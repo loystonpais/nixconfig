@@ -24,7 +24,7 @@
           };
           system = settings.system;
           modules = [
-            ./configuration.nix
+            ./basic.nix
             ./hardware-configuration.nix
           ];
         };

@@ -4,7 +4,11 @@
   home.username = settings.username;
   home.homeDirectory = "/home/" + settings.username;
 
-  home.packages = with pkgs; [ kate nil nixfmt ];
+  home.packages = with pkgs; [
+    kate # A code editor I like
+    nil # Nix server
+    nixfmt # Nix formatter
+  ];
 
   home.sessionVariables = {};
 
