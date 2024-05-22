@@ -30,7 +30,13 @@ undo_hardware_config() {
 }
 
 build() {
-  sudo nixos-rebuild switch --flake .
+  if [ -f /run/current-system/sw/bin/nh ]; then
+    echo "nh exists"
+    echo Building using nh command
+    nh os switch .
+  else
+    sudo nixos-rebuild switch --flake .
+  fi
 }
 
 if [ "$1" = "--keep" ]; then

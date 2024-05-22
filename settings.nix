@@ -1,7 +1,6 @@
 # Only modify this
 # DO NOT modify the imports in configurations.nix or anywhere else
 # Only modify outside this if things don't work
-
 {
   username = "loystonvm";
   name = "Loyston Pais";

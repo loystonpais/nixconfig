@@ -47,7 +47,7 @@ with builtins;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [ vim git fastfetch home-manager ];
+  environment.systemPackages = with pkgs; [ vim git fastfetch home-manager nh ];
 
   home-manager = {
     extraSpecialArgs = {
