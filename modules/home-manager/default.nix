@@ -6,7 +6,7 @@
 
   home.packages = with pkgs; [ kate nil nixfmt ];
 
-  home.sessionVariables = { AMOGUS = "sus"; };
+  home.sessionVariables = {};
 
   home.file = {
 

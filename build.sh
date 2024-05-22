@@ -33,15 +33,21 @@ build() {
   sudo nixos-rebuild switch --flake .
 }
 
-if [ "$1" = "--new" ]; then
-  import_hardware_config
+if [ "$1" = "--keep" ]; then
   build
 
 elif [ "$1" = "--undo" ]; then
   undo_hardware_config
 
+elif [ "$1" = "--fast" ]; then
+  import_hardware_config
+  build
+
 elif [ "$1" = "" ]; then
-  echo "Using current hardware configuration"
+  echo Please verify the settings
+  sleep 1
+  $EDITOR settings.nix
+  import_hardware_config
   build
 
 else
