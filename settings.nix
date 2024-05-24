@@ -9,8 +9,21 @@
   timeZone = "Asia/Kolkata";
   defaultLocale = "en_IN";
 
+
+  optionalModules = [
+     # Contains kdeconnect, gparted
+     ./options/modules/app-list-1
+
+     # Contains vm related things
+     ./options/modules/virtual-machine
+
+    # Contains gaming related things
+    # ./options/modules/gaming
+
+  ];
+
   # Select option nvidia, asuslinux
-  graphicsSetting = "nvidia";
+  graphicsSetting = "asuslinux";
 
   # Set boot type
   # Default is UEFI

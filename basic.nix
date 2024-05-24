@@ -18,13 +18,17 @@ with builtins;
 
   ] ++ (if settings.graphicsSetting == "nvidia" then
     trace "Graphics mode nvidia" [ ./options/graphics/nvidia.nix ]
-  else
-    abort "bad graphics settings")
+    else if settings.graphicsSetting == "asuslinux" then
+    trace "Graphics mode asuslinux" [ ./options/graphics/asuslinux.nix ]
+    else abort "Bad graphics setting")
 
     ++ (if settings.biosBoot then
       trace "Set to bios mode" [ ./options/boot/bios.nix ]
     else
-      [ ]);
+      [ ])
+
+    ++ settings.optionalModules
+      ;
 
  # Configure keymap in X11
   services.xserver = {
@@ -51,7 +55,7 @@ with builtins;
       inherit inputs;
       inherit settings;
     };
-    users.${settings.username} = import ./modules/home-manager;
+    users.${settings.username} = import ./external-modules/home-manager;
   };
 
   # Some programs need SUID wrappers, can be configured further or are
