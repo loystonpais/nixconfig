@@ -2,7 +2,7 @@
 # DO NOT modify the imports in configurations.nix or anywhere else
 # Only modify outside this if things don't work
 {
-  username = "loystonvm";
+  username = "loystonpais";
   name = "Loyston Pais";
   email = "loyston500@gmail.com";
   githubUsername = "loystonpais";

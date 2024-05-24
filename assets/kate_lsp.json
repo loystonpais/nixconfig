@@ -1,0 +1,9 @@
+{
+      "servers": {
+        "nix": {
+          "command": ["nil"],
+          "url": "https://github.com/oxalica/nil",
+          "highlightingModeRegex": "^Nix$"
+        }
+      }
+    }

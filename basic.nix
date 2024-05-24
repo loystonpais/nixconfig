@@ -51,7 +51,7 @@ with builtins;
       inherit inputs;
       inherit settings;
     };
-    users = { loystonvm = import ./modules/home-manager; };
+    users.${settings.username} = import ./modules/home-manager;
   };
 
   # Some programs need SUID wrappers, can be configured further or are

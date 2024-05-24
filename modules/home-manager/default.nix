@@ -1,4 +1,4 @@
-{ config, pkgs, settings, ... }:
+{ config, pkgs, settings, inputs, ... }:
 
 {
   home.username = settings.username;
@@ -13,7 +13,7 @@
   home.sessionVariables = {};
 
   home.file = {
-
+    ".config/kate/lspclient/settings.json".source = ../../assets/kate_lsp.json;
   };
 
   home.stateVersion = "23.11";
