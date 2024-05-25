@@ -25,8 +25,8 @@
   services.supergfxd.settings = {
     mode = "Hybrid";
     vfio_enable = true;
-    vfio_save = false;
-    #"gfx_vfio_enable" = true;
+    vfio_save = true;
+    gfx_vfio_enable = true;
     always_reboot = false;
     no_logind = false;
     logout_timeout_s = 180;

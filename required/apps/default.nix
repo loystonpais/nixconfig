@@ -10,5 +10,6 @@
     fastfetch
     home-manager
     nh
+    pciutils
   ];
 }

@@ -3,14 +3,43 @@
 {
 
   # Virtualization based on libvirtd
+  virtualisation.libvirtd = {
+    enable = true;
+    qemu = {
+      package = pkgs.qemu_kvm;
+      runAsRoot = true;
+      swtpm.enable = true;
+      ovmf = {
+        enable = true;
+        packages = [
+          (pkgs.OVMF.override {
+            secureBoot = true;
+            tpmSupport = true;
+          }).fd
+        ];
+      };
+    };
+  };
 
-  virtualisation.libvirtd.enable = true;
+  # Using vit manager
   programs.virt-manager.enable = true;
 
+  # evdev setup
+  # Change keyboad and mouse with
+  # your preferred ones
+  virtualisation.libvirtd.qemu.verbatimConfig =
+  ''
+user = "${settings.username}"
+qroup = "kvm"
+cgroup_device_acl = [
+    "/dev/input/by-id/usb-SINO_WEALTH_Gaming_KB-event-kbd",
+    "/dev/input/by-id/usb-Razer_Razer_DeathAdder_Essential-event-mouse",
+    "/dev/null", "/dev/full", "/dev/zero",
+    "/dev/random", "/dev/urandom", "/dev/ptmx",
+    "/dev/kvm", "/dev/rtc", "/dev/hpet"
+]
+  '';
 
-  #virtualisation.tpm.enable = true;
-
-  environment.systemPackages = with pkgs; [
-
-  ];
+  # Adding username to the necessary groups
+  users.users.${settings.username}.extraGroups = [ "libvirtd" "kvm" "input" ];
 }
