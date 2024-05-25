@@ -15,6 +15,9 @@ with builtins;
     #inputs.stylix.nixosModules.stylix
     #(trace "Stylix settings imported" ./modules/stylix)
 
+    # NUR
+    #inputs.nur.nixosModules.nur
+
 
   ] ++ (if settings.graphicsSetting == "nvidia" then
     trace "Graphics mode nvidia" [ ./options/graphics/nvidia.nix ]

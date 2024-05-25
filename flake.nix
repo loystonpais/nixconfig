@@ -8,6 +8,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     #stylix.url = "github:danth/stylix";
+    #nur.url = "github:nix-community/NUR";
   };
 
   outputs = { self, nixpkgs, ... }@inputs:

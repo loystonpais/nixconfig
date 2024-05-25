@@ -11,14 +11,15 @@
 
 
   optionalModules = [
-     # Contains kdeconnect, gparted
+     # Contains kdeconnect, gparted, compsize
      ./options/modules/app-list-1
 
      # Contains vm related things
      ./options/modules/virtual-machine
 
-    # Contains gaming related things
+    # Contains gaming related packages
     # ./options/modules/gaming
+
 
   ];
 
