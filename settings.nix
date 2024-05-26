@@ -20,6 +20,9 @@
     # Contains gaming related packages
     # ./options/modules/gaming
 
+    # Minecraft setup using patched p*ismlauncher
+    ./options/modules/minecraft
+
 
   ];
 
