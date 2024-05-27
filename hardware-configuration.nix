@@ -25,6 +25,12 @@
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
+  fileSystems."/mnt/backdrive" =
+    { device = "/dev/disk/by-uuid/27530ec1-f573-4ea2-873c-c348e8bc5c7d";
+      fsType = "btrfs";
+      options = [ "compress-force=zstd" ];
+    };
+
   swapDevices =
     [ { device = "/dev/disk/by-uuid/5ecf2579-37b0-40fd-972d-e0e47b20447a"; }
     ];
