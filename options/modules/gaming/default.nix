@@ -12,9 +12,11 @@
     [
 
     protonup-qt
-    lutris
+    heroic
+    dxvk
     # wineWowPackages.stable
     wineWowPackages.waylandFull
     antimicrox
+    mangohud
     ];
 }

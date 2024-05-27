@@ -23,6 +23,9 @@
     # Minecraft setup using patched p*ismlauncher
     ./options/modules/minecraft
 
+    # Piracy tools
+    ./options/modules/piracy
+
 
   ];
 
