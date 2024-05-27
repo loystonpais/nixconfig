@@ -18,7 +18,7 @@
      ./options/modules/virtual-machine
 
     # Contains gaming related packages
-    # ./options/modules/gaming
+    ./options/modules/gaming
 
     # Minecraft setup using patched p*ismlauncher
     ./options/modules/minecraft
