@@ -25,7 +25,7 @@ import_hardware_config() {
 }
 
 undo_hardware_config() {
-  echo "Undoing.."
+  echo "Undoing changes by init.."
   mv "$hardware_config_path".bak "$hardware_config_path"
 }
 
@@ -39,21 +39,19 @@ build() {
   fi
 }
 
-if [ "$1" = "--keep" ]; then
-  build
+if [ "$1" = "--init" ]; then
+  import_hardware_config
 
 elif [ "$1" = "--undo" ]; then
   undo_hardware_config
 
 elif [ "$1" = "--fast" ]; then
-  import_hardware_config
   build
 
 elif [ "$1" = "" ]; then
   echo Please verify the settings
   sleep 1
   $EDITOR settings.nix
-  import_hardware_config
   build
 
 else
