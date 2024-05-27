@@ -39,13 +39,16 @@ with builtins;
     xkb.variant = "";
   };
 
+  # Enabling zsh, will put it in required later
+  programs.zsh.enable = true;
 
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.${settings.username} = {
     isNormalUser = true;
     description = "Userspace of " + settings.name;
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "disk" ];
+    shell = pkgs.zsh;
     packages = [ ];
   };
 

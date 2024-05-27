@@ -23,6 +23,9 @@
     # Minecraft setup using patched p*ismlauncher
     ./options/modules/minecraft
 
+    # Gamedev packages, godot
+    ./options/modules/gamedev
+
     # Piracy tools
     ./options/modules/piracy
 

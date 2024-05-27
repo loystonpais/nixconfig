@@ -4,5 +4,6 @@
 
   environment.systemPackages = with pkgs; [
     qbittorrent
+    stremio
   ];
 }

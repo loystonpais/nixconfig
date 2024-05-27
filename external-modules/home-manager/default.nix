@@ -10,7 +10,7 @@
     nixfmt # Nix formatter
   ];
 
-  home.sessionVariables = {};
+  home.sessionVariables = { };
 
   home.file = {
     ".config/kate/lspclient/settings.json".source = ../../assets/kate_lsp.json;
@@ -31,8 +31,31 @@
     };
   };
 
-  programs.bash = {
+  programs.zsh = {
     enable = true;
-    shellAliases = { sl = "ls"; };
+    enableCompletion = true;
+    autocd = true;
+    syntaxHighlighting.enable = true;
+    autosuggestion.enable = true;
+
+    shellAliases = { ll = "ls -l"; };
+    history = {
+      size = 10000000;
+      save = 10000000;
+      ignoreSpace = true;
+      ignoreDups = true;
+      ignoreAllDups = true;
+      expireDuplicatesFirst = true;
+      extended = true;
+      share = true;
+      path = "${config.home.homeDirectory}/.zsh_history";
+    };
+
+    oh-my-zsh = {
+      enable = true;
+      plugins = [ "git" ];
+      theme = "robbyrussell";
+    };
   };
+
 }
