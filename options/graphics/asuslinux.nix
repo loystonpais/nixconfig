@@ -32,4 +32,8 @@
     logout_timeout_s = 180;
     hotplug_type =  "None";
   };
+
+  environment.systemPackages = with pkgs; [
+    lsof
+  ];
 }
