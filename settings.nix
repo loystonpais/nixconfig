@@ -20,7 +20,7 @@
     # Contains gaming related packages
     ./options/modules/gaming
 
-    # Minecraft setup using patched p*ismlauncher
+    # Minecraft setup, includes patches for p*ismlauncher
     ./options/modules/minecraft
 
     # Gamedev packages, godot
@@ -33,6 +33,7 @@
   ];
 
   # Select option nvidia, asuslinux
+  # asuslinux module includes a patch
   graphicsSetting = "asuslinux";
 
   # Set boot type
