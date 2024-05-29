@@ -13,6 +13,9 @@
     package = config.boot.kernelPackages.nvidiaPackages.production;
   };
 
+  # Add lsof to path because it is missing in the pkg config
+  systemd.services.supergfxd.path = [ pkgs.lsof ];
+
   services.supergfxd.enable = true;
 
   services = {
@@ -32,8 +35,4 @@
     logout_timeout_s = 180;
     hotplug_type =  "None";
   };
-
-  environment.systemPackages = with pkgs; [
-    lsof
-  ];
 }
