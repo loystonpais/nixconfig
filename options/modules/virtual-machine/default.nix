@@ -43,3 +43,17 @@ cgroup_device_acl = [
   # Adding username to the necessary groups
   users.users.${settings.username}.extraGroups = [ "libvirtd" "kvm" "input" ];
 }
+
+# Additional Notes
+# Run the command below to start the network
+# sudo virsh net-autostart default
+# Also put this in home manager
+/*
+dconf.settings = {
+  "org/virt-manager/virt-manager/connections" = {
+    autoconnect = ["qemu:///system"];
+    uris = ["qemu:///system"];
+  };
+};
+*/
+

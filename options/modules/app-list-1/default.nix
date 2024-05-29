@@ -7,5 +7,6 @@
   environment.systemPackages = with pkgs; [
     gparted
     compsize
+    telegram-desktop
   ];
 }

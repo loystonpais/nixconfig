@@ -8,9 +8,7 @@
     dedicatedServer.openFirewall = true;
   };
 
-  environment.systemPackages = with pkgs;
-    [
-
+  environment.systemPackages = with pkgs; [
     protonup-qt
     heroic
     dxvk
@@ -18,5 +16,6 @@
     wineWowPackages.waylandFull
     antimicrox
     mangohud
-    ];
+    distrobox
+  ];
 }
