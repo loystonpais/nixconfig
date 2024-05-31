@@ -29,6 +29,9 @@
     # Piracy tools
     ./options/modules/piracy
 
+    # Distrobox setup with docker
+    ./options/modules/distrobox
+
 
   ];
 

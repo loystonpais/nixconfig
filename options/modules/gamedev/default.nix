@@ -12,8 +12,5 @@
 
   environment.systemPackages = with pkgs; [
     godot_4
-
-    # For running stuff in FHS
-    distrobox
   ];
 }

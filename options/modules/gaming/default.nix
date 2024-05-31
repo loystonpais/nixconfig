@@ -16,6 +16,5 @@
     wineWowPackages.waylandFull
     antimicrox
     mangohud
-    distrobox
   ];
 }
