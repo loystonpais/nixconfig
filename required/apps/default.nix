@@ -11,5 +11,9 @@
     home-manager
     nh
     pciutils
+    ripgrep
+    file
+    busybox
+    python3
   ];
 }
