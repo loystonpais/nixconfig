@@ -10,7 +10,7 @@
   defaultLocale = "en_IN";
 
 
-  optionalModules = [
+  optionalImports = [
      # Contains kdeconnect, gparted, compsize
      ./options/modules/app-list-1
 
@@ -20,7 +20,7 @@
     # Contains gaming related packages
     ./options/modules/gaming
 
-    # Minecraft setup, includes patches for p*ismlauncher
+    # Minecraft setup with prismlauncher
     ./options/modules/minecraft
 
     # Gamedev packages, godot
@@ -31,6 +31,18 @@
 
     # Distrobox setup with docker
     ./options/modules/distrobox
+
+
+    # ~~ Patches ~~
+
+    # A patch for supergfxd in asuslinux
+    # which fixes lsof usage
+    ./options/overlays/supergfxd-lsof-patch.nix
+
+
+    # A patch for minecraft launcher
+    # to allow offline accounts
+    ./options/overlays/mc-launcher-patch.nix
 
 
   ];

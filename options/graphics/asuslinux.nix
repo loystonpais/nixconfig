@@ -1,11 +1,6 @@
 { config, pkgs, settings, inputs, ... }:
 
 {
-
-  imports = [
-    ../../patches/supergfxd-lsof-patch.nix
-  ];
-
   services.xserver.videoDrivers = [ "nvidia" ];
 
   hardware.nvidia = {

@@ -30,7 +30,7 @@ with builtins;
     else
       [ ])
 
-    ++ settings.optionalModules
+    ++ settings.optionalImports
       ;
 
  # Configure keymap in X11
