@@ -15,5 +15,6 @@
     file
     busybox
     python3
+    android-tools # its not that huge and very useful
   ];
 }
