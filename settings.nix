@@ -32,6 +32,9 @@
     # Distrobox setup with docker
     ./options/modules/distrobox
 
+    # Waydroid
+    ./options/modules/waydroid
+
 
     # ~~ Patches ~~
 
