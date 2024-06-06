@@ -1,3 +1,8 @@
+# Welcome to my nixconfig
+
+This is a config for those who want things to work. No fancy customizations or other shenanigans are encourged.
+</br> NOTE: It uses KDE Plasma 6 and has configs revolving around this desktop environment.
+
 # How to run
 
 For first time runners
