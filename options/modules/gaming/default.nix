@@ -17,4 +17,11 @@
     antimicrox
     mangohud
   ];
+
+
+  # Feral gamemode setup
+  programs.gamemode.enable = true;
+
+  # Adding username to the necessary groups
+  users.users.${settings.username}.extraGroups = [ "gamemode" ];
 }

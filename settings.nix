@@ -1,6 +1,6 @@
-# Only modify this
-# DO NOT modify the imports in configurations.nix or anywhere else
-# Only modify outside this if things don't work
+# Settings for the nixconfig
+# Can always go to other files if not satisfied
+# with the modifications available here
 {
   username = "loystonpais";
   name = "Loyston Pais";
@@ -14,7 +14,7 @@
      # Contains kdeconnect, gparted, compsize
      ./options/modules/app-list-1
 
-     # Contains vm related things
+     # Contains vm related packages
      ./options/modules/virtual-machine
 
     # Contains gaming related packages
@@ -34,6 +34,12 @@
 
     # Waydroid
     ./options/modules/waydroid
+
+    # Samba server, check the file for configurations
+    # Mainly set up for vms
+    # make sure to set the passwoed usng
+    # sudo smbpasswd -a <username>
+    ./options/modules/samba
 
 
     # ~~ Patches ~~
