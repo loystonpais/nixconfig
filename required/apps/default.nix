@@ -2,7 +2,13 @@
 
 {
   # Install firefox.
-  programs.firefox.enable = true;
+  programs.firefox = {
+    enable = true;
+    preferences = {
+      "widget.use-xdg-desktop-portal.file-picker" = 1;
+    };
+  };
+
 
   environment.systemPackages = with pkgs; [
     vim
