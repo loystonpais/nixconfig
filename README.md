@@ -1,7 +1,9 @@
 # Welcome to my nixconfig
 
 This is a config for those who want things to work. No fancy customizations or other shenanigans are encourged.
-</br> NOTE: It uses KDE Plasma 6 and has configs revolving around this desktop environment.
+<br/> NOTE: It uses KDE Plasma 6 and has configs revolving around this desktop environment.
+
+<br/> <br/> It is also recommended that you read settings.nix file
 
 # How to run
 
