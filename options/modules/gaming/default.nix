@@ -16,6 +16,7 @@
     wineWowPackages.waylandFull
     antimicrox
     mangohud
+    bottles
   ];
 
 
