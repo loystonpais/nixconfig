@@ -11,11 +11,11 @@
 
 
   optionalImports = [
-     # Contains kdeconnect, gparted, compsize
-     ./options/modules/app-list-1
+    # Contains kdeconnect, gparted, compsize
+    ./options/modules/app-list-1
 
-     # Contains vm related packages
-     ./options/modules/virtual-machine
+    # Contains vm related packages
+    ./options/modules/virtual-machine
 
     # Contains gaming related packages
     ./options/modules/gaming
@@ -35,9 +35,12 @@
     # Waydroid
     ./options/modules/waydroid
 
+    # Multimedia, includes stremio and vlc
+    ./options/modules/multimedia
+
     # Samba server, check the file for configurations
     # Mainly set up for vms
-    # make sure to set the passwoed usng
+    # make sure to set the passwoed using
     # sudo smbpasswd -a <username>
     ./options/modules/samba
 
