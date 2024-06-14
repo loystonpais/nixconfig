@@ -12,6 +12,12 @@
   services.xserver.enable = true;
 
   services.displayManager.defaultSession = "plasma";
+
+  # Get rid of baloo
+  environment.plasma6.excludePackages = with pkgs.kdePackages; [
+    baloo
+  ];
+
   services.displayManager.sddm.wayland.enable = true;
 
   # Enable the KDE Plasma Desktop Environment.
