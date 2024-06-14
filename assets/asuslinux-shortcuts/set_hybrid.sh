@@ -12,7 +12,7 @@ if [ "$CURRENT_MODE" = "Hybrid" ]; then
   notify-send -a "$notifier" "You are already in hybrid mode"
 
 elif  [ "$CURRENT_MODE" = "Vfio" ]; then
-  notify-send -a "$notifier" "Switching to Hybrid"
+  notify-send -a "$notifier" "You need to switch to Integrated first. Trying nonetheless"
   supergfxctl -m Hybrid
 
 elif  [ "$CURRENT_MODE" = "Integrated" ]; then
