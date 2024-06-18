@@ -14,7 +14,7 @@ in
   nixpkgs.overlays = [
   (
      final: prev: {
-       prism-launcher = prev.prism-launcher.overrideAttrs(oldAttrs: {
+       prismlauncher-unwrapped = prev.prismlauncher-unwrapped.overrideAttrs(oldAttrs: {
          prePatch = patch_script;
        });
      }
