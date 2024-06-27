@@ -4,25 +4,24 @@
   # Enable opengl
   hardware.opengl = {
     enable = true;
-    driSupport = true;
     driSupport32Bit = true;
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
+  # X11 not needed
+  services.xserver.enable = false;
 
   services.displayManager.defaultSession = "plasma";
-
-  # Get rid of baloo
-  environment.plasma6.excludePackages = with pkgs.kdePackages; [
-    baloo
-  ];
 
   services.displayManager.sddm.wayland.enable = true;
 
   # Enable the KDE Plasma Desktop Environment.
   services.displayManager.sddm.enable = true;
-  #services.xserver.desktopMinheritanager.plasma5.enable = true;
-  # Switching to plasma6
+
+  # Plasma 6
   services.desktopManager.plasma6.enable = true;
+
+  # Get rid of baloo
+  environment.plasma6.excludePackages = with pkgs.kdePackages; [
+    baloo
+  ];
 }
