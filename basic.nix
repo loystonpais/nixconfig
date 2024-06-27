@@ -53,7 +53,12 @@ with builtins;
   };
 
   # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+      allowUnfreePredicate = (_: true);
+    };
+  };
 
 
   home-manager = {
@@ -62,6 +67,7 @@ with builtins;
       inherit settings;
     };
     users.${settings.username} = import ./external-modules/home-manager;
+    useGlobalPkgs = true;
   };
 
   # Some programs need SUID wrappers, can be configured further or are
