@@ -38,6 +38,9 @@
     # Multimedia, includes stremio and vlc
     ./options/modules/multimedia
 
+    # Fonts
+    ./options/modules/fonts
+
     # Samba server, check the file for configurations
     # Mainly set up for vms
     # make sure to set the passwoed using
