@@ -15,5 +15,6 @@
     blender
     krita
     f3d
+    vscode
   ];
 }
