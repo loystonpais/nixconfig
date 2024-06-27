@@ -1,6 +1,10 @@
 { config, pkgs, settings, inputs, ... }:
 
 {
+  imports = [
+    ./hyprland
+  ];
+
   home.username = settings.username;
   home.homeDirectory = "/home/" + settings.username;
 

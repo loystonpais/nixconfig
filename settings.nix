@@ -48,6 +48,10 @@
     ./options/modules/samba
 
 
+    # Enabling hyprland lol
+    ./options/modules/hyprland
+
+
     # ~~ Patches ~~
 
     # A patch for supergfxd in asuslinux
