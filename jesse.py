@@ -34,7 +34,7 @@ def get_nix_architecture():
     else:
         return None
 
-app = typer.Typer()
+app = typer.Typer(help="Jesse the nix config helper")
 
 @app.command()
 def yo(name: str):
@@ -67,7 +67,7 @@ def create(instance: str):
     template = '''
 {{ self, inputs, ... }}: 
 
-inputs.nixpkgs-unstable.lib.nixosSystem {{
+inputs.nixpkgs.lib.nixosSystem {{
   system = "{system}";
 
   specialArgs = {{

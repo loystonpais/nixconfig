@@ -12,56 +12,56 @@
 
   optionalImports = [
     # Contains kdeconnect, gparted, compsize
-    ./options/modules/app-list-1
+    ../../options/modules/app-list-1
 
     # Contains vm related packages
-    ./options/modules/virtual-machine
+    ../../options/modules/virtual-machine
 
     # Contains gaming related packages
-    ./options/modules/gaming
+    ../../options/modules/gaming
 
     # Minecraft setup with prismlauncher
-    ./options/modules/minecraft
+    ../../options/modules/minecraft
 
     # Gamedev packages, godot
-    ./options/modules/gamedev
+    ../../options/modules/gamedev
 
     # Piracy tools
-    ./options/modules/piracy
+    ../../options/modules/piracy
 
     # Distrobox setup with docker
-    ./options/modules/distrobox
+    ../../options/modules/distrobox
 
     # Waydroid
-    ./options/modules/waydroid
+    ../../options/modules/waydroid
 
     # Multimedia, includes stremio and vlc
-    ./options/modules/multimedia
+    ../../options/modules/multimedia
 
     # Fonts
-    ./options/modules/fonts
+    ../../options/modules/fonts
 
     # Samba server, check the file for configurations
     # Mainly set up for vms
     # make sure to set the passwoed using
     # sudo smbpasswd -a <username>
-    ./options/modules/samba
+    ../../options/modules/samba
 
 
     # Enabling hyprland lol
-    ./options/modules/hyprland
+    ../../options/modules/hyprland
 
 
     # ~~ Patches ~~
 
     # A patch for supergfxd in asuslinux
     # which fixes lsof usage
-    ./options/overlays/supergfxd-lsof-patch.nix
+    ../../options/overlays/supergfxd-lsof-patch.nix
 
 
     # A patch for minecraft launcher
     # to allow offline accounts
-    ./options/overlays/mc-launcher-patch.nix
+    ../../options/overlays/mc-launcher-patch.nix
 
 
   ];
