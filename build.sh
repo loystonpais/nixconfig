@@ -1,5 +1,8 @@
 #!/run/current-system/sw/bin/bash
 
+echo "This is on development, do not use"
+exit 1
+
 import_hardware_config_path="/etc/nixos/hardware-configuration.nix"
 hardware_config_path="hardware-configuration.nix"
 
