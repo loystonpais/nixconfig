@@ -1,0 +1,5 @@
+{
+    "currentDir": ".",
+    "nixosInstancesPath": "./instances",
+    "nixosProfilesPath": "./profiles"
+}

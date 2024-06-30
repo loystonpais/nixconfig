@@ -6,6 +6,7 @@ import typer
 from typing_extensions import Annotated
 from typing import Optional
 
+import json
 import os
 import shutil
 import platform
@@ -15,24 +16,32 @@ try:
 except ImportError:
     pass
 
-current_dir = "."
-nixos_instances_path = current_dir + "/" +  "nixos-instances"
+try:
+    json_data = json.loads(".json")
+except Exception as e:
+    raise Exception(f".json failed to load, {e}")
 
-def get_nix_architecture():
-    system = platform.system()
-    machine = platform.machine()
+nixos_instances_path = json_data["nixosInstancesPath"]
+nixos_profiles_path = json_data["nixosProfilesPath"]
 
-    if system == 'Linux':
-        if machine == 'x86_64':
-            return 'x86_64-linux'
-        elif machine == 'aarch64':
-            return 'aarch64-linux'
-        elif machine.startswith('arm') or machine.startswith('armv'):
-            return 'arm-linux'
+class Utils:
+
+    @staticmethod
+    def get_nix_architecture():
+        system = platform.system()
+        machine = platform.machine()
+
+        if system == 'Linux':
+            if machine == 'x86_64':
+                return 'x86_64-linux'
+            elif machine == 'aarch64':
+                return 'aarch64-linux'
+            elif machine.startswith('arm') or machine.startswith('armv'):
+                return 'arm-linux'
+            else:
+                return f"{machine.lower()}-linux"
         else:
-            return f"{machine.lower()}-linux"
-    else:
-        return None
+            return None
 
 app = typer.Typer(help="Jesse the nix config helper")
 
@@ -76,7 +85,6 @@ inputs.nixpkgs.lib.nixosSystem {{
 
   modules = [
     ./configuration.nix
-    ./hardware-configuration.nix
   ];
 }}
 '''
