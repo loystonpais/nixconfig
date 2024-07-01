@@ -4,38 +4,50 @@
   outputs = { self, ... }@inputs:
     with builtins;
     let
-      # defining nixosConfigurations
-      nixosConfigurations = let path = ./nixos-instances;
-      in if pathExists path then
+
+      json = fromJSON (readFile ./.json);
+
+      nixosInstancesPath = ./. + ("/" + json.nixosInstancesPath);
+      nixosProfilesPath = ./. + ("/" + json.nixosInstancesPath);
+
+      nixosConfigurations = 
+      let 
+        path = nixosInstancesPath;
+      in 
+        if pathExists path then
         let
           isValid = name:
-            getAttr name dir == "directory";
+          getAttr name dir == "directory";
 
           dir = readDir path; # read the directory and get contents within it
           names = attrNames dir; # list of names
 
-          dirNames = if all isValid names then
-            filter isValid names
+          dirNames = 
+            if all isValid names then
+              filter isValid names
+            else
+              throw ''
+                Failed validating names!
+                Hosts folder should contain only directories 
+                and the name of the directory should be a valid hostname
+                '';
+        in 
+          if length dirNames > 0 then
+            listToAttrs (map (name: {
+              inherit name;
+              value = (import (path + ("/" + name))) {
+                inherit self;
+                inherit inputs;
+              };
+            }) dirNames)
           else
-            throw ''
-              Failed validating names!
-              Hosts folder should contain only directories 
-              and the name of the directory should be a valid hostname
-            '';
-        in if length dirNames > 0 then
-        # create set from the list
-          listToAttrs (map (name: {
-            inherit name;
-            value = (import (path + ("/" + name))) {
-              inherit self;
-              inherit inputs;
-            };
-          }) dirNames)
+            trace "No instances found. Directory is empty" { }
         else
-          trace "No hosts found. hosts directory is empty" { }
-      else
-        throw "No such directory " + toString path;
-    in { inherit nixosConfigurations; };
+            throw "No such directory " + toString path;
+    in 
+    { 
+      inherit nixosConfigurations; 
+    };
 
   inputs = {
 

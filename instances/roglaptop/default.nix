@@ -1,4 +1,5 @@
-
+# It is not recommended to modify this file
+# Do modifications in configuration.nix
 { self, inputs, ... }: 
 
 inputs.nixpkgs.lib.nixosSystem {
@@ -6,10 +7,11 @@ inputs.nixpkgs.lib.nixosSystem {
 
   specialArgs = {
     inherit inputs;
-    settings = import ./settings.nix;
   };
 
   modules = [
+    ../../core.nix
+
     ./configuration.nix
     ./hardware-configuration.nix
   ];
