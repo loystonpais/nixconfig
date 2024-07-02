@@ -108,7 +108,7 @@ with lib;
     };
 
     graphicsMode = mkOption {
-      type = types.enum ["nvidia" "asuslinux" ];
+      type = types.enum [ "nvidia" "asuslinux" "none" ];
       description = ''
       GPU specific settings
       nvidia - Basic nvidia gpu settings, uses production pkg
