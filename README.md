@@ -2,7 +2,12 @@
 
 Hi! This is my version of nix configuration.
 
-# Guide
+# Guide (Automatic)
+
+Yet to write.
+
+
+# Guide (Manual)
 
 The usage of the word "instances" over "hosts" is on purpose. This config is designed to handle multiple instances of nixos regardless of which device it is running on.
 
