@@ -33,8 +33,18 @@
       user = "${config.vars.username}"
       qroup = "kvm"
       cgroup_device_acl = [
+      '' 
+      + 
+      /*''
           "/dev/input/by-id/usb-SINO_WEALTH_Gaming_KB-event-kbd",
           "/dev/input/by-id/usb-Razer_Razer_DeathAdder_Essential-event-mouse",
+      ''*/
+      lib.strings.concatStrings (
+        map (device: ''"/dev/input/by-id/${device}", '') 
+        config.vars.modules.virtual-machine.cgroupDevicesById
+      )
+      +
+      ''
           "/dev/null", "/dev/full", "/dev/zero",
           "/dev/random", "/dev/urandom", "/dev/ptmx",
           "/dev/kvm", "/dev/rtc", "/dev/hpet"

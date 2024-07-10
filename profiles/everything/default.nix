@@ -16,6 +16,7 @@ with lib;
       samba.enable = mkDefault true;
       virtual-machine.enable = mkDefault true;
       waydroid.enable = mkDefault true;
+      browsers.enable = mkDefault true;
 
       home-manager.enable = mkDefault true;
     };

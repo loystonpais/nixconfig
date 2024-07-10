@@ -14,6 +14,7 @@
     ./samba
     ./virtual-machine
     ./waydroid
+    ./browsers
 
     ./home-manager
   ];

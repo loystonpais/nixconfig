@@ -86,15 +86,34 @@ with lib;
 
       distrobox.enable = mkEnableOption "enables distrobox";
       gamedev.enable = mkEnableOption "enables gamedev";
+      
       gaming.enable = mkEnableOption "enable gaming";
+      
       minecraft.enable = mkEnableOption "enables minecraft";
       multimedia.enable = mkEnableOption "enables multimedia";
       piracy.enable = mkEnableOption "enables piracy";
       program-collection.enable = mkEnableOption "enables program-collection";
-      virtual-machine.enable = mkEnableOption "enables virtual machine";
+      
+      virtual-machine = {
+        enable = mkEnableOption "enables virtual machine";
+        cgroupDevicesById = mkOption {
+          type = types.listOf types.str;
+          description = "Devices registered to be passed to the vm";
+          default = [ "usb-SINO_WEALTH_Gaming_KB-event-kbd" "usb-Razer_Razer_DeathAdder_Essential-event-mouse" ];
+        };
+      };
+      
+      
       waydroid.enable = mkEnableOption "enables waydroid";
       samba.enable = mkEnableOption "enables samba";
       home-manager.enable = mkEnableOption "enables home-manager";
+
+      browsers = {
+        enable = mkEnableOption "enables browser configuration";
+        floorp = {
+          enable = mkEnableOption "enables floorp configuration";
+        };
+      };
     };
 
     profile = {
