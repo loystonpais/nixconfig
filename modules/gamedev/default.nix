@@ -14,7 +14,6 @@
       godot_4
       blender
       krita
-      f3d
       vscode
     ];
 
