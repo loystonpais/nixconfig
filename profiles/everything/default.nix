@@ -17,6 +17,7 @@ with lib;
       virtual-machine.enable = mkDefault true;
       waydroid.enable = mkDefault true;
       browsers.enable = mkDefault true;
+      android.enable = mkDefault true;
 
       home-manager.enable = mkDefault true;
     };

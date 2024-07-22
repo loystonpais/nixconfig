@@ -102,6 +102,24 @@ with lib;
           default = [ "usb-SINO_WEALTH_Gaming_KB-event-kbd" "usb-Razer_Razer_DeathAdder_Essential-event-mouse" ];
         };
       };
+
+      android = {
+        enable = mkEnableOption "enables android module";
+        scrcpy.enable = mkEnableOption "enables scrcpy";
+        phone.ip = mkOption {
+          type = types.str;
+          description = ''
+          Default device IP. To set a static ip for your android device run as root: 
+          `ip address add 192.168.43.1/24 dev wlan0` 
+          '';
+          default = "192.168.43.1";
+        };
+        phone.port = mkOption {
+          type = types.int;
+          description = "Default device port";
+          default = 5555;
+        };
+      };
       
       
       waydroid.enable = mkEnableOption "enables waydroid";

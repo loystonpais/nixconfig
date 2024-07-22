@@ -15,6 +15,7 @@
     ./virtual-machine
     ./waydroid
     ./browsers
+    ./android
 
     ./home-manager
   ];
