@@ -16,4 +16,9 @@
   # Set your profile
   vars.profile.everything.enable = true;
 
+  # Exclusion
+  vars.modules.browsers.floorp.enable = false;
+  vars.modules.waydroid.enable = false;
+  vars.modules.samba.enable = false;
+
 }
