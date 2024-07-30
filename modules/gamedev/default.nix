@@ -14,6 +14,7 @@
       godot_4
       blender
       krita
+      inkscape
       vscode
     ];
 
