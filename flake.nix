@@ -51,7 +51,7 @@
 
       # TODO: Generalize
       nixOnDroidConfigurations.vili = inputs.nix-on-droid.lib.nixOnDroidConfiguration {
-        pkgs = import nixpkgs { system = "aarch64-linux"; };
+        pkgs = import inputs.nixpkgs-24_05 { system = "aarch64-linux"; };
         modules = [ (nixOnDroidInstancesPath + "/vili/nix-on-droid.nix") ];
       };
 
