@@ -1,5 +1,6 @@
 {
     "currentDir": ".",
     "nixosInstancesPath": "./instances",
-    "nixosProfilesPath": "./profiles"
+    "nixosProfilesPath": "./profiles",
+    "nixOnDroidInstancesPath": "./nix-on-droid/instances"
 }

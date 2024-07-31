@@ -9,6 +9,7 @@
 
       nixosInstancesPath = ./. + ("/" + json.nixosInstancesPath);
       nixosProfilesPath = ./. + ("/" + json.nixosInstancesPath);
+      nixOnDroidInstancesPath = ./. + ("/" + json.nixOnDroidInstancesPath);
 
       nixosConfigurations = 
       let 
@@ -47,6 +48,13 @@
     in 
     { 
       inherit nixosConfigurations; 
+
+      # TODO: Generalize
+      nixOnDroidConfigurations.vili = nix-on-droid.lib.nixOnDroidConfiguration {
+        pkgs = import nixpkgs { system = "aarch64-linux"; };
+        modules = [ (nixOnDroidInstancesPath + "/vili/nix-on-droid.nix") ];
+      };
+
     };
 
   inputs = {
@@ -54,10 +62,16 @@
     # Nixpkgs
     nixpkgs.url = "nixpkgs/nixos-unstable";
     nixpkgs-23_11.url = "nixpkgs/nixos-23.11";
+    nixpkgs-24_05.url = "nixpkgs/nixos-24.05";
 
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nix-on-droid = {
+      url = "github:nix-community/nix-on-droid/release-24.05";
+      inputs.nixpkgs.follows = "nixpkgs-24_05";
     };
 
   };
