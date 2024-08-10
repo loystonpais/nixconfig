@@ -15,6 +15,7 @@
       blender
       krita
       inkscape
+      tiled
       vscode
     ];
 
