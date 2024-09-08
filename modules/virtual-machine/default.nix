@@ -53,6 +53,13 @@
 
     # Adding username to the necessary groups
     users.users.${config.vars.username}.extraGroups = [ "libvirtd" "kvm" "input" ];
+
+
+
+    # Needed for filesysystem passthrough
+    environment.systemPackages =  [
+      pkgs.virtiofsd
+    ];
   };
 
 }
