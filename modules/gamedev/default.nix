@@ -17,6 +17,7 @@
       inkscape
       tiled
       vscode
+      dotnet-sdk_8
     ];
 
   };
