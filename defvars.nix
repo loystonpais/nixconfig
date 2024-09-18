@@ -75,6 +75,7 @@ with lib;
       };
       mc-launcher-patch.enable = mkEnableOption "enables prismlauncer patch";
       supergfxd-lsof-patch.enable = mkEnableOption "enables supergfxd lsof patch";
+      makehuman-makework-patch.enable = mkEnableOption "enables makehuman import patch";
     };
 
     modules = {
