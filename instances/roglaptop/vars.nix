@@ -17,7 +17,7 @@
   vars.profile.everything.enable = true;
 
   # Exclusion
-  vars.modules.browsers.floorp.enable = false;
+  vars.modules.browsers.floorp.enable = true;
   vars.modules.waydroid.enable = false;
   vars.modules.samba.enable = false;
 
