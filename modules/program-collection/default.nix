@@ -9,6 +9,11 @@
       gparted
       compsize
       telegram-desktop
+      obsidian
+
+      zoxide
+      tldr
+      
     ];
   };
 }
