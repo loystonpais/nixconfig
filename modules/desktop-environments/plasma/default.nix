@@ -14,6 +14,8 @@
       baloo
     ];
 
-    environment.systemPackages = lib.mkIf (config.vars.graphicsMode == "asuslinux") [ pkgs.supergfxctl-plasmoid ];
+    environment.systemPackages = [ pkgs.kdePackages.sddm-kcm ]
+      ++ ( if config.vars.graphicsMode == "asuslinux" then 
+       [ pkgs.supergfxctl-plasmoid ] else [] );
   };
 }
