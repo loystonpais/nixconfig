@@ -13,7 +13,7 @@
 
       zoxide
       tldr
-      
+      tmux
     ];
   };
 }
