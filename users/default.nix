@@ -8,7 +8,7 @@
   config = {
     users.users.${config.vars.username} = {
       isNormalUser = true;
-      description = "Nix User " + config.vars.name;
+      description = config.vars.name;
       extraGroups = [ "networkmanager" "wheel" "disk" ];
       shell = config.vars.shell;
       packages = [ ];
