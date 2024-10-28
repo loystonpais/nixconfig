@@ -221,13 +221,37 @@
         "type": "gitlab"
       }
     },
+    "plasma-manager": {
+      "inputs": {
+        "home-manager": [
+          "home-manager"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1729710171,
+        "narHash": "sha256-2sVt2hbL+G0FzEESm/EZBewPOmNtZ6MTnYhsvHJW6Rs=",
+        "owner": "nix-community",
+        "repo": "plasma-manager",
+        "rev": "247a8e677b51f053ca89dcf67059e24f85e47391",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "plasma-manager",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
         "nix-on-droid": "nix-on-droid",
         "nixpkgs": "nixpkgs",
         "nixpkgs-23_11": "nixpkgs-23_11",
-        "nixpkgs-24_05": "nixpkgs-24_05"
+        "nixpkgs-24_05": "nixpkgs-24_05",
+        "plasma-manager": "plasma-manager"
       }
     },
     "scss-reset": {

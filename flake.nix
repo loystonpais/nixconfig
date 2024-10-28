@@ -74,6 +74,12 @@
       inputs.nixpkgs.follows = "nixpkgs-24_05";
     };
 
+    plasma-manager = {
+      url = "github:nix-community/plasma-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
+
   };
 
 }
