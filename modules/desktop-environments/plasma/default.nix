@@ -16,8 +16,13 @@
       baloo
     ];
 
-    environment.systemPackages = [ pkgs.kdePackages.sddm-kcm ]
+    environment.systemPackages = with pkgs; [ 
+      kdePackages.sddm-kcm 
+      kdePackages.qtstyleplugin-kvantum
+    ]
       ++ ( if config.vars.graphicsMode == "asuslinux" then 
        [ pkgs.supergfxctl-plasmoid ] else [] );
+
+
   };
 }
