@@ -3,6 +3,7 @@
 {
   imports = [
     ./hyprland
+    ./plasma
   ];
 
   home.username = systemConfig.vars.username;
@@ -82,6 +83,7 @@
       nix-direnv.enable = true;
       enableZshIntegration = true;
     };
+
 
     home.stateVersion = "23.11";
 }
