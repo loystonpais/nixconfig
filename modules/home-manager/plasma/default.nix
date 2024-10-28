@@ -93,10 +93,10 @@
             launchers = [
               "applications:org.kde.dolphin.desktop"
               "applications:org.kde.konsole.desktop"
-              "applications:systemsettings"
-            ] ++ lib.optional
-              systemConfig.vars.modules.desktop-environments.plasma.enable
-              "applications:code.desktop";
+            ] ++ 
+            # This is to add if the package is installed
+            lib.optional (lib.elem pkgs.vscode systemConfig.environment.systemPackages)
+            "applications:code.desktop";
           };
         }
       ];
