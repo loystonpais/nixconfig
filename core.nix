@@ -64,6 +64,7 @@
 
   programs.firefox = {
     enable = true;
+    package = pkgs.firefox-esr;
     preferences = {
       "widget.use-xdg-desktop-portal.file-picker" = 1;
     };
