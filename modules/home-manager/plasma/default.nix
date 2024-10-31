@@ -1,5 +1,4 @@
-{ pkgs, lib, systemConfig, ... }: 
-{
+{ pkgs, lib, systemConfig, ... }: {
 
   imports = [ ];
 
@@ -10,6 +9,20 @@
     whitesur-gtk-theme
     (callPackage ../../../derivations/kwin-modern-informative { })
   ];
+
+  qt = {
+    enable = true;
+    style.name = "kvantum";
+  };
+
+  xdg.configFile = {
+    "Kvantum/WhiteSur".source = "${pkgs.whitesur-kde}/share/Kvantum/WhiteSur";
+
+    "Kvantum/kvantum.kvconfig".text = ''
+      [General]
+      theme=WhiteSurDark
+    '';
+  };
 
   programs.plasma = {
     overrideConfig = true;
@@ -39,7 +52,7 @@
         immutable = true;
       };
 
-      "katerc"."KTextEditor Renderer"."Font" = "Hack,10,-1,7,50,0,0,0,0,0";
+      # NOTE: need to get these working
       "kdeglobals"."General"."font" =
         "Inter Variable,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1";
       "kdeglobals"."General"."menuFont" =
@@ -50,8 +63,14 @@
         "Inter Variable,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1";
       "kdeglobals"."WM"."activeFont" =
         "Inter Variable,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1";
+      "kdeglobals"."General"."fixed" = 
+        "Fira Code,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1";
 
       "kwinrc"."TabBox"."LayoutName" = "modern_informative";
+      "kwinrc"."org.kde.kdecoration2"."ButtonsOnLeft" = "BF";
+      "kwinrc"."org.kde.kdecoration2"."ButtonsOnRight" = "IAX";
+
+      "kdeglobals"."KDE"."widgetStyle" = { value = "kvantum-dark"; immutable = true; };
     };
 
     workspace = {
@@ -72,35 +91,55 @@
       };
     };
 
-    panels = [{
-      location = "bottom";
-      floating = true;
-      height = 44;
-      hiding = "autohide";
-      lengthMode = "fit";
-      screen = "all";
+    panels = [
+      {
+        location = "bottom";
+        floating = true;
+        height = 44;
+        hiding = "autohide";
+        lengthMode = "fit";
+        screen = "all";
 
-      widgets = [
-        {
-          kickoff = {
-            sortAlphabetically = true;
-            icon = "nix-snowflake-white";
-          };
-        }
+        widgets = [
+          {
+            kickoff = {
+              sortAlphabetically = true;
+              icon = "nix-snowflake-white";
+            };
+          }
 
-        {
-          iconTasks = {
-            launchers = [
-              "applications:org.kde.dolphin.desktop"
-              "applications:org.kde.konsole.desktop"
-            ] ++ 
-            # This is to add if the package is installed
-            lib.optional (lib.elem pkgs.vscode systemConfig.environment.systemPackages)
-            "applications:code.desktop";
-          };
-        }
-      ];
-    }];
+          {
+            iconTasks = {
+              launchers = [
+                "applications:org.kde.dolphin.desktop"
+                "applications:org.kde.konsole.desktop"
+              ] ++
+                # This is to add if the package is installed
+                lib.optional
+                (lib.elem pkgs.vscode systemConfig.environment.systemPackages)
+                "applications:code.desktop";
+            };
+          }
+        ];
+      }
+
+      {
+        location = "top";
+        floating = true;
+        height = 40;
+        hiding = "dodgewindows";
+        lengthMode = "fit";
+        alignment = "right";
+        screen = "all";
+
+        widgets = [
+          "org.kde.plasma.pager"
+          "org.kde.plasma.systemtray"
+          "org.kde.plasma.digitalclock"
+          "org.kde.plasma.showdesktop"
+        ];
+      }
+    ];
 
   };
 }
