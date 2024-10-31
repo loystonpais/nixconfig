@@ -7,13 +7,9 @@
 
     environment.systemPackages = with pkgs; [
       gparted
-      compsize
       telegram-desktop
       obsidian
-
-      zoxide
-      tldr
-      tmux
+      spotube
     ];
   };
 }

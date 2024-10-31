@@ -12,6 +12,17 @@
   home.packages = with pkgs; [
     kate # A code editor I like
     nil # Nix server
+    
+    # useful sh commands
+    zoxide
+    lsd
+    fd
+    tldr
+    tmux
+    broot
+    ripgrep
+    thefuck
+    compsize
     nixfmt-classic # Nix formatter
   ];
 
@@ -41,7 +52,11 @@
     syntaxHighlighting.enable = true;
     autosuggestion.enable = true;
 
-    shellAliases = { ll = "ls -l"; };
+    shellAliases = { 
+      ll = "lsd -l";
+      ls = "lsd -lh";
+      neofetch = "fastfetch";
+    };
     history = {
       size = 10000000;
       save = 10000000;
