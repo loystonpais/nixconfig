@@ -9,6 +9,9 @@
   home.username = systemConfig.vars.username;
   home.homeDirectory = "/home/" + systemConfig.vars.username;
 
+  # enable fonts 
+  fonts.fontconfig.enable = true;
+
   home.packages = with pkgs; [
     kate # A code editor I like
     nil # Nix server
@@ -24,6 +27,17 @@
     thefuck
     compsize
     nixfmt-classic # Nix formatter
+
+
+    
+    # fonts
+    noto-fonts
+    noto-fonts-cjk-sans
+    noto-fonts-emoji
+    nerdfonts
+    fira-code
+    fira-code-symbols 
+
   ];
 
   home.sessionVariables = { };

@@ -13,9 +13,5 @@
     users.${config.vars.username}.imports = [ ./home.nix ];
   };
 
-  fonts.packages = with pkgs; [
-      fira-code
-      fira-code-symbols
-  ];
 
 }
