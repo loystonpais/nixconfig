@@ -67,8 +67,8 @@
         "Fira Code,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1";
 
       "kwinrc"."TabBox"."LayoutName" = "modern_informative";
-      "kwinrc"."org.kde.kdecoration2"."ButtonsOnLeft" = "BF";
-      "kwinrc"."org.kde.kdecoration2"."ButtonsOnRight" = "IAX";
+      "kwinrc"."org.kde.kdecoration2"."ButtonsOnLeft" = "XAI";
+      "kwinrc"."org.kde.kdecoration2"."ButtonsOnRight" = "FB";
 
       "kdeglobals"."KDE"."widgetStyle" = { value = "kvantum-dark"; immutable = true; };
     };
