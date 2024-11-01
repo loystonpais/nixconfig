@@ -19,6 +19,7 @@
     environment.systemPackages = with pkgs; [ 
       kdePackages.sddm-kcm 
       kdePackages.qtstyleplugin-kvantum
+      kdePackages.plasma-browser-integration
     ]
       ++ ( if config.vars.graphicsMode == "asuslinux" then 
        [ pkgs.supergfxctl-plasmoid ] else [] );
