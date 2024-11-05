@@ -18,6 +18,7 @@ with lib;
       waydroid.enable = mkDefault true;
       browsers.enable = mkDefault true;
       android.enable = mkDefault true;
+      ssh.enable = mkDefault true;
 
       home-manager.enable = mkDefault true;
     };

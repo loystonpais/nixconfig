@@ -67,6 +67,13 @@ with lib;
       default = "en_IN";
     };
 
+    sshPublicKeys = mkOption {
+      type = types.listOf types.str;
+      description = "Public ssh keys to set as authorized keys";
+      # Default not set for obvious reasons
+      default = [];
+    };
+
     overlays = {
       enableAll = mkOption {
         type = types.bool;
@@ -133,6 +140,9 @@ with lib;
           enable = mkEnableOption "enables zen browser configuration";
         };
       };
+
+      
+      ssh.enable = mkEnableOption "enables ssh";  
         };
       };
     };

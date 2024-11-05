@@ -10,6 +10,8 @@ with lib;
 
     vars.modules.home-manager.enable = mkDefault true;
 
+    vars.modules.ssh.enable = mkDefault true;
+
     environment.systemPackages = with pkgs; [
       gparted
     ];

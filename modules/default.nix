@@ -16,6 +16,7 @@
     ./waydroid
     ./browsers
     ./android
+    ./ssh
 
     ./home-manager
   ];
