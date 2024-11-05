@@ -12,6 +12,8 @@ with lib;
 
     vars.modules.ssh.enable = mkDefault true;
 
+    vars.modules.secrets.enable = mkDefault true;
+
     environment.systemPackages = with pkgs; [
       gparted
     ];

@@ -4,6 +4,7 @@
   imports = [
     ./hyprland
     ./plasma
+    ./secrets
   ];
 
   home.username = systemConfig.vars.username;
@@ -88,6 +89,9 @@
       plugins = [ "git" "direnv" ];
       theme = "robbyrussell";
     };
+
+    
+  
 
 #     plugins = [
 #       {

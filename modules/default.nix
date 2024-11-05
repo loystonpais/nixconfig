@@ -17,6 +17,7 @@
     ./browsers
     ./android
     ./ssh
+    ./secrets
 
     ./home-manager
   ];

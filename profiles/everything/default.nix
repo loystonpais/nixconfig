@@ -19,6 +19,7 @@ with lib;
       browsers.enable = mkDefault true;
       android.enable = mkDefault true;
       ssh.enable = mkDefault true;
+      secrets.enable = mkDefault true;
 
       home-manager.enable = mkDefault true;
     };

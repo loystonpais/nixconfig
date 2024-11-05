@@ -143,6 +143,14 @@ with lib;
 
       
       ssh.enable = mkEnableOption "enables ssh";  
+      
+
+      secrets = {
+        enable = mkEnableOption "enables sops secrets";
+        environmentVariablesFromSops = mkOption {
+          type = types.attrs;
+          default = {};
+          description = "environment variables to be set from the sops secrets";
         };
       };
     };
