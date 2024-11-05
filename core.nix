@@ -14,6 +14,9 @@
   networking.hostName = config.vars.hostName;
   networking.networkmanager.enable = true;
 
+  # Explicitly set firewall to true (pretty sure its enabled by default)
+  networking.firewall.enable = true;
+
   # Enable opengl/graphics
   hardware.graphics = {
     enable = true;
