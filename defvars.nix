@@ -129,8 +129,10 @@ with lib;
 
       browsers = {
         enable = mkEnableOption "enables browser configuration";
-        floorp = {
-          enable = mkEnableOption "enables floorp configuration";
+        zen = {
+          enable = mkEnableOption "enables zen browser configuration";
+        };
+      };
         };
       };
     };

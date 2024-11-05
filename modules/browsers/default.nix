@@ -3,10 +3,10 @@ with lib;
 {
 
   imports = [
-    ./floorp.nix
+    ./zen.nix
   ];
 
   config.vars.modules.browsers = mkIf config.vars.modules.browsers.enable {
-    floorp.enable = mkDefault true;
+    zen.enable = mkDefault false;
   };
 }
