@@ -29,9 +29,17 @@
     enable = true;
     windows.allowWindowsToRememberPositions = true;
 
+    kscreenlocker.appearance.wallpaper = 
+      "${pkgs.whitesur-kde}/share/wallpapers/WhiteSur-dark/contents/images/3840x2160.png";
+    kscreenlocker.autoLock = false;
+
+
     powerdevil = {
       AC.autoSuspend.action = "nothing";
       AC.whenLaptopLidClosed = "doNothing";
+      AC.powerProfile = "performance";
+      AC.turnOffDisplay.idleTimeout = "never";
+      
 
       battery.autoSuspend.action = "nothing";
       battery.whenLaptopLidClosed = "doNothing";
@@ -40,6 +48,8 @@
       batteryLevels.criticalLevel = 5;
       batteryLevels.lowLevel = 20;
       lowBattery.powerProfile = "powerSaving";
+
+      
 
     };
 
