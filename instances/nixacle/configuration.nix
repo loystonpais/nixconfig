@@ -1,17 +1,26 @@
 { lib, inputs, pkgs, config, ... }:
 
 {
-  imports = [
-    ./vars.nix
-  ];
 
 
   environment.systemPackages = with pkgs; [
-     nano
-     #nh
      git
      tmux
+     nh
+     micro
   ];
+
+
+
+
+  imports = [
+    ./vars.nix
+    ./services/nginx.nix
+  ];
+
+
+  # Must replace with ssh module configuration
+  users.users.${config.vars.username}.openssh.authorizedKeys.keys = config.vars.sshPublicKeys;
 
 }
 

@@ -11,4 +11,14 @@
   boot.initrd.kernelModules = [ "nvme" ];
   fileSystems."/" = { device = "/dev/mapper/ocivolume-root"; fsType = "xfs"; };
   
+  fileSystems."/mnt/datablk1" = {
+    device = "/dev/disk/by-label/datablk1";
+    fsType = "xfs";
+    options = [ "nofail" ];
+  };
+   
+  swapDevices = [ {
+    device = "/var/lib/swapfile";
+    size = 4096;
+  } ];
 }

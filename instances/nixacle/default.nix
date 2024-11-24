@@ -2,7 +2,7 @@
 # Do modifications in configuration.nix
 { self, inputs, ... }: 
 
-inputs.nixpkgs-23_11.lib.nixosSystem {
+inputs.nixpkgs-24_05.lib.nixosSystem {
   system = "x86_64-linux";
 
   specialArgs = {
@@ -10,13 +10,16 @@ inputs.nixpkgs-23_11.lib.nixosSystem {
   };
 
   modules = [
+    ./oracle # DO NOT REMOVE
+
+    #services/iscsi.nix
+
     ../../defvars.nix
     ../../modules/secrets
     ../../users
-
-    ./oracle.nix
-
+    
+    
+    
     ./configuration.nix
-    ./hardware-configuration.nix
   ];
 }
