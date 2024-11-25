@@ -1,7 +1,7 @@
 { config, ... }:
 let 
   datablock = config.vars.nixacle.datablock1;
-	address = config.vars.nixacle.address;
+  address = config.vars.nixacle.address;
 in
 {
 
@@ -9,26 +9,41 @@ in
     enable = true; 
     allowedTCPPorts = [ 80 443 ]; 
   };
+
+
+  security.acme = {
+    acceptTerms = true;
+    defaults.email = config.vars.email;
+  };
     
-	services.nginx = {
-		enable = true;
+  services.nginx = {
+	enable = true;
+	recommendedGzipSettings = true;
+	recommendedOptimisation = true;
 
-		virtualHosts.${address} = {
-		  #addSSL = true;
-		  #enableACME = true;
+	virtualHosts.${address} = {
+	  enableACME = true;
+	  forceSSL = true;
 
-		  locations = {
-				"/" = {
-					root = "${datablock.path}/www/html";
-				};
+	  locations = {
+	    "/" = {
+	      root = "${datablock.path}/www/html";
+	    };
 
-				"/gitea" = {
-					# Gitea runs locally at port 3000 
-					proxyPass = "http://127.0.0.1:3000";
-				};
-
-			};
-			
-		};
-	};
+	    "/gitea/" = {
+	      # Gitea runs locally at port 3000 
+		  proxyPass = "http://localhost:3000/";
+		  extraConfig = ''
+		    client_max_body_size 512M;
+		    proxy_set_header Connection $http_connection;
+		    proxy_set_header Upgrade $http_upgrade;
+		    proxy_set_header Host $host;
+		    proxy_set_header X-Real-IP $remote_addr;
+		    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+		    proxy_set_header X-Forwarded-Proto $scheme;
+	     '';
+	    };
+      };		
+    };
+  };
 }
