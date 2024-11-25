@@ -69,6 +69,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    home-manager-24_05 = {
+       url = "github:nix-community/home-manager/release-24.05";
+       inputs.nixpkgs.follows = "nixpkgs-24_05";
+    };
+
     nix-on-droid = {
       url = "github:nix-community/nix-on-droid/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs-24_05";

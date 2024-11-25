@@ -16,7 +16,8 @@ inputs.nixpkgs-24_05.lib.nixosSystem {
     ../../defvars.nix
     ../../modules/secrets
     ../../users
-    
+
+    ./home-manager.nix
     
     ./configuration.nix
   ];
