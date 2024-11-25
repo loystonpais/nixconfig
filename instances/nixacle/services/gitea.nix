@@ -23,7 +23,7 @@ in
     };
 
     dump = {
-      backupDir = config.vars.nixacle.datablock1.path + "backup/gitea";
+      backupDir = config.vars.nixacle.datablock1.path + "/backup/gitea";
     };
 
   };
