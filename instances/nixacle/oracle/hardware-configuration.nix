@@ -1,4 +1,4 @@
-{ modulesPath, ... }:
+{ modulesPath, config, ... }:
 {
   imports = [ (modulesPath + "/profiles/qemu-guest.nix") ];
   boot.loader.grub = {
@@ -11,7 +11,7 @@
   boot.initrd.kernelModules = [ "nvme" ];
   fileSystems."/" = { device = "/dev/mapper/ocivolume-root"; fsType = "xfs"; };
   
-  fileSystems."/mnt/datablk1" = {
+  fileSystems.${config.vars.nixacle.datablock1.path} = {
     device = "/dev/disk/by-label/datablk1";
     fsType = "xfs";
     options = [ "nofail" ];

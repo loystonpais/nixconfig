@@ -11,9 +11,10 @@
     (pkgs.callPackage (builtins.fetchGit {
       url = "https://github.com/loystonpais/idk-shell-command";
       ref = "main";
-      rev = "4090d721d4e2e42e451cb11eae7fba750ab7ca03";
+      rev = "de31d1683248722170dfab6b9db9d4dbb44504e0";
     }) { inherit pkgs; })
- 
+
+    pkgs.warp-terminal
   ];
 
   system.stateVersion = "23.11"; # Did you read the comment?

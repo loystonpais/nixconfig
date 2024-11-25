@@ -12,12 +12,10 @@ inputs.nixpkgs-24_05.lib.nixosSystem {
   modules = [
     ./oracle # DO NOT REMOVE
 
-    #services/iscsi.nix
-
+    # Only importing wanted modules
     ../../defvars.nix
     ../../modules/secrets
     ../../users
-    
     
     
     ./configuration.nix
