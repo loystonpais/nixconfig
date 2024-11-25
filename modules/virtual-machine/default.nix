@@ -20,6 +20,8 @@
             }).fd
           ];
         };
+        # Needed for filesysystem passthrough
+        vhostUserPackages = with pkgs; [ virtiofsd ];
       };
     };
 
