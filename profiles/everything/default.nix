@@ -21,7 +21,10 @@ with lib;
       ssh.enable = mkDefault true;
       secrets.enable = mkDefault true;
 
-      home-manager.enable = mkDefault true;
+      home-manager = {
+        enable = mkDefault true;
+        enableAllModules = mkDefault true;
+      };
     };
   };
 }

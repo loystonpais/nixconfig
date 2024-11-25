@@ -1,45 +1,9 @@
 { config, systemConfig, pkgs, ... }:
 
 {
-  imports = [
-    ./hyprland
-    ./plasma
-    ./secrets
-  ];
 
   home.username = systemConfig.vars.username;
   home.homeDirectory = "/home/" + systemConfig.vars.username;
-
-  # enable fonts 
-  fonts.fontconfig.enable = true;
-
-  home.packages = with pkgs; [
-    kate # A code editor I like
-    nil # Nix server
-    
-    # useful sh commands
-    zoxide
-    lsd
-    fd
-    tldr
-    tmux
-    broot
-    ripgrep
-    thefuck
-    compsize
-    nixfmt-classic # Nix formatter
-
-
-    
-    # fonts
-    noto-fonts
-    noto-fonts-cjk-sans
-    noto-fonts-emoji
-    nerdfonts
-    fira-code
-    fira-code-symbols 
-
-  ];
 
   home.sessionVariables = { };
 
@@ -49,74 +13,13 @@
 
   programs.home-manager.enable = true;
 
-  programs.git = {
+  
+  programs.direnv = {
     enable = true;
-    userName = systemConfig.vars.github.username;
-    userEmail = systemConfig.vars.email;
-    aliases = {
-      pu = "push";
-      ch = "checkout";
-      cm = "commit";
-    };
+    nix-direnv.enable = true;
+    enableZshIntegration = true;
   };
 
-  programs.zsh = {
-    enable = true;
-    enableCompletion = true;
-    autocd = true;
-    syntaxHighlighting.enable = true;
-    autosuggestion.enable = true;
 
-    shellAliases = { 
-      ll = "lsd -l";
-      ls = "lsd -lh";
-      neofetch = "fastfetch";
-    };
-    history = {
-      size = 10000000;
-      save = 10000000;
-      ignoreSpace = true;
-      ignoreDups = true;
-      ignoreAllDups = true;
-      expireDuplicatesFirst = true;
-      extended = true;
-      share = true;
-      path = "${config.home.homeDirectory}/.zsh_history";
-    };
-
-    oh-my-zsh = {
-      enable = true;
-      plugins = [ "git" "direnv" ];
-      theme = "robbyrussell";
-    };
-
-    
-  
-
-#     plugins = [
-#       {
-#         name = "zsh-nix-shell";
-#         file = "nix-shell.plugin.zsh";
-#         src = pkgs.fetchFromGitHub {
-#           owner = "chisui";
-#           repo = "zsh-nix-shell";
-#           rev = "v0.8.0";
-#           sha256 = "1lzrn0n4fxfcgg65v0qhnj7wnybybqzs4adz7xsrkgmcsr0ii8b7";
-#         };
-#       }
-#     ];
-
-#     initExtra = ''
-#       #prompt_nix_shell_setup
-#     '';
-    };
-
-    programs.direnv = {
-      enable = true;
-      nix-direnv.enable = true;
-      enableZshIntegration = true;
-    };
-
-
-    home.stateVersion = "23.11";
+  home.stateVersion = "23.11";
 }

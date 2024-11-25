@@ -132,7 +132,18 @@ with lib;
       
       waydroid.enable = mkEnableOption "enables waydroid";
       samba.enable = mkEnableOption "enables samba";
-      home-manager.enable = mkEnableOption "enables home-manager";
+      home-manager = {
+        enable = mkEnableOption "enables home manager";
+        enableAllModules = mkEnableOption "enables all home configurations";
+        hyprland.enable = mkEnableOption "enables hyprland home configuration";
+        plasma.enable = mkEnableOption "enables plasma home configuration";
+        fonts.enable = mkEnableOption "enables fonts configuration";
+        program-collection.enable = mkEnableOption "enables program collection";
+        git.enable = mkEnableOption "enables git configuration";
+        zsh.enable = mkEnableOption "enables zsh configuration";
+        secrets.enable = 
+          mkEnableOption "enables home secrets configuration (needs secrets module to be enabled)";
+      };
 
       browsers = {
         enable = mkEnableOption "enables browser configuration";

@@ -1,6 +1,6 @@
 { systemConfig, lib, ... }:
 {
-  config = lib.mkIf systemConfig.vars.modules.secrets.enable {
+  config = lib.mkIf ( systemConfig.vars.modules.secrets.enable && systemConfig.vars.modules.home-manager.secrets.enable ) {
 
     programs.zsh.initExtra = with builtins;
     let 
