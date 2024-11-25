@@ -13,6 +13,7 @@
     sops.secrets.groq_personal_use_key.owner = config.vars.username;
     sops.secrets.gemini_api_key.owner = config.vars.username;
     sops.secrets.github_key.owner = config.vars.username;
+    sops.secrets.nixacle_gitea_db_password.owner = config.vars.username;
 
     vars.modules.secrets.environmentVariablesFromSops = {
       IDK_GROQ_API_KEY = config.sops.secrets.groq_personal_use_key;
