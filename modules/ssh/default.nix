@@ -22,5 +22,10 @@
 
     users.users.${config.vars.username}.openssh.authorizedKeys.keys = config.vars.sshPublicKeys;
 
+    programs.mosh = {
+      enable = true;
+      openFirewall = true;
+    };
+
   };  
 }
