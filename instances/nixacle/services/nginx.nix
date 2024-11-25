@@ -1,24 +1,34 @@
-{ ... }:
+{ config, ... }:
 let 
-  rootPathPrefix = "/mnt/datablk1";
+  datablock = config.vars.nixacle.datablock1;
+	address = config.vars.nixacle.address;
 in
 {
 
-    networking.firewall = { 
-      enable = true; 
-      allowedTCPPorts = [ 80 443 ]; 
-    };
+  networking.firewall = { 
+    enable = true; 
+    allowedTCPPorts = [ 80 443 ]; 
+  };
     
 	services.nginx = {
 		enable = true;
 
-		virtualHosts."loy.us.to" = {
+		virtualHosts.${address} = {
 		  #addSSL = true;
 		  #enableACME = true;
-		  #root = "/mnt/datablk1/www/html";	
-		  locations."/" = {
-		  	root = "${rootPathPrefix}/www/html";
-		  };
+
+		  locations = {
+				"/" = {
+					root = "${datablock.path}/www/html";
+				};
+
+				"/gitea" = {
+					# Gitea runs locally at port 3000 
+					proxyPass = "http://127.0.0.1:3000";
+				};
+
+			};
+			
 		};
 	};
 }
