@@ -1,0 +1,4 @@
+@import "https://theme-park.dev/css/base/gitea/dark.css";
+:root {
+  --is-dark-theme:true;
+}
