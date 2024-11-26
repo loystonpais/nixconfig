@@ -32,6 +32,8 @@
       zsh.enable = true;	
     };
 
+    vars.modules.ssh.enable = true;
+
     vars.modules.secrets.enable = true;
   };
 

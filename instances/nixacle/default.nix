@@ -7,6 +7,7 @@ inputs.nixpkgs-24_05.lib.nixosSystem {
 
   specialArgs = {
     inherit inputs;
+    inherit self;
   };
 
   modules = [
@@ -15,6 +16,7 @@ inputs.nixpkgs-24_05.lib.nixosSystem {
     # Only importing wanted modules
     ../../defvars.nix
     ../../modules/secrets
+    ../../modules/ssh
     ../../users
 
     ./home-manager.nix
