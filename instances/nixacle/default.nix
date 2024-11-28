@@ -2,7 +2,7 @@
 # Do modifications in configuration.nix
 { self, inputs, ... }: 
 
-inputs.nixpkgs-24_05.lib.nixosSystem {
+inputs.nixpkgs-24_11.lib.nixosSystem {
   system = "x86_64-linux";
 
   specialArgs = {

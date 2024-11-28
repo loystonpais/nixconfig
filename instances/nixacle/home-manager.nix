@@ -2,7 +2,7 @@
 
 {
   imports = [
-    inputs.home-manager-24_05.nixosModules.home-manager
+    inputs.home-manager-24_11.nixosModules.home-manager
   ];
 
   home-manager = lib.mkIf config.vars.modules.home-manager.enable {
