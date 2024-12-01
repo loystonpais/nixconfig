@@ -35,6 +35,8 @@
     vars.modules.ssh.enable = true;
 
     vars.modules.secrets.enable = true;
+
+    vars.modules.home-manager.secrets.enable = true;
   };
 
 }

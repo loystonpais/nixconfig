@@ -14,6 +14,7 @@
       ../../modules/home-manager/home.nix
       ../../modules/home-manager/git
       ../../modules/home-manager/zsh
+      ../../modules/home-manager/secrets
 
       ./home-override.nix
     ];
