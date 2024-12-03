@@ -169,6 +169,7 @@ with lib;
     profile = {
       everything.enable = mkEnableOption "enables almost eveything within the config";
       vm.enable = mkEnableOption "enables vm profile";
+      vps.enable = mkEnableOption "enables vps profile (for cloud vps)";
     };
 
     bootMode = mkOption {
