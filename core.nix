@@ -8,6 +8,7 @@
     ./required
     ./overlays
     ./users
+    ./vars.nix
     ./defvars.nix
   ];
 
@@ -96,14 +97,6 @@
   services.xserver = {
     xkb.layout = "us";
     xkb.variant = "";
-  };
-
-  # Allow unfree packages
-  nixpkgs = {
-    config = {
-      allowUnfree = true;
-      allowUnfreePredicate = (_: true);
-    };
   };
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
