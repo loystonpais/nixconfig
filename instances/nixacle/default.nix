@@ -19,6 +19,7 @@ inputs.nixpkgs-24_11.lib.nixosSystem {
     ../../modules/secrets
     ../../modules/ssh
     ../../users
+    ../../profiles
 
     ./home-manager.nix
     
