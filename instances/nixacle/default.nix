@@ -15,6 +15,7 @@ inputs.nixpkgs-24_11.lib.nixosSystem {
 
     # Only importing wanted modules
     ../../defvars.nix
+    ../../vars.nix
     ../../modules/secrets
     ../../modules/ssh
     ../../users
