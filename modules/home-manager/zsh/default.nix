@@ -14,10 +14,20 @@
       syntaxHighlighting.enable = true;
       autosuggestion.enable = true;
 
-      shellAliases = { 
+      shellAliases = rec { 
         ll = "lsd -l";
         ls = "lsd -lh";
         neofetch = "fastfetch";
+        changes = "sudo nixos-rebuild dry-activate --fast --flake .#${systemConfig.vars.hostName}";
+        test = "sudo nixos-rebuild test --fast --flake .#${systemConfig.vars.hostName}";
+        switch = "sudo nixos-rebuild switch --flake .#${systemConfig.vars.hostName}";
+        fuckgoback = "sudo nixos-rebuild switch --rollback --flake .#${systemConfig.vars.hostName}";
+        fuckgobackasap = rollback;
+        rollback = "sudo nixos-rebuild switch --rollback";
+        nhswitch = "nh os switch -v -H ${systemConfig.vars.hostName} .";
+        switchbutcooler = nhswitch;
+        update = "( cd ~/nixconfig && (git pull || git fetch) && changes )";
+        upgrade = "( ${update}; cd ~/nixconfig && switch )";
       };
       history = {
         size = 10000000;
