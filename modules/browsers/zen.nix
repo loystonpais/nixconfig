@@ -1,8 +1,8 @@
-{ config, lib, pkgs, ... }: 
+{ config, lib, pkgs, inputs, system, ... }: 
 {
   config = lib.mkIf config.vars.modules.browsers.zen.enable {
     environment.systemPackages = [
-      (pkgs.callPackage ../../derivations/zen-browser { inherit pkgs; })
+      inputs.zen-browser.packages."${system}".specific
     ];
   };
 }
