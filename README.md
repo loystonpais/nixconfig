@@ -15,12 +15,12 @@ NixOS is an operating system that makes it easy to set up and maintain a **repro
 The usage of the word "instances" over "hosts" is on purpose. This config is designed to handle multiple instances of nixos regardless of which device it is running on.
 
 ```sh 
-./jesse.py nixos-instance import instanceName
+./helper.sh create instanceName
 ```
 Replace `instanceName` with any name you want. (Must be a valid hostname)
 
 <br/>
-When you run the above jesse command, a new folder named `instanceName` will be created in the `instances` folder along with few files.
+When you run the above command, a new folder named `instanceName` will be created in the `instances` folder along with few files.
 
 ```nix
 # instances/instanceName/default.nix
@@ -31,6 +31,7 @@ inputs.nixpkgs.lib.nixosSystem {
   
   specialArgs  = {
     inherit  inputs;
+    inherit system;
   };
   
   modules = [
