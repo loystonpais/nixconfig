@@ -2,11 +2,12 @@
 # Do modifications in configuration.nix
 { self, inputs, ... }: 
 
-inputs.nixpkgs.lib.nixosSystem {
+inputs.nixpkgs.lib.nixosSystem rec {
   system = "x86_64-linux";
 
   specialArgs = {
     inherit inputs;
+    inherit system;
   };
 
   modules = [
