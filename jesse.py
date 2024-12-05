@@ -102,11 +102,12 @@ def import_(instance: str):
     default_file = dedent(f'''
     {{ self, inputs, ... }}:
 
-    inputs.nixpkgs.lib.nixosSystem {{
+    inputs.nixpkgs.lib.nixosSystem rec {{
       system = "{system}";
 
       specialArgs = {{
         inherit inputs;
+        inherit system;
       }};
 
       modules = [  {"  ".join(modules)}  ];
