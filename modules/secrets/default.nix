@@ -16,6 +16,8 @@
     sops.secrets.nixacle_gitea_db_password.owner = config.vars.username;
     sops.secrets.gitea_key.owner = config.vars.username;
     sops.secrets.cachix_loystonpais_auth_token.owner = config.vars.username;
+    sops.secrets.ataraxy_bot_token.owner = config.vars.username;
+    sops.secrets.ataraxy_environment_file.owner = config.vars.username;
 
     vars.modules.secrets.environmentVariablesFromSops = {
       IDK_GROQ_API_KEY = config.sops.secrets.groq_personal_use_key;
@@ -26,6 +28,8 @@
       
       CACHIX_LOYSTONPAIS_AUTH_TOKEN = config.sops.secrets.cachix_loystonpais_auth_token;
       CACHIX_AUTH_TOKEN = config.sops.secrets.cachix_loystonpais_auth_token;
+
+      ATARAXY_BOT_TOKEN = config.sops.secrets.ataraxy_bot_token;
     };
 
     environment.systemPackages = with pkgs; [
