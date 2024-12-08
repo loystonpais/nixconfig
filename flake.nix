@@ -98,6 +98,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    idk-shell-command = {
+      url = "github:loystonpais/idk-shell-command";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
 }
