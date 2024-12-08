@@ -102,6 +102,13 @@
       url = "github:loystonpais/idk-shell-command";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+
+    ataraxy-discord-bot = {
+      url = "github:loystonpais/ataraxy";
+      inputs.nixpkgs.follows = "nixpkgs-24_11";
+    };
+
   };
 
 }

@@ -1,5 +1,25 @@
 {
   "nodes": {
+    "ataraxy-discord-bot": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs-24_11"
+        ]
+      },
+      "locked": {
+        "lastModified": 1733677683,
+        "narHash": "sha256-vYgHrTedc10rxtZLezw3ZOMG50skh+1ooJA4UEe0QvY=",
+        "owner": "loystonpais",
+        "repo": "ataraxy",
+        "rev": "86ae4f9ae9491a102f927700b0c4d4f9d88dd193",
+        "type": "github"
+      },
+      "original": {
+        "owner": "loystonpais",
+        "repo": "ataraxy",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -59,6 +79,26 @@
       "original": {
         "owner": "nix-community",
         "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "idk-shell-command": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1733472168,
+        "narHash": "sha256-OlrdZ3VY5kFJwLdc5zvczUOzKtMqjxQiVKVJgeX2UD0=",
+        "owner": "loystonpais",
+        "repo": "idk-shell-command",
+        "rev": "1d2beec322ceb184287fc2543808a4da5bb27671",
+        "type": "github"
+      },
+      "original": {
+        "owner": "loystonpais",
+        "repo": "idk-shell-command",
         "type": "github"
       }
     },
@@ -283,8 +323,10 @@
     },
     "root": {
       "inputs": {
+        "ataraxy-discord-bot": "ataraxy-discord-bot",
         "home-manager": "home-manager",
         "home-manager-24_11": "home-manager-24_11",
+        "idk-shell-command": "idk-shell-command",
         "nix-on-droid": "nix-on-droid",
         "nixpkgs": "nixpkgs",
         "nixpkgs-24_05": "nixpkgs-24_05",
