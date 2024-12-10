@@ -321,6 +321,26 @@
         "type": "github"
       }
     },
+    "portfolio-website": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs-24_11"
+        ]
+      },
+      "locked": {
+        "lastModified": 1733832334,
+        "narHash": "sha256-kjgKa1uGKsv1zdCIB/cCoRDGH5YtELPvGNOjM4dPLPM=",
+        "owner": "loystonpais",
+        "repo": "portfolio",
+        "rev": "29d62f3982d5dfe24068e5f8a16d85c33c970225",
+        "type": "github"
+      },
+      "original": {
+        "owner": "loystonpais",
+        "repo": "portfolio",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "ataraxy-discord-bot": "ataraxy-discord-bot",
@@ -332,6 +352,7 @@
         "nixpkgs-24_05": "nixpkgs-24_05",
         "nixpkgs-24_11": "nixpkgs-24_11",
         "plasma-manager": "plasma-manager",
+        "portfolio-website": "portfolio-website",
         "sops-nix": "sops-nix",
         "zen-browser": "zen-browser"
       }

@@ -109,6 +109,11 @@
       inputs.nixpkgs.follows = "nixpkgs-24_11";
     };
 
+    portfolio-website = {
+      url = "github:loystonpais/portfolio";
+      inputs.nixpkgs.follows = "nixpkgs-24_11";
+    };
+
   };
 
 }
