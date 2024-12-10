@@ -1,4 +1,4 @@
 { lib, ... }:
 {
-	programs.zsh.oh-my-zsh.theme = lib.mkForce "crunch";
+	programs.zsh.oh-my-zsh.theme = lib.mkForce "afowler";
 }
