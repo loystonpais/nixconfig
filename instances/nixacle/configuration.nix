@@ -17,6 +17,7 @@
     ./vars.nix
     ./services/nginx.nix
     ./services/gitea.nix
+    ./services/portfolio-website.nix
   ];
 
 
