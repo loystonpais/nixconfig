@@ -4,7 +4,7 @@
   	inputs.portfolio-website.nixosModules.default
   ];
 
-  programs.portfolio-website = {
+  services.portfolio-website = {
     enable = true;
   };
 }
