@@ -328,11 +328,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1733832334,
-        "narHash": "sha256-kjgKa1uGKsv1zdCIB/cCoRDGH5YtELPvGNOjM4dPLPM=",
+        "lastModified": 1734025635,
+        "narHash": "sha256-SM6Th+RT3feN68ufP5yxXReRrEvgdEdh71I7X0BOgN0=",
         "owner": "loystonpais",
         "repo": "portfolio",
-        "rev": "29d62f3982d5dfe24068e5f8a16d85c33c970225",
+        "rev": "9324847bb87f6fddc1a010e7996f2b5fdb6956f1",
         "type": "github"
       },
       "original": {
