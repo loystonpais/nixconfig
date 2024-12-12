@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1733758097,
-        "narHash": "sha256-2lMULaLIEspVQQQHQtMx3ERhPRP9/JJkhWrTZAaxRW4=",
+        "lastModified": 1734026377,
+        "narHash": "sha256-vQr2QpnZky0EC+cfGFT+k8Oq6+uRXFqGoAI+pwFCQyU=",
         "owner": "loystonpais",
         "repo": "ataraxy",
-        "rev": "577e51c934ddbe9bc6fc66c46bf364ecf486d761",
+        "rev": "0243905d43c09f70619bd1b2c54a4ed604f75d68",
         "type": "github"
       },
       "original": {
