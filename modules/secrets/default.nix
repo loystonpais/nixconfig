@@ -32,6 +32,26 @@
       ATARAXY_BOT_TOKEN = config.sops.secrets.ataraxy_bot_token;
     };
 
+
+    sops.secrets.auto-resume-builder = {
+      format = "dotenv";
+      sopsFile = ../../secrets/auto-resume-builder.env;
+      key = "";
+      owner = config.vars.username;
+    };
+
+    sops.secrets."business-profile.jpg" = {
+      format = "binary";
+      sopsFile = ../../secrets/files/business-profile.jpg.enc;
+      owner = config.vars.username;
+    };
+
+    sops.secrets."college-logo.jpg" = {
+      format = "binary";
+      sopsFile = ../../secrets/files/college-logo.jpg.enc;
+      owner = config.vars.username;
+    };
+
     environment.systemPackages = with pkgs; [
       sops
     ];
