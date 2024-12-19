@@ -20,6 +20,26 @@
         "type": "github"
       }
     },
+    "auto-resume-builder": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs-24_11"
+        ]
+      },
+      "locked": {
+        "lastModified": 1734639144,
+        "narHash": "sha256-wuThZu6UISW+p+6ZSTyMHeHJiNPffkfcL2iqyyPWfFc=",
+        "owner": "loystonpais",
+        "repo": "auto-resume-builder",
+        "rev": "195ce15f9359b28718f160ed83ccbbeaeb8814d4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "loystonpais",
+        "repo": "auto-resume-builder",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -344,6 +364,7 @@
     "root": {
       "inputs": {
         "ataraxy-discord-bot": "ataraxy-discord-bot",
+        "auto-resume-builder": "auto-resume-builder",
         "home-manager": "home-manager",
         "home-manager-24_11": "home-manager-24_11",
         "idk-shell-command": "idk-shell-command",

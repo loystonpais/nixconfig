@@ -114,6 +114,11 @@
       inputs.nixpkgs.follows = "nixpkgs-24_11";
     };
 
+    auto-resume-builder = {
+      url = "github:loystonpais/auto-resume-builder";
+      inputs.nixpkgs.follows = "nixpkgs-24_11";
+    };
+
   };
 
 }
