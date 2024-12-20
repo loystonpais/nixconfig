@@ -24,8 +24,18 @@ in
 	virtualHosts.${address} = {
 	  enableACME = true;
 	  forceSSL = true;
+	  
 
 	  locations = {
+	    "/resume/" = {
+	      alias = "/var/lib/auto-resume-builder/build/";
+	      extraConfig = ''
+	        index resume.pdf;
+	    	default_type application/pdf;
+	    	add_header Content-Disposition 'inline';
+	      '';
+	    };
+	    
 	    "/" = {
 	      # Portfolio Website runs at port 3001
 	      proxyPass = "http://localhost:3001";

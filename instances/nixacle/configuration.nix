@@ -11,13 +11,12 @@
   ];
 
 
-
-
   imports = [
     ./vars.nix
     ./services/nginx.nix
     ./services/gitea.nix
     ./services/portfolio-website.nix
+    ./services/auto-resume-builder.nix
   ];
 
 
