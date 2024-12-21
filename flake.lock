@@ -27,11 +27,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1734639144,
-        "narHash": "sha256-wuThZu6UISW+p+6ZSTyMHeHJiNPffkfcL2iqyyPWfFc=",
+        "lastModified": 1734796064,
+        "narHash": "sha256-iHAOb+yGyjPZdnVxHsqMqE9EQkRdB/UozvmLLHotiw8=",
         "owner": "loystonpais",
         "repo": "auto-resume-builder",
-        "rev": "195ce15f9359b28718f160ed83ccbbeaeb8814d4",
+        "rev": "73bbdca9dfa3e94d346c1c7df3063cd5634dcc26",
         "type": "github"
       },
       "original": {
