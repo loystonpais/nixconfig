@@ -1,7 +1,10 @@
 # It is not recommended to modify this file
 # Do modifications in configuration.nix
-{ self, inputs, ... }: 
-
+{
+  self,
+  inputs,
+  ...
+}:
 inputs.nixpkgs-24_11.lib.nixosSystem {
   system = "x86_64-linux";
 
@@ -22,7 +25,7 @@ inputs.nixpkgs-24_11.lib.nixosSystem {
     ../../profiles
 
     ./home-manager.nix
-    
+
     ./configuration.nix
   ];
 }

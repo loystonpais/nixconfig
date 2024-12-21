@@ -1,9 +1,11 @@
-{ config, pkgs, lib,  ... }:
-
 {
-
-  config = lib.mkIf (config.vars.graphicsMode == "asuslinux" ) {
-    services.xserver.videoDrivers = [ "nvidia" ];
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
+  config = lib.mkIf (config.vars.graphicsMode == "asuslinux") {
+    services.xserver.videoDrivers = ["nvidia"];
 
     hardware.nvidia = {
       modesetting.enable = true;
@@ -34,5 +36,4 @@
       hotplug_type = "None";
     };
   };
-
 }

@@ -1,6 +1,8 @@
-{ lib, config, ... }:
-
-let
+{
+  lib,
+  config,
+  ...
+}: let
   patch_script = ''
     function_name="AccountListPage::on_actionAddOffline_triggered"
     patch_file="./launcher/ui/pages/global/AccountListPage.cpp"
@@ -13,10 +15,10 @@ in {
   config = lib.mkIf config.vars.overlays.mc-launcher-patch.enable {
     nixpkgs.overlays = [
       (final: prev: {
-        prismlauncher-unwrapped = prev.prismlauncher-unwrapped.overrideAttrs
-          (oldAttrs: { prePatch = patch_script; });
+        prismlauncher-unwrapped =
+          prev.prismlauncher-unwrapped.overrideAttrs
+          (oldAttrs: {prePatch = patch_script;});
       })
     ];
   };
-
 }

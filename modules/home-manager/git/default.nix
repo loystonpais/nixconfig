@@ -1,5 +1,9 @@
-{ systemConfig, lib, pkgs, ...  }:
 {
+  systemConfig,
+  lib,
+  pkgs,
+  ...
+}: {
   config = lib.mkIf systemConfig.vars.modules.home-manager.git.enable {
     programs.git = {
       enable = true;

@@ -1,6 +1,8 @@
-{ lib, config, ... }: 
-
 {
+  lib,
+  config,
+  ...
+}: {
   imports = [
     ./hyprland
     ./plasma

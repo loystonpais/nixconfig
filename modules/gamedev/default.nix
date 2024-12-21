@@ -1,6 +1,9 @@
-{ config, lib, pkgs, ... }:
-
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   config = lib.mkIf config.vars.modules.gamedev.enable {
     # This is needed for steam-run
     # Can run UE5 in its FHS
@@ -19,7 +22,5 @@
       vscode
       dotnet-sdk_8
     ];
-
   };
-
 }

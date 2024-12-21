@@ -1,10 +1,11 @@
-{ lib, config, pkgs, ... }:
-
-with lib;
 {
-
+  lib,
+  config,
+  pkgs,
+  ...
+}:
+with lib; {
   config = mkIf config.vars.profile.vm.enable {
-
     vars.modules.desktop-environments.hyprland.enable = mkDefault true;
     vars.modules.multimedia.enable = mkDefault true;
 
@@ -17,6 +18,5 @@ with lib;
     environment.systemPackages = with pkgs; [
       gparted
     ];
-
   };
 }

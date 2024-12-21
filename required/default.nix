@@ -1,9 +1,6 @@
-{ ... }:
-
-{
+{...}: {
   imports = [
     ./boot
     ./graphics
   ];
-
 }

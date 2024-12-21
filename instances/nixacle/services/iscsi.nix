@@ -1,6 +1,5 @@
 # UNUSED
-{ pkgs, ... }: 
-{
+{pkgs, ...}: {
   services.openiscsi = {
     enable = true;
 
@@ -16,7 +15,6 @@
   fileSystems."/mnt/datablk1" = {
     device = "/dev/disk/by-label/datablk1";
     fsType = "xfs";
-    options = [ "_netdev" "nofail" ];
+    options = ["_netdev" "nofail"];
   };
-  
 }

@@ -1,5 +1,8 @@
-{ lib, config, ... }: 
 {
+  lib,
+  config,
+  ...
+}: {
   #imports = map (name: ./. + ( "/" + name)) (attrNames (readDir ./.));
 
   imports = [

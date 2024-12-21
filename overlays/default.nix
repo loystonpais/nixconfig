@@ -1,6 +1,8 @@
-{ config, lib, ... }:
-
 {
+  config,
+  lib,
+  ...
+}: {
   imports = [
     ./mc-launcher-patch.nix
     ./supergfxd-lsof-patch.nix

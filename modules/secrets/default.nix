@@ -1,11 +1,15 @@
-{ lib, config, inputs, pkgs, ... }: 
 {
+  lib,
+  config,
+  inputs,
+  pkgs,
+  ...
+}: {
   imports = [
     inputs.sops-nix.nixosModules.sops
   ];
 
   config = lib.mkIf config.vars.modules.secrets.enable {
-    
     sops.defaultSopsFile = ../../secrets/secrets.yaml;
     sops.defaultSopsFormat = "yaml";
     sops.age.keyFile = "/home/${config.vars.username}/.config/sops/age/keys.txt";
@@ -25,13 +29,12 @@
       GEMINI_API_KEY = config.sops.secrets.gemini_api_key;
       GITHUB_KEY = config.sops.secrets.github_key;
       GITEA_KEY = config.sops.secrets.gitea_key;
-      
+
       CACHIX_LOYSTONPAIS_AUTH_TOKEN = config.sops.secrets.cachix_loystonpais_auth_token;
       CACHIX_AUTH_TOKEN = config.sops.secrets.cachix_loystonpais_auth_token;
 
       ATARAXY_BOT_TOKEN = config.sops.secrets.ataraxy_bot_token;
     };
-
 
     sops.secrets.auto-resume-builder = {
       format = "dotenv";
@@ -55,6 +58,5 @@
     environment.systemPackages = with pkgs; [
       sops
     ];
-
-  };  
+  };
 }

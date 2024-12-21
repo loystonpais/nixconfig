@@ -1,9 +1,10 @@
-{ config, lib, ... }:
-
 {
-
-  config = lib.mkIf ( config.vars.graphicsMode == "nvidia" ) {
-    services.xserver.videoDrivers = [ "nvidia" ];
+  config,
+  lib,
+  ...
+}: {
+  config = lib.mkIf (config.vars.graphicsMode == "nvidia") {
+    services.xserver.videoDrivers = ["nvidia"];
 
     hardware.nvidia = {
       modesetting.enable = true;
@@ -14,5 +15,4 @@
       package = config.boot.kernelPackages.nvidiaPackages.production;
     };
   };
-  
 }

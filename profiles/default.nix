@@ -1,7 +1,9 @@
-{ lib, config, ... }:
-
-with lib;
 {
+  lib,
+  config,
+  ...
+}:
+with lib; {
   imports = [
     ./everything
     ./vm

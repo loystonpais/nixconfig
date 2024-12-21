@@ -1,6 +1,4 @@
-{ ... }:
-
-{
+{...}: {
   vars.hostName = "roglaptop";
   vars.graphicsMode = "asuslinux";
   vars.bootMode = "uefi";
@@ -16,5 +14,4 @@
   vars.modules.browsers.zen.enable = true;
   vars.modules.waydroid.enable = false;
   vars.modules.samba.enable = false;
-
 }

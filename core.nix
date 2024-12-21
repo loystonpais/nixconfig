@@ -1,7 +1,10 @@
 # this is named core for the lack of any names
-{ config, pkgs, lib, ... }:
-
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   imports = [
     ./modules
     ./profiles
@@ -30,7 +33,6 @@
   services.printing.enable = true;
 
   hardware.pulseaudio.enable = false;
-
 
   hardware.bluetooth.enable = true;
 
@@ -76,7 +78,6 @@
 
   programs.nix-ld.enable = true;
 
-
   environment.systemPackages = with pkgs; [
     vim
     git
@@ -99,5 +100,5 @@
     xkb.variant = "";
   };
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 }

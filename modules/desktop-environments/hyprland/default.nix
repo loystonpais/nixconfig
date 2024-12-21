@@ -1,8 +1,10 @@
 # Setting up hyprland that can be optionally installed
-
-{ config, lib, pkgs, ... }:
-
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   config = lib.mkIf config.vars.modules.desktop-environments.hyprland.enable {
     programs.hyprland = {
       enable = true;
@@ -30,7 +32,6 @@
     ];
 
     xdg.portal.enable = true;
-    xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
+    xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-hyprland];
   };
-
 }

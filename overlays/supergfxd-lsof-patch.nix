@@ -1,6 +1,9 @@
-{ config, pkgs, lib, ... }:
-
-let
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
   patch_script = ''
     patch_file="./src/lib.rs"
     if grep -q 'if !PathBuf::from("/usr/bin/lsof").exists() {' $patch_file; then
@@ -11,16 +14,16 @@ let
       exit 1
     fi '';
 in {
-
   config = lib.mkIf config.vars.overlays.supergfxd-lsof-patch.enable {
     # Add lsof to path because it is missing in the pkg config
-    systemd.services.supergfxd.path = [ pkgs.lsof ];
+    systemd.services.supergfxd.path = [pkgs.lsof];
 
     # Patch the package so that lsof usage is not ignored
     nixpkgs.overlays = [
       (final: prev: {
-        supergfxctl = prev.supergfxctl.overrideAttrs
-          (oldAttrs: { prePatch = patch_script; });
+        supergfxctl =
+          prev.supergfxctl.overrideAttrs
+          (oldAttrs: {prePatch = patch_script;});
       })
     ];
   };

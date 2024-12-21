@@ -1,7 +1,9 @@
-{ config, lib, pkgs, ... }:
-
 {
-
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   config = lib.mkIf config.vars.modules.program-collection.enable {
     programs.kdeconnect.enable = true;
 

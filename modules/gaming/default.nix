@@ -1,6 +1,9 @@
-{ config, lib, pkgs, ... }:
-
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   config = lib.mkIf config.vars.modules.gaming.enable {
     programs.steam = {
       enable = true;
@@ -20,7 +23,6 @@
     programs.gamemode.enable = true;
 
     # Adding username to the necessary groups
-    users.users.${config.vars.username}.extraGroups = [ "gamemode" ];
+    users.users.${config.vars.username}.extraGroups = ["gamemode"];
   };
-
 }

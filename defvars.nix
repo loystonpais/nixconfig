@@ -3,20 +3,20 @@
 # Change the default values here
 # Note: Some are missing default values and thats on purpose
 # However, there's nothing stopping you from setting them default values
-{ pkgs, lib, config, ...}: 
-
-with lib;
-
 {
-
+  pkgs,
+  lib,
+  config,
+  ...
+}:
+with lib; {
   options.vars = {
-
     name = mkOption {
       type = types.str;
       description = "Name of the user";
       default = "Loyston Pais";
     };
-    
+
     hostName = mkOption {
       type = types.str;
       description = "Name of the host";
@@ -94,20 +94,20 @@ with lib;
 
       distrobox.enable = mkEnableOption "enables distrobox";
       gamedev.enable = mkEnableOption "enables gamedev";
-      
+
       gaming.enable = mkEnableOption "enable gaming";
-      
+
       minecraft.enable = mkEnableOption "enables minecraft";
       multimedia.enable = mkEnableOption "enables multimedia";
       piracy.enable = mkEnableOption "enables piracy";
       program-collection.enable = mkEnableOption "enables program-collection";
-      
+
       virtual-machine = {
         enable = mkEnableOption "enables virtual machine";
         cgroupDevicesById = mkOption {
           type = types.listOf types.str;
           description = "Devices registered to be passed to the vm";
-          default = [ "usb-SINO_WEALTH_Gaming_KB-event-kbd" "usb-Razer_Razer_DeathAdder_Essential-event-mouse" ];
+          default = ["usb-SINO_WEALTH_Gaming_KB-event-kbd" "usb-Razer_Razer_DeathAdder_Essential-event-mouse"];
         };
       };
 
@@ -117,8 +117,8 @@ with lib;
         phone.ip = mkOption {
           type = types.str;
           description = ''
-          Default device IP. To set a static ip for your android device run as root: 
-          `ip address add 192.168.43.1/24 dev wlan0` 
+            Default device IP. To set a static ip for your android device run as root:
+            `ip address add 192.168.43.1/24 dev wlan0`
           '';
           default = "192.168.43.1";
         };
@@ -128,8 +128,7 @@ with lib;
           default = 5555;
         };
       };
-      
-      
+
       waydroid.enable = mkEnableOption "enables waydroid";
       samba.enable = mkEnableOption "enables samba";
       home-manager = {
@@ -141,7 +140,7 @@ with lib;
         program-collection.enable = mkEnableOption "enables program collection";
         git.enable = mkEnableOption "enables git configuration";
         zsh.enable = mkEnableOption "enables zsh configuration";
-        secrets.enable = 
+        secrets.enable =
           mkEnableOption "enables home secrets configuration (needs secrets module to be enabled)";
       };
 
@@ -152,9 +151,7 @@ with lib;
         };
       };
 
-      
-      ssh.enable = mkEnableOption "enables ssh";  
-      
+      ssh.enable = mkEnableOption "enables ssh";
 
       secrets = {
         enable = mkEnableOption "enables sops secrets";
@@ -173,19 +170,17 @@ with lib;
     };
 
     bootMode = mkOption {
-      type = types.enum [ "uefi" "bios" ];
+      type = types.enum ["uefi" "bios"];
       description = "Boot mode";
     };
 
     graphicsMode = mkOption {
-      type = types.enum [ "nvidia" "asuslinux" "none" ];
+      type = types.enum ["nvidia" "asuslinux" "none"];
       description = ''
-      GPU specific settings
-      nvidia - Basic nvidia gpu settings, uses production pkg
-      asuslinux - Nvidia gpu settings with asusd, supergfxctl. 
+        GPU specific settings
+        nvidia - Basic nvidia gpu settings, uses production pkg
+        asuslinux - Nvidia gpu settings with asusd, supergfxctl.
       '';
     };
-
   };
 }
-

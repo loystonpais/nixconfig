@@ -1,41 +1,40 @@
-{ stdenv
-, lib
-, cacert
-, curl
-, runCommandLocal
-, unzip
-, appimage-run
-, addOpenGLRunpath
-, dbus
-, libGLU
-, xorg
-, buildFHSEnv
-, buildFHSEnvChroot
-, bash
-, writeText
-, ocl-icd
-, xkeyboard_config
-, glib
-, libarchive
-, libxcrypt
-, python3
-, perl
-, aprutil
-, makeDesktopItem
-, copyDesktopItems
-, jq
-, fetchzip
-, fetchurl
-, studioVariant ? false
-}:
-
-let
+{
+  stdenv,
+  lib,
+  cacert,
+  curl,
+  runCommandLocal,
+  unzip,
+  appimage-run,
+  addOpenGLRunpath,
+  dbus,
+  libGLU,
+  xorg,
+  buildFHSEnv,
+  buildFHSEnvChroot,
+  bash,
+  writeText,
+  ocl-icd,
+  xkeyboard_config,
+  glib,
+  libarchive,
+  libxcrypt,
+  python3,
+  perl,
+  aprutil,
+  makeDesktopItem,
+  copyDesktopItems,
+  jq,
+  fetchzip,
+  fetchurl,
+  studioVariant ? false,
+}: let
   davinci = stdenv.mkDerivation rec {
     pname = "davinci-resolve-studio";
     version = "19.0b4";
 
     nativeBuildInputs = [
-      (appimage-run.override { buildFHSEnv = buildFHSEnvChroot; })
+      (appimage-run.override {buildFHSEnv = buildFHSEnvChroot;})
       addOpenGLRunpath
       copyDesktopItems
       unzip
@@ -47,14 +46,15 @@ let
       xorg.libXxf86vm
     ];
 
-	# UPDATE THIS LINK - get it from the website by manual download
-    /*src = fetchurl {
+    # UPDATE THIS LINK - get it from the website by manual download
+    /*
+      src = fetchurl {
       url = "https://swr.cloud.blackmagicdesign.com/DaVinciResolve/v19.0b3/DaVinci_Resolve_Studio_19.0b3_Linux.zip?verify=1716566507-UHfg6Z2EYoptInhK2SVuLOsqY3XLAJHSYOSsFhDty10%3D";
       sha256 = "pQi6E8L1UOMpaSHX3vlIF/SdyuEbKMlBZgtzGLoXdzk=";
-    };*/
+    };
+    */
 
     src = /home/loystonpais/Downloads/DaVinci_Resolve_Studio_19.0b4_Linux.zip;
-
 
     unpackPhase = ''
       echo unzipping...
@@ -128,88 +128,90 @@ let
       platforms = ["x86_64-linux"];
     };
   };
-
 in
-buildFHSEnv {
-  inherit (davinci) pname version;
+  buildFHSEnv {
+    inherit (davinci) pname version;
 
-  targetPkgs = pkgs: with pkgs; [
-    alsa-lib
-    aprutil
-    bzip2
-    davinci
-    dbus
-    expat
-    fontconfig
-    freetype
-    glib
-    libGL
-    libGLU
-    libarchive
-    libcap
-    librsvg
-    libtool
-    libuuid
-    libxcrypt # provides libcrypt.so.1
-    libxkbcommon
-    nspr
-    ocl-icd
-    opencl-headers
-    python3
-    python3.pkgs.numpy
-    udev
-    xdg-utils # xdg-open needed to open URLs
-    xorg.libICE
-    xorg.libSM
-    xorg.libX11
-    xorg.libXcomposite
-    xorg.libXcursor
-    xorg.libXdamage
-    xorg.libXext
-    xorg.libXfixes
-    xorg.libXi
-    xorg.libXinerama
-    xorg.libXrandr
-    xorg.libXrender
-    xorg.libXt
-    xorg.libXtst
-    xorg.libXxf86vm
-    xorg.libxcb
-    xorg.xcbutil
-    xorg.xcbutilimage
-    xorg.xcbutilkeysyms
-    xorg.xcbutilrenderutil
-    xorg.xcbutilwm
-    xorg.xkeyboardconfig
-    zlib
-  ];
+    targetPkgs = pkgs:
+      with pkgs; [
+        alsa-lib
+        aprutil
+        bzip2
+        davinci
+        dbus
+        expat
+        fontconfig
+        freetype
+        glib
+        libGL
+        libGLU
+        libarchive
+        libcap
+        librsvg
+        libtool
+        libuuid
+        libxcrypt # provides libcrypt.so.1
+        libxkbcommon
+        nspr
+        ocl-icd
+        opencl-headers
+        python3
+        python3.pkgs.numpy
+        udev
+        xdg-utils # xdg-open needed to open URLs
+        xorg.libICE
+        xorg.libSM
+        xorg.libX11
+        xorg.libXcomposite
+        xorg.libXcursor
+        xorg.libXdamage
+        xorg.libXext
+        xorg.libXfixes
+        xorg.libXi
+        xorg.libXinerama
+        xorg.libXrandr
+        xorg.libXrender
+        xorg.libXt
+        xorg.libXtst
+        xorg.libXxf86vm
+        xorg.libxcb
+        xorg.xcbutil
+        xorg.xcbutilimage
+        xorg.xcbutilkeysyms
+        xorg.xcbutilrenderutil
+        xorg.xcbutilwm
+        xorg.xkeyboardconfig
+        zlib
+      ];
 
-  /*extraPreBwrapCmds = ''
-    mkdir -p ~/.local/share/DaVinciResolve/license || exit 1
-  '';
+    /*
+      extraPreBwrapCmds = ''
+      mkdir -p ~/.local/share/DaVinciResolve/license || exit 1
+    '';
 
-  extraBwrapArgs = [
-    "--bind \"$HOME\"/.local/share/DaVinciResolve/license ${davinci}/.license"
-  ];*/
+    extraBwrapArgs = [
+      "--bind \"$HOME\"/.local/share/DaVinciResolve/license ${davinci}/.license"
+    ];
+    */
 
-  runScript = "${bash}/bin/bash ${
-    writeText "davinci-wrapper" ''
-      export QT_XKB_CONFIG_ROOT="${xorg.xkeyboardconfig}/share/X11/xkb"
-      export QT_PLUGIN_PATH="${davinci}/libs/plugins:$QT_PLUGIN_PATH"
-      export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib:/usr/lib32:${davinci}/libs
-      ${davinci}/bin/resolve
-    ''
-  }";
+    runScript = "${bash}/bin/bash ${
+      writeText "davinci-wrapper" ''
+        export QT_XKB_CONFIG_ROOT="${xorg.xkeyboardconfig}/share/X11/xkb"
+        export QT_PLUGIN_PATH="${davinci}/libs/plugins:$QT_PLUGIN_PATH"
+        export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib:/usr/lib32:${davinci}/libs
+        ${davinci}/bin/resolve
+      ''
+    }";
 
-  passthru = { inherit davinci; };
+    passthru = {inherit davinci;};
 
-  meta = with lib; {
-    description = "Professional video editing, color, effects and audio post-processing";
-    homepage = "https://www.blackmagicdesign.com/products/davinciresolve";
-    license = licenses.unfree;
-    maintainers = with maintainers; [amarshall jshcmpbll orivej];
-    platforms = ["x86_64-linux"];
-    sourceProvenance = with sourceTypes; [binaryNativeCode];
-    mainProgram = "davinci-resolve";
-  };
-}
+    meta = with lib; {
+      description = "Professional video editing, color, effects and audio post-processing";
+      homepage = "https://www.blackmagicdesign.com/products/davinciresolve";
+      license = licenses.unfree;
+      maintainers = with maintainers; [amarshall jshcmpbll orivej];
+      platforms = ["x86_64-linux"];
+      sourceProvenance = with sourceTypes; [binaryNativeCode];
+      mainProgram = "davinci-resolve";
+    };
+  }

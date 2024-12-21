@@ -1,16 +1,15 @@
-{ systemConfig, lib, ... }:
-
-with builtins;
-
-let
+{
+  systemConfig,
+  lib,
+  ...
+}:
+with builtins; let
   startupFile = toFile "start.sh" ''
     #!/usr/bin/env bash
     swww init &
-    waybar &  
+    waybar &
   '';
-
 in {
-
   config = lib.mkIf systemConfig.vars.modules.home-manager.hyprland.enable {
     wayland.windowManager.hyprland = {
       enable = true;
@@ -19,9 +18,9 @@ in {
         "$terminal" = "kitty";
         "$fileManager" = "dolphin";
 
-        env = [ "XCURSOR_SIZE,24" "HYPRCURSOR_SIZE,40" ];
+        env = ["XCURSOR_SIZE,24" "HYPRCURSOR_SIZE,40"];
 
-        "exec-once" = [ "bash ${startupFile}" ];
+        "exec-once" = ["bash ${startupFile}"];
 
         general = {
           gaps_in = 5;
@@ -45,15 +44,13 @@ in {
           "$mod, right, movefocus, r"
           "$mod, up, movefocus, u"
           "$mod, down, movefocus, d"
-
         ];
 
-        bindm =
-          [ "$mod, mouse:272, movewindow" "$mod, mouse:273, resizewindow" ];
+        bindm = ["$mod, mouse:272, movewindow" "$mod, mouse:273, resizewindow"];
 
         windowrulev2 = "suppressevent maximize, class:.*";
 
-        gestures = { workspace_swipe = false; };
+        gestures = {workspace_swipe = false;};
 
         input = {
           kb_layout = "us";
@@ -66,10 +63,7 @@ in {
         animations.enabled = true;
 
         decoration.rounding = 10;
-
       };
-
     };
   };
-
 }

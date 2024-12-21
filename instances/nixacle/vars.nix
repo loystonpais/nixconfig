@@ -1,17 +1,18 @@
-{ config, lib,... }:
-
 {
-
+  config,
+  lib,
+  ...
+}: {
   options.vars.nixacle = {
-      datablock1.path = lib.mkOption {
-        type = lib.types.str;
-        description = "Path to data block 1";
-      };
+    datablock1.path = lib.mkOption {
+      type = lib.types.str;
+      description = "Path to data block 1";
+    };
 
-      address = lib.mkOption {
-        type = lib.types.str;
-        description = "Main address of the vps";
-      };
+    address = lib.mkOption {
+      type = lib.types.str;
+      description = "Main address of the vps";
+    };
   };
 
   config = {
@@ -28,5 +29,4 @@
 
     vars.profile.vps.enable = true;
   };
-
 }

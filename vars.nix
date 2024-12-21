@@ -1,7 +1,10 @@
-{ lib, config, pkgs, ... }:
-
-with lib;
 {
+  lib,
+  config,
+  pkgs,
+  ...
+}:
+with lib; {
   imports = [
     ./defvars.nix
   ];
@@ -15,8 +18,8 @@ with lib;
   };
 
   nix.settings = {
-    substituters = [ "https://loystonpais.cachix.org" ];
-    trusted-public-keys = [ "loystonpais.cachix.org-1:lclfaBitH51Lw9WwBxQ4bbesdt7c01JlFbKoSZ0PMLc=" ];
-    experimental-features = [ "nix-command" "flakes" ];
+    substituters = ["https://loystonpais.cachix.org"];
+    trusted-public-keys = ["loystonpais.cachix.org-1:lclfaBitH51Lw9WwBxQ4bbesdt7c01JlFbKoSZ0PMLc="];
+    experimental-features = ["nix-command" "flakes"];
   };
 }

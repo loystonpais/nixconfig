@@ -1,8 +1,9 @@
-{ lib, config, ... }:
-with lib;
-
 {
-
+  lib,
+  config,
+  ...
+}:
+with lib; {
   imports = [
     ./nvidia.nix
     ./asuslinux.nix

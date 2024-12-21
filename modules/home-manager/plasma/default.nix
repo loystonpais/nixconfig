@@ -1,6 +1,10 @@
-{ pkgs, lib, systemConfig, ... }: {
-
-  imports = [ ];
+{
+  pkgs,
+  lib,
+  systemConfig,
+  ...
+}: {
+  imports = [];
 
   config = lib.mkIf systemConfig.vars.modules.home-manager.plasma.enable {
     home.packages = with pkgs; [
@@ -8,7 +12,7 @@
       whitesur-icon-theme
       whitesur-cursors
       whitesur-gtk-theme
-      (callPackage ../../../derivations/kwin-modern-informative { })
+      (callPackage ../../../derivations/kwin-modern-informative {})
     ];
 
     qt = {
@@ -30,8 +34,7 @@
       enable = true;
       windows.allowWindowsToRememberPositions = true;
 
-      kscreenlocker.appearance.wallpaper =
-        "${pkgs.whitesur-kde}/share/wallpapers/WhiteSur-dark/contents/images/3840x2160.jpg";
+      kscreenlocker.appearance.wallpaper = "${pkgs.whitesur-kde}/share/wallpapers/WhiteSur-dark/contents/images/3840x2160.jpg";
       kscreenlocker.autoLock = false;
 
       powerdevil = {
@@ -47,12 +50,10 @@
         batteryLevels.criticalLevel = 5;
         batteryLevels.lowLevel = 20;
         lowBattery.powerProfile = "powerSaving";
-
       };
 
       configFile = {
-
-        "kwinrc"."Plugins"."shakecursorEnabled" = { value = false; };
+        "kwinrc"."Plugins"."shakecursorEnabled" = {value = false;};
 
         "baloofilerc"."Basic Settings"."Indexing-Enabled" = {
           value = false;
@@ -60,18 +61,12 @@
         };
 
         # NOTE: need to get these working
-        "kdeglobals"."General"."font" =
-          "Inter Variable,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1";
-        "kdeglobals"."General"."menuFont" =
-          "Inter Variable,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1";
-        "kdeglobals"."General"."smallestReadableFont" =
-          "Inter Variable,8,-1,5,400,0,0,0,0,0,0,0,0,0,0,1";
-        "kdeglobals"."General"."toolBarFont" =
-          "Inter Variable,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1";
-        "kdeglobals"."WM"."activeFont" =
-          "Inter Variable,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1";
-        "kdeglobals"."General"."fixed" =
-          "Fira Code,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1";
+        "kdeglobals"."General"."font" = "Inter Variable,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1";
+        "kdeglobals"."General"."menuFont" = "Inter Variable,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1";
+        "kdeglobals"."General"."smallestReadableFont" = "Inter Variable,8,-1,5,400,0,0,0,0,0,0,0,0,0,0,1";
+        "kdeglobals"."General"."toolBarFont" = "Inter Variable,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1";
+        "kdeglobals"."WM"."activeFont" = "Inter Variable,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1";
+        "kdeglobals"."General"."fixed" = "Fira Code,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1";
 
         "kwinrc"."TabBox"."LayoutName" = "modern_informative";
         "kwinrc"."org.kde.kdecoration2"."ButtonsOnLeft" = "XAI";
@@ -84,7 +79,7 @@
       };
 
       workspace = {
-        # cannot be used because it applies default splash screen 
+        # cannot be used because it applies default splash screen
         # lookAndFeel = "com.github.vinceliuice.WhiteSur-dark";
 
         theme = "WhiteSur-dark";
@@ -93,8 +88,7 @@
         colorScheme = "WhiteSurDark";
         windowDecorations.theme = "__aurorae__svg__WhiteSur-dark";
         windowDecorations.library = "org.kde.kwin.aurorae";
-        wallpaper =
-          "${pkgs.whitesur-kde}/share/wallpapers/WhiteSur-dark/contents/images/3840x2160.jpg";
+        wallpaper = "${pkgs.whitesur-kde}/share/wallpapers/WhiteSur-dark/contents/images/3840x2160.jpg";
         splashScreen = {
           theme = "None";
           engine = "none";
@@ -120,10 +114,12 @@
 
             {
               iconTasks = {
-                launchers = [
-                  "applications:org.kde.dolphin.desktop"
-                  "applications:org.kde.konsole.desktop"
-                ] ++
+                launchers =
+                  [
+                    "applications:org.kde.dolphin.desktop"
+                    "applications:org.kde.konsole.desktop"
+                  ]
+                  ++
                   # This is to add if the package is installed
                   lib.optional
                   (lib.elem pkgs.vscode systemConfig.environment.systemPackages)
@@ -150,8 +146,6 @@
           ];
         }
       ];
-
     };
   };
-
 }

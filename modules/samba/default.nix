@@ -1,8 +1,9 @@
-{ config, lib, ... }:
-
 {
+  config,
+  lib,
+  ...
+}: {
   config = lib.mkIf config.vars.modules.samba.enable {
-
     services.samba = {
       enable = true;
       securityType = "user";
@@ -36,6 +37,5 @@
 
     #networking.firewall.enable = true;
     #networking.firewall.allowPing = true;
-
   };
 }
