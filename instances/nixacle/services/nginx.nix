@@ -31,8 +31,8 @@ in
 	      alias = "/var/lib/auto-resume-builder/build/";
 	      extraConfig = ''
 	        index resume.pdf;
-	    	default_type application/pdf;
-	    	add_header Content-Disposition 'inline';
+	    	  default_type application/pdf;
+	    	  add_header Content-Disposition 'inline';
 	      '';
 	    };
 	    
