@@ -11,6 +11,6 @@
   };
 
   imports = [
-    inputs.auto-resume-builder.nixosModules.default
+    inputs.resumake.nixosModules.default
   ];
 }
