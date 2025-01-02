@@ -32,6 +32,7 @@
         switchbutcooler = nhswitch;
         update = "( cd ~/nixconfig && (git pull || git fetch) && changes )";
         upgrade = "( ${update}; cd ~/nixconfig && switch )";
+        collect = "nix-collect-garbage";
       };
       history = {
         size = 10000000;
