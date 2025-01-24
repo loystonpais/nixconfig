@@ -11,7 +11,6 @@
   vars.profile.everything.enable = true;
 
   # Exclusion
-  vars.modules.browsers.zen.enable = true;
   vars.modules.waydroid.enable = false;
   vars.modules.samba.enable = false;
 }
