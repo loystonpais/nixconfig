@@ -10,6 +10,6 @@ with lib; {
   ];
 
   config.vars.modules.browsers = mkIf config.vars.modules.browsers.enable {
-    zen.enable = mkDefault false;
+    zen.enable = mkDefault true;
   };
 }
