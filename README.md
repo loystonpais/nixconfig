@@ -1,3 +1,5 @@
+![Lunar Nix](./assets/artwork/logo.svg)
+
 # Welcome to my nix config
 
 Hi! This is my version of nix configuration.
