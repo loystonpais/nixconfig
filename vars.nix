@@ -2,6 +2,7 @@
   lib,
   config,
   pkgs,
+  inputs,
   ...
 }:
 with lib; {
@@ -22,4 +23,6 @@ with lib; {
     trusted-public-keys = ["loystonpais.cachix.org-1:lclfaBitH51Lw9WwBxQ4bbesdt7c01JlFbKoSZ0PMLc="];
     experimental-features = ["nix-command" "flakes"];
   };
+
+  nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 }
