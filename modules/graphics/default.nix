@@ -1,5 +1,5 @@
 { config, lib, ... }: {
-  config = lib.mkIf config.luner.modules.graphics.enable {
+  config = lib.mkIf config.lunar.modules.graphics.enable {
     # Configure keymap in X11
     services.xserver = {
       enable = false;

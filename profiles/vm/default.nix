@@ -17,6 +17,7 @@ with lib; {
 
     lunar.modules.audio.enable = mkDefault true;
     lunar.modules.hardware.enable = mkDefault true;
+    lunar.modules.graphics.enable = mkDefault true;
 
     environment.systemPackages = with pkgs; [
       gparted

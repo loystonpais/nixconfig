@@ -1,5 +1,5 @@
 { config, lib, ... }: {
-  config = lib.mkIf config.luner.modules.audio.enable {
+  config = lib.mkIf config.lunar.modules.audio.enable {
     hardware.pulseaudio.enable = false;
     services.pipewire = {
       enable = true;

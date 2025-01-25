@@ -21,6 +21,9 @@
     ./android
     ./ssh
     ./secrets
+    ./hardware
+    ./audio
+    ./graphics
 
     ./home-manager
   ];

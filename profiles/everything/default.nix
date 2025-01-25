@@ -22,6 +22,7 @@ with lib; {
       ssh.enable = mkDefault true;
       secrets.enable = mkDefault true;
       audio.enable = mkDefault true;
+      graphics.enable = mkDefault true;
       hardware.enable = mkDefault true;
 
       home-manager = {
