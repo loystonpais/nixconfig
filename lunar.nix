@@ -1,4 +1,3 @@
-# this is named core for the lack of any names
 {
   config,
   pkgs,
