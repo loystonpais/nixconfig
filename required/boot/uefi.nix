@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: {
-  config = lib.mkIf (config.vars.bootMode == "uefi") {
+  config = lib.mkIf (config.lunar.bootMode == "uefi") {
     # UEFI
     boot.loader.grub.efiSupport = true;
     boot.loader.grub.device = "nodev";

@@ -5,15 +5,18 @@
   ...
 }:
 with lib; {
-  config = mkIf config.vars.profile.vm.enable {
-    vars.modules.desktop-environments.hyprland.enable = mkDefault true;
-    vars.modules.multimedia.enable = mkDefault true;
+  config = mkIf config.lunar.profile.vm.enable {
+    lunar.modules.desktop-environments.hyprland.enable = mkDefault true;
+    lunar.modules.multimedia.enable = mkDefault true;
 
-    vars.modules.home-manager.enable = mkDefault true;
+    lunar.modules.home-manager.enable = mkDefault true;
 
-    vars.modules.ssh.enable = mkDefault true;
+    lunar.modules.ssh.enable = mkDefault true;
 
-    vars.modules.secrets.enable = mkDefault true;
+    lunar.modules.secrets.enable = mkDefault true;
+
+    lunar.modules.audio.enable = mkDefault true;
+    lunar.modules.hardware.enable = mkDefault true;
 
     environment.systemPackages = with pkgs; [
       gparted

@@ -49,10 +49,10 @@ inputs.nixpkgs.lib.nixosSystem {
 Go to the `configuration.nix` file and remove everything except the state version.
 Add, 
 ```nix
-vars.hostName = "anyhostname";
-vars.graphicsMode = "none";
-vars.bootMode = "uefi"; # change to bios if you are booting from bios
-vars.profile.everything.enable = true; # enables almost everyting set up in the config
+lunar.hostName = "anyhostname";
+lunar.graphicsMode = "none";
+lunar.bootMode = "uefi"; # change to bios if you are booting from bios
+lunar.profile.everything.enable = true; # enables almost everyting set up in the config
 ```
 That should be enough to successfully run `sudo nixos-rebuild --flake .#instanceName`.
 Additionally, read `defvars.nix`

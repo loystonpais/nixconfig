@@ -9,7 +9,7 @@
     inputs.home-manager.nixosModules.home-manager
   ];
 
-  home-manager = lib.mkIf config.vars.modules.home-manager.enable {
+  home-manager = lib.mkIf config.lunar.modules.home-manager.enable {
     extraSpecialArgs = {
       inherit inputs;
       systemConfig = config;
@@ -17,7 +17,7 @@
     sharedModules = [inputs.plasma-manager.homeManagerModules.plasma-manager];
     useGlobalPkgs = true;
     useUserPackages = true;
-    users.${config.vars.username}.imports = [
+    users.${config.lunar.username}.imports = [
       ./home.nix
       ./fonts
       ./git
@@ -29,7 +29,7 @@
     ];
   };
 
-  vars.modules.home-manager = lib.mkIf config.vars.modules.home-manager.enableAllModules {
+  lunar.modules.home-manager = lib.mkIf config.lunar.modules.home-manager.enableAllModules {
     fonts.enable = lib.mkDefault true;
     git.enable = lib.mkDefault true;
     hyprland.enable = lib.mkDefault true;

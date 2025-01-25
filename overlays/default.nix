@@ -9,7 +9,7 @@
     ./makehuman-makework-patch.nix
   ];
 
-  config.vars.overlays = lib.mkIf config.vars.overlays.enableAll {
+  config.lunar.overlays = lib.mkIf config.lunar.overlays.enableAll {
     mc-launcher-patch.enable = true;
     supergfxd-lsof-patch.enable = true;
     makehuman-makework-patch.enable = true;

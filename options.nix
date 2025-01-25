@@ -1,4 +1,4 @@
-# These are the default vars that are shared to all the instances
+# These are the default lunar that are shared to all the instances
 # Of course, they can be overridden for each instance
 # Change the default values here
 # Note: Some are missing default values and thats on purpose
@@ -10,7 +10,7 @@
   ...
 }:
 with lib; {
-  options.vars = {
+  options.lunar = {
     name = mkOption {
       type = types.str;
       description = "Name of the user";
@@ -86,6 +86,10 @@ with lib; {
     };
 
     modules = {
+      audio.enable = mkEnableOption "enables audio";
+      graphics.enable = mkEnableOption "enables graphics";
+      hardware.enable = mkEnableOption "enables hardware";
+
       desktop-environments = {
         enableAll = mkEnableOption "enables all available desktop environments";
         hyprland.enable = mkEnableOption "enables hyprland";

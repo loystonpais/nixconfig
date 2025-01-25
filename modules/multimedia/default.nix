@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: {
-  config = lib.mkIf config.vars.modules.multimedia.enable {
+  config = lib.mkIf config.lunar.modules.multimedia.enable {
     environment.systemPackages = with pkgs; [
       stremio
       vlc

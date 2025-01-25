@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: {
-  config = lib.mkIf systemConfig.vars.modules.home-manager.program-collection.enable {
+  config = lib.mkIf systemConfig.lunar.modules.home-manager.program-collection.enable {
     home.packages = with pkgs; [
       nil # Nix server
 

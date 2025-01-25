@@ -5,7 +5,7 @@
   pkgs,
   ...
 }: {
-  config = lib.mkIf config.vars.modules.desktop-environments.hyprland.enable {
+  config = lib.mkIf config.lunar.modules.desktop-environments.hyprland.enable {
     programs.hyprland = {
       enable = true;
       xwayland.enable = true;

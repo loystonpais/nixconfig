@@ -4,20 +4,20 @@
   ...
 }: {
   imports = [
-    ../defvars.nix
+    ../options.nix
   ];
 
   config = {
-    users.users.${config.vars.username} = {
+    users.users.${config.lunar.username} = {
       isNormalUser = true;
-      description = config.vars.name;
+      description = config.lunar.name;
       extraGroups = ["networkmanager" "wheel" "disk"];
-      shell = config.vars.shell;
+      shell = config.lunar.shell;
       packages = [];
     };
 
     programs.zsh.enable =
-      if config.vars.shell == pkgs.zsh
+      if config.lunar.shell == pkgs.zsh
       then true
       else false;
   };

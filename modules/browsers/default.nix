@@ -1,15 +1,13 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ config, lib, pkgs, ... }:
 with lib; {
-  imports = [
-    ./zen.nix
-  ];
+  imports = [ ./zen.nix ];
 
-  config.vars.modules.browsers = mkIf config.vars.modules.browsers.enable {
-    zen.enable = mkDefault false;
+  config = mkIf config.lunar.modules.browsers.enable {
+    programs.firefox = {
+      enable = true;
+      package = pkgs.firefox-esr;
+      preferences = { "widget.use-xdg-desktop-portal.file-picker" = 1; };
+    };
+    lunar.modules.browsers.zen.enable = mkDefault false;
   };
 }

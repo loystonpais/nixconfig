@@ -13,9 +13,9 @@
   ];
 
   imports = [
-    ./vars.nix
+    ./lunar.nix
   ];
 
   # Must replace with ssh module configuration
-  users.users.${config.vars.username}.openssh.authorizedKeys.keys = config.vars.sshPublicKeys;
+  users.users.${config.lunar.username}.openssh.authorizedKeys.keys = config.lunar.sshPublicKeys;
 }

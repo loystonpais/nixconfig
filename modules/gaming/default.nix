@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: {
-  config = lib.mkIf config.vars.modules.gaming.enable {
+  config = lib.mkIf config.lunar.modules.gaming.enable {
     programs.steam = {
       enable = true;
       remotePlay.openFirewall = true;
@@ -23,6 +23,6 @@
     programs.gamemode.enable = true;
 
     # Adding username to the necessary groups
-    users.users.${config.vars.username}.extraGroups = ["gamemode"];
+    users.users.${config.lunar.username}.extraGroups = ["gamemode"];
   };
 }

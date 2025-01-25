@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: {
-  config = lib.mkIf config.vars.modules.virtual-machine.enable {
+  config = lib.mkIf config.lunar.modules.virtual-machine.enable {
     # Virtualization based on libvirtd
     virtualisation.libvirtd = {
       enable = true;
@@ -35,7 +35,7 @@
     # your preferred ones
     virtualisation.libvirtd.qemu.verbatimConfig =
       ''
-        user = "${config.vars.username}"
+        user = "${config.lunar.username}"
         qroup = "kvm"
         cgroup_device_acl = [
       ''
@@ -48,7 +48,7 @@
       */
       lib.strings.concatStrings (
         map (device: ''"/dev/input/by-id/${device}", '')
-        config.vars.modules.virtual-machine.cgroupDevicesById
+        config.lunar.modules.virtual-machine.cgroupDevicesById
       )
       + ''
             "/dev/null", "/dev/full", "/dev/zero",
@@ -58,7 +58,7 @@
       '';
 
     # Adding username to the necessary groups
-    users.users.${config.vars.username}.extraGroups = ["libvirtd" "kvm" "input"];
+    users.users.${config.lunar.username}.extraGroups = ["libvirtd" "kvm" "input"];
 
     # Enabling usb redirection
     virtualisation.spiceUSBRedirection.enable = true;

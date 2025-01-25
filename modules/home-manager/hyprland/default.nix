@@ -10,7 +10,7 @@ with builtins; let
     waybar &
   '';
 in {
-  config = lib.mkIf systemConfig.vars.modules.home-manager.hyprland.enable {
+  config = lib.mkIf systemConfig.lunar.modules.home-manager.hyprland.enable {
     wayland.windowManager.hyprland = {
       enable = true;
       settings = {
