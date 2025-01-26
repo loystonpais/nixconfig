@@ -1,5 +1,3 @@
-# These are the default lunar that are shared to all the instances
-# Of course, they can be overridden for each instance
 # Change the default values here
 # Note: Some are missing default values and thats on purpose
 # However, there's nothing stopping you from setting them default values
