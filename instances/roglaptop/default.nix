@@ -15,8 +15,8 @@ inputs.nixpkgs.lib.nixosSystem rec {
 
   modules = [
 
-    #self.nixosModules.default
-    ../../lunar.nix
+    self.nixosModules.default
+    #../../lunar.nix
 
     ./configuration.nix
     ./hardware-configuration.nix

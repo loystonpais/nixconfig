@@ -7,7 +7,7 @@
     lib = nixpkgs.lib;
     utils = import ./utils { inherit lib; };
     cfg = fromTOML (readFile ./.toml);
-    #lunarModule = import ./lunar.nix;
+    lunarModule = import ./lunar.nix;
   in
     with utils;
 
@@ -20,7 +20,7 @@
       nixOnDroidConfigurations = mapAttrs (n: v: v { inherit self inputs; })(importMapFromDir nixOnDroidConfigurationsPath);
 
       nixosModules = rec {
-        lunar = 5;
+        lunar = lunarModule;
         default = lunar;
       };
     };
