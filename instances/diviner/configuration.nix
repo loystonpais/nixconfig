@@ -14,6 +14,7 @@
 
   imports = [
     ./lunar.nix
+    ./services/wireguard.nix
   ];
 
   # Must replace with ssh module configuration
