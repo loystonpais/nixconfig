@@ -17,7 +17,6 @@ inputs.nixpkgs.lib.nixosSystem rec {
 
     self.nixosModules.default
     self.nixosModules.extras.home-manager.unstable
-    #../../lunar.nix
 
     ./configuration.nix
     ./hardware-configuration.nix
