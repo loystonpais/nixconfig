@@ -22,6 +22,12 @@
       nixosModules = rec {
         lunar = lunarModule;
         default = lunar;
+        extras = {
+          home-manager = {
+            unstable = inputs.home-manager.nixosModules.home-manager;
+            "24_11" = inputs.home-manager-24_11.nixosModules.home-manager;
+          };
+        };
       };
     };
 
