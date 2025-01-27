@@ -24,6 +24,7 @@
     ./hardware
     ./audio
     ./graphics
+    ./vpn
 
     ./home-manager
   ];

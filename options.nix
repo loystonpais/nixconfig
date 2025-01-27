@@ -84,6 +84,15 @@ with lib; {
     };
 
     modules = {
+      vpn = {
+        wireguard = {
+          enableMode = mkOption {
+            type = types.enum ["server" "client" "none"];
+            description = "enable wireguard server or client";
+            default = "none";
+          };
+        };
+      };
       audio.enable = mkEnableOption "enables audio";
       graphics.enable = mkEnableOption "enables graphics";
       hardware.enable = mkEnableOption "enables hardware";
