@@ -16,13 +16,12 @@ inputs.nixpkgs-24_11.lib.nixosSystem {
   modules = [
     ./oracle # DO NOT REMOVE
 
+    self.nixosModules.default
     # Only importing wanted modules
-    ../../deflunar.nix
-    ../../lunar.nix
-    ../../modules/secrets
-    ../../modules/ssh
-    ../../users
-    ../../profiles
+    # ../../modules/secrets
+    # ../../modules/ssh
+    # ../../users
+    # ../../profiles
 
     ./home-manager.nix
 
