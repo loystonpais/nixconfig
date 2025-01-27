@@ -6,7 +6,7 @@
   ...
 }: {
   imports = [
-    inputs.home-manager.nixosModules.home-manager
+    # home-manager module is imported in the instance's default.nix
   ];
 
   home-manager = lib.mkIf config.lunar.modules.home-manager.enable {
