@@ -91,6 +91,11 @@ with lib; {
             description = "enable wireguard server or client";
             default = "none";
           };
+          clientPrivateKeyInSops = mkOption {
+            type = types.bool;
+            description = ''Looks for private key in sops wireguard-client-{hostname}-private-key'';
+            default = true;
+          };
         };
       };
       audio.enable = mkEnableOption "enables audio";
