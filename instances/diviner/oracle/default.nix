@@ -2,7 +2,7 @@
   imports = [
     ./hardware-configuration.nix
   ];
-
+  boot.loader.efi.canTouchEfiVariables = lib.mkForce false;
   boot.tmp.cleanOnBoot = lib.mkForce true;
   zramSwap.enable = lib.mkForce true;
   networking.hostName = lib.mkForce "diviner";
