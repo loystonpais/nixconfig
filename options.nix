@@ -79,8 +79,10 @@ with lib; {
         default = true;
       };
       mc-launcher-patch.enable = mkEnableOption "enables prismlauncer patch";
-      supergfxd-lsof-patch.enable = mkEnableOption "enables supergfxd lsof patch";
-      makehuman-makework-patch.enable = mkEnableOption "enables makehuman import patch";
+      supergfxd-lsof-patch.enable =
+        mkEnableOption "enables supergfxd lsof patch";
+      makehuman-makework-patch.enable =
+        mkEnableOption "enables makehuman import patch";
     };
 
     modules = {
@@ -123,7 +125,10 @@ with lib; {
         cgroupDevicesById = mkOption {
           type = types.listOf types.str;
           description = "Devices registered to be passed to the vm";
-          default = ["usb-SINO_WEALTH_Gaming_KB-event-kbd" "usb-Razer_Razer_DeathAdder_Essential-event-mouse"];
+          default = [
+            "usb-SINO_WEALTH_Gaming_KB-event-kbd"
+            "usb-Razer_Razer_DeathAdder_Essential-event-mouse"
+          ];
         };
       };
 
@@ -157,14 +162,13 @@ with lib; {
         git.enable = mkEnableOption "enables git configuration";
         zsh.enable = mkEnableOption "enables zsh configuration";
         secrets.enable =
-          mkEnableOption "enables home secrets configuration (needs secrets module to be enabled)";
+          mkEnableOption
+          "enables home secrets configuration (needs secrets module to be enabled)";
       };
 
       browsers = {
         enable = mkEnableOption "enables browser configuration";
-        zen = {
-          enable = mkEnableOption "enables zen browser configuration";
-        };
+        zen = {enable = mkEnableOption "enables zen browser configuration";};
       };
 
       ssh.enable = mkEnableOption "enables ssh";
@@ -180,13 +184,14 @@ with lib; {
     };
 
     profile = {
-      everything.enable = mkEnableOption "enables almost eveything within the config";
+      everything.enable =
+        mkEnableOption "enables almost eveything within the config";
       vm.enable = mkEnableOption "enables vm profile";
       vps.enable = mkEnableOption "enables vps profile (for cloud vps)";
     };
 
     bootMode = mkOption {
-      type = types.enum ["uefi" "bios"];
+      type = types.enum ["uefi" "bios" "dontmanage"];
       description = "Boot mode";
     };
 
