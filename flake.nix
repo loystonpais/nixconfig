@@ -5,11 +5,13 @@
   with builtins;
   let
     lib = nixpkgs.lib;
-    utils = import ./utils { inherit lib; };
-    cfg = fromTOML (readFile ./.toml);
-    lunarModule = import ./lunar.nix;
-  in
-    with utils;
+      pkgs = (nixpkgs { });
+      utils = import ./utils { inherit lib; };
+      cfg = fromTOML (readFile ./.toml);
+      lunarModule = import ./lunar.nix;
+      forAllSystems = nixpkgs.lib.genAttrs nixpkgs.lib.systems.flakeExposed;
+      nixpkgsFor = forAllSystems (system: import nixpkgs { inherit system; });
+    in with utils;
 
     let
       nixosConfigurationsPath = ./. + ("/" + cfg.paths.nixosConfigurations);
@@ -29,6 +31,10 @@
           };
         };
       };
+
+      packages = forAllSystems (system:
+        mapAttrs (n: v: v { pkgs = nixpkgsFor.${system}; })
+        (importFileMapFromDir pacakgesPath));
     };
 
   inputs = {
