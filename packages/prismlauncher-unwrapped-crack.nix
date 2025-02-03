@@ -18,4 +18,4 @@ let
     fi
   '';
 in pkgs.prismlauncher-unwrapped.overrideAttrs
-(oldAttrs: { prePatch = patchOfflineTrigger + "\n\n" + patchOwnsMinecraft; })
+(p: { version = p.version + "-crack"; prePatch = patchOfflineTrigger + "\n\n" + patchOwnsMinecraft; })
