@@ -1,7 +1,7 @@
 { config, inputs, lib, pkgs, ... }: {
 
   config = {
-    specialisation.productive =
+    specialisations.productive =
       let wallpaper = "${inputs.self}/assets/wallpapers/green-leaves.jpg";
       in {
         configuration = {
