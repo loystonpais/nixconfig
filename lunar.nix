@@ -1,7 +1,7 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, inputs, ... }:
 with lib; {
   imports =
-    [ ./modules ./profiles ./required ./overlays ./users ./options.nix ];
+    [ ./modules ./profiles ./required ./overlays ./users ./options.nix  ./specialisations ];
 
   networking.hostName = config.lunar.hostName;
   networking.networkmanager.enable = true;
@@ -41,4 +41,6 @@ with lib; {
     ];
     experimental-features = [ "nix-command" "flakes" ];
   };
+
+  system.nixos.tags = [ "lunar" ];
 }
