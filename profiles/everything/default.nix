@@ -30,5 +30,6 @@ with lib; {
         enableAllModules = mkDefault true;
       };
     };
+    lunar.specialisations.enable = mkDefault true;
   };
 }

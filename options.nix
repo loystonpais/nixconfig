@@ -85,6 +85,10 @@ with lib; {
         mkEnableOption "enables makehuman import patch";
     };
 
+    specialisations = {
+      enable = mkEnableOption "enables lunar specific specialisations";
+    };
+
     modules = {
       vpn = {
         wireguard = {
