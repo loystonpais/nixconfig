@@ -16,6 +16,7 @@
     let
       nixosConfigurationsPath = ./. + ("/" + cfg.paths.nixosConfigurations);
       nixOnDroidConfigurationsPath = ./. + ("/" + cfg.paths.nixOnDroidConfigurations);
+      packagesPath = ./. + ("/" + cfg.paths.packages);
     in {
       nixosConfigurations = mapAttrs (n: v: v { inherit self inputs; })(importMapFromDir nixosConfigurationsPath);
 
