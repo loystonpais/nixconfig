@@ -18,5 +18,5 @@ for file in "$DIR"/*.nix; do
   BASENAME=$(basename "$file" .nix)
 
   echo "Building $BASENAME..."
-  echo nix build --print-out-paths ".#$BASENAME"
+  nix build --print-out-paths ".#$BASENAME"
 done
