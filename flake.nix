@@ -35,7 +35,7 @@
 
       packages = forAllSystems (system:
         mapAttrs (n: v: v { pkgs = nixpkgsFor.${system}; })
-        (importFileMapFromDir pacakgesPath));
+        (importFileMapFromDir packagesPath));
     };
 
   inputs = {
