@@ -1,0 +1,1 @@
+{ pkgs ? import <nixpkgs> {} }: pkgs.prismlauncher.override { prismlauncher-unwrapped = ( import ./prismlauncher-unwrapped-crack.nix ) { inherit pkgs; }; }
