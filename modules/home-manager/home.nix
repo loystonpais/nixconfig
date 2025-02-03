@@ -4,8 +4,8 @@
   pkgs,
   ...
 }: {
-  home.username = systemConfig.vars.username;
-  home.homeDirectory = "/home/" + systemConfig.vars.username;
+  home.username = systemConfig.lunar.username;
+  home.homeDirectory = "/home/" + systemConfig.lunar.username;
 
   home.sessionVariables = {};
 

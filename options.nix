@@ -1,5 +1,3 @@
-# These are the default vars that are shared to all the instances
-# Of course, they can be overridden for each instance
 # Change the default values here
 # Note: Some are missing default values and thats on purpose
 # However, there's nothing stopping you from setting them default values
@@ -10,7 +8,7 @@
   ...
 }:
 with lib; {
-  options.vars = {
+  options.lunar = {
     name = mkOption {
       type = types.str;
       description = "Name of the user";
@@ -81,11 +79,35 @@ with lib; {
         default = true;
       };
       mc-launcher-patch.enable = mkEnableOption "enables prismlauncer patch";
-      supergfxd-lsof-patch.enable = mkEnableOption "enables supergfxd lsof patch";
-      makehuman-makework-patch.enable = mkEnableOption "enables makehuman import patch";
+      supergfxd-lsof-patch.enable =
+        mkEnableOption "enables supergfxd lsof patch";
+      makehuman-makework-patch.enable =
+        mkEnableOption "enables makehuman import patch";
+    };
+
+    specialisations = {
+      enable = mkEnableOption "enables lunar specific specialisations";
     };
 
     modules = {
+      vpn = {
+        wireguard = {
+          enableMode = mkOption {
+            type = types.enum ["server" "client" "none"];
+            description = "enable wireguard server or client";
+            default = "none";
+          };
+          clientPrivateKeyInSops = mkOption {
+            type = types.bool;
+            description = ''Looks for private key in sops wireguard-client-{hostname}-private-key'';
+            default = true;
+          };
+        };
+      };
+      audio.enable = mkEnableOption "enables audio";
+      graphics.enable = mkEnableOption "enables graphics";
+      hardware.enable = mkEnableOption "enables hardware";
+
       desktop-environments = {
         enableAll = mkEnableOption "enables all available desktop environments";
         hyprland.enable = mkEnableOption "enables hyprland";
@@ -107,7 +129,10 @@ with lib; {
         cgroupDevicesById = mkOption {
           type = types.listOf types.str;
           description = "Devices registered to be passed to the vm";
-          default = ["usb-SINO_WEALTH_Gaming_KB-event-kbd" "usb-Razer_Razer_DeathAdder_Essential-event-mouse"];
+          default = [
+            "usb-SINO_WEALTH_Gaming_KB-event-kbd"
+            "usb-Razer_Razer_DeathAdder_Essential-event-mouse"
+          ];
         };
       };
 
@@ -141,14 +166,13 @@ with lib; {
         git.enable = mkEnableOption "enables git configuration";
         zsh.enable = mkEnableOption "enables zsh configuration";
         secrets.enable =
-          mkEnableOption "enables home secrets configuration (needs secrets module to be enabled)";
+          mkEnableOption
+          "enables home secrets configuration (needs secrets module to be enabled)";
       };
 
       browsers = {
         enable = mkEnableOption "enables browser configuration";
-        zen = {
-          enable = mkEnableOption "enables zen browser configuration";
-        };
+        zen = {enable = mkEnableOption "enables zen browser configuration";};
       };
 
       ssh.enable = mkEnableOption "enables ssh";
@@ -164,13 +188,14 @@ with lib; {
     };
 
     profile = {
-      everything.enable = mkEnableOption "enables almost eveything within the config";
+      everything.enable =
+        mkEnableOption "enables almost eveything within the config";
       vm.enable = mkEnableOption "enables vm profile";
       vps.enable = mkEnableOption "enables vps profile (for cloud vps)";
     };
 
     bootMode = mkOption {
-      type = types.enum ["uefi" "bios"];
+      type = types.enum ["uefi" "bios" "dontmanage"];
       description = "Boot mode";
     };
 

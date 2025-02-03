@@ -18,7 +18,7 @@
      --set PYOPENGL_PLATFORM x11
   '';
 in {
-  config = lib.mkIf config.vars.overlays.makehuman-makework-patch.enable {
+  config = lib.mkIf config.lunar.overlays.makehuman-makework-patch.enable {
     nixpkgs.overlays = [
       (final: prev: {
         makehuman =

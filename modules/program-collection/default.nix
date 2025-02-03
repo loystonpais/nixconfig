@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: {
-  config = lib.mkIf config.vars.modules.program-collection.enable {
+  config = lib.mkIf config.lunar.modules.program-collection.enable {
     programs.kdeconnect.enable = true;
 
     environment.systemPackages = with pkgs; [

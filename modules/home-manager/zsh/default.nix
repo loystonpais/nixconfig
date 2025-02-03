@@ -5,7 +5,7 @@
   lib,
   ...
 }: {
-  config = lib.mkIf systemConfig.vars.modules.home-manager.zsh.enable {
+  config = lib.mkIf systemConfig.lunar.modules.home-manager.zsh.enable {
     home.packages = with pkgs; [
       lsd
       fastfetch
@@ -22,13 +22,13 @@
         ll = "lsd -l";
         ls = "lsd -lh";
         neofetch = "fastfetch";
-        changes = "sudo nixos-rebuild dry-activate --fast --flake .#${systemConfig.vars.hostName}";
-        test = "sudo nixos-rebuild test --fast --flake .#${systemConfig.vars.hostName}";
-        switch = "sudo nixos-rebuild switch --flake .#${systemConfig.vars.hostName}";
-        fuckgoback = "sudo nixos-rebuild switch --rollback --flake .#${systemConfig.vars.hostName}";
+        changes = "sudo nixos-rebuild dry-activate --fast --flake .#${systemConfig.lunar.hostName}";
+        test = "sudo nixos-rebuild test --fast --flake .#${systemConfig.lunar.hostName}";
+        switch = "sudo nixos-rebuild switch --flake .#${systemConfig.lunar.hostName}";
+        fuckgoback = "sudo nixos-rebuild switch --rollback --flake .#${systemConfig.lunar.hostName}";
         fuckgobackasap = rollback;
         rollback = "sudo nixos-rebuild switch --rollback";
-        nhswitch = "nh os switch -v -H ${systemConfig.vars.hostName} .";
+        nhswitch = "nh os switch -v -H ${systemConfig.lunar.hostName} .";
         switchbutcooler = nhswitch;
         update = "( cd ~/nixconfig && (git pull || git fetch) && changes )";
         upgrade = "( ${update}; cd ~/nixconfig && switch )";

@@ -7,12 +7,12 @@
     ./scrcpy.nix
   ];
 
-  config = lib.mkIf config.vars.modules.android.enable {
+  config = lib.mkIf config.lunar.modules.android.enable {
 
     programs.adb.enable = true;
     # Prevents using sudo
-    users.users.${config.vars.username}.extraGroups = [ "adbusers" ];
+    users.users.${config.lunar.username}.extraGroups = [ "adbusers" ];
 
-    vars.modules.android.scrcpy.enable = lib.mkDefault true;
+    lunar.modules.android.scrcpy.enable = lib.mkDefault true;
   };
 }

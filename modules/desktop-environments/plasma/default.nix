@@ -6,7 +6,7 @@
 }: {
   imports = [];
 
-  config = lib.mkIf config.vars.modules.desktop-environments.plasma.enable {
+  config = lib.mkIf config.lunar.modules.desktop-environments.plasma.enable {
     services.displayManager.defaultSession = "plasma";
     services.displayManager.sddm.wayland.enable = true;
     services.displayManager.sddm.enable = true;
@@ -24,7 +24,7 @@
         kdePackages.plasma-browser-integration
       ]
       ++ (
-        if config.vars.graphicsMode == "asuslinux"
+        if config.lunar.graphicsMode == "asuslinux"
         then [pkgs.supergfxctl-plasmoid]
         else []
       );

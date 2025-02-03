@@ -5,7 +5,7 @@
   pkgs,
   ...
 }: {
-  config = lib.mkIf config.vars.modules.minecraft.enable {
+  config = lib.mkIf config.lunar.modules.minecraft.enable {
     environment.systemPackages = with pkgs; [
       prismlauncher
       jdk21

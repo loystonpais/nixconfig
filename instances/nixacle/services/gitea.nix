@@ -5,7 +5,7 @@
   lib,
   ...
 }: let
-  address = config.vars.nixacle.address;
+  address = config.lunar.nixacle.address;
 
   themes = with builtins; let
     dir = self.outPath + "/assets/gitea/themes/";
@@ -22,13 +22,13 @@
     _themes;
 in {
   systemd.tmpfiles.rules =
-    map (theme: ''C ${config.services.gitea.customDir}/public/assets/css/theme-${theme.name}.css 0644 ${config.vars.username} gitea - ${theme.path} '')
+    map (theme: ''C ${config.services.gitea.customDir}/public/assets/css/theme-${theme.name}.css 0644 ${config.lunar.username} gitea - ${theme.path} '')
     themes;
 
   services.gitea = {
     enable = true;
-    user = config.vars.username;
-    stateDir = config.vars.nixacle.datablock1.path + "/gitea";
+    user = config.lunar.username;
+    stateDir = config.lunar.nixacle.datablock1.path + "/gitea";
     settings.server = {
       ROOT_URL = "https://" + address + "/gitea";
       DISABLE_SSH = true;
@@ -45,12 +45,12 @@ in {
 
     database = {
       type = "sqlite3";
-      user = config.vars.username;
+      user = config.lunar.username;
       #passwordFile = "/run/secrets/nixacle_gitea_db_password";
     };
 
     dump = {
-      backupDir = config.vars.nixacle.datablock1.path + "/backup/gitea";
+      backupDir = config.lunar.nixacle.datablock1.path + "/backup/gitea";
     };
   };
 }

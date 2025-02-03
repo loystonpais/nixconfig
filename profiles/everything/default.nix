@@ -4,8 +4,8 @@
   ...
 }:
 with lib; {
-  config = mkIf config.vars.profile.everything.enable {
-    vars.modules = {
+  config = mkIf config.lunar.profile.everything.enable {
+    lunar.modules = {
       desktop-environments.enableAll = mkDefault true;
       distrobox.enable = mkDefault true;
       gamedev.enable = mkDefault true;
@@ -21,11 +21,15 @@ with lib; {
       android.enable = mkDefault true;
       ssh.enable = mkDefault true;
       secrets.enable = mkDefault true;
+      audio.enable = mkDefault true;
+      graphics.enable = mkDefault true;
+      hardware.enable = mkDefault true;
 
       home-manager = {
         enable = mkDefault true;
         enableAllModules = mkDefault true;
       };
     };
+    lunar.specialisations.enable = mkDefault true;
   };
 }

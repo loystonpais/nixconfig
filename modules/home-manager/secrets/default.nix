@@ -3,10 +3,10 @@
   lib,
   ...
 }: {
-  config = lib.mkIf (systemConfig.vars.modules.secrets.enable && systemConfig.vars.modules.home-manager.secrets.enable) {
+  config = lib.mkIf (systemConfig.lunar.modules.secrets.enable && systemConfig.lunar.modules.home-manager.secrets.enable) {
     programs.zsh.initExtra = with builtins; let
-      vars = systemConfig.vars.modules.secrets.environmentVariablesFromSops;
+      lunar = systemConfig.lunar.modules.secrets.environmentVariablesFromSops;
     in
-      concatStringsSep "\n" (map (name: ''export '${name}'="$(cat ${vars.${name}.path})"'') (attrNames vars));
+      concatStringsSep "\n" (map (name: ''export '${name}'="$(cat ${lunar.${name}.path})"'') (attrNames lunar));
   };
 }

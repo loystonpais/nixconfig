@@ -1,0 +1,9 @@
+{
+  config,
+  lib,
+  ...
+}: {
+  imports = [
+    ./wireguard
+  ];
+}

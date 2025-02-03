@@ -3,7 +3,7 @@
   lib,
   ...
 }: {
-  options.vars.nixacle = {
+  options.lunar.nixacle = {
     datablock1.path = lib.mkOption {
       type = lib.types.str;
       description = "Path to data block 1";
@@ -16,17 +16,17 @@
   };
 
   config = {
-    vars.hostName = "nixacle";
-    vars.graphicsMode = "none";
-    vars.bootMode = "uefi";
+    lunar.hostName = "nixacle";
+    lunar.graphicsMode = "none";
+    lunar.bootMode = "uefi";
 
-    vars.nixacle.datablock1.path = "/mnt/datablk1";
-    vars.nixacle.address = "loy.ftp.sh";
+    lunar.nixacle.datablock1.path = "/mnt/datablk1";
+    lunar.nixacle.address = "loy.ftp.sh";
 
-    vars.sshPublicKeys = [
+    lunar.sshPublicKeys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHtN04FVSVonasScikFfltCPFJkSWa3t3z+wo+JA8GGd loyston500@gmail.com"
     ];
 
-    vars.profile.vps.enable = true;
+    lunar.profile.vps.enable = true;
   };
 }

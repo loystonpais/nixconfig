@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: {
-  config = lib.mkIf systemConfig.vars.modules.home-manager.fonts.enable {
+  config = lib.mkIf systemConfig.lunar.modules.home-manager.fonts.enable {
     fonts.fontconfig.enable = true;
 
     home.packages = with pkgs; [

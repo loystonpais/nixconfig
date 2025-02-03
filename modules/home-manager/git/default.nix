@@ -4,11 +4,11 @@
   pkgs,
   ...
 }: {
-  config = lib.mkIf systemConfig.vars.modules.home-manager.git.enable {
+  config = lib.mkIf systemConfig.lunar.modules.home-manager.git.enable {
     programs.git = {
       enable = true;
-      userName = systemConfig.vars.github.username;
-      userEmail = systemConfig.vars.email;
+      userName = systemConfig.lunar.github.username;
+      userEmail = systemConfig.lunar.email;
       aliases = {
         pu = "push";
         ch = "checkout";

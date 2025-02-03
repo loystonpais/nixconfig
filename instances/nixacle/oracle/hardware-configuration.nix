@@ -20,7 +20,7 @@
     fsType = "xfs";
   };
 
-  fileSystems.${config.vars.nixacle.datablock1.path} = {
+  fileSystems.${config.lunar.nixacle.datablock1.path} = {
     device = "/dev/disk/by-label/datablk1";
     fsType = "xfs";
     options = ["nofail"];

@@ -1,12 +1,13 @@
 {
   pkgs,
   lib,
+  inputs,
   systemConfig,
   ...
 }: {
   imports = [];
 
-  config = lib.mkIf systemConfig.vars.modules.home-manager.plasma.enable {
+  config = lib.mkIf systemConfig.lunar.modules.home-manager.plasma.enable {
     home.packages = with pkgs; [
       whitesur-kde
       whitesur-icon-theme

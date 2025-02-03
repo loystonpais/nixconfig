@@ -10,9 +10,9 @@ with lib; {
     ./vps
   ];
 
-  options.vars.profile.enableAll = mkEnableOption "enables all profiles";
+  options.lunar.profile.enableAll = mkEnableOption "enables all profiles";
 
-  config.vars.profile = mkIf config.vars.profile.enableAll {
+  config.lunar.profile = mkIf config.lunar.profile.enableAll {
     everything.enable = true;
     vm.enable = true;
     vps.enable = true;

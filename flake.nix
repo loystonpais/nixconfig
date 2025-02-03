@@ -1,55 +1,40 @@
 {
-  description = "Breaking Flake";
+  description = "Lunar Flake.";
 
-  outputs = {self, ...} @ inputs:
-    with builtins; let
-      json = fromJSON (readFile ./.json);
+  outputs = {self, nixpkgs, ...} @ inputs:
+  with builtins;
+  let
+    lib = nixpkgs.lib;
+      pkgs = (nixpkgs { });
+      utils = import ./utils { inherit lib; };
+      cfg = fromTOML (readFile ./.toml);
+      lunarModule = import ./lunar.nix;
+      forAllSystems = nixpkgs.lib.genAttrs nixpkgs.lib.systems.flakeExposed;
+      nixpkgsFor = forAllSystems (system: import nixpkgs { inherit system; });
+    in with utils;
 
-      nixosInstancesPath = ./. + ("/" + json.nixosInstancesPath);
-      nixosProfilesPath = ./. + ("/" + json.nixosInstancesPath);
-      nixOnDroidInstancesPath = ./. + ("/" + json.nixOnDroidInstancesPath);
-
-      nixosConfigurations = let
-        path = nixosInstancesPath;
-      in
-        if pathExists path
-        then let
-          isValid = name:
-            getAttr name dir == "directory";
-
-          dir = readDir path; # read the directory and get contents within it
-          names = attrNames dir; # list of names
-
-          dirNames =
-            if all isValid names
-            then filter isValid names
-            else
-              throw ''
-                Failed validating names!
-                Hosts folder should contain only directories
-                and the name of the directory should be a valid hostname
-              '';
-        in
-          if length dirNames > 0
-          then
-            listToAttrs (map (name: {
-                inherit name;
-                value = (import (path + ("/" + name))) {
-                  inherit self;
-                  inherit inputs;
-                };
-              })
-              dirNames)
-          else trace "No instances found. Directory is empty" {}
-        else throw "No such directory " + toString path;
+    let
+      nixosConfigurationsPath = ./. + ("/" + cfg.paths.nixosConfigurations);
+      nixOnDroidConfigurationsPath = ./. + ("/" + cfg.paths.nixOnDroidConfigurations);
     in {
-      inherit nixosConfigurations;
+      nixosConfigurations = mapAttrs (n: v: v { inherit self inputs; })(importMapFromDir nixosConfigurationsPath);
 
-      # TODO: Generalize
-      nixOnDroidConfigurations.vili = inputs.nix-on-droid.lib.nixOnDroidConfiguration {
-        pkgs = import inputs.nixpkgs-24_05 {system = "aarch64-linux";};
-        modules = [(nixOnDroidInstancesPath + "/vili/nix-on-droid.nix")];
+      nixOnDroidConfigurations = mapAttrs (n: v: v { inherit self inputs; })(importMapFromDir nixOnDroidConfigurationsPath);
+
+      nixosModules = rec {
+        lunar = lunarModule;
+        default = lunar;
+        extras = {
+          home-manager = {
+            unstable = inputs.home-manager.nixosModules.home-manager;
+            "24_11" = inputs.home-manager-24_11.nixosModules.home-manager;
+          };
+        };
       };
+
+      packages = forAllSystems (system:
+        mapAttrs (n: v: v { pkgs = nixpkgsFor.${system}; })
+        (importFileMapFromDir pacakgesPath));
     };
 
   inputs = {

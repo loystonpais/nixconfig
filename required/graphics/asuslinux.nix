@@ -4,7 +4,7 @@
   lib,
   ...
 }: {
-  config = lib.mkIf (config.vars.graphicsMode == "asuslinux") {
+  config = lib.mkIf (config.lunar.graphicsMode == "asuslinux") {
     services.xserver.videoDrivers = ["nvidia"];
 
     hardware.nvidia = {

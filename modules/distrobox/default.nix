@@ -10,7 +10,7 @@
     then "btrfs"
     else null;
 in {
-  config = lib.mkIf config.vars.modules.distrobox.enable {
+  config = lib.mkIf config.lunar.modules.distrobox.enable {
     environment.systemPackages = with pkgs; [distrobox];
 
     # Using docker with distrobox
@@ -20,6 +20,6 @@ in {
     virtualisation.docker.storageDriver = storageDriver;
 
     # Adding user to the docker group
-    users.users.${config.vars.username}.extraGroups = ["docker"];
+    users.users.${config.lunar.username}.extraGroups = ["docker"];
   };
 }

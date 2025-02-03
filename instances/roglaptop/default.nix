@@ -14,7 +14,9 @@ inputs.nixpkgs.lib.nixosSystem rec {
   };
 
   modules = [
-    ../../core.nix
+
+    self.nixosModules.default
+    self.nixosModules.extras.home-manager.unstable
 
     ./configuration.nix
     ./hardware-configuration.nix

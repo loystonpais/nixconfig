@@ -16,15 +16,13 @@ inputs.nixpkgs-24_11.lib.nixosSystem {
   modules = [
     ./oracle # DO NOT REMOVE
 
+    self.nixosModules.default
+    /* self.nixosModules.extras.home-manager."24_11" */ ./home-manager.nix
     # Only importing wanted modules
-    ../../defvars.nix
-    ../../vars.nix
-    ../../modules/secrets
-    ../../modules/ssh
-    ../../users
-    ../../profiles
-
-    ./home-manager.nix
+    # ../../modules/secrets
+    # ../../modules/ssh
+    # ../../users
+    # ../../profiles
 
     ./configuration.nix
   ];

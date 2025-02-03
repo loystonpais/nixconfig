@@ -2,5 +2,6 @@
   imports = [
     ./boot
     ./graphics
+    ./locale
   ];
 }

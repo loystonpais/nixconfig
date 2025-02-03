@@ -14,7 +14,7 @@
       exit 1
     fi '';
 in {
-  config = lib.mkIf config.vars.overlays.supergfxd-lsof-patch.enable {
+  config = lib.mkIf config.lunar.overlays.supergfxd-lsof-patch.enable {
     # Add lsof to path because it is missing in the pkg config
     systemd.services.supergfxd.path = [pkgs.lsof];
 

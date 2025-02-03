@@ -1,6 +1,6 @@
 {config, ...}: let
-  datablock = config.vars.nixacle.datablock1;
-  address = config.vars.nixacle.address;
+  datablock = config.lunar.nixacle.datablock1;
+  address = config.lunar.nixacle.address;
 in {
   networking.firewall = {
     enable = true;
@@ -9,7 +9,7 @@ in {
 
   security.acme = {
     acceptTerms = true;
-    defaults.email = config.vars.email;
+    defaults.email = config.lunar.email;
   };
 
   services.nginx = {

@@ -26,3 +26,4 @@ with lib; {
 
   nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 }
+

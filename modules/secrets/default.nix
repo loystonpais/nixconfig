@@ -9,21 +9,23 @@
     inputs.sops-nix.nixosModules.sops
   ];
 
-  config = lib.mkIf config.vars.modules.secrets.enable {
+  config = lib.mkIf config.lunar.modules.secrets.enable {
     sops.defaultSopsFile = ../../secrets/secrets.yaml;
     sops.defaultSopsFormat = "yaml";
-    sops.age.keyFile = "/home/${config.vars.username}/.config/sops/age/keys.txt";
+    sops.age.keyFile = "/home/${config.lunar.username}/.config/sops/age/keys.txt";
 
-    sops.secrets.groq_personal_use_key.owner = config.vars.username;
-    sops.secrets.gemini_api_key.owner = config.vars.username;
-    sops.secrets.github_key.owner = config.vars.username;
-    sops.secrets.nixacle_gitea_db_password.owner = config.vars.username;
-    sops.secrets.gitea_key.owner = config.vars.username;
-    sops.secrets.cachix_loystonpais_auth_token.owner = config.vars.username;
-    sops.secrets.ataraxy_bot_token.owner = config.vars.username;
-    sops.secrets.ataraxy_environment_file.owner = config.vars.username;
+    sops.secrets.groq_personal_use_key.owner = config.lunar.username;
+    sops.secrets.gemini_api_key.owner = config.lunar.username;
+    sops.secrets.github_key.owner = config.lunar.username;
+    sops.secrets.nixacle_gitea_db_password.owner = config.lunar.username;
+    sops.secrets.gitea_key.owner = config.lunar.username;
+    sops.secrets.cachix_loystonpais_auth_token.owner = config.lunar.username;
+    sops.secrets.ataraxy_bot_token.owner = config.lunar.username;
+    sops.secrets.ataraxy_environment_file.owner = config.lunar.username;
+    sops.secrets.wireguard-server-common-private-key.owner = config.lunar.username;
+    sops.secrets."wireguard-client-${config.lunar.hostName}-private-key" = lib.mkIf (config.lunar.modules.vpn.wireguard.enableMode == "client" && config.lunar.modules.vpn.wireguard.clientPrivateKeyInSops) { owner = config.lunar.username;};
 
-    vars.modules.secrets.environmentVariablesFromSops = {
+    lunar.modules.secrets.environmentVariablesFromSops = {
       IDK_GROQ_API_KEY = config.sops.secrets.groq_personal_use_key;
       GROQ_API_KEY = config.sops.secrets.groq_personal_use_key;
       GEMINI_API_KEY = config.sops.secrets.gemini_api_key;
@@ -40,19 +42,19 @@
       format = "dotenv";
       sopsFile = ../../secrets/auto-resume-builder.env;
       key = "";
-      owner = config.vars.username;
+      owner = config.lunar.username;
     };
 
     sops.secrets."business-profile.jpg" = {
       format = "binary";
       sopsFile = ../../secrets/files/business-profile.jpg.enc;
-      owner = config.vars.username;
+      owner = config.lunar.username;
     };
 
     sops.secrets."college-logo.jpg" = {
       format = "binary";
       sopsFile = ../../secrets/files/college-logo.jpg.enc;
-      owner = config.vars.username;
+      owner = config.lunar.username;
     };
 
     environment.systemPackages = with pkgs; [

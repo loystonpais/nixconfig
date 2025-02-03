@@ -3,7 +3,7 @@
   lib,
   ...
 }: {
-  config = lib.mkIf (config.vars.graphicsMode == "nvidia") {
+  config = lib.mkIf (config.lunar.graphicsMode == "nvidia") {
     services.xserver.videoDrivers = ["nvidia"];
 
     hardware.nvidia = {

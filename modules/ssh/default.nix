@@ -3,13 +3,13 @@
   config,
   ...
 }: {
-  config = lib.mkIf config.vars.modules.ssh.enable {
+  config = lib.mkIf config.lunar.modules.ssh.enable {
     services.openssh = {
       enable = true;
       ports = [22];
       settings = {
         PasswordAuthentication = false;
-        AllowUsers = [config.vars.username];
+        AllowUsers = [config.lunar.username];
         UseDns = true;
         X11Forwarding = false;
         PermitRootLogin = "prohibit-password";
@@ -22,7 +22,7 @@
       allowedTCPPorts = [22];
     };
 
-    users.users.${config.vars.username}.openssh.authorizedKeys.keys = config.vars.sshPublicKeys;
+    users.users.${config.lunar.username}.openssh.authorizedKeys.keys = config.lunar.sshPublicKeys;
 
     programs.mosh = {
       enable = true;

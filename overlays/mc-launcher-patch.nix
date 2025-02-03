@@ -21,7 +21,7 @@
     fi
   '';
 in {
-  config = lib.mkIf config.vars.overlays.mc-launcher-patch.enable {
+  config = lib.mkIf config.lunar.overlays.mc-launcher-patch.enable {
     nixpkgs.overlays = [
       (final: prev: {
         prismlauncher-unwrapped =
