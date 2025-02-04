@@ -10,6 +10,7 @@
     nixpkgs.overlays = [
       (final: prev: {
         prismlauncher-unwrapped = inputs.self.packages.${system}.prismlauncher-unwrapped-crack;
+        prismlauncher = inputs.self.packages.${system}.prismlauncher-crack;
       })
     ];
   };
