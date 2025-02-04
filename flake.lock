@@ -89,11 +89,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1733472168,
-        "narHash": "sha256-OlrdZ3VY5kFJwLdc5zvczUOzKtMqjxQiVKVJgeX2UD0=",
+        "lastModified": 1738668418,
+        "narHash": "sha256-rv9cwJ25CrP3jWjuDKL0t6dh22BG/9Tj/VBs3HPeEPg=",
         "owner": "loystonpais",
         "repo": "idk-shell-command",
-        "rev": "1d2beec322ceb184287fc2543808a4da5bb27671",
+        "rev": "492d8299da0b9f2ead7ebc527a40875f64d01096",
         "type": "github"
       },
       "original": {
