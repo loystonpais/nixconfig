@@ -18,5 +18,9 @@ for file in "$DIR"/*.nix; do
   BASENAME=$(basename "$file" .nix)
 
   echo "Building $BASENAME..."
-  nix build --print-out-paths ".#$BASENAME"
+  if nix build --print-out-paths ".#$BASENAME"; then
+    echo "Build succeeded for $BASENAME."
+  else
+    echo "::warning::Build failed for $BASENAME."
+  fi
 done
