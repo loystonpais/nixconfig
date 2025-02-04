@@ -3,6 +3,7 @@
   lib,
   inputs,
   systemConfig,
+  system,
   ...
 }: {
   imports = [];
@@ -13,7 +14,7 @@
       whitesur-icon-theme
       whitesur-cursors
       whitesur-gtk-theme
-      (callPackage ../../../derivations/kwin-modern-informative {})
+      inputs.self.packages.${system}.kwin-modern-informative
     ];
 
     qt = {
