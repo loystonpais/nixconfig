@@ -3,6 +3,7 @@
   config,
   lib,
   pkgs,
+  system,
   ...
 }: {
   imports = [
@@ -12,6 +13,7 @@
   home-manager = lib.mkIf config.lunar.modules.home-manager.enable {
     extraSpecialArgs = {
       inherit inputs;
+      inherit system;
       systemConfig = config;
     };
     sharedModules = [inputs.plasma-manager.homeManagerModules.plasma-manager];
