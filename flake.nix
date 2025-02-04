@@ -18,9 +18,9 @@
       nixOnDroidConfigurationsPath = ./. + ("/" + cfg.paths.nixOnDroidConfigurations);
       packagesPath = ./. + ("/" + cfg.paths.packages);
     in {
-      nixosConfigurations = mapAttrs (n: v: v { inherit self inputs; })(importMapFromDir nixosConfigurationsPath);
+      nixosConfigurations = mapAttrs (n: v: v { inherit self inputs; })(importDirMapFromDir nixosConfigurationsPath);
 
-      nixOnDroidConfigurations = mapAttrs (n: v: v { inherit self inputs; })(importMapFromDir nixOnDroidConfigurationsPath);
+      nixOnDroidConfigurations = mapAttrs (n: v: v { inherit self inputs; })(importDirMapFromDir nixOnDroidConfigurationsPath);
 
       nixosModules = rec {
         lunar = lunarModule;
