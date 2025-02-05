@@ -1,5 +1,5 @@
 with builtins;
-{ lib ? (import <nixpkgs> { }).lib }: {
+{ lib ? (import <nixpkgs> { }).lib }: rec {
   # Imports default.nix from dirs within a given path
   # and maps them to their dir name
   importDirMapFromDir = path:
@@ -16,4 +16,7 @@ with builtins;
     in lib.attrsets.mapAttrs' (n: v:
       (lib.attrsets.nameValuePair (lib.strings.removeSuffix ".nix" n)
         (import (path + ("/" + n))))) files;
+
+  importMapFromDir = path:
+    (importDirMapFromDir path) // (importFileMapFromDir path);
 }
