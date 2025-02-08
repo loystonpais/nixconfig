@@ -17,7 +17,7 @@ inputs.nixpkgs-24_11.lib.nixosSystem {
     ./oracle # DO NOT REMOVE
 
     # Only importing wanted modules
-    ../../deflunar.nix
+    ../../options.nix
     ../../lunar.nix
     ../../modules/secrets
     ../../modules/ssh
