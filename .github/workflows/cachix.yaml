@@ -1,4 +1,4 @@
-name: Cachix
+name: Cachix Build Packages
 
 on:
   workflow_dispatch:
