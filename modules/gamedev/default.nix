@@ -15,7 +15,7 @@
 
     environment.systemPackages = with pkgs; [
       godot_4
-      blender
+      /* blender */ (lib.warn "Blender has been temporarily removed from modules/gamedev due to openusd not building" pkgs.emptyFile)
       krita
       inkscape
       tiled
