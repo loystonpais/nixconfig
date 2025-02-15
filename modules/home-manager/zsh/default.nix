@@ -18,6 +18,10 @@
       syntaxHighlighting.enable = true;
       autosuggestion.enable = true;
 
+      localVariables = {
+        OLLAMA_NOPRUNE = true;
+      };
+
       shellAliases = rec {
         ll = "lsd -l";
         ls = "lsd -lh";
