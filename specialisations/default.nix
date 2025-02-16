@@ -2,6 +2,7 @@
 
   imports = [
     ./productive
+    ./gruvbox
   ];
 
 }
