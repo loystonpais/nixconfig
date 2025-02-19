@@ -1,10 +1,10 @@
 {
   description = "Lunar Flake.";
 
-  outputs = {self, nixpkgs, ...} @ inputs:
-  with builtins;
-  let
-    lib = nixpkgs.lib;
+  outputs = { self, nixpkgs, ... }@inputs:
+    with builtins;
+    let
+      lib = nixpkgs.lib;
       pkgs = (nixpkgs { });
       utils = import ./utils { inherit lib; };
       cfg = fromTOML (readFile ./.toml);
@@ -14,13 +14,15 @@
     in with utils;
 
     let
-      nixosConfigurationsPath = ./. + ("/" + cfg.paths.nixosConfigurations);
-      nixOnDroidConfigurationsPath = ./. + ("/" + cfg.paths.nixOnDroidConfigurations);
-      packagesPath = ./. + ("/" + cfg.paths.packages);
+      nixosConfigurationsPath = joinPathAndString ./. cfg.paths.nixosConfigurations;
+      nixOnDroidConfigurationsPath = joinPathAndString ./. cfg.paths.nixOnDroidConfigurations;
+      packagesPath = joinPathAndString ./. cfg.paths.packages;
     in {
-      nixosConfigurations = mapAttrs (n: v: v { inherit self inputs; })(importDirMapFromDir nixosConfigurationsPath);
+      nixosConfigurations = mapAttrs (n: v: v { inherit self inputs; })
+        (importDir' nixosConfigurationsPath);
 
-      nixOnDroidConfigurations = mapAttrs (n: v: v { inherit self inputs; })(importDirMapFromDir nixOnDroidConfigurationsPath);
+      nixOnDroidConfigurations = mapAttrs (n: v: v { inherit self inputs; })
+        (importDir' nixOnDroidConfigurationsPath);
 
       nixosModules = rec {
         lunar = lunarModule;
@@ -35,7 +37,7 @@
 
       packages = forAllSystems (system:
         mapAttrs (n: v: v { pkgs = nixpkgsFor.${system}; })
-        (importFileMapFromDir packagesPath));
+        (importDir { path = packagesPath; }));
     };
 
   inputs = {
