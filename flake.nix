@@ -1,21 +1,17 @@
 {
-  description = "Lunar Flake.";
+  description = "The Lunar Flake";
 
   outputs = { self, nixpkgs, ... }@inputs:
-    with builtins;
+    with builtins // (import ./utils { inherit (nixpkgs) lib; });
     let
-      lib = nixpkgs.lib;
-      pkgs = (nixpkgs { });
-      utils = import ./utils { inherit lib; };
       cfg = fromTOML (readFile ./.toml);
       lunarModule = import ./lunar.nix;
-      forAllSystems = nixpkgs.lib.genAttrs nixpkgs.lib.systems.flakeExposed;
       nixpkgsFor = forAllSystems (system: import nixpkgs { inherit system; });
-    in with utils;
 
-    let
-      nixosConfigurationsPath = joinPathAndString ./. cfg.paths.nixosConfigurations;
-      nixOnDroidConfigurationsPath = joinPathAndString ./. cfg.paths.nixOnDroidConfigurations;
+      nixosConfigurationsPath =
+        joinPathAndString ./. cfg.paths.nixosConfigurations;
+      nixOnDroidConfigurationsPath =
+        joinPathAndString ./. cfg.paths.nixOnDroidConfigurations;
       packagesPath = joinPathAndString ./. cfg.paths.packages;
     in {
       nixosConfigurations = mapAttrs (n: v: v { inherit self inputs; })
