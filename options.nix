@@ -185,6 +185,10 @@ with lib; {
           description = "environment variables to be set from the sops secrets";
         };
       };
+
+      nixvim = {
+        enable = mkEnableOption "enables nixvim";
+      };
     };
 
     profile = {

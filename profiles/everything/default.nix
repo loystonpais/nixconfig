@@ -24,6 +24,7 @@ with lib; {
       audio.enable = mkDefault true;
       graphics.enable = mkDefault true;
       hardware.enable = mkDefault true;
+      nixvim.enable = mkDefault true;
 
       home-manager = {
         enable = mkDefault true;

@@ -25,6 +25,7 @@
     ./audio
     ./graphics
     ./vpn
+    ./nixvim
 
     ./home-manager
   ];

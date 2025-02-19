@@ -1,12 +1,18 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: {
+{ config, lib, pkgs, inputs, ... }: {
+  imports = [ inputs.nixvim.nixosModules.nixvim ];
+
   config = lib.mkIf config.lunar.modules.nixvim.enable {
-    environment.systemPackages = with pkgs; [
-      
-    ];
+
+    programs.nixvim = {
+      enable = true;
+      colorschemes.gruvbox.enable = true;
+
+      opts = { number = true; };
+
+      plugins = {
+        lualine.enable = true;
+        lsp.servers.pyright = { enable = true; };
+      };
+    };
   };
 }
