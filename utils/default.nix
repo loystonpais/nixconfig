@@ -3,6 +3,8 @@ with builtins;
 
   inherit lib;
 
+  forAllSystems = lib.genAttrs lib.systems.flakeExposed;
+
   importFromDir = path: (importDirsFromDir path) // (importFilesFromDir path);
 
   filterAttrs = lib.attrsets.filterAttrs;
