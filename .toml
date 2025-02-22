@@ -2,3 +2,4 @@
 nixosConfigurations = "./instances"
 nixOnDroidConfigurations = "./nix-on-droid/instances"
 packages = "./packages"
+templates = "./templates"
