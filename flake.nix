@@ -13,6 +13,7 @@
       nixOnDroidConfigurationsPath =
         joinPathAndString ./. cfg.paths.nixOnDroidConfigurations;
       packagesPath = joinPathAndString ./. cfg.paths.packages;
+      templatesPath = joinPathAndString ./. cfg.paths.templates;
     in {
       nixosConfigurations = mapAttrs (n: v: v { inherit self inputs; })
         (importDir' nixosConfigurationsPath);
@@ -34,6 +35,8 @@
       packages = forAllSystems (system:
         mapAttrs (n: v: v { pkgs = nixpkgsFor.${system}; })
         (importDir { path = packagesPath; }));
+
+      templates = importTemplates templatesPath;
     };
 
   inputs = {
