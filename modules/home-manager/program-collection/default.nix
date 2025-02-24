@@ -17,7 +17,7 @@
       broot
       ripgrep
       compsize
-      nixfmt-classic # Nix formatter
+      alejandra # Nix formatter
     ];
   };
 }
