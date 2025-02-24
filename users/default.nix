@@ -13,6 +13,7 @@
       description = config.lunar.name;
       extraGroups = ["networkmanager" "wheel" "disk"];
       shell = config.lunar.shell;
+      initialPassword = config.lunar.username;
       packages = [];
     };
 
