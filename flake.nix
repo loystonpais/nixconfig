@@ -101,10 +101,5 @@
       url = "github:loystonpais/portfolio";
       inputs.nixpkgs.follows = "nixpkgs-24_11";
     };
-
-    resumake = {
-      url = "github:loystonpais/resumake?ref=main";
-      inputs.nixpkgs.follows = "nixpkgs-24_11";
-    };
   };
 }
