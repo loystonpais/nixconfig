@@ -29,6 +29,7 @@
             unstable = inputs.home-manager.nixosModules.home-manager;
             "24_11" = inputs.home-manager-24_11.nixosModules.home-manager;
           };
+          specialisations = importDir' ./specialisations;
         };
       };
 
