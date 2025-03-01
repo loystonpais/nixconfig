@@ -168,6 +168,7 @@ with lib; {
         secrets.enable =
           mkEnableOption
           "enables home secrets configuration (needs secrets module to be enabled)";
+        zed.enable = mkEnableOption "enables zed editor configuration";
       };
 
       browsers = {

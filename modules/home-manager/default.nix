@@ -28,6 +28,7 @@
       ./program-collection
       ./secrets
       ./zsh
+      ./zed
     ];
   };
 
@@ -39,5 +40,6 @@
     secrets.enable = lib.mkDefault true;
     zsh.enable = lib.mkDefault true;
     program-collection.enable = lib.mkDefault true;
+    zed.enable = lib.mkDefault true;
   };
 }
