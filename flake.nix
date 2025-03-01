@@ -32,6 +32,8 @@
         };
       };
 
+      fomatter = forAllSystems (system: nixpkgsFor.${system}.alejandra);
+
       packages = forAllSystems (system:
         mapAttrs (n: v: v { pkgs = nixpkgsFor.${system}; })
         (importDir { path = packagesPath; }));
