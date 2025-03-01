@@ -785,27 +785,6 @@
         "type": "github"
       }
     },
-    "resumake": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs-24_11"
-        ]
-      },
-      "locked": {
-        "lastModified": 1734796064,
-        "narHash": "sha256-iHAOb+yGyjPZdnVxHsqMqE9EQkRdB/UozvmLLHotiw8=",
-        "owner": "loystonpais",
-        "repo": "resumake",
-        "rev": "73bbdca9dfa3e94d346c1c7df3063cd5634dcc26",
-        "type": "github"
-      },
-      "original": {
-        "owner": "loystonpais",
-        "ref": "main",
-        "repo": "resumake",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "ataraxy-discord-bot": "ataraxy-discord-bot",
@@ -819,7 +798,6 @@
         "nixvim": "nixvim",
         "plasma-manager": "plasma-manager",
         "portfolio-website": "portfolio-website",
-        "resumake": "resumake",
         "sops-nix": "sops-nix",
         "stylix": "stylix",
         "zen-browser": "zen-browser"
