@@ -2,6 +2,7 @@
   config,
   systemConfig,
   pkgs,
+  lib,
   ...
 }: {
   home.username = systemConfig.lunar.username;
@@ -19,6 +20,7 @@
     enable = true;
     nix-direnv.enable = true;
     enableZshIntegration = true;
+    enableBashIntegration = true;
   };
 
   home.stateVersion = "23.11";
