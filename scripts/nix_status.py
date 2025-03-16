@@ -2,15 +2,15 @@
 #! nix-shell -i python3 -p "python3.withPackages(p: [ p.requests ])"
 
 import argparse
-from dataclasses import dataclass
-from datetime import datetime, timezone, timedelta
-import requests
-from urllib.parse import quote_plus
-from typing import List, Dict, Optional
-import sys
 import logging
-import argparse
+import sys
 from contextlib import redirect_stdout
+from dataclasses import dataclass
+from datetime import datetime, timedelta, timezone
+from typing import Dict, List, Optional
+from urllib.parse import quote_plus
+
+import requests
 
 
 @dataclass
@@ -166,9 +166,9 @@ class ChannelAnalyzer:
             return f"{diff.days} days ago"
         secs = diff.seconds
         if secs >= 3600:
-            return f"{secs//3600} hours ago"
+            return f"{secs // 3600} hours ago"
         if secs >= 60:
-            return f"{secs//60} minutes ago"
+            return f"{secs // 60} minutes ago"
         return f"{secs} seconds ago"
 
     @staticmethod
@@ -251,7 +251,6 @@ class ReportGenerator:
 
 
 def main():
-
     parser = argparse.ArgumentParser(
         description="Tool to analyze Nix channels and GitHub issues, generating a detailed report."
     )
@@ -432,9 +431,9 @@ if __name__ == "__main__":
 
 def api_usage_example_1():
     from . import (
+        ChannelAnalyzer,
         GitHubClient,
         PrometheusClient,
-        ChannelAnalyzer,
         ReportGenerator,
     )
 
