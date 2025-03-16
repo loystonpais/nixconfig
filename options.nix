@@ -75,18 +75,18 @@ with lib; {
     overlays = {
       enableAll = mkOption {
         type = types.bool;
-        description = "enables overlays";
+        description = "overlays";
         default = true;
       };
-      mc-launcher-patch.enable = mkEnableOption "enables prismlauncer patch";
+      mc-launcher-patch.enable = mkEnableOption "prismlauncer patch";
       supergfxd-lsof-patch.enable =
-        mkEnableOption "enables supergfxd lsof patch";
+        mkEnableOption "supergfxd lsof patch";
       makehuman-makework-patch.enable =
-        mkEnableOption "enables makehuman import patch";
+        mkEnableOption "makehuman import patch";
     };
 
     specialisations = {
-      enable = mkEnableOption "enables lunar specific specialisations";
+      enable = mkEnableOption "lunar specific specialisations";
     };
 
     modules = {
@@ -104,28 +104,28 @@ with lib; {
           };
         };
       };
-      audio.enable = mkEnableOption "enables audio";
-      graphics.enable = mkEnableOption "enables graphics";
-      hardware.enable = mkEnableOption "enables hardware";
+      audio.enable = mkEnableOption "audio";
+      graphics.enable = mkEnableOption "graphics";
+      hardware.enable = mkEnableOption "hardware";
 
       desktop-environments = {
-        enableAll = mkEnableOption "enables all available desktop environments";
-        hyprland.enable = mkEnableOption "enables hyprland";
-        plasma.enable = mkEnableOption "enables plasma";
+        enableAll = mkEnableOption "all available desktop environments";
+        hyprland.enable = mkEnableOption "hyprland";
+        plasma.enable = mkEnableOption "plasma";
       };
 
-      distrobox.enable = mkEnableOption "enables distrobox";
-      gamedev.enable = mkEnableOption "enables gamedev";
+      distrobox.enable = mkEnableOption "distrobox";
+      gamedev.enable = mkEnableOption "gamedev";
 
-      gaming.enable = mkEnableOption "enable gaming";
+      gaming.enable = mkEnableOption "gaming";
 
-      minecraft.enable = mkEnableOption "enables minecraft";
-      multimedia.enable = mkEnableOption "enables multimedia";
-      piracy.enable = mkEnableOption "enables piracy";
-      program-collection.enable = mkEnableOption "enables program-collection";
+      minecraft.enable = mkEnableOption "minecraft";
+      multimedia.enable = mkEnableOption "multimedia";
+      piracy.enable = mkEnableOption "piracy";
+      program-collection.enable = mkEnableOption "program-collection";
 
       virtual-machine = {
-        enable = mkEnableOption "enables virtual machine";
+        enable = mkEnableOption "virtual machine";
         cgroupDevicesById = mkOption {
           type = types.listOf types.str;
           description = "Devices registered to be passed to the vm";
@@ -137,8 +137,8 @@ with lib; {
       };
 
       android = {
-        enable = mkEnableOption "enables android module";
-        scrcpy.enable = mkEnableOption "enables scrcpy";
+        enable = mkEnableOption "android module";
+        scrcpy.enable = mkEnableOption "scrcpy";
         phone.ip = mkOption {
           type = types.str;
           description = ''
@@ -154,32 +154,32 @@ with lib; {
         };
       };
 
-      waydroid.enable = mkEnableOption "enables waydroid";
-      samba.enable = mkEnableOption "enables samba";
+      waydroid.enable = mkEnableOption "waydroid";
+      samba.enable = mkEnableOption "samba";
       home-manager = {
-        enable = mkEnableOption "enables home manager";
-        enableAllModules = mkEnableOption "enables all home configurations";
-        hyprland.enable = mkEnableOption "enables hyprland home configuration";
-        plasma.enable = mkEnableOption "enables plasma home configuration";
-        fonts.enable = mkEnableOption "enables fonts configuration";
-        program-collection.enable = mkEnableOption "enables program collection";
-        git.enable = mkEnableOption "enables git configuration";
-        zsh.enable = mkEnableOption "enables zsh configuration";
+        enable = mkEnableOption "home manager";
+        enableAllModules = mkEnableOption "all home configurations";
+        hyprland.enable = mkEnableOption "hyprland home configuration";
+        plasma.enable = mkEnableOption "plasma home configuration";
+        fonts.enable = mkEnableOption "fonts configuration";
+        program-collection.enable = mkEnableOption "program collection";
+        git.enable = mkEnableOption "git configuration";
+        zsh.enable = mkEnableOption "zsh configuration";
         secrets.enable =
           mkEnableOption
-          "enables home secrets configuration (needs secrets module to be enabled)";
-        zed.enable = mkEnableOption "enables zed editor configuration";
+          "home secrets configuration (needs secrets module to be enabled)";
+        zed.enable = mkEnableOption "zed editor configuration";
       };
 
       browsers = {
-        enable = mkEnableOption "enables browser configuration";
-        zen = {enable = mkEnableOption "enables zen browser configuration";};
+        enable = mkEnableOption "browser configuration";
+        zen = {enable = mkEnableOption "zen browser configuration";};
       };
 
-      ssh.enable = mkEnableOption "enables ssh";
+      ssh.enable = mkEnableOption "ssh";
 
       secrets = {
-        enable = mkEnableOption "enables sops secrets";
+        enable = mkEnableOption "sops secrets";
         environmentVariablesFromSops = mkOption {
           type = types.attrs;
           default = {};
@@ -188,15 +188,15 @@ with lib; {
       };
 
       nixvim = {
-        enable = mkEnableOption "enables nixvim";
+        enable = mkEnableOption "nixvim";
       };
     };
 
     profile = {
       everything.enable =
-        mkEnableOption "enables almost eveything within the config";
-      vm.enable = mkEnableOption "enables vm profile";
-      vps.enable = mkEnableOption "enables vps profile (for cloud vps)";
+        mkEnableOption "almost eveything within the config";
+      vm.enable = mkEnableOption "vm profile";
+      vps.enable = mkEnableOption "vps profile (for cloud vps)";
     };
 
     bootMode = mkOption {
