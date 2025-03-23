@@ -17,13 +17,26 @@
         "dart"
         "flutter-snippets"
         "git-firefly"
+        "terraform"
+        "zig"
+        "gdscript"
+        "ruff"
+
+        # Themes
         "xcode-themes"
+        "vscode-dark-plus"
+        "macos-classic"
+        "intellij-newui-theme"
+
+        # Icon Themes
+        "vscode-icons"
       ];
       extraPackages = [
         pkgs.nixd
         pkgs.nil
         pkgs.dart
         pkgs.rustfmt
+        pkgs.zls
       ];
       userSettings = {
         hour_format = "hour12";
@@ -31,7 +44,7 @@
         terminal = {
           working_directory = "current_project_directory";
         };
-        theme = lib.mkForce "Gruvbox Dark";
+        theme = lib.mkDefault "JetBrains New Dark";
         load_direnv = "shell_hook";
         base_keymap = "VSCode";
         show_whitespaces = "all";
@@ -69,11 +82,62 @@
               };
             };
           };
+
+          Python = {
+            language_servers = ["ruff"];
+            format_on_save = "on";
+            formatter = {
+              language_server = {
+                name = "ruff";
+              };
+
+              # Doesn't work for some reason
+              /*
+              code_actions = {
+                "source.organizeImports.ruff" = true;
+              };
+              */
+            };
+          };
+
+          /*
+            Markdown = {
+            formatter = "prettier";
+          };
+          TOML = {
+            formatter = "taplo";
+          };
+          JSON = {
+            formatter = "prettier";
+          };
+          */
+
+          Zig = {
+            format_on_save = "language_server";
+            code_actions_on_format = {
+              "source.fixAll" = true;
+              "source.organizeImports" = true;
+            };
+          };
         };
 
+        # Setting this makes nix's formatter not work
+        /*
+          prettier = {
+          allowed = true;
+        };
+        */
+
         lsp = {
+          zls = {
+            binary.path_lookup = true;
+          };
+
           dart = {
-            path_lookup = true;
+            binary.path_lookup = true;
+            settings = {
+              "lineLength" = 140;
+            };
           };
 
           rust-analyzer = {
