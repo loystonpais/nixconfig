@@ -21,6 +21,8 @@
     acceleration = "cuda";
   };
 
+  lunar.specialisations.productive.enable = true;
+
   # Prevents ollama from redownloading...
   environment.variables.OLLAMA_NOPRUNE = "true";
 
