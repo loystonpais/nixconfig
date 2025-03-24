@@ -87,6 +87,8 @@ with lib; {
 
     specialisations = {
       enable = mkEnableOption "lunar specific specialisations";
+      gruvbox.enable = mkEnableOption "enable gruvbox specialisation";
+      productive.enable = mkEnableOption "enable productive specialisation";
     };
 
     modules = {
