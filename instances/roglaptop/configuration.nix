@@ -8,10 +8,6 @@
 }: {
   imports = [
     ./lunar.nix
-
-    inputs.ataraxy-discord-bot.nixosModules.default
-    inputs.portfolio-website.nixosModules.default
-    inputs.resumake.nixosModules.default
   ];
 
   programs.extra-container.enable = true;
