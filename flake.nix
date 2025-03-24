@@ -1,46 +1,49 @@
 {
   description = "The Lunar Flake";
 
-  outputs = { self, nixpkgs, ... }@inputs:
-    with builtins // (import ./utils { inherit (nixpkgs) lib; });
-    let
-      cfg = fromTOML (readFile ./.toml);
-      lunarModule = import ./lunar.nix;
-      nixpkgsFor = forAllSystems (system: import nixpkgs { inherit system; });
+  outputs = {
+    self,
+    nixpkgs,
+    ...
+  } @ inputs: let
+    lib = inputs.nixpkgs.lib.extend (final: prev: {lunar = import ./lib prev;});
+    inherit (lib.lunar) forAllSystems importDir' importDir importTemplates;
+    inherit (builtins) mapAttrs;
 
-      nixosConfigurationsPath =
-        joinPathAndString ./. cfg.paths.nixosConfigurations;
-      nixOnDroidConfigurationsPath =
-        joinPathAndString ./. cfg.paths.nixOnDroidConfigurations;
-      packagesPath = joinPathAndString ./. cfg.paths.packages;
-      templatesPath = joinPathAndString ./. cfg.paths.templates;
-    in {
-      nixosConfigurations = mapAttrs (n: v: v { inherit self inputs; })
-        (importDir' nixosConfigurationsPath);
+    lunarNixosModule = import ./lunar.nix;
+    nixpkgsFor = forAllSystems (system: import nixpkgs {inherit system;});
+  in {
+    nixosConfigurations = mapAttrs (n: v:
+      v {
+        inherit self inputs;
+      })
+    (importDir' ./instances);
 
-      nixOnDroidConfigurations = mapAttrs (n: v: v { inherit self inputs; })
-        (importDir' nixOnDroidConfigurationsPath);
+    nixOnDroidConfigurations = mapAttrs (n: v:
+      v {
+        inherit self inputs;
+      })
+    (importDir' ./nix-on-droid/instances);
 
-      nixosModules = rec {
-        lunar = lunarModule;
-        default = lunar;
-        extras = {
-          home-manager = {
-            unstable = inputs.home-manager.nixosModules.home-manager;
-            "24_11" = inputs.home-manager-24_11.nixosModules.home-manager;
-          };
-          specialisations = importDir' ./specialisations;
+    nixosModules = rec {
+      lunar = lunarNixosModule;
+      default = lunar;
+      extras = {
+        home-manager = {
+          unstable = inputs.home-manager.nixosModules.home-manager;
+          "24_11" = inputs.home-manager-24_11.nixosModules.home-manager;
         };
       };
-
-      fomatter = forAllSystems (system: nixpkgsFor.${system}.alejandra);
-
-      packages = forAllSystems (system:
-        mapAttrs (n: v: v { pkgs = nixpkgsFor.${system}; })
-        (importDir { path = packagesPath; }));
-
-      templates = importTemplates templatesPath;
     };
+
+    fomatter = forAllSystems (system: nixpkgsFor.${system}.alejandra);
+
+    packages = forAllSystems (system:
+      mapAttrs (n: v: v {pkgs = nixpkgsFor.${system};})
+      (importDir {path = ./packages;}));
+
+    templates = importTemplates ./templates;
+  };
 
   inputs = {
     # Nixpkgs
