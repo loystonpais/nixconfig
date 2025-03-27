@@ -87,8 +87,11 @@ inputs.nixpkgs.lib.nixosSystem rec {
     inherit system;
   };
 
-  modules = [ 
-    ../../core.nix
+  modules = [
+
+    self.nixosModules.default
+    self.nixosModules.extras.home-manager.unstable
+
     ./hardware-configuration.nix
     ./configuration.nix
   ];
