@@ -4,6 +4,7 @@
   inputs,
   systemConfig,
   system,
+  config,
   ...
 }: {
   imports = [];
@@ -11,7 +12,10 @@
   config = lib.mkIf systemConfig.lunar.modules.home-manager.plasma.enable {
     home.packages = with pkgs; [
       whitesur-kde
-      whitesur-icon-theme
+      (whitesur-icon-theme.override {
+        alternativeIcons = true;
+        boldPanelIcons = true;
+      })
       whitesur-cursors
       whitesur-gtk-theme
       inputs.self.packages.${system}.kwin-modern-informative
