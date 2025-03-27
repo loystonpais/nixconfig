@@ -3,7 +3,7 @@
   lib,
   ...
 }: {
-  config = lib.mkIf (config.lunar.bootMode == "boot") {
+  config = lib.mkIf (config.lunar.bootMode == "bios") {
     # BIOS
     boot.loader.grub.efiSupport = false;
     boot.loader.grub.device = "";
