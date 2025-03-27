@@ -5,7 +5,7 @@
   pkgs,
   ...
 }: {
-  config = {
+  config = lib.mkIf (config.lunar.specialisations.enable && config.lunar.specialisations.gruvbox.enable) {
     specialisation.gruvbox = {
       configuration = {
         imports = [inputs.stylix.nixosModules.stylix];
