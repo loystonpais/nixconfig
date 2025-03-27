@@ -14,8 +14,6 @@
     ".config/kate/lspclient/settings.json".source = ../../assets/kate_lsp.json;
   };
 
-  programs.home-manager.enable = true;
-
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
