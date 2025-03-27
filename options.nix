@@ -209,11 +209,12 @@ with lib; {
     };
 
     graphicsMode = mkOption {
-      type = types.enum ["nvidia" "asuslinux" "none"];
+      type = types.enum ["nvidia" "asuslinux" "none" "dontmanage"];
       description = ''
         GPU specific settings
         nvidia - Basic nvidia gpu settings, uses production pkg
         asuslinux - Nvidia gpu settings with asusd, supergfxctl.
+        dontmanage - Is totally ignored by lunar.
       '';
     };
   };
