@@ -192,6 +192,8 @@ with lib; {
       nixvim = {
         enable = mkEnableOption "nixvim";
       };
+
+      winapps.enable = mkEnableOption "winapps";
     };
 
     profile = {
