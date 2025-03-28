@@ -18,6 +18,6 @@ inputs.nixpkgs.lib.nixosSystem rec {
     self.nixosModules.extras.home-manager.unstable
 
     ./configuration.nix
-    # ./hardware-configuration.nix
+    ./hardware-configuration.nix
   ];
 }
