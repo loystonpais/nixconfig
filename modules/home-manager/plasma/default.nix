@@ -153,5 +153,62 @@
         }
       ];
     };
+
+    programs.konsole = {
+      enable = true;
+      customColorSchemes = {
+        #DarkPastelsModified = inputs.self.outPath + "/assets/konsole/themes/DarkPastelsModified.colorscheme";
+        DarkPastelsModified = ../../../assets/konsole/themes/DarkPastelsModified.colorscheme;
+      };
+      defaultProfile = "Lunar";
+      profiles = {
+        Lunar = {
+          colorScheme = "DarkPastelsModified";
+          extraConfig = {
+            # converted to nix code from the old .profile file
+            Appearance = {
+              AntiAliasFonts = true;
+              BoldIntense = true;
+              ColorScheme = "DarkPastelsModified";
+              Font = "Fira Code Light,10,-1,5,25,0,0,0,0,0,Regular";
+              TabColor = "27,30,32,0";
+              UseFontLineChararacters = false;
+              WordModeBrahmic = false;
+            };
+
+            "Cursor Options" = {
+              CursorShape = 2;
+              UseCustomCursorColor = false;
+            };
+
+            General = {
+              InvertSelectionColors = false;
+              # Name = "Lunar";
+              Parent = "FALLBACK/";
+              SemanticUpDown = false;
+              TerminalCenter = false;
+            };
+
+            "Interaction Options" = {
+              OpenLinksByDirectClickEnabled = true;
+              TextEditorCmd = 1;
+              UnderlineFilesEnabled = true;
+            };
+
+            Keyboard = {
+              KeyBindings = "default";
+            };
+
+            Scrolling = {
+              HistoryMode = 1;
+            };
+
+            "Terminal Features" = {
+              BlinkingCursorEnabled = true;
+            };
+          };
+        };
+      };
+    };
   };
 }
