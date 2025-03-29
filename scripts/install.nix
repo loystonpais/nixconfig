@@ -92,12 +92,6 @@ writeShellApplication {
     edit_lunar_nix() {
         local lunar_nix="$INSTANCE_DIR/lunar.nix"
 
-        # If the file doesn't exist, create it
-        if [[ ! -f "$lunar_nix" ]]; then
-            echo "Creating lunar.nix with hostname replacement..."
-            echo "<hostname>" > "$lunar_nix"
-        fi
-
         # Replace <hostname> with actual hostname
         sed -i "s/<hostname>/$HOSTNAME/g" "$lunar_nix"
 
