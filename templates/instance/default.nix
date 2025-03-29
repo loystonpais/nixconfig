@@ -19,6 +19,5 @@ inputs.nixpkgs.lib.nixosSystem rec {
 
     ./configuration.nix
     ./hardware-configuration.nix
-    ./lunar.nix
   ];
 }
