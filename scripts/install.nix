@@ -71,7 +71,7 @@ writeShellApplication {
         fi
 
         echo "Creating new flake instance at $INSTANCE_DIR..."
-        nix flake new -t .#instance "$INSTANCE_DIR"
+        ( cd "$TARGET_DIR" && nix flake new -t .#instance "$INSTANCE_DIR" )
 
         local current_system
         current_system=$(nix eval --impure --expr "builtins.currentSystem" | jq -r)
