@@ -77,7 +77,13 @@ writeShellApplication {
         current_system=$(nix eval --impure --expr "builtins.currentSystem" | jq -r)
         sed -i "s/<system>/$current_system/g" "$INSTANCE_DIR/default.nix"
 
-        [[ -f "/etc/nixos/hardware-configuration.nix" ]] && cp /etc/nixos/hardware-configuration.nix "$INSTANCE_DIR/"
+        # Handle hardware configuration
+        if [[ -f "/etc/nixos/hardware-configuration.nix" ]]; then
+            cp /etc/nixos/hardware-configuration.nix "$INSTANCE_DIR/"
+        else
+            echo "Generating hardware configuration..."
+            sudo nixos-generate-config --dir "$INSTANCE_DIR"
+        fi
 
         echo "New instance created at $INSTANCE_DIR"
     }
@@ -105,7 +111,7 @@ writeShellApplication {
         $EDIT_CONFIG && edit_lunar_nix
         (cd "$TARGET_DIR" && git add .)  # Ensure changes are tracked
         echo "Running: nh os switch -v -H $HOSTNAME"
-        (cd "$TARGET_DIR" && echo nh os switch -v -H "$HOSTNAME" .)
+        (cd "$TARGET_DIR" && nh os switch -v -H "$HOSTNAME" .)
     }
 
     # Execute steps
