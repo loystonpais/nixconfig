@@ -38,11 +38,33 @@
 
     fomatter = forAllSystems (system: nixpkgsFor.${system}.alejandra);
 
-    packages = forAllSystems (system:
-      mapAttrs (n: v: v {pkgs = nixpkgsFor.${system};})
-      (importDir {path = ./packages;}));
+    packages = forAllSystems (system: let
+      pkgs = nixpkgsFor.${system};
+      packagesFromDir =
+        mapAttrs (n: v: v {inherit pkgs;})
+        (importDir {path = ./packages;});
+      packages = rec {
+        bw-set-age-key = pkgs.callPackage ./scripts/bw-set-age-key.nix {};
+        install = pkgs.callPackage ./scripts/install.nix {inherit bw-set-age-key;};
+      };
+      packages' = packagesFromDir // packages;
+    in
+      packages');
 
     templates = importTemplates ./templates;
+
+    apps = forAllSystems (system: let
+      pkgs = nixpkgsFor.${system};
+    in {
+      bw-set-age-key = {
+        type = "app";
+        program = pkgs.lib.getExe self.packages.${system}.bw-set-age-key;
+      };
+      install = {
+        type = "app";
+        program = pkgs.lib.getExe self.packages.${system}.install;
+      };
+    });
   };
 
   inputs = {
