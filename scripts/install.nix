@@ -85,16 +85,15 @@ writeShellApplication {
             sudo nixos-generate-config --dir "$INSTANCE_DIR"
         fi
 
+        local lunar_nix="$INSTANCE_DIR/lunar.nix"
+        # Replace <hostname> with actual hostname
+        sed -i "s/<hostname>/$HOSTNAME/g" "$lunar_nix"
+
         echo "New instance created at $INSTANCE_DIR"
     }
 
     # Function to edit lunar.nix if --edit is set
     edit_lunar_nix() {
-        local lunar_nix="$INSTANCE_DIR/lunar.nix"
-
-        # Replace <hostname> with actual hostname
-        sed -i "s/<hostname>/$HOSTNAME/g" "$lunar_nix"
-
         echo "Opening lunar.nix for editing..."
         nano "$lunar_nix"
     }
