@@ -26,6 +26,10 @@
       style.name = "kvantum";
     };
 
+    home.file = {
+      ".local/share/fonts/InterVariable.ttf".source = ../../../assets/fonts/InterVariable.ttf;
+    };
+
     xdg.configFile = {
       "Kvantum/WhiteSur".source = "${pkgs.whitesur-kde}/share/Kvantum/WhiteSur";
 
@@ -66,14 +70,6 @@
           immutable = true;
         };
 
-        # NOTE: need to get these working
-        "kdeglobals"."General"."font" = "Inter Variable,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1";
-        "kdeglobals"."General"."menuFont" = "Inter Variable,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1";
-        "kdeglobals"."General"."smallestReadableFont" = "Inter Variable,8,-1,5,400,0,0,0,0,0,0,0,0,0,0,1";
-        "kdeglobals"."General"."toolBarFont" = "Inter Variable,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1";
-        "kdeglobals"."WM"."activeFont" = "Inter Variable,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1";
-        "kdeglobals"."General"."fixed" = "Fira Code,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1";
-
         "kwinrc"."TabBox"."LayoutName" = "modern_informative";
         "kwinrc"."org.kde.kdecoration2"."ButtonsOnLeft" = "XAI";
         "kwinrc"."org.kde.kdecoration2"."ButtonsOnRight" = "FB";
@@ -81,6 +77,39 @@
         "kdeglobals"."KDE"."widgetStyle" = {
           value = "kvantum-dark";
           immutable = true;
+        };
+      };
+
+      fonts = {
+        general = {
+          family = "Inter Variable";
+          pointSize = 10;
+          weight = 400;
+        };
+        fixedWidth = {
+          family = "Fira Code";
+          pointSize = 10;
+          weight = 400;
+        };
+        small = {
+          family = "Inter Variable";
+          pointSize = 8;
+          weight = 400;
+        };
+        toolbar = {
+          family = "Inter Variable";
+          pointSize = 10;
+          weight = 400;
+        };
+        menu = {
+          family = "Inter Variable";
+          pointSize = 10;
+          weight = 400;
+        };
+        windowTitle = {
+          family = "Inter Variable";
+          pointSize = 10;
+          weight = 400;
         };
       };
 
