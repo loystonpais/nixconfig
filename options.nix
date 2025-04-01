@@ -128,6 +128,7 @@ with lib; {
 
       virtual-machine = {
         enable = mkEnableOption "virtual machine";
+        nixvirt.enable = mkEnableOption "NixVirt defined virtual machines";
         cgroupDevicesById = mkOption {
           type = types.listOf types.str;
           description = "Devices registered to be passed to the vm";

@@ -4,6 +4,9 @@
   pkgs,
   ...
 }: {
+  imports = [
+    ./nixvirt.nix
+  ];
   config = lib.mkIf config.lunar.modules.virtual-machine.enable {
     # Virtualization based on libvirtd
     virtualisation.libvirtd = {
