@@ -24,6 +24,7 @@
     sops.secrets.ataraxy-environment-file.owner = config.lunar.username;
     sops.secrets.wireguard-server-common-private-key.owner = config.lunar.username;
     sops.secrets."wireguard-client-${config.lunar.hostName}-private-key" = lib.mkIf (config.lunar.modules.vpn.wireguard.enableMode == "client" && config.lunar.modules.vpn.wireguard.clientPrivateKeyInSops) {owner = config.lunar.username;};
+    sops.secrets.loy-ftp-sh-dns-update-url.owner = config.lunar.username;
 
     lunar.modules.secrets.environmentVariablesFromSops = {
       IDK_GROQ_API_KEY = config.sops.secrets.groq-personal-use-key;
