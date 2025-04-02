@@ -40,9 +40,6 @@
   systemd.services.loy-ftp-sh-dns-update = {
     path = [pkgs.curl];
     script = "curl -fsS $(cat ${config.sops.secrets.loy-ftp-sh-dns-update-url.path})";
-    serviceConfig = {
-      Type = "oneshot";
-      Before = ["acme-loy.ftp.sh.service"];
-    };
+    before = ["acme-loy.ftp.sh.service"];
   };
 }
