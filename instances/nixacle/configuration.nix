@@ -36,4 +36,9 @@
       programs.zsh.oh-my-zsh.theme = lib.mkForce "afowler";
     })
   ];
+
+  systemd.services.loy-ftp-sh-dns-update = {
+    path = [pkgs.curl];
+    script = "curl -fsS $(cat /run/secrets/loy-ftp-sh-dns-update-url)";
+  };
 }
