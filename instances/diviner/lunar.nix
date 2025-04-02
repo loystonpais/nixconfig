@@ -3,18 +3,6 @@
   lib,
   ...
 }: {
-  options.lunar.nixacle = {
-    datablock1.path = lib.mkOption {
-      type = lib.types.str;
-      description = "Path to data block 1";
-    };
-
-    address = lib.mkOption {
-      type = lib.types.str;
-      description = "Main address of the vps";
-    };
-  };
-
   config = {
     lunar.hostName = "diviner";
     lunar.graphicsMode = "none";
