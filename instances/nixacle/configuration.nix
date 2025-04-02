@@ -41,5 +41,8 @@
     path = [pkgs.curl];
     script = "curl -fsS $(cat ${config.sops.secrets.loy-ftp-sh-dns-update-url.path})";
     before = ["acme-loy.ftp.sh.service"];
+    serviceConfig = {
+      Type = "oneshot";
+    };
   };
 }
