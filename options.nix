@@ -197,7 +197,9 @@ with lib; {
       winapps.enable = mkEnableOption "winapps";
 
       rclone = {
+        mega500.enable = mkEnableOption "rclone mega500";
         mega800.enable = mkEnableOption "rclone mega800";
+        mega200.enable = mkEnableOption "rclone mega200";
         dropbox500.enable = mkEnableOption "rclone dropbox500";
         pcloud500.enable = mkEnableOption "rclone pcloud500";
         box500.enable = mkEnableOption "rclone box500";

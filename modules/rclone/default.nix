@@ -5,11 +5,14 @@
   pkgs,
   ...
 }: let
-  inherit (builtins) map listToAttrs attrNames;
+  inherit (builtins) map listToAttrs attrNames concatStringsSep;
   inherit (lib.generators) toINI;
 
   # Edit this
-  allRemotes = ["mega800" "box500" "koofr500" "pcloud500" "dropbox500"];
+  megaRemotes = ["mega800" "mega500" "mega200"];
+
+  # Edit this
+  allRemotes = megaRemotes ++ ["box500" "koofr500" "pcloud500" "dropbox500"];
 
   # Edit this
   unionConfig = {
@@ -18,12 +21,16 @@
     # Files from some remotes dont appear
     all = {
       type = "union";
-      upstreams = "mega800: box500: koofr500: pcloud500: dropbox500:";
+      upstreams = concatStringsSep " " (map (remote: "${remote}:") allRemotes);
       cache_time = 120;
     };
     mega = {
       type = "union";
-      upstreams = "mega800: mega500:";
+      upstreams = concatStringsSep " " (map (remote: "${remote}:") megaRemotes);
+      create_policy = "epmfs";
+      action_policy = "epmfs";
+      read_policy = "ff";
+      minfree = "1G";
       cache_time = 120;
     };
   };
