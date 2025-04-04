@@ -26,6 +26,7 @@
     ./graphics
     ./vpn
     ./nixvim
+    ./rclone
 
     ./home-manager
   ];

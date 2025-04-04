@@ -195,6 +195,18 @@ with lib; {
       };
 
       winapps.enable = mkEnableOption "winapps";
+
+      rclone = {
+        mega800.enable = mkEnableOption "rclone mega800";
+        dropbox500.enable = mkEnableOption "rclone dropbox500";
+        pcloud500.enable = mkEnableOption "rclone pcloud500";
+        box500.enable = mkEnableOption "rclone box500";
+        koofr500.enable = mkEnableOption "rclone box500";
+
+        # Unions
+        unions.all.enable = mkEnableOption "enables union of all remotes";
+        unions.mega.enable = mkEnableOption "enables union of all mega remotes";
+      };
     };
 
     profile = {
