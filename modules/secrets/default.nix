@@ -58,6 +58,12 @@
       owner = config.lunar.username;
     };
 
+    sops.secrets."rclone.conf" = {
+      format = "ini";
+      sopsFile = ../../secrets/rclone.ini;
+      owner = config.lunar.username;
+    };
+
     environment.systemPackages = with pkgs; [
       sops
     ];
