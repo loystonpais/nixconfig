@@ -10,6 +10,7 @@
     tmux
     nh
     micro
+    bat
   ];
 
   imports = [
