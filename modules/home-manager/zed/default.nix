@@ -10,7 +10,15 @@
       extensions = [
         "nix"
         "toml"
+        "html"
+        "xml"
+        "lua"
+        "typos"
+        "kotlin"
+        "csharp"
+        "ini"
         "basher"
+        "dockerfile"
         "gleam"
         "slint"
         "svelte"
@@ -21,6 +29,7 @@
         "zig"
         "gdscript"
         "ruff"
+        "haskell"
 
         # Themes
         "xcode-themes"
@@ -31,12 +40,14 @@
         # Icon Themes
         "vscode-icons"
       ];
+      # Add formatters
+      # Avoid lsps or the language toolset
+      # As they should be provided by the dev shell
+      # dart zsl haskell-language-server
       extraPackages = [
         pkgs.nixd
         pkgs.nil
-        pkgs.dart
         pkgs.rustfmt
-        pkgs.zls
       ];
       userSettings = {
         hour_format = "hour12";
@@ -62,7 +73,9 @@
         outline_panel.dock = "right";
         project_panel.dock = "right";
 
-        font_family = "FiraCode Nerd Font";
+        font_family = "FiraCode Nerd Font Mono";
+        buffer_font_family = "FiraCode Nerd Font Mono";
+        terminal.font_family = "FiraCode Nerd Font Mono";
         format_on_save = "on";
 
         node = {
@@ -140,6 +153,13 @@
             };
           };
 
+          hls = {
+            initialization_options = {
+              haskell.formattingProvider = "fourmolu";
+            };
+            binary.path_lookup = true;
+          };
+
           rust-analyzer = {
             binary = {
               #path = lib.getExe pkgs.rust-analyzer;
@@ -203,15 +223,6 @@
                 ];
               };
             };
-            /*
-            using languages.Nix instead
-              nix = {
-              binary = {path_lookup = true;};
-            };
-            nil = {
-              initialization_options.formatting.command = [(lib.getExe pkgs.alejandra) "--quiet" "--"];
-              };
-            */
           };
         };
       };
