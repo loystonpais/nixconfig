@@ -16,6 +16,7 @@
     ./lunar.nix
     ./services/nginx.nix
     ./services/gitea.nix
+    ./services/flarum.nix
     # ./services/portfolio-website.nix
   ];
 
