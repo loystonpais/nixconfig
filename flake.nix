@@ -36,7 +36,7 @@
       };
     };
 
-    fomatter = forAllSystems (system: nixpkgsFor.${system}.alejandra);
+    formatter = forAllSystems (system: nixpkgsFor.${system}.alejandra);
 
     packages = forAllSystems (system: let
       pkgs = nixpkgsFor.${system};
