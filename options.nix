@@ -213,7 +213,7 @@ with lib; {
 
     profile = {
       everything.enable =
-        mkEnableOption "almost eveything within the config";
+        mkEnableOption "almost everything within the config";
       vm.enable = mkEnableOption "vm profile";
       vps.enable = mkEnableOption "vps profile (for cloud vps)";
     };
