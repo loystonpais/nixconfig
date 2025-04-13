@@ -16,6 +16,8 @@
       package = config.boot.kernelPackages.nvidiaPackages.production;
     };
 
+    hardware.graphics.extraPackages = [pkgs.nvidia-vaapi-driver];
+
     services.supergfxd.enable = true;
 
     services = {
