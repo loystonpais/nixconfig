@@ -7,7 +7,12 @@
   config,
   ...
 }:
-with lib; {
+with lib; let
+  patterns = {
+    identifier = "[a-zA-Z_][a-zA-Z0-9_]*";
+    ipAddress = "^([0-9]{1,3}\\.){3}[0-9]{1,3}$";
+  };
+in {
   options.lunar = {
     name = mkOption {
       type = types.str;
@@ -142,18 +147,22 @@ with lib; {
       android = {
         enable = mkEnableOption "android module";
         scrcpy.enable = mkEnableOption "scrcpy";
-        phone.ip = mkOption {
-          type = types.str;
+        adbDevices = mkOption {
           description = ''
             Default device IP. To set a static ip for your android device run as root:
             `ip address add 192.168.43.1/24 dev wlan0`
           '';
-          default = "192.168.43.1";
-        };
-        phone.port = mkOption {
-          type = types.int;
-          description = "Default device port";
-          default = 5555;
+          type = types.attrsOf (types.submodule {
+            options = {
+              ip = mkOption {
+                type = types.strMatching patterns.ipAddress;
+              };
+              port = mkOption {
+                type = types.port;
+                default = 5555;
+              };
+            };
+          });
         };
       };
 
