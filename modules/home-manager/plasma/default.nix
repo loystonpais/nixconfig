@@ -201,7 +201,7 @@
               ColorScheme = "DarkPastelsModified";
               Font = "Fira Code Light,10,-1,5,25,0,0,0,0,0,Regular";
               TabColor = "27,30,32,0";
-              UseFontLineChararacters = false;
+              UseFontLineCharacters = false;
               WordModeBrahmic = false;
             };
 
