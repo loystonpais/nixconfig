@@ -1,5 +1,4 @@
-{ pkgs ? import <nixpkgs> { } }:
-let
+{prismlauncher-unwrapped, ...}: let
   patchOfflineTrigger = ''
     function_name="AccountListPage::on_actionAddOffline_triggered"
     patch_file="./launcher/ui/pages/global/AccountListPage.cpp"
@@ -17,5 +16,9 @@ let
       exit 1
     fi
   '';
-in pkgs.prismlauncher-unwrapped.overrideAttrs
-(p: { version = p.version + "-crack"; prePatch = patchOfflineTrigger + "\n\n" + patchOwnsMinecraft; })
+in
+  prismlauncher-unwrapped.overrideAttrs
+  (p: {
+    version = p.version + "-crack";
+    prePatch = patchOfflineTrigger + "\n\n" + patchOwnsMinecraft;
+  })

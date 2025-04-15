@@ -1,5 +1,4 @@
-{ pkgs ? import <nixpkgs> {} }:
-let
+{supergfxctl, ...}: let
   lsofPatch = ''
     patch_file="./src/lib.rs"
     if grep -q 'if !PathBuf::from("/usr/bin/lsof").exists() {' $patch_file; then
@@ -9,4 +8,8 @@ let
       echo "Patch failed."
       exit 1
     fi '';
-in pkgs.supergfxctl.overrideAttrs (p: { version = p.version + "-lsof-fix"; prePatch = lsofPatch; })
+in
+  supergfxctl.overrideAttrs (p: {
+    version = p.version + "-lsof-fix";
+    prePatch = lsofPatch;
+  })

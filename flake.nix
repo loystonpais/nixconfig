@@ -45,8 +45,11 @@
     packages = forAllSystems (system: let
       pkgs = nixpkgsFor.${system};
       packagesFromDir =
-        mapAttrs (n: v: v {inherit pkgs;})
-        (importDir {path = ./packages;});
+        mapAttrs (name: path: pkgs.callPackage path {})
+        (importDir {
+          path = ./packages;
+          importPaths = false;
+        });
       packages = rec {
         bw-set-age-key = pkgs.callPackage ./scripts/bw-set-age-key.nix {};
         install = pkgs.callPackage ./scripts/install.nix {inherit bw-set-age-key;};
