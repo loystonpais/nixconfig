@@ -35,7 +35,10 @@ with lib; {
   };
 
   nix.settings = {
-    substituters = ["https://loystonpais.cachix.org" "https://cache.garnix.io"];
+    substituters = lib.mkAfter [
+      "https://loystonpais.cachix.org"
+      "https://cache.garnix.io"
+    ];
     trusted-public-keys = [
       "loystonpais.cachix.org-1:lclfaBitH51Lw9WwBxQ4bbesdt7c01JlFbKoSZ0PMLc="
       "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
