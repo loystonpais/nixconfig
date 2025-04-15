@@ -11,7 +11,11 @@
     inherit (builtins) mapAttrs;
 
     lunarNixosModule = import ./lunar.nix;
-    nixpkgsFor = forAllSystems (system: import nixpkgs {inherit system;});
+    nixpkgsFor = forAllSystems (system:
+      import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      });
   in {
     nixosConfigurations = mapAttrs (n: v:
       v {
