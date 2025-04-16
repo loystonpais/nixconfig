@@ -88,6 +88,7 @@ in {
         mkEnableOption "supergfxd lsof patch";
       makehuman-makework-patch.enable =
         mkEnableOption "makehuman import patch";
+      spotify-adblock-patch.enable = mkEnableOption "spotify adblock patch";
     };
 
     specialisations = {
