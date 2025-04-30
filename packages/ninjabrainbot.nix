@@ -9,7 +9,7 @@
   xorg,
 }:
 stdenv.mkDerivation rec {
-  name = "ninjabrainbot";
+  pname = "ninjabrainbot";
   version = "1.5.1";
 
   src = fetchurl {
@@ -26,10 +26,10 @@ stdenv.mkDerivation rec {
   installPhase = ''
     runHook preInstall
 
-    install -Dm644 ${src} $out/share/java/${name}-${version}.jar
+    install -Dm644 ${src} $out/share/java/${pname}-${version}.jar
 
-    makeWrapper ${jre}/bin/java $out/bin/${name} \
-      --add-flags "-jar $out/share/java/${name}-${version}.jar" \
+    makeWrapper ${jre}/bin/java $out/bin/${pname} \
+      --add-flags "-jar $out/share/java/${pname}-${version}.jar" \
       --prefix LD_LIBRARY_PATH : ${
       lib.makeLibraryPath [
         libxkbcommon
