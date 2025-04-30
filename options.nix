@@ -67,7 +67,7 @@ in {
     locale = mkOption {
       type = types.str;
       description = "Locale";
-      default = "en_IN";
+      default = "en_US.UTF-8";
     };
 
     sshPublicKeys = mkOption {
