@@ -30,6 +30,7 @@
         "gdscript"
         "ruff"
         "haskell"
+        "assembly"
 
         # Themes
         "xcode-themes"
