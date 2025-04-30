@@ -1,4 +1,3 @@
-# source: https://github.com/MonkieeBoi/nix-config/blob/ba497457e886071ab715b5ec569b5a2dc748db4f/pkgs/ninb.nix
 {
   lib,
   stdenv,
@@ -24,11 +23,11 @@
 in
   stdenv.mkDerivation rec {
     pname = "ZigSeedGlitchless";
-    version = "3.2.0";
+    version = "3.2.1";
 
     src = fetchurl {
       url = "https://github.com/DuncanRuns/ZigSeedGlitchless/releases/download/v${version}/${pname}.v${version}.lin.116.zip";
-      hash = "sha256-NLg6D+TwBaYex69CHA6r9DDsenoKPvlchrmufQSBVVg=";
+      hash = "sha256-zEtlyr1+BjFUWgvlZ89wmMj4b/s80CCBTFCDKSAeLXc=";
     };
 
     dontUnpack = true;
