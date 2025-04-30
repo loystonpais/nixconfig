@@ -1,19 +1,31 @@
-{ config, lib, ... }: {
+{
+  config,
+  lib,
+  ...
+}: let
+  inherit (lib) mkDefault;
+in {
   # Set your time zone.
-  time.timeZone = config.lunar.timeZone;
+  time.timeZone = mkDefault config.lunar.timeZone;
 
   # Select internationalisation properties.
-  i18n.defaultLocale = config.lunar.locale;
+  i18n.defaultLocale = mkDefault config.lunar.locale;
+
+  i18n.supportedLocales = [
+    "en_US.UTF-8/UTF-8"
+    "en_GB.UTF-8/UTF-8"
+    "en_IN/UTF-8"
+  ];
 
   i18n.extraLocaleSettings = {
-    LC_ADDRESS = config.lunar.locale;
-    LC_IDENTIFICATION = config.lunar.locale;
-    LC_MEASUREMENT = config.lunar.locale;
-    LC_MONETARY = config.lunar.locale;
-    LC_NAME = config.lunar.locale;
-    LC_NUMERIC = config.lunar.locale;
-    LC_PAPER = config.lunar.locale;
-    LC_TELEPHONE = config.lunar.locale;
-    LC_TIME = config.lunar.locale;
+    LC_ADDRESS = mkDefault config.lunar.locale;
+    LC_IDENTIFICATION = mkDefault config.lunar.locale;
+    LC_MEASUREMENT = mkDefault config.lunar.locale;
+    LC_MONETARY = mkDefault config.lunar.locale;
+    LC_NAME = mkDefault config.lunar.locale;
+    LC_NUMERIC = mkDefault config.lunar.locale;
+    LC_PAPER = mkDefault config.lunar.locale;
+    LC_TELEPHONE = mkDefault config.lunar.locale;
+    LC_TIME = mkDefault config.lunar.locale;
   };
 }
