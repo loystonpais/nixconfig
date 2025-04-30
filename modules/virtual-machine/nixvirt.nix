@@ -9,6 +9,9 @@
     inputs.NixVirt.nixosModules.default
   ];
   config = lib.mkIf config.lunar.modules.virtual-machine.nixvirt.enable {
+    environment.systemPackages = [
+      pkgs.libossp_uuid
+    ];
     virtualisation.libvirt.enable = true;
     virtualisation.libvirt.connections."qemu:///session".domains = [
       {
