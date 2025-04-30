@@ -12,6 +12,7 @@
       prismlauncher
       jdk21
       inputs.self.packages.${system}.ninjabrainbot
+      inputs.self.packages.${system}.zig-seed-glitchless
     ];
   };
 }
