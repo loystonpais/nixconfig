@@ -17,6 +17,7 @@
       antimicrox
       mangohud
       bottles
+      piper
     ];
 
     # Feral gamemode setup
@@ -24,5 +25,8 @@
 
     # Adding username to the necessary groups
     users.users.${config.lunar.username}.extraGroups = ["gamemode"];
+
+    # For mouse and keyboard configuration
+    services.ratbagd.enable = true;
   };
 }
