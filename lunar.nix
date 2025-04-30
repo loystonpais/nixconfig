@@ -37,11 +37,11 @@ with lib; {
   nix.settings = {
     substituters = lib.mkAfter [
       "https://loystonpais.cachix.org"
-      "https://cache.garnix.io"
+      # "https://cache.garnix.io" /* Garnix is very slow and buggy for some reason */
     ];
     trusted-public-keys = [
       "loystonpais.cachix.org-1:lclfaBitH51Lw9WwBxQ4bbesdt7c01JlFbKoSZ0PMLc="
-      "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
+      # "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
     ];
     experimental-features = [ "nix-command" "flakes" ];
     trusted-users = [ "root" config.lunar.username ];
