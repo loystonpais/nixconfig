@@ -107,6 +107,28 @@
         "type": "github"
       }
     },
+    "blender-bin": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "dir": "blender",
+        "lastModified": 1744818303,
+        "narHash": "sha256-2PUa611Rb9463nkySG62pxTSCqhg19y4c3USwUKn+PA=",
+        "owner": "edolstra",
+        "repo": "nix-warez",
+        "rev": "a8d868fab40b51eba89d2a6c857f9dd9c6e05518",
+        "type": "github"
+      },
+      "original": {
+        "dir": "blender",
+        "owner": "edolstra",
+        "repo": "nix-warez",
+        "type": "github"
+      }
+    },
     "devshell": {
       "inputs": {
         "nixpkgs": [
@@ -906,6 +928,7 @@
       "inputs": {
         "NixVirt": "NixVirt",
         "ataraxy-discord-bot": "ataraxy-discord-bot",
+        "blender-bin": "blender-bin",
         "home-manager": "home-manager",
         "home-manager-24_11": "home-manager-24_11",
         "idk-shell-command": "idk-shell-command",
