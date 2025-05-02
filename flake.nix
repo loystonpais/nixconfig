@@ -132,6 +132,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    blender-bin = {
+      url = "github:edolstra/nix-warez?dir=blender";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     idk-shell-command = {
       url = "github:loystonpais/idk-shell-command";
       inputs.nixpkgs.follows = "nixpkgs";
