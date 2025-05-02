@@ -4,7 +4,7 @@
   ...
 }: {
   config = lib.mkIf config.lunar.modules.audio.enable {
-    hardware.pulseaudio.enable = false;
+    services.pulseaudio.enable = false;
     security.rtkit.enable = true;
     services.pipewire = {
       enable = true;
