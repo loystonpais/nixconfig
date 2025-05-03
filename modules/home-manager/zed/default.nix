@@ -31,6 +31,7 @@
         "ruff"
         "haskell"
         "assembly"
+        "ruby"
 
         # Themes
         "xcode-themes"
@@ -41,14 +42,19 @@
         # Icon Themes
         "vscode-icons"
       ];
-      # Add formatters
-      # Avoid lsps or the language toolset
+      # Avoid large lsps or the language toolset
       # As they should be provided by the dev shell
-      # dart zsl haskell-language-server
+      # Ex: dart zsl haskell-language-server
       extraPackages = [
         pkgs.nixd
         pkgs.nil
         pkgs.rustfmt
+
+        pkgs.rubyPackages.solargraph
+
+        # For shell scripts
+        pkgs.bash-language-server
+        pkgs.shellcheck
       ];
       userSettings = {
         hour_format = "hour12";
@@ -95,6 +101,22 @@
                 command = lib.getExe pkgs.alejandra;
               };
             };
+          };
+
+          Ruby = {
+            language_servers = ["solargraph" "!rubocop" "!ruby-lsp"];
+          };
+
+          "Shell Script" = {
+            format_on_save = "on";
+            formatter = {
+              external = {
+                command = lib.getExe pkgs.shfmt;
+                arguments = ["--filename" "{buffer_path}" "--indent" "2"];
+              };
+            };
+            tab_size = 2;
+            hard_tab = false;
           };
 
           Python = {
@@ -150,8 +172,32 @@
           dart = {
             binary.path_lookup = true;
             settings = {
-              "lineLength" = 140;
+              lineLength = 140;
             };
+          };
+
+          solargraph = {
+            initialization_options = {
+              diagnostics = true;
+              formatting = true;
+            };
+            binary.path_lookup = true;
+            settings = {
+              use_bundler = false;
+            };
+          };
+
+          pyright = {
+            settings = {
+              "python.analysis" = {
+                diagnosticMode = "workspace";
+                typeCheckingMode = "strict";
+              };
+              python = {
+                pythonPath = ".venv/bin/python";
+              };
+            };
+            binary.path_lookup = true;
           };
 
           hls = {
