@@ -11,7 +11,6 @@
       gparted
       telegram-desktop
       obsidian
-      spotube
     ];
   };
 }
