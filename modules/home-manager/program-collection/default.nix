@@ -18,6 +18,9 @@
       ripgrep
       compsize
       alejandra # Nix formatter
+      ruby
+      jq
+      bat
     ];
   };
 }
