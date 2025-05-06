@@ -19,11 +19,24 @@
       whitesur-cursors
       whitesur-gtk-theme
       inputs.self.packages.${system}.kwin-modern-informative
+
+      pkgs.kdePackages.karousel
     ];
 
     qt = {
       enable = true;
       style.name = "kvantum";
+    };
+
+    gtk = {
+      theme = {
+        package = pkgs.whitesur-gtk-theme;
+        name = "WhiteSurDark";
+      };
+      gtk2.configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";
+      gtk3.extraConfig = {
+        gtk-application-prefer-dark-theme = 1;
+      };
     };
 
     home.file = {
@@ -63,7 +76,10 @@
       };
 
       configFile = {
-        "kwinrc"."Plugins"."shakecursorEnabled" = {value = false;};
+        "kwinrc"."Plugins" = {
+          "shakecursorEnabled" = {value = false;};
+          #"karouselEnabled" = true;
+        };
 
         "baloofilerc"."Basic Settings"."Indexing-Enabled" = {
           value = false;
