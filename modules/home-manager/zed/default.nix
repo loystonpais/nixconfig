@@ -176,6 +176,11 @@
             };
           };
 
+          omnisharp = {
+            binary.path_lookup = true;
+            binary.arguments = ["optional" "additional" "args" "-lsp"];
+          };
+
           solargraph = {
             initialization_options = {
               diagnostics = true;
