@@ -28,15 +28,18 @@
       style.name = "kvantum";
     };
 
-    gtk = {
-      theme = {
-        package = pkgs.whitesur-gtk-theme;
-        name = "WhiteSurDark";
-      };
-      gtk2.configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";
-      gtk3.extraConfig = {
-        gtk-application-prefer-dark-theme = 1;
-      };
+    ## GTK Theminng
+
+    # makes some gtk apps (not libadwaita) apps pick up
+    # custom theme
+    home.sessionVariables.GTK_THEME = "WhiteSur-Dark";
+
+    # Fixes theme polarity (light/dark) between several gtk4?
+    # apps such as gparted and libadwaita apps such as bottles
+    xdg.portal = {
+      enable = true;
+      extraPortals = with pkgs; [xdg-desktop-portal-gtk];
+      configPackages = with pkgs; [xdg-desktop-portal-gtk];
     };
 
     home.file = {
