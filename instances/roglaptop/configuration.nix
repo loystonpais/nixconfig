@@ -17,53 +17,17 @@
     acceleration = "cuda";
   };
 
-  lunar.specialisations = {
-    enable = true;
-    productive.enable = true;
-  };
-
-  # Mainly for wither
-  lunar.modules.virtual-machine.cgroupDevicesById = [
-    "usb-Razer_Razer_DeathAdder_Essential-event-mouse"
-    "usb-Usb_KeyBoard_Usb_KeyBoard-event-kbd"
-  ];
   lunar.modules.virtual-machine.nixvirt.enable = false;
 
   # Prevents ollama from redownloading...
-  environment.variables.OLLAMA_NOPRUNE = "true";
-
-  lunar.modules.desktop-environments.hyprland.enable = true;
+  environment.variables.OLLAMA_NOPRUNE = lib.mkDefault "true";
 
   environment.systemPackages = [
-    inputs.idk-shell-command.packages.${system}.default
     pkgs.ungoogled-chromium
     pkgs.cachix
     pkgs.gcc
-    pkgs.nix-init
-    pkgs.devenv
-    pkgs.comma
-    # pkgs.nixos-generators # package version is old
-
-    inputs.winapps.packages."${system}".winapps
-    inputs.winapps.packages."${system}".winapps-launcher
     pkgs.rclone
-
-    pkgs.ente-auth
-
-    #(pkgs.callPackage ./spotify-adblock.nix {})
-    pkgs.spotify
-
-    # pkgs.whitesur-kde
-    #
-    (pkgs.runCommand "sddm-background-image" {} ''
-      CONFIG_PATH=$out/share/sddm/breeze/
-
-      mkdir -p $CONFIG_PATH
-      cat > "$CONFIG_PATH"/theme.conf.user <<EOF
-      [General]
-      background=${pkgs.whitesur-kde}/share/wallpapers/WhiteSur-dark/contents/images/3840x2160.jpg
-      EOF
-    '')
+    inputs.self.packages.${system}.lumon-mdr
   ];
 
   # services.displayManager.sddm = {
@@ -74,35 +38,33 @@
   #
 
   # NOTE: move this to hardware-configuration.nix once the uid issue is fixed
-  boot.supportedFilesystems = ["ntfs"];
   fileSystems."/mnt/windows" = {
     device = "/dev/disk/by-uuid/BA16A4A516A463DB";
     fsType = "ntfs-3g";
-    options = ["nofail" "rw" "uid=1001"];
+    options = ["nofail" "rw" "uid=${config.users.users.${config.lunar.username}.uid}"];
   };
 
-  lunar.modules.android.adbDevices = {
-    vili = {
-      ip = "192.168.43.2";
-      port = 5555;
+  systemd.services.auractl-wallpaper = let
+    wallpaper = config.home-manager.users.${config.lunar.username}.programs.plasma.kscreenlocker.appearance.wallpaper;
+    aura = "breathe";
+  in {
+    enable = true;
+    path = [pkgs.okolors pkgs.asusctl];
+    script = ''
+      COLS=($(okolors -k 4 -s h '${wallpaper}'))
+      for x in {1..4}; do
+        y=$((x - 1))
+        COL="${"\${COLS[$y]}"}"
+        asusctl aura "${aura}" -c "$COL" -z "$x" 2>&1  1>/dev/null
+        echo "Applied ${aura} $COL to zone $x"
+      done
+    '';
+    serviceConfig = {
+      Type = "oneshot";
     };
+    after = ["asusd.service"];
+    wantedBy = ["multi-user.target"];
   };
-
-  # specialisation.integrated = {
-  #   configuration = {
-  #     services.supergfxd.settings = {
-  #       mode = "Integrated";
-  #       # vfio_enable = true;
-  #       # vfio_save = true;
-  #       # gfx_vfio_enable = true;
-  #       # always_reboot = false;
-  #       # no_logind = false;
-  #       # logout_timeout_s = 180;
-  #       # hotplug_type = "None";
-  #     };
-  #   };
-  # };
-  #
 
   hardware.nvidia.prime = {
     offload.enable = true;
