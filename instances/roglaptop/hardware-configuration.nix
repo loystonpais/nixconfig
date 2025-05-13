@@ -16,6 +16,12 @@
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-amd"];
   boot.extraModulePackages = [];
+  boot.supportedFilesystems = ["ntfs"];
+
+  hardware.nvidia.prime = {
+    amdgpuBusId = "PCI:06:00:0";
+    nvidiaBusId = "PCI:01:00:0";
+  };
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/54677df6-7051-4ed8-af29-24660bcd695b";
