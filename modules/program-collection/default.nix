@@ -2,6 +2,8 @@
   config,
   lib,
   pkgs,
+  inputs,
+  system,
   ...
 }: {
   config = lib.mkIf config.lunar.modules.program-collection.enable {
@@ -11,6 +13,8 @@
       gparted
       telegram-desktop
       obsidian
+      ente-auth
+      inputs.idk-shell-command.packages.${system}.default
     ];
   };
 }
