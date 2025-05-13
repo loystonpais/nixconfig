@@ -89,6 +89,7 @@ in {
       makehuman-makework-patch.enable =
         mkEnableOption "makehuman import patch";
       spotify-adblock-patch.enable = mkEnableOption "spotify adblock patch";
+      libadwaita-without-adwaita-patch.enable = mkEnableOption "libadwaita-without-adwaita patch";
     };
 
     specialisations = {
