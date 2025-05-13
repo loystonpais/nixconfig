@@ -8,6 +8,6 @@ with lib; {
       package = pkgs.firefox-esr;
       preferences = { "widget.use-xdg-desktop-portal.file-picker" = 1; };
     };
-    lunar.modules.browsers.zen.enable = mkDefault false;
+    lunar.modules.browsers.zen.enable = true;
   };
 }
