@@ -14,8 +14,8 @@ in {
       ]
       ++ (attrValues (mapAttrs (name: opts:
         pkgs.writeShellScriptBin "scrcpy-${name}" ''
-          adb connect "${opts.ip}:${builtins.toString opts.port}"
-          scrcpy --stay-awake --turn-screen-off --power-off-on-close
+          DEVICE="${opts.ip}:${builtins.toString opts.port}"
+          scrcpy --stay-awake --turn-screen-off --power-off-on-close --tcpip="$DEVICE"
         '')
       config.lunar.modules.android.adbDevices));
   };
