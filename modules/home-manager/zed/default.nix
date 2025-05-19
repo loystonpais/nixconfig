@@ -5,6 +5,27 @@
   ...
 }: {
   config = lib.mkIf (systemConfig.lunar.modules.home-manager.zed.enable) {
+    xdg.configFile."zed/tasks.json".text = builtins.toJSON [
+      {
+        label = "ruby eval: '$ZED_SELECTED_TEXT'";
+        command = "ruby";
+        args = ["ruby" "-e" "$ZED_SELECTED_TEXT"];
+        use_new_terminal = false;
+      }
+      {
+        label = "nix eval: $ZED_SELECTED_TEXT";
+        command = "nix";
+        args = ["eval" "--expr" "let pkgs = import <nixpkgs> {}; lib = pkgs.lib; in $ZED_SELECTED_TEXT"];
+        use_new_terminal = false;
+      }
+      {
+        label = "py eval: $ZED_SELECTED_TEXT";
+        command = "python3";
+        args = ["-c" "print($ZED_SELECTED_TEXT)"];
+        use_new_terminal = false;
+      }
+    ];
+
     programs.zed-editor = {
       enable = true;
       extensions = [
@@ -61,6 +82,7 @@
         auto_update = false;
         terminal = {
           working_directory = "current_project_directory";
+          detect_venv = "off";
         };
         theme = lib.mkDefault "JetBrains New Dark";
         load_direnv = "shell_hook";
@@ -120,7 +142,7 @@
           };
 
           Python = {
-            language_servers = ["ruff"];
+            language_servers = ["pyright" "ruff"];
             format_on_save = "on";
             formatter = {
               language_server = {
