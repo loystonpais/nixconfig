@@ -21,7 +21,7 @@
       inkscape
       tiled
       vscode
-      dotnet-sdk_8
+      godot-mono
 
       # As for blender use blender-bin if graphics is set to nvidia or asuslinux
       (
