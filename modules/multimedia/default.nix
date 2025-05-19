@@ -8,6 +8,7 @@
     environment.systemPackages = with pkgs; [
       stremio
       vlc
+      spotify
     ];
   };
 }
