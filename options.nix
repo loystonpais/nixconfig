@@ -131,7 +131,7 @@ in {
       minecraft.enable = mkEnableOption "minecraft";
       multimedia.enable = mkEnableOption "multimedia";
       piracy.enable = mkEnableOption "piracy";
-      program-collection.enable = mkEnableOption "program-collection";
+      misc.enable = mkEnableOption "misc";
 
       virtual-machine = {
         enable = mkEnableOption "virtual machine";

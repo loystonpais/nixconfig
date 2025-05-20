@@ -7,7 +7,7 @@
 
   imports = [
     ./desktop-environments
-    ./program-collection
+    ./misc
     ./distrobox
     ./gamedev
     ./gaming
