@@ -28,5 +28,14 @@
     enableBashIntegration = true;
   };
 
+  home.packages = lib.mkMerge [
+    (
+      # TODO: Maybe add an option to enable templates
+      lib.mkIf true (builtins.attrValues (builtins.mapAttrs
+        (name: attrs: pkgs.writeShellScriptBin ("template-" + name) "nix flake new -t ${inputs.self}#${name} $@")
+        inputs.self.templates))
+    )
+  ];
+
   home.stateVersion = "23.11";
 }

@@ -38,9 +38,7 @@
         update = "( cd ~/nixconfig && (git pull || git fetch) && changes )";
         upgrade = "( ${update}; cd ~/nixconfig && switch )";
         collect = "nix-collect-garbage";
-      } // lib.attrsets.mapAttrs' (name: attrs:
-        lib.attrsets.nameValuePair ("template-" + name)
-        "nix flake new -t ${inputs.self}#${name} ") inputs.self.templates;
+      };
       history = {
         size = 10000000;
         save = 10000000;
