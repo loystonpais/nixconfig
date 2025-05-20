@@ -31,6 +31,7 @@
           ./secrets
           ./zsh
           ./zed
+          ./browsers
         ];
       };
     };
@@ -44,6 +45,7 @@
       zsh.enable = lib.mkDefault true;
       program-collection.enable = lib.mkDefault true;
       zed.enable = lib.mkDefault true;
+      browsers.enableAll = lib.mkDefault true;
     };
   };
 }

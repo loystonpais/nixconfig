@@ -183,6 +183,10 @@ in {
           mkEnableOption
           "home secrets configuration (needs secrets module to be enabled)";
         zed.enable = mkEnableOption "zed editor configuration";
+        browsers = {
+          enableAll = mkEnableOption "browser configuration";
+          zen = {enable = mkEnableOption "zen browser configuration";};
+        };
       };
 
       browsers = {
