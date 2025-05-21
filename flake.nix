@@ -3,20 +3,54 @@
 
   outputs = {
     self,
+    flake-utils,
     nixpkgs,
     ...
   } @ inputs: let
-    lib = inputs.nixpkgs.lib.extend (final: prev: {lunar = import ./lib prev;});
-    inherit (lib.lunar) forAllSystems importDir' importDir importTemplates;
+    lib = nixpkgs.lib.extend (final: prev: {lunar = import ./lib prev;});
+
+    inherit (lib.lunar) importDir' importDir importTemplates;
     inherit (builtins) mapAttrs;
 
-    lunarNixosModule = import ./lunar.nix;
-    nixpkgsFor = forAllSystems (system:
-      import nixpkgs {
+    eachSystem = flake-utils.lib.eachDefaultSystem (system: let
+      pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
-      });
+      };
+    in {
+      packages = let
+        packagesFromDir =
+          mapAttrs (name: path: pkgs.callPackage path {})
+          (importDir {
+            path = ./packages;
+            importPaths = false;
+          });
+        otherPackages = rec {
+          bw-set-age-key = pkgs.callPackage ./scripts/bw-set-age-key.nix {};
+          install = pkgs.callPackage ./scripts/install.nix {inherit bw-set-age-key;};
+        };
+        packages' = packagesFromDir // otherPackages;
+      in
+        packages';
+
+      apps = {
+        bw-set-age-key = {
+          type = "app";
+          program = pkgs.lib.getExe self.packages.${system}.bw-set-age-key;
+        };
+        install = {
+          type = "app";
+          program = pkgs.lib.getExe self.packages.${system}.install;
+        };
+      };
+
+      formatter = pkgs.alejandra;
+    });
   in {
+    inherit (eachSystem) packages apps formatter;
+
+    lib = lib.lunar;
+
     nixosConfigurations = mapAttrs (n: v:
       v {
         inherit self inputs;
@@ -30,7 +64,7 @@
     (importDir' ./nix-on-droid/instances);
 
     nixosModules = rec {
-      lunar = lunarNixosModule;
+      lunar = import ./lunar.nix;
       default = lunar;
       extras = {
         home-manager = {
@@ -40,38 +74,7 @@
       };
     };
 
-    formatter = forAllSystems (system: nixpkgsFor.${system}.alejandra);
-
-    packages = forAllSystems (system: let
-      pkgs = nixpkgsFor.${system};
-      packagesFromDir =
-        mapAttrs (name: path: pkgs.callPackage path {})
-        (importDir {
-          path = ./packages;
-          importPaths = false;
-        });
-      packages = rec {
-        bw-set-age-key = pkgs.callPackage ./scripts/bw-set-age-key.nix {};
-        install = pkgs.callPackage ./scripts/install.nix {inherit bw-set-age-key;};
-      };
-      packages' = packagesFromDir // packages;
-    in
-      packages');
-
     templates = importTemplates ./templates;
-
-    apps = forAllSystems (system: let
-      pkgs = nixpkgsFor.${system};
-    in {
-      bw-set-age-key = {
-        type = "app";
-        program = pkgs.lib.getExe self.packages.${system}.bw-set-age-key;
-      };
-      install = {
-        type = "app";
-        program = pkgs.lib.getExe self.packages.${system}.install;
-      };
-    });
   };
 
   inputs = {
@@ -79,6 +82,10 @@
     nixpkgs.url = "nixpkgs/nixos-unstable";
     nixpkgs-24_05.url = "nixpkgs/nixos-24.05";
     nixpkgs-24_11.url = "nixpkgs/nixos-24.11";
+
+    flake-utils = {
+      url = "github:numtide/flake-utils";
+    };
 
     home-manager = {
       url = "github:nix-community/home-manager";
