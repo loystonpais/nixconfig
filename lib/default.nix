@@ -103,15 +103,5 @@ with builtins;
           a;
       };
 
-    mkConfigWithEnableOptions' = attr: {
-      options = mapAttrs (name: value: {enable = lib.mkEnableOption name;}) attr;
-      imports = lib.attrsets.mapAttrsToList (name: path: f);
-    };
-
-    mkConfigWithEnableOption = name: f: inputs: {
-      options.${name}.enable = lib.mkEnableOption name;
-      config = lib.mkIf config.${name}.enable (f inputs);
-    };
-
     joinPathAndString = path: string: path + "/${string}";
   }
