@@ -18,6 +18,21 @@
       mangohud
       bottles
       piper
+
+      (pkgs.lunar.writeKioServiceMenu "steam-run" ''
+        [Desktop Entry]
+        Type=Service
+        X-KDE-ServiceTypes=KonqPopupMenu/Plugin
+        MimeType=application/x-executable;application/x-pie-executable;application/x-sharedlib;
+        Actions=runWithSteamRun;
+        X-KDE-Priority=TopLevel
+        Icon=steam-symbolic
+
+        [Desktop Action runWithSteamRun]
+        Name=Run With Steam Run
+        Icon=steam-symbolic
+        Exec=steam-run "%f"
+      '')
     ];
 
     # Feral gamemode setup
