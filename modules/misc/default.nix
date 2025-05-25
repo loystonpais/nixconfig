@@ -39,6 +39,7 @@
           ruby
           jq
           bat
+          rsync
           inputs.idk-shell-command.packages.${system}.default
         ];
       }
