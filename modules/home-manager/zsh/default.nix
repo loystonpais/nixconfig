@@ -38,6 +38,8 @@
         update = "( cd ~/nixconfig && (git pull || git fetch) && changes )";
         upgrade = "( ${update}; cd ~/nixconfig && switch )";
         collect = "nix-collect-garbage";
+        collectd = "nix-collect-garbage -d";
+        cpr = "rsync -avhP --partial --inplace";
       };
       history = {
         size = 10000000;
