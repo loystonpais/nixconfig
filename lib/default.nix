@@ -103,5 +103,18 @@ with builtins;
           a;
       };
 
+    importOverlays = path: attrs:
+      importDir {
+        inherit path;
+        importPaths = true;
+      };
+
+    importNixosSystems = path: attrs:
+      importDir {
+        inherit path;
+        importPaths = false;
+        customPipe = a: mapAttrs (name: path: import path attrs) a;
+      };
+
     joinPathAndString = path: string: path + "/${string}";
   }
