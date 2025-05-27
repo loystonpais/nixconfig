@@ -9,7 +9,7 @@
   } @ inputs: let
     lib = nixpkgs.lib.extend (final: prev: {lunar = import ./lib prev;});
 
-    inherit (lib.lunar) importDir' importDir importTemplates;
+    inherit (lib.lunar) importDir' importDir importTemplates importNixosSystems;
     inherit (builtins) mapAttrs;
 
     eachSystem = flake-utils.lib.eachDefaultSystem (system: let
@@ -51,11 +51,9 @@
 
     lib = lib.lunar;
 
-    nixosConfigurations = mapAttrs (n: v:
-      v {
-        inherit self inputs;
-      })
-    (importDir' ./instances);
+    nixosConfigurations = importNixosSystems ./systems {
+      inherit self inputs;
+    };
 
     nixOnDroidConfigurations = mapAttrs (n: v:
       v {
@@ -75,6 +73,8 @@
     };
 
     templates = importTemplates ./templates;
+
+    overlays = importDir' ./overlays;
   };
 
   inputs = {
