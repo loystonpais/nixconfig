@@ -1,3 +1,3 @@
 final: prev: {
-  supergfxctl = prev.callPackage ../supergfxctl-lsof-fix.nix {};
+  supergfxctl = prev.callPackage ../packages/supergfxctl-lsof-fix.nix {inherit (prev) supergfxctl;};
 }

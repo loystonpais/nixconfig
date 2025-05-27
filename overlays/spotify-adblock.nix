@@ -1,3 +1,3 @@
-(final: prev: {
-  spotify = prev.callPackage ../packages/spotify-adblock.nix {};
-})
+final: prev: {
+  spotify = prev.callPackage ../packages/spotify-adblocked.nix {inherit (prev) spotify;};
+}
