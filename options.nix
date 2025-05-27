@@ -77,19 +77,10 @@ in {
       default = [];
     };
 
-    overlays = {
-      enableAll = mkOption {
-        type = types.bool;
-        description = "overlays";
-        default = true;
-      };
-      mc-launcher-patch.enable = mkEnableOption "prismlauncer patch";
-      supergfxd-lsof-patch.enable =
-        mkEnableOption "supergfxd lsof patch";
-      makehuman-makework-patch.enable =
-        mkEnableOption "makehuman import patch";
-      spotify-adblock-patch.enable = mkEnableOption "spotify adblock patch";
-      libadwaita-without-adwaita-patch.enable = mkEnableOption "libadwaita-without-adwaita patch";
+    expensiveBuilds = mkOption {
+      type = types.bool;
+      description = "enables expensive builds";
+      default = true;
     };
 
     specialisations = {
