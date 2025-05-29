@@ -119,7 +119,7 @@ in {
 
       gaming.enable = mkEnableOption "gaming";
 
-      minecraft.enable = mkEnableOption "minecraft";
+      # minecraft moved to modules
       multimedia.enable = mkEnableOption "multimedia";
       piracy.enable = mkEnableOption "piracy";
       misc.enable = mkEnableOption "misc";
