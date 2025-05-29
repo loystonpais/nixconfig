@@ -2,8 +2,8 @@
 final: prev: let
   aurRepo = prev.fetchgit {
     url = "https://aur.archlinux.org/libadwaita-without-adwaita-git.git";
-    rev = "312880664a0b37402a93d381c9465967d142284a";
-    hash = "sha256-Z8htdlLBz9vSiv5qKpCLPoFqk14VTanaLpn+mBITq3o=";
+    rev = "d98b5bc68b2eba95104ee36661af788701f43219";
+    hash = "sha256-a2yzF9kqycEo44Hmy/Tg+c2UpONiOiU/7KAnCMdpTFY=";
   };
   themingPatch = aurRepo + "/theming_patch.diff";
 in {
