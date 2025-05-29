@@ -1,7 +1,14 @@
 { config, pkgs, lib, inputs, ... }:
 with lib; {
-  imports =
-    [ ./modules ./profiles ./required ./overlays ./users ./options.nix  ./specialisations ];
+  imports = [
+    # Directories with default.nix are generally module configurations
+    ./modules
+    ./profiles
+    ./required
+    ./users
+    ./options.nix
+    ./specialisations
+  ];
 
   networking.hostName = config.lunar.hostName;
   networking.networkmanager.enable = true;
