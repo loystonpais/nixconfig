@@ -8,6 +8,10 @@
   spotify-adblock = callPackage ./spotify-adblock.nix {};
 in
   spotify.overrideAttrs (oldAttrs: {
+      # applying this fails the build
+      # version = "${oldAttrs.version}-adblocked";
+      #__intentionallyOverridingVersion = true;
+
       fixupPhase =
         lib.replaceStrings [
           "wrapProgramShell $out/share/spotify/spotify \\"

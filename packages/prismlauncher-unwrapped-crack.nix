@@ -21,4 +21,5 @@ in
   (p: {
     version = p.version + "-crack";
     prePatch = patchOfflineTrigger + "\n\n" + patchOwnsMinecraft;
+    __intentionallyOverridingVersion = true;
   })

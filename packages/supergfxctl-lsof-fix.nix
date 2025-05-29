@@ -11,5 +11,6 @@
 in
   supergfxctl.overrideAttrs (p: {
     version = p.version + "-lsof-fix";
+    __intentionallyOverridingVersion = true;
     prePatch = lsofPatch;
   })
