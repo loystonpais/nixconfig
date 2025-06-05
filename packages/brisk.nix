@@ -18,14 +18,15 @@
   glib,
   libepoxy,
   fontconfig,
+  ffmpeg,
 }:
 stdenv.mkDerivation rec {
   pname = "brisk";
-  version = "2.2.5";
+  version = "2.3.0";
 
   src = fetchurl {
     url = "https://github.com/BrisklyDev/brisk/releases/download/v${version}/Brisk-v${version}-linux-x86_64.tar.xz";
-    hash = "sha256-YGUzyyFiQqCzelIzFK1W2nD19PVxAZNAGly9ptwtOic=";
+    hash = "sha256-QXB78qMmMI30x6xw6jQJLytg6VNqWQimHUcdzk4zrtk=";
   };
 
   dontUnpack = true;
@@ -55,6 +56,7 @@ stdenv.mkDerivation rec {
     chmod +x $DIR/brisk
     makeWrapper $DIR/brisk $out/bin/${pname} \
       --chdir  $DIR \
+      --prefix PATH : ${lib.makeBinPath [ffmpeg]} \
       --prefix LD_LIBRARY_PATH : ${
       lib.makeLibraryPath [
         gcc
@@ -73,6 +75,7 @@ stdenv.mkDerivation rec {
         glib
         libepoxy
         fontconfig
+        ffmpeg
       ]
     }
 
