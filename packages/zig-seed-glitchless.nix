@@ -22,12 +22,12 @@
   configFile = writeText "zsg-config.json" (builtins.toJSON zsgConfig');
 in
   stdenv.mkDerivation rec {
-    pname = "ZigSeedGlitchless";
-    version = "3.2.1";
+    pname = "zigseedglitchless";
+    version = "4.0.0";
 
     src = fetchurl {
       url = "https://github.com/DuncanRuns/ZigSeedGlitchless/releases/download/v${version}/${pname}.v${version}.lin.116.zip";
-      hash = "sha256-zEtlyr1+BjFUWgvlZ89wmMj4b/s80CCBTFCDKSAeLXc=";
+      hash = "sha256-Odb5evpeK4G5Jd/cI75gWSPRgHh5zkV4ifaa3udX01E=";
     };
 
     dontUnpack = true;
@@ -38,17 +38,19 @@ in
     ];
 
     installPhase = ''
+      DIR=$out/share/${pname}
+
       mkdir -p $out/bin
-      mkdir -p $out/share
+      mkdir -p $DIR
 
-      unzip $src -d $out/share
+      unzip $src -d $DIR
 
-      rm -rf $out/share/config.json
-      ln -s ${configFile} $out/share/config.json
+      rm -rf $DIR/config.json
+      ln -s ${configFile} $DIR/config.json
 
-      chmod +x $out/share/ZigSeedGlitchless
-      makeWrapper $out/share/ZigSeedGlitchless $out/bin/zigseedglitchless \
-        --chdir $out/share
+      chmod +x $DIR/ZigSeedGlitchless
+      makeWrapper $DIR/ZigSeedGlitchless $out/bin/${pname} \
+        --chdir $DIR
     '';
 
     dontFixup = true;
