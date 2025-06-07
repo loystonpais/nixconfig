@@ -67,7 +67,6 @@
       extras = {
         home-manager = {
           unstable = inputs.home-manager.nixosModules.home-manager;
-          "24_11" = inputs.home-manager-24_11.nixosModules.home-manager;
         };
       };
     };
@@ -91,6 +90,11 @@
     };
     nixvim = {
       url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nur = {
+      url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -119,6 +123,10 @@
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    niri-flake = {
+      url = "github:sodiboo/niri-flake";
     };
 
     # User flakes
