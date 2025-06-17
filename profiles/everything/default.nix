@@ -13,7 +13,7 @@ with lib; {
       minecraft.enable = mkDefault true;
       multimedia.enable = mkDefault true;
       piracy.enable = mkDefault true;
-      misc.enable = mkDefault true;
+      misc.enableAll = mkDefault true;
       samba.enable = mkDefault true;
       virtual-machine.enable = mkDefault true;
       waydroid.enable = mkDefault true;
