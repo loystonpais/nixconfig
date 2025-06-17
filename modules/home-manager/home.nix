@@ -35,6 +35,36 @@
         (name: attrs: pkgs.writeShellScriptBin ("template-" + name) "nix flake new -t ${inputs.self}#${name} $@")
         inputs.self.templates))
     )
+
+    (
+      # TODO: Maybe add an option to enable templates
+      lib.mkIf true (let
+        subMenus = builtins.attrValues (builtins.mapAttrs
+          (name: attrs: {
+            inherit name;
+            text = ''
+              [Desktop Action ${name}]
+              Name=${builtins.replaceStrings ["-"] [" "] name}
+              Icon=document-new-from-template
+              Exec=${pkgs.nix}/bin/nix flake new -t ${inputs.self}#${name} "%f"
+            '';
+          })
+          inputs.self.templates);
+
+        initializeTemplate = pkgs.lunar.writeKioServiceMenu "initialize-template" ''
+          [Desktop Entry]
+          Type=Service
+          X-KDE-ServiceTypes=KonqPopupMenu/Plugin
+          MimeType=inode/directory;
+          Actions=${builtins.concatStringsSep ";" (map (a: a.name) subMenus)};
+          X-KDE-Priority=TopLevel
+          Icon=accessories-text-editor
+          X-KDE-Submenu=Initialize Nix Template
+
+          ${builtins.concatStringsSep "\n\n" (map (a: a.text) subMenus)}
+        '';
+      in [initializeTemplate])
+    )
   ];
 
   home.stateVersion = "23.11";
