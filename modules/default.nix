@@ -27,6 +27,7 @@
     ./vpn
     ./nixvim
     ./rclone
+    ./niri
 
     ./home-manager
   ];

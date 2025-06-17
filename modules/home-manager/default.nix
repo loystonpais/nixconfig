@@ -32,6 +32,7 @@
           ./zsh
           ./zed
           ./browsers
+          ./niri
         ];
       };
     };
