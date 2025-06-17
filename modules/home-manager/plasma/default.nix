@@ -68,6 +68,39 @@
         enable = true;
         windows.allowWindowsToRememberPositions = true;
 
+        hotkeys = {
+          commands = {
+            # Tall Macro
+            minecraft-tall = {
+              name = "Tall macro for minecraft";
+              key = "Meta+Space";
+              command = builtins.toString (pkgs.writeShellScript "tall-macro" ''
+                ${pkgs.wmctrl}/bin/wmctrl -r "Minecraft* 1.16.1" -e 1,$(( 1920 + (1920 / 2) - 280 / 2)),10,280,1000
+              '');
+            };
+          };
+        };
+
+        window-rules = [
+          {
+            description = "Waydroid FreeFire full screen";
+            match = {
+              window-types = ["normal"];
+              window-class = {
+                value = "waydroid.com.dts.freefiremax";
+                type = "exact";
+                match-whole = false;
+              };
+            };
+            apply = {
+              fullscreen = {
+                value = true;
+                apply = "remember";
+              };
+            };
+          }
+        ];
+
         kscreenlocker.appearance.wallpaper = "${pkgs.whitesur-kde}/share/wallpapers/WhiteSur-dark/contents/images/3840x2160.jpg";
         kscreenlocker.autoLock = false;
 
