@@ -5,6 +5,23 @@
   ...
 }: {
   config = lib.mkIf (systemConfig.lunar.modules.home-manager.zed.enable) {
+    home.packages = [
+      (pkgs.lunar.writeKioServiceMenu "open-with-zeditor" ''
+        [Desktop Entry]
+        Type=Service
+        X-KDE-ServiceTypes=KonqPopupMenu/Plugin
+        MimeType=inode/directory;
+        Actions=openWithZed;
+        X-KDE-Priority=TopLevel
+        Icon=zed
+
+        [Desktop Action openWithZed]
+        Name=Open with Zed
+        Icon=zed
+        Exec=zeditor "%f"
+      '')
+    ];
+
     xdg.configFile."zed/tasks.json".text = builtins.toJSON [
       {
         label = "ruby eval: '$ZED_SELECTED_TEXT'";
@@ -53,6 +70,7 @@
         "haskell"
         "assembly"
         "ruby"
+        "kdl"
 
         # Themes
         "xcode-themes"
