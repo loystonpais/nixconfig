@@ -1,0 +1,16 @@
+{
+  "BACKGROUND_FRAME_RATE:enabled": true,
+  "BACKGROUND_FRAME_RATE:frameLimit": 1,
+  "LOADING_SCREEN_FRAME_RATE:enabled": true,
+  "LOADING_SCREEN_FRAME_RATE:frameLimit": 30,
+  "WORLD_SETUP_FRAME_RATE:enabled": true,
+  "WORLD_SETUP_FRAME_RATE:frameLimit": 10,
+  "WORLD_SETUP_FRAME_RATE:maxTicks": 30,
+  "LOCKED_INSTANCE_FRAME_RATE:enabled": true,
+  "LOCKED_INSTANCE_FRAME_RATE:frameLimit": 1,
+  "LOCKED_INSTANCE_FRAME_RATE:tickInterval": 20,
+  "LOADING_SCREEN_TICK_INTERVAL:enabled": true,
+  "LOADING_SCREEN_TICK_INTERVAL:tickInterval": 1,
+  "LOG_INTERVAL:enabled": true,
+  "LOG_INTERVAL:logInterval": 500
+}

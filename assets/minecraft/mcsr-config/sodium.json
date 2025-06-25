@@ -1,0 +1,20 @@
+{
+  "quality:enableVignette": false,
+  "advanced:maxChunkThreads": 0,
+  "advanced:targetChunkThreads": 0,
+  "advanced:initialChunkThreads": 0,
+  "advanced:quickThreadCreationInterval": 100,
+  "advanced:slowThreadCreationInterval": 1000,
+  "advanced:useChunkMultidraw": true,
+  "advanced:useBlockFaceCulling": true,
+  "advanced:useCompactVertexFormat": true,
+  "advanced:useFogOcclusion": true,
+  "advanced:useEntityCulling": false,
+  "advanced:useParticleCulling": true,
+  "advanced:animateOnlyVisibleTextures": true,
+  "advanced:allowDirectMemoryAccess": true,
+  "advanced:ignoreDriverBlacklist": false,
+  "speedrun:usePlanarFog": true,
+  "speedrun:showEntityCulling": true,
+  "speedrun:showFogOcclusion": true
+}

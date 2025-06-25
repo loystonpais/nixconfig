@@ -1,0 +1,467 @@
+{
+  "fov": {
+    "enabled": true,
+    "value": 95.0
+  },
+  "realmsNotifications": {
+    "enabled": false,
+    "value": true
+  },
+  "fullscreenResolution": {
+    "enabled": true,
+    "value": null
+  },
+  "biomeBlendRadius": {
+    "enabled": true,
+    "value": 2.0
+  },
+  "graphicsMode": {
+    "enabled": false,
+    "value": 1
+  },
+  "renderDistance": {
+    "enabled": true,
+    "value": 5.0
+  },
+  "ao": {
+    "enabled": true,
+    "value": 2
+  },
+  "maxFps": {
+    "enabled": true,
+    "value": 260.0
+  },
+  "enableVsync": {
+    "enabled": true,
+    "value": true
+  },
+  "bobView": {
+    "enabled": true,
+    "value": true
+  },
+  "guiScale": {
+    "enabled": true,
+    "value": 3
+  },
+  "attackIndicator": {
+    "enabled": true,
+    "value": 1
+  },
+  "gamma": {
+    "enabled": true,
+    "value": 5.0
+  },
+  "renderClouds": {
+    "enabled": true,
+    "value": 2
+  },
+  "fullscreen": {
+    "enabled": false,
+    "value": false
+  },
+  "particles": {
+    "enabled": false,
+    "value": 0
+  },
+  "mipmapLevels": {
+    "enabled": false,
+    "value": 4.0
+  },
+  "entityShadows": {
+    "enabled": false,
+    "value": true
+  },
+  "entityDistanceScaling": {
+    "enabled": true,
+    "value": 1.5
+  },
+  "entityCulling": {
+    "enabled": true,
+    "value": false
+  },
+  "modelPart_cape": {
+    "enabled": false,
+    "value": true
+  },
+  "modelPart_jacket": {
+    "enabled": false,
+    "value": true
+  },
+  "modelPart_left_sleeve": {
+    "enabled": false,
+    "value": true
+  },
+  "modelPart_right_sleeve": {
+    "enabled": false,
+    "value": true
+  },
+  "modelPart_left_pants_leg": {
+    "enabled": false,
+    "value": true
+  },
+  "modelPart_right_pants_leg": {
+    "enabled": false,
+    "value": true
+  },
+  "modelPart_hat": {
+    "enabled": false,
+    "value": true
+  },
+  "mainHand": {
+    "enabled": false,
+    "value": 1
+  },
+  "soundCategory_master": {
+    "enabled": true,
+    "value": 1.0
+  },
+  "soundCategory_music": {
+    "enabled": true,
+    "value": 0.3392857
+  },
+  "soundCategory_record": {
+    "enabled": false,
+    "value": 1.0
+  },
+  "soundCategory_weather": {
+    "enabled": false,
+    "value": 1.0
+  },
+  "soundCategory_block": {
+    "enabled": false,
+    "value": 1.0
+  },
+  "soundCategory_hostile": {
+    "enabled": true,
+    "value": 0.5
+  },
+  "soundCategory_neutral": {
+    "enabled": false,
+    "value": 1.0
+  },
+  "soundCategory_player": {
+    "enabled": false,
+    "value": 1.0
+  },
+  "soundCategory_ambient": {
+    "enabled": false,
+    "value": 1.0
+  },
+  "soundCategory_voice": {
+    "enabled": false,
+    "value": 1.0
+  },
+  "showSubtitles": {
+    "enabled": true,
+    "value": true
+  },
+  "language": {
+    "enabled": true,
+    "value": "en_us"
+  },
+  "forceUnicodeFont": {
+    "enabled": true,
+    "value": false
+  },
+  "mouseSensitivity": {
+    "enabled": false,
+    "value": 0.5
+  },
+  "invertYMouse": {
+    "enabled": false,
+    "value": false
+  },
+  "mouseWheelSensitivity": {
+    "enabled": false,
+    "value": 1.0
+  },
+  "discrete_mouse_scroll": {
+    "enabled": false,
+    "value": false
+  },
+  "touchscreen": {
+    "enabled": false,
+    "value": false
+  },
+  "rawMouseInput": {
+    "enabled": false,
+    "value": true
+  },
+  "autoJump": {
+    "enabled": false,
+    "value": true
+  },
+  "key_key.jump": {
+    "enabled": false,
+    "value": "key.keyboard.space"
+  },
+  "key_key.sneak": {
+    "enabled": false,
+    "value": "key.keyboard.left.shift"
+  },
+  "key_key.sprint": {
+    "enabled": false,
+    "value": "key.keyboard.left.control"
+  },
+  "key_key.left": {
+    "enabled": false,
+    "value": "key.keyboard.a"
+  },
+  "key_key.right": {
+    "enabled": false,
+    "value": "key.keyboard.d"
+  },
+  "key_key.back": {
+    "enabled": false,
+    "value": "key.keyboard.s"
+  },
+  "key_key.forward": {
+    "enabled": false,
+    "value": "key.keyboard.w"
+  },
+  "key_key.attack": {
+    "enabled": false,
+    "value": "key.mouse.left"
+  },
+  "key_key.pickItem": {
+    "enabled": false,
+    "value": "key.mouse.middle"
+  },
+  "key_key.use": {
+    "enabled": false,
+    "value": "key.mouse.right"
+  },
+  "key_key.drop": {
+    "enabled": false,
+    "value": "key.keyboard.q"
+  },
+  "key_key.hotbar.1": {
+    "enabled": false,
+    "value": "key.keyboard.1"
+  },
+  "key_key.hotbar.2": {
+    "enabled": false,
+    "value": "key.keyboard.2"
+  },
+  "key_key.hotbar.3": {
+    "enabled": false,
+    "value": "key.keyboard.3"
+  },
+  "key_key.hotbar.4": {
+    "enabled": false,
+    "value": "key.keyboard.4"
+  },
+  "key_key.hotbar.5": {
+    "enabled": false,
+    "value": "key.keyboard.5"
+  },
+  "key_key.hotbar.6": {
+    "enabled": false,
+    "value": "key.keyboard.6"
+  },
+  "key_key.hotbar.7": {
+    "enabled": false,
+    "value": "key.keyboard.7"
+  },
+  "key_key.hotbar.8": {
+    "enabled": false,
+    "value": "key.keyboard.8"
+  },
+  "key_key.hotbar.9": {
+    "enabled": false,
+    "value": "key.keyboard.9"
+  },
+  "key_key.inventory": {
+    "enabled": false,
+    "value": "key.keyboard.e"
+  },
+  "key_key.swapOffhand": {
+    "enabled": false,
+    "value": "key.keyboard.f"
+  },
+  "key_key.loadToolbarActivator": {
+    "enabled": false,
+    "value": "key.keyboard.x"
+  },
+  "key_key.saveToolbarActivator": {
+    "enabled": false,
+    "value": "key.keyboard.c"
+  },
+  "key_key.playerlist": {
+    "enabled": false,
+    "value": "key.keyboard.tab"
+  },
+  "key_key.chat": {
+    "enabled": false,
+    "value": "key.keyboard.t"
+  },
+  "key_key.command": {
+    "enabled": false,
+    "value": "key.keyboard.slash"
+  },
+  "key_key.advancements": {
+    "enabled": false,
+    "value": "key.keyboard.l"
+  },
+  "key_key.spectatorOutlines": {
+    "enabled": false,
+    "value": "key.keyboard.unknown"
+  },
+  "key_key.screenshot": {
+    "enabled": false,
+    "value": "key.keyboard.f2"
+  },
+  "key_key.smoothCamera": {
+    "enabled": false,
+    "value": "key.keyboard.unknown"
+  },
+  "key_key.fullscreen": {
+    "enabled": false,
+    "value": "key.keyboard.f11"
+  },
+  "key_key.togglePerspective": {
+    "enabled": false,
+    "value": "key.keyboard.f5"
+  },
+  "key_Create New World": {
+    "enabled": true,
+    "value": "key.keyboard.7"
+  },
+  "key_speedrunigt.controls.start_timer": {
+    "enabled": false,
+    "value": "key.keyboard.u"
+  },
+  "key_speedrunigt.controls.stop_timer": {
+    "enabled": false,
+    "value": "key.keyboard.i"
+  },
+  "chatVisibility": {
+    "enabled": false,
+    "value": 0
+  },
+  "chatColors": {
+    "enabled": false,
+    "value": true
+  },
+  "chatLinks": {
+    "enabled": false,
+    "value": true
+  },
+  "chatLinksPrompt": {
+    "enabled": false,
+    "value": true
+  },
+  "chatOpacity": {
+    "enabled": false,
+    "value": 1.0
+  },
+  "textBackgroundOpacity": {
+    "enabled": false,
+    "value": 0.5
+  },
+  "chatScale": {
+    "enabled": false,
+    "value": 1.0
+  },
+  "chatLineSpacing": {
+    "enabled": false,
+    "value": 0.0
+  },
+  "chatWidth": {
+    "enabled": false,
+    "value": 1.0
+  },
+  "chatHeightFocused": {
+    "enabled": false,
+    "value": 1.0
+  },
+  "chatHeightUnfocused": {
+    "enabled": false,
+    "value": 0.44366195797920227
+  },
+  "narrator": {
+    "enabled": false,
+    "value": 0
+  },
+  "autoSuggestions": {
+    "enabled": false,
+    "value": true
+  },
+  "reducedDebugInfo": {
+    "enabled": false,
+    "value": false
+  },
+  "backgroundForChatOnly": {
+    "enabled": false,
+    "value": 1
+  },
+  "chatDelay": {
+    "enabled": false,
+    "value": 0.0
+  },
+  "toggleCrouch": {
+    "enabled": false,
+    "value": 0
+  },
+  "toggleSprint": {
+    "enabled": false,
+    "value": 0
+  },
+  "pauseOnLostFocus": {
+    "enabled": false,
+    "value": true
+  },
+  "advancedItemTooltips": {
+    "enabled": false,
+    "value": false
+  },
+  "hitboxes": {
+    "enabled": true,
+    "value": true
+  },
+  "chunkborders": {
+    "enabled": true,
+    "value": true
+  },
+  "pieDirectory": {
+    "enabled": true,
+    "value": "root.gameRenderer.level.entities"
+  },
+  "perspective": {
+    "enabled": false,
+    "value": 0
+  },
+  "f1": {
+    "enabled": false,
+    "value": false
+  },
+  "sneaking": {
+    "enabled": false,
+    "value": false
+  },
+  "sprinting": {
+    "enabled": false,
+    "value": false
+  },
+  "fovOnWorldJoin": {
+    "enabled": false,
+    "value": 70.0
+  },
+  "renderDistanceOnWorldJoin": {
+    "enabled": false,
+    "value": 12.0
+  },
+  "entityDistanceScalingOnWorldJoin": {
+    "enabled": false,
+    "value": 1.0
+  },
+  "guiScaleOnWorldJoin": {
+    "enabled": false,
+    "value": 0
+  },
+  "toggleStandardSettings": true,
+  "toggleAll": true,
+  "autoF3Esc": true,
+  "firstAutoF3EscDelay": 22,
+  "triggerOnResize": false
+}

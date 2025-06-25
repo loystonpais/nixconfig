@@ -1,0 +1,19 @@
+{
+  "gameMode": "SURVIVAL",
+  "structures": true,
+  "worldDifficulty": "EASY",
+  "seed": "",
+  "bonusChest": false,
+  "cheatsEnabled": false,
+  "generatorType": "DEFAULT",
+  "generatorDetails": "",
+  "gameRules": {},
+  "dataPackSettings": {
+    "enabled": [
+      "vanilla"
+    ],
+    "disabled": []
+  },
+  "demoMode": false,
+  "hasLegalSettings": true
+}
