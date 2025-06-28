@@ -7,6 +7,7 @@
   unzip,
   writeText,
   zsgConfig ? {},
+  minecraftVersion ? "116",
 }: let
   zsgConfig' =
     {
@@ -26,16 +27,16 @@ in
     version = "4.0.0";
 
     src = fetchurl {
-      url = "https://github.com/DuncanRuns/ZigSeedGlitchless/releases/download/v${version}/${pname}.v${version}.lin.116.zip";
+      url = "https://github.com/DuncanRuns/ZigSeedGlitchless/releases/download/v${version}/${pname}.v${version}.lin.${minecraftVersion}.zip";
       hash = "sha256-Odb5evpeK4G5Jd/cI75gWSPRgHh5zkV4ifaa3udX01E=";
     };
-
-    dontUnpack = true;
 
     nativeBuildInputs = [
       makeWrapper
       unzip
     ];
+
+    phases = ["installPhase"];
 
     installPhase = ''
       DIR=$out/share/${pname}
@@ -45,6 +46,11 @@ in
 
       unzip $src -d $DIR
 
+      sed -i -e 's/\r$//' $DIR/run.sh
+      sed -i -e 's/\r$//' $DIR/test.sh
+      chmod +x $DIR/run.sh
+      chmod +x $DIR/test.sh
+
       rm -rf $DIR/config.json
       ln -s ${configFile} $DIR/config.json
 
@@ -52,8 +58,6 @@ in
       makeWrapper $DIR/ZigSeedGlitchless $out/bin/${pname} \
         --chdir $DIR
     '';
-
-    dontFixup = true;
 
     meta = {
       homepage = "https://github.com/DuncanRuns/ZigSeedGlitchless";
