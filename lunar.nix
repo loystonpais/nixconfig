@@ -56,7 +56,7 @@ with lib; {
 
   nix.registry = {
     n.flake = inputs.nixpkgs; # shorthand that allows to do `nix shell n#hello`
-    nixpkgs-stable.flake = inputs.nixpkgs-24_11;
+    # nixpkgs-stable.flake = inputs.nixpkgs-24_11;
   };
 
   system.nixos.tags = [ "lunar" ];
