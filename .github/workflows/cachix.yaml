@@ -19,4 +19,4 @@ jobs:
           name: loystonpais
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
       - run: |
-          packages/cachix-wf-builds.sh
+          packages/.cachix-wf-builds.sh
