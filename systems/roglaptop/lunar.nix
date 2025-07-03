@@ -1,4 +1,4 @@
-{...}: {
+{config, ...}: {
   lunar.hostName = "roglaptop";
   lunar.graphicsMode = "asuslinux";
   lunar.bootMode = "uefi";
