@@ -137,11 +137,6 @@
       inputs.home-manager.follows = "home-manager";
     };
 
-    zen-browser-zen-nebula = {
-      url = "github:JustAdumbPrsn/Nebula-A-Minimal-Theme-for-Zen-Browser";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     blender-bin = {
       url = "github:edolstra/nix-warez?dir=blender";
       inputs.nixpkgs.follows = "nixpkgs";

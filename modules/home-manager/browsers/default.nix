@@ -8,7 +8,6 @@
 }: {
   imports = [
     inputs.zen-browser.homeModules.twilight
-    inputs.zen-browser-zen-nebula.homeModules.default
   ];
 
   config = let
@@ -24,11 +23,6 @@
             DisableTelemetry = true;
             DontCheckDefaultBrowser = true;
           };
-        };
-
-        zen-nebula = {
-          enable = true;
-          profile = "default";
         };
       })
     ];
