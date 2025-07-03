@@ -1,5 +1,5 @@
 {
-  "chunkDistance": 8,
-  "instantRenderDistance": 5,
+  "chunkDistance": 4,
+  "instantRenderDistance": 1,
   "dataLimit": 100
 }

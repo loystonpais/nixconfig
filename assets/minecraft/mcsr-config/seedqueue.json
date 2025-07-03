@@ -1,7 +1,7 @@
 {
-  "maxCapacity": 30,
+  "maxCapacity": 16,
   "maxConcurrently": 12,
-  "maxConcurrently_onWall": 30,
+  "maxConcurrently_onWall": 16,
   "maxWorldGenerationPercentage": 20,
   "resumeOnFilledQueue": false,
   "chunkMapVisibility": "FALSE",
@@ -10,15 +10,15 @@
   "rows": 4,
   "columns": 4,
   "simulatedWindowSize": {
-    "width": 854,
-    "height": 480
+    "width": 256,
+    "height": 144
   },
   "resetCooldown": 150,
   "waitForPreviewSetup": true,
   "bypassWall": true,
   "smartSwitch": false,
-  "wallFPS": 60,
-  "previewFPS": 15,
+  "wallFPS": 14,
+  "previewFPS": 9,
   "preparingPreviews": -1,
   "freezeLockedPreviews": false,
   "reduceSchedulingBudget": false,

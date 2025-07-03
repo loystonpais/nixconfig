@@ -14,14 +14,14 @@ reducedDebugInfo:false
 snooperEnabled:false
 showSubtitles:true
 touchscreen:false
-fullscreen:false
+fullscreen:true
 bobView:true
 toggleCrouch:false
 toggleSprint:false
 mouseSensitivity:0.35035210847854614
-fov:0.625
+fov:0.75
 gamma:5.0
-renderDistance:5
+renderDistance:32
 entityDistanceScaling:1.5
 guiScale:3
 particles:0
