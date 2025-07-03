@@ -2,7 +2,7 @@
   stdenv,
   lib,
   fetchFromGitHub,
-  kernel ? pkgs.kernelPackages.kernel,
+  kernel ? pkgs.linuxPackages.kernel,
   kmod,
   looking-glass-client,
   pkgs,
