@@ -23,7 +23,6 @@
   lunar.profile.everything.enable = true;
 
   # Exclusion
-  lunar.modules.waydroid.enable = false;
   lunar.modules.samba.enable = false;
 
   # Specialisations
