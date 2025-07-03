@@ -16,7 +16,15 @@
 
   lunar.modules.android.adbDevices = {
     vili = {
-      ip = "192.168.43.2";
+      ip = "192.168.44.1";
+      port = 5555;
+    };
+    ysl = {
+      ip = "192.168.54.1";
+      port = 5555;
+    };
+    j4plus = {
+      ip = "192.168.64.1";
       port = 5555;
     };
   };
