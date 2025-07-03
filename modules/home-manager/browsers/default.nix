@@ -22,6 +22,7 @@
             DisableAppUpdate = true;
             DisableTelemetry = true;
             DontCheckDefaultBrowser = true;
+            OfferToSaveLogins = false;
           };
         };
       })
