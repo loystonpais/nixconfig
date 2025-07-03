@@ -2,9 +2,10 @@
   stdenv,
   lib,
   fetchFromGitHub,
-  kernel,
+  kernel ? pkgs.kernelPackages.kernel,
   kmod,
   looking-glass-client,
+  pkgs,
   ...
 }:
 stdenv.mkDerivation rec {
