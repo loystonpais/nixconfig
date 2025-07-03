@@ -25,9 +25,8 @@
   # Exclusion
   lunar.modules.samba.enable = false;
 
-  # Specialisations
-  lunar.specialisations = {
-    enable = true;
-    productive.enable = true;
+  home-manager.users.${config.lunar.username} = {
+    lunar.plasma.mode = "productive";
+    lunar.niri.enable = true;
   };
 }
