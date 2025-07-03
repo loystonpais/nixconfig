@@ -127,12 +127,12 @@ in {
       virtual-machine = {
         enable = mkEnableOption "virtual machine";
         nixvirt.enable = mkEnableOption "NixVirt defined virtual machines";
-        cgroupDevicesById = mkOption {
+        cgroupDevices = mkOption {
           type = types.listOf types.str;
           description = "Devices registered to be passed to the vm";
           default = [
-            "usb-SINO_WEALTH_Gaming_KB-event-kbd"
-            "usb-Razer_Razer_DeathAdder_Essential-event-mouse"
+            "/dev/input/by-id/usb-SINO_WEALTH_Gaming_KB-event-kbd"
+            "/dev/input/by-id/usb-Razer_Razer_DeathAdder_Essential-event-mouse"
           ];
         };
       };
