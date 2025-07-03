@@ -6,6 +6,7 @@
 }: {
   imports = [
     ./nixvirt.nix
+    ./kvmfr
   ];
   config = lib.mkIf config.lunar.modules.virtual-machine.enable {
     # Virtualization based on libvirtd
