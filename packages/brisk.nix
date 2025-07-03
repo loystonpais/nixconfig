@@ -22,11 +22,11 @@
 }:
 stdenv.mkDerivation rec {
   pname = "brisk";
-  version = "2.3.0";
+  version = "2.3.2";
 
   src = fetchurl {
     url = "https://github.com/BrisklyDev/brisk/releases/download/v${version}/Brisk-v${version}-linux-x86_64.tar.xz";
-    hash = "sha256-QXB78qMmMI30x6xw6jQJLytg6VNqWQimHUcdzk4zrtk=";
+    hash = "sha256-8yr6mIDZVy6m8iphVVD0Pz5RZXeplZrEoDzBHf2/iLs=";
   };
 
   dontUnpack = true;
