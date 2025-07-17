@@ -130,10 +130,11 @@ in {
         cgroupDevices = mkOption {
           type = types.listOf types.str;
           description = "Devices registered to be passed to the vm";
-          default = [
+          example = [
             "/dev/input/by-id/usb-SINO_WEALTH_Gaming_KB-event-kbd"
             "/dev/input/by-id/usb-Razer_Razer_DeathAdder_Essential-event-mouse"
           ];
+          apply = unique;
         };
       };
 
