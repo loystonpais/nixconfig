@@ -40,7 +40,7 @@ in {
 
   config = mkIf cfg.enable {
     boot.extraModulePackages = with config.boot.kernelPackages; [
-      (inputs.self.packages.${system}.kvmfr {inherit kernel;})
+      (inputs.self.packages.${system}.kvmfr.override {inherit kernel;})
     ];
     boot.initrd.kernelModules = ["kvmfr"];
 
@@ -51,5 +51,9 @@ in {
     services.udev.extraRules = optionals cfg.shm.enable ''
       SUBSYSTEM=="kvmfr", OWNER="${cfg.shm.user}", GROUP="${cfg.shm.group}", MODE="${cfg.shm.mode}"
     '';
+
+    lunar.modules.virtual-machine.cgroupDevices = [
+      "/dev/kvmfr0"
+    ];
   };
 }
