@@ -1,4 +1,9 @@
-{prismlauncher-unwrapped, ...}: let
+{
+  prismlauncher-unwrapped,
+  stdenv,
+  msaClientID ? null,
+  gamemodeSupport ? stdenv.hostPlatform.isLinux,
+}: let
   patchOfflineTrigger = ''
     function_name="AccountListPage::on_actionAddOffline_triggered"
     patch_file="./launcher/ui/pages/global/AccountListPage.cpp"
@@ -17,9 +22,11 @@
     fi
   '';
 in
-  prismlauncher-unwrapped.overrideAttrs
-  (p: {
-    version = p.version + "-crack";
-    prePatch = patchOfflineTrigger + "\n\n" + patchOwnsMinecraft;
-    __intentionallyOverridingVersion = true;
-  })
+  (
+    prismlauncher-unwrapped.overrideAttrs
+    (p: {
+      version = p.version + "-crack";
+      prePatch = (p.prePatch or "") + patchOfflineTrigger + "\n\n" + patchOwnsMinecraft;
+      __intentionallyOverridingVersion = true;
+    })
+  ).override {inherit msaClientID gamemodeSupport;}
