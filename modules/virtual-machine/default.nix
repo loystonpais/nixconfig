@@ -45,7 +45,7 @@
       user = "${config.lunar.username}"
       qroup = "kvm"
       cgroup_device_acl = [
-          ${devicesString}
+          ${devicesString},
           "/dev/null", "/dev/full", "/dev/zero",
           "/dev/random", "/dev/urandom", "/dev/ptmx",
           "/dev/kvm", "/dev/rtc", "/dev/hpet"
@@ -53,7 +53,7 @@
     '';
 
     # Adding username to the necessary groups
-    users.users.${config.lunar.username}.extraGroups = ["libvirtd" "kvm" "input"];
+    users.users.${config.lunar.username}.extraGroups = ["libvirtd" "kvm" "input" "libvirt"];
 
     # Enabling usb redirection
     virtualisation.spiceUSBRedirection.enable = true;
