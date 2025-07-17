@@ -19,6 +19,20 @@
     {
       lunar.modules.minecraft.cracked = true;
       environment.systemPackages = with pkgs; [
+        # Accessible from /run/current-system/sw/share/java-collection/
+        # Example: /run/current-system/sw/share/java-collection/jdk17/bin/java
+        (pkgs.linkFarm "java-collection" [
+          {
+            name = "share/java-collection/jdk17";
+            path = pkgs.jdk17;
+          }
+
+          {
+            name = "share/java-collection/jdk21";
+            path = pkgs.jdk21;
+          }
+        ])
+
         prismlauncher
         jdk21
         inputs.self.packages.${system}.ninjabrainbot
