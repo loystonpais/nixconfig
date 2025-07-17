@@ -30,6 +30,7 @@ stdenv.mkDerivation rec {
 
     makeWrapper ${jre}/bin/java $out/bin/${pname} \
       --add-flags "-jar $out/share/java/${pname}-${version}.jar" \
+      --prefix _JAVA_OPTIONS : '-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true' \
       --prefix LD_LIBRARY_PATH : ${
       lib.makeLibraryPath [
         libxkbcommon
