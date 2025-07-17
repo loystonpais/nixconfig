@@ -49,6 +49,7 @@
         "nix"
         "toml"
         "html"
+        "html-jinja"
         "xml"
         "lua"
         "typos"
