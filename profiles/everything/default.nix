@@ -6,7 +6,6 @@
 with lib; {
   config = mkIf config.lunar.profile.everything.enable {
     lunar.modules = {
-      desktop-environments.enableAll = mkDefault true;
       distrobox.enable = mkDefault true;
       gamedev.enable = mkDefault true;
       gaming.enable = mkDefault true;
@@ -26,6 +25,7 @@ with lib; {
       hardware.enable = mkDefault true;
       nixvim.enable = mkDefault true;
       niri.enable = mkDefault true;
+      plasma.enable = mkDefault true;
 
       home-manager = {
         enable = mkDefault true;

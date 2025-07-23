@@ -108,12 +108,6 @@ in {
       graphics.enable = mkEnableOption "graphics";
       hardware.enable = mkEnableOption "hardware";
 
-      desktop-environments = {
-        enableAll = mkEnableOption "all available desktop environments";
-        hyprland.enable = mkEnableOption "hyprland";
-        plasma.enable = mkEnableOption "plasma";
-      };
-
       distrobox.enable = mkEnableOption "distrobox";
       gamedev.enable = mkEnableOption "gamedev";
 

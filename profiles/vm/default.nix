@@ -6,7 +6,7 @@
 }:
 with lib; {
   config = mkIf config.lunar.profile.vm.enable {
-    lunar.modules.desktop-environments.hyprland.enable = mkDefault true;
+    lunar.modules.plasma.enable = mkDefault true;
     lunar.modules.multimedia.enable = mkDefault true;
 
     lunar.modules.home-manager.enable = mkDefault true;
