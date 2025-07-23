@@ -1,6 +1,6 @@
 {
   stdenv,
-  fetchgit,
+  fetchFromGitHub,
   cmake,
   clang,
   ffmpeg,
@@ -10,8 +10,9 @@ stdenv.mkDerivation {
   pname = "davinci-linux-aac-codec";
   version = "1.0.0";
 
-  src = fetchgit {
-    url = "https://github.com/Toxblh/davinci-linux-aac-codec";
+  src = fetchFromGitHub {
+    owner = "Toxblh";
+    repo = "davinci-linux-aac-codec";
     rev = "bca3dad197ed00bfc232acde79a5fe032f240f7a";
     hash = "sha256-sm0KF2be0jYTnOYVGQciWJ9IzBlWqWhs7H9oNk3G3TI=";
   };
