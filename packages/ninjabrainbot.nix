@@ -7,6 +7,11 @@
   jre,
   libxkbcommon,
   xorg,
+  javaOptions ? [
+    "-Dswing.defaultlaf=javax.swing.plaf.metal.MetalLookAndFeel"
+    "-Dawt.useSystemAAFontSettings=on"
+    "-Dswing.aatext=true"
+  ],
 }:
 stdenv.mkDerivation rec {
   pname = "ninjabrainbot";
@@ -30,7 +35,7 @@ stdenv.mkDerivation rec {
 
     makeWrapper ${jre}/bin/java $out/bin/${pname} \
       --add-flags "-jar $out/share/java/${pname}-${version}.jar" \
-      --prefix _JAVA_OPTIONS : '-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true' \
+      --prefix _JAVA_OPTIONS : '${lib.escapeShellArgs javaOptions}' \
       --prefix LD_LIBRARY_PATH : ${
       lib.makeLibraryPath [
         libxkbcommon
