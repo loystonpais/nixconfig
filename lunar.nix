@@ -21,7 +21,7 @@ with lib; {
   programs.nix-ld.enable = true;
 
   environment.systemPackages = with pkgs; [
-    vim
+    micro
     git
     fastfetch
     nh
