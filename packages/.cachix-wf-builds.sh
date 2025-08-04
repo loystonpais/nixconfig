@@ -1,2 +1,2 @@
 nix build .#kvmfr
-nix build .#prismlauncher-crack
+nix build .#prismlauncher-unwrapped-crack
