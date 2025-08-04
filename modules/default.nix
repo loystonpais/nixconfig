@@ -6,7 +6,6 @@
   #imports = map (name: ./. + ( "/" + name)) (attrNames (readDir ./.));
 
   imports = [
-    ./desktop-environments
     ./misc
     ./distrobox
     ./gamedev
@@ -25,9 +24,13 @@
     ./audio
     ./graphics
     ./vpn
-    ./nixvim
     ./rclone
     ./niri
+    ./stylix
+    ./waybar
+    ./plasma
+    ./nvf
+    ./bluetooth
 
     ./home-manager
   ];
