@@ -89,10 +89,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     nur = {
       url = "github:nix-community/NUR";
@@ -102,7 +98,6 @@
     stylix = {
       url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
     };
 
     plasma-manager = {
@@ -111,8 +106,8 @@
       inputs.home-manager.follows = "home-manager";
     };
 
-    winapps = {
-      url = "github:winapps-org/winapps";
+    nvf = {
+      url = "github:notashelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -146,5 +141,10 @@
       url = "github:loystonpais/idk-shell-command";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # nix-mc = {
+    #   url = "git+file:///home/loystonpais/Shells/nix-minecraft-launcher?ref=rewrite";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
   };
 }
