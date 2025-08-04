@@ -72,6 +72,7 @@
         "assembly"
         "ruby"
         "kdl"
+        "just"
 
         # Themes
         "xcode-themes"
@@ -103,7 +104,7 @@
           working_directory = "current_project_directory";
           detect_venv = "off";
         };
-        theme = lib.mkDefault "JetBrains New Dark";
+        theme = lib.mkForce "JetBrains New Dark";
         load_direnv = "shell_hook";
         base_keymap = "VSCode";
         show_whitespaces = "all";
@@ -121,9 +122,9 @@
         outline_panel.dock = "right";
         project_panel.dock = "right";
 
-        font_family = "FiraCode Nerd Font Mono";
-        buffer_font_family = "FiraCode Nerd Font Mono";
-        terminal.font_family = "FiraCode Nerd Font Mono";
+        font_family = lib.mkDefault "Fira Code";
+        buffer_font_family = lib.mkDefault "Fira Code";
+        terminal.font_family = lib.mkDefault "Fira Code";
         format_on_save = "on";
 
         node = {
