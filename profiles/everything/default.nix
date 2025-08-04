@@ -26,6 +26,7 @@ with lib; {
       nixvim.enable = mkDefault true;
       niri.enable = mkDefault true;
       plasma.enable = mkDefault true;
+      bluetooth.enable = mkDefault true;
 
       home-manager = {
         enable = mkDefault true;
