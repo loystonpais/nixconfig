@@ -58,5 +58,8 @@ in {
     environment.systemPackages = with pkgs; [
       waywall
     ];
+
+    # Xwayland should be running for waywall to open ninb
+    programs.xwayland.enable = true;
   };
 }
