@@ -44,6 +44,7 @@
         pavucontrol
         libnotify
         playerctl
+        wl-kbptr
       ];
 
       # services.mako.enable = lib.mkDefault true;
