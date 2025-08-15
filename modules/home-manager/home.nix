@@ -37,6 +37,12 @@
       # };
     };
   };
+  programs.zoxide = {
+    enable = lib.mkDefault true;
+    enableZshIntegration = lib.mkDefault true;
+    enableBashIntegration = lib.mkDefault true;
+  };
+
 
   home.packages = lib.mkMerge [
     (
