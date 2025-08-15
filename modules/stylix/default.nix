@@ -86,6 +86,8 @@
             };
 
             zed.enable = true;
+
+            vscode.enable = lib.mkDefault false;
           };
 
           #home.file.".config/gtk-3.0/gtk.css".force = lib.mkDefault true;
