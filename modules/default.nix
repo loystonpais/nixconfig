@@ -31,6 +31,7 @@
     ./plasma
     ./nvf
     ./bluetooth
+    ./vscode
 
     ./home-manager
   ];
