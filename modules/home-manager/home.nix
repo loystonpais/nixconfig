@@ -23,6 +23,21 @@
     enableBashIntegration = true;
   };
 
+  programs.ssh = {
+    enable = true;
+    matchBlocks = {
+      "*" = {
+        setEnv = {
+          # https://ghostty.org/docs/help/terminfo#configure-ssh-to-fall-back-to-a-known-terminfo-entry
+          TERM = "xterm-256color";
+        };
+      };
+      # pureintent = {
+      #   forwardAgent = true;
+      # };
+    };
+  };
+
   home.packages = lib.mkMerge [
     (
       # TODO: Maybe add an option to enable templates
