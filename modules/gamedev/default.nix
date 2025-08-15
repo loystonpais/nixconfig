@@ -20,7 +20,6 @@
       krita
       inkscape
       tiled
-      vscode
       godot-mono
 
       # As for blender use blender-bin if graphics is set to nvidia or asuslinux
@@ -30,5 +29,7 @@
         else blender
       )
     ];
+
+    lunar.modules.vscode.enable = lib.mkDefault true;
   };
 }
