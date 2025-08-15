@@ -23,39 +23,17 @@
     {
       lunar.modules.minecraft.mcsr.enable = lib.mkDefault true;
       lunar.modules.minecraft.cracked = true;
+
+      # Accessible from /etc/java-collection/
+      # Example: /etc/java-collection/jdk17/bin/java
+      environment.etc."java-collection/jdk17".source = pkgs.jdk17;
+      environment.etc."java-collection/jdk21".source = pkgs.jdk21;
+
+      environment.etc."glfw-collection/glfw3".source = pkgs.glfw3;
+      environment.etc."glfw-collection/glfw3-minecraft-cursorfix".source = inputs.self.packages.${system}.glfw3-minecraft-cursorfix;
+      environment.etc."glfw-collection/glfw3-waywall".source = inputs.self.packages.${system}.glfw3-waywall;
+
       environment.systemPackages = with pkgs; [
-        # Accessible from /run/current-system/sw/share/java-collection/
-        # Example: /run/current-system/sw/share/java-collection/jdk17/bin/java
-        (pkgs.linkFarm "java-collection" [
-          {
-            name = "share/java-collection/jdk17";
-            path = pkgs.jdk17;
-          }
-
-          {
-            name = "share/java-collection/jdk21";
-            path = pkgs.jdk21;
-          }
-        ])
-
-        # Collection of Glfw3
-        (pkgs.linkFarm "glfw-collection" [
-          {
-            name = "share/glfw-collection/glfw3";
-            path = pkgs.glfw3;
-          }
-
-          {
-            name = "share/glfw-collection/glfw3-minecraft-cursorfix";
-            path = inputs.self.packages.${system}.glfw3-minecraft-cursorfix;
-          }
-
-          {
-            name = "share/glfw-collection/glfw3-waywall";
-            path = inputs.self.packages.${system}.glfw3-waywall;
-          }
-        ])
-
         prismlauncher
 
         waywall
