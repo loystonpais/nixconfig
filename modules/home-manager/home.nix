@@ -16,11 +16,6 @@
     ".config/kate/lspclient/settings.json".source = ../../assets/kate_lsp.json;
   };
 
-  home.file."Books" = {
-    source = inputs.self.packages.${system}.goalkicker-books;
-    recursive = true;
-  };
-
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
