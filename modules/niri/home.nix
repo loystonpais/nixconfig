@@ -88,10 +88,12 @@
             "Mod+T".action = spawn "ghostty";
             "Mod+D".action = spawn "fuzzel";
             "Mod+Q".action = close-window;
-            "Mod+E".action = spawn "zeditor";
+            "Mod+E".action = spawn "code";
+            "Mod+Shift+E".action = spawn "zeditor";
             "Mod+M".action = sh "prismlauncher -l FSG";
             "Mod+S".action = spawn "stremio";
             "Mod+B".action = spawn "zen";
+            "Mod+X".action = spawn (lib.getExe pkgs.wl-kbptr);
             "Mod+Shift+B".action = spawn "brave";
             "Mod+Shift+Ctrl+Alt+P".action = sh "shutdown now";
 
@@ -104,7 +106,7 @@
             #"Ctrl-Print".action = screenshot-screen;
             "Alt+Print".action = screenshot-window;
 
-            "Mod+Shift+E".action = quit;
+            "Mod+Shift+Q".action = quit;
             "Ctrl+Alt+Delete".action = quit;
 
             "Mod+Shift+P".action = power-off-monitors;
