@@ -13,6 +13,7 @@
         mkEnableOption "supergfxd lsof patch";
       spotify-adblock-overlay.enable = mkEnableOption "spotify adblock patch";
       libadwaita-without-adwaita-overlay.enable = mkEnableOption "libadwaita-without-adwaita patch";
+      glfw3-minecraft-cursorfix-overlay.enable = mkEnableOption "glfw3 minecraft cursor fix";
     };
   };
 
@@ -50,7 +51,7 @@
           jq
           bat
           rsync
-          inputs.idk-shell-command.packages.${system}.default
+          #  inputs.idk-shell-command.packages.${system}.default
         ];
       }
     )
@@ -86,11 +87,24 @@
     )
 
     (
+      lib.mkIf (config.lunar.modules.misc.glfw3-minecraft-cursorfix-overlay.enable && config.lunar.expensiveBuilds) {
+        nixpkgs.overlays = [
+          (
+            final: prev: {
+              glfw3-minecraft = inputs.self.packages.${system}.glfw3-minecraft-cursorfix;
+            }
+          )
+        ];
+      }
+    )
+
+    (
       lib.mkIf config.lunar.modules.misc.enableAll {
         lunar.modules.misc = {
           libadwaita-without-adwaita-overlay.enable = lib.mkDefault true;
           spotify-adblock-overlay.enable = lib.mkDefault true;
           supergfxd-lsof-overlay.enable = lib.mkDefault true;
+          glfw3-minecraft-cursorfix-overlay.enable = lib.mkDefault true;
         };
       }
     )
