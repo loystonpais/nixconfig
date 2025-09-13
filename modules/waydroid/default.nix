@@ -10,7 +10,7 @@
     virtualisation.waydroid.enable = true;
     environment.systemPackages = with pkgs; [
       wl-clipboard
-      inputs.nur.legacyPackages.${system}.repos.ataraxiasjel.waydroid-script
+      # inputs.nur.legacyPackages.${system}.repos.ataraxiasjel.waydroid-script
     ];
   };
 }

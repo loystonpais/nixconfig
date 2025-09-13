@@ -97,8 +97,6 @@ in {
 
     specialisations = {
       enable = mkEnableOption "lunar specific specialisations";
-      gruvbox.enable = mkEnableOption "enable gruvbox specialisation";
-      productive.enable = mkEnableOption "enable productive specialisation";
     };
 
     modules = {
@@ -187,10 +185,7 @@ in {
         };
       };
 
-      browsers = {
-        enable = mkEnableOption "browser configuration";
-        zen = {enable = mkEnableOption "zen browser configuration";};
-      };
+      # browsers moved to modules
 
       ssh.enable = mkEnableOption "ssh";
 

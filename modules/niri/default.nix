@@ -17,6 +17,23 @@
 
   config = lib.mkIf config.lunar.modules.niri.enable (lib.mkMerge [
     {
+      # sddm
+      services.displayManager.defaultSession = lib.mkDefault "niri";
+      services.displayManager.sddm.wayland.enable = true;
+      services.displayManager.sddm.enable = true;
+    }
+
+    {
+      # icons
+      environment.systemPackages = [
+        (pkgs.whitesur-icon-theme.override {
+          alternativeIcons = true;
+          boldPanelIcons = true;
+        })
+      ];
+    }
+
+    {
       lunar.modules.waybar.enable = lib.mkDefault true;
 
       programs.niri.enable = true;

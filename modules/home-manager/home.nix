@@ -49,6 +49,21 @@
     enableBashIntegration = lib.mkDefault true;
   };
 
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "text/html" = lib.mkDefault "zen.desktop";
+      "text/markdown" = lib.mkDefault "zeditor.desktop";
+      "text/plain" = lib.mkDefault "zeditor.desktop";
+      #"image/png" = ".desktop";
+      #"image/jpeg" = "pqiv.desktop";
+      #"image/gif" = "pqiv.desktop";
+      #"image/webp" = "pqiv.desktop";
+      "application/pdf" = lib.mkDefault "okular.desktop";
+      "x-scheme-handler/http" = lib.mkDefault "zen.desktop";
+      "x-scheme-handler/https" = lib.mkDefault "zen.desktop";
+    };
+  };
 
   home.packages = lib.mkMerge [
     (

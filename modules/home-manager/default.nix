@@ -25,14 +25,10 @@
           ./home.nix
           ./fonts
           ./git
-          ./hyprland
-          ./plasma
           ./program-collection
           ./secrets
           ./zsh
           ./zed
-          ./browsers
-          ./niri
         ];
       };
     };
@@ -46,7 +42,6 @@
       zsh.enable = lib.mkDefault true;
       program-collection.enable = lib.mkDefault true;
       zed.enable = lib.mkDefault true;
-      browsers.enableAll = lib.mkDefault true;
     };
   };
 }
