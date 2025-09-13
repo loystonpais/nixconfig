@@ -8,6 +8,7 @@
 }: {
   imports = [
     ./mcsr
+    ./nixcraft
   ];
 
   options = {
@@ -23,6 +24,7 @@
     {
       lunar.modules.minecraft.mcsr.enable = lib.mkDefault true;
       lunar.modules.minecraft.cracked = true;
+      lunar.modules.nixcraft.enable = true;
 
       # Accessible from /etc/java-collection/
       # Example: /etc/java-collection/jdk17/bin/java

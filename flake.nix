@@ -146,5 +146,10 @@
       url = "github:nix-community/nix-vscode-extensions";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixcraft = {
+      url = "path:///home/loystonpais/Shells/nixcraft";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 }

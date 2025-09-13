@@ -7,38 +7,42 @@
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHtN04FVSVonasScikFfltCPFJkSWa3t3z+wo+JA8GGd loyston500@gmail.com"
   ];
 
-  lunar.modules.virtual-machine.cgroupDevices = [
-    #"/dev/input/by-id/usb-Razer_Razer_DeathAdder_Essential-event-mouse"
-    #"/dev/input/by-id/usb-Usb_KeyBoard_Usb_KeyBoard-event-kbd"
-    "/dev/input/by-id/usb-Logitech_Gaming_Mouse_G402_497B57573447-event-mouse"
-    "/dev/input/by-id/usb-SINO_WEALTH_Gaming_KB-event-kbd"
-  ];
-
-  lunar.modules.android.adbDevices = {
-    vili = {
-      ip = "192.168.44.1";
-      port = 5555;
-    };
-    ysl = {
-      ip = "192.168.54.1";
-      port = 5555;
-    };
-    j4plus = {
-      ip = "192.168.64.1";
-      port = 5555;
-    };
-  };
-
   # Set your profile
   lunar.profile.everything.enable = true;
+  lunar.modules = {
+    virtual-machine.cgroupDevices = [
+      #"/dev/input/by-id/usb-Razer_Razer_DeathAdder_Essential-event-mouse"
+      #"/dev/input/by-id/usb-Usb_KeyBoard_Usb_KeyBoard-event-kbd"
+      "/dev/input/by-id/usb-Logitech_Gaming_Mouse_G402_497B57573447-event-mouse"
+      "/dev/input/by-id/usb-SINO_WEALTH_Gaming_KB-event-kbd"
+    ];
 
-  # Exclusion
-  lunar.modules.samba.enable = false;
-  lunar.modules.nvf.enable = false;
-  lunar.modules.distrobox.enable = false;
-  lunar.modules.plasma.enable = false;
+    android.adbDevices = {
+      vili = {
+        ip = "192.168.44.1";
+        port = 5555;
+      };
+      ysl = {
+        ip = "192.168.54.1";
+        port = 5555;
+      };
+      j4plus = {
+        ip = "192.168.64.1";
+        port = 5555;
+      };
+    };
 
-  lunar.modules.plasma.mode = "productive";
-  lunar.modules.stylix.enable = true;
-  lunar.modules.virtual-machine.nixvirt.enable = false;
+    # Exclusion
+    samba.enable = false;
+    nvf.enable = false;
+    distrobox.enable = false;
+    # plasma.enable = false;
+    plasma.mode = "productive";
+    virtual-machine.nixvirt.enable = false;
+    winapps.enable = false;
+
+    stylix.enable = true;
+  };
+
+  lunar.expensiveBuilds = false;
 }

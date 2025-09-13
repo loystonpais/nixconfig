@@ -156,6 +156,8 @@
     # interfaces.enp7s0f3u1u2.useDHCP = true;
   };
 
+  services.displayManager.defaultSession = lib.mkForce "niri";
+
   boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
 
   systemd.services.auractl-wallpaper = let
