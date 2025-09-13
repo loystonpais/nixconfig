@@ -66,7 +66,7 @@
       };
     };
 
-    home-manager.backupFileExtension = lib.mkDefault ".nixbak";
+    home-manager.backupFileExtension = lib.mkDefault "nixbak";
 
     home-manager.users.${config.lunar.username} = {
       imports = [
