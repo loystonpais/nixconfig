@@ -18,6 +18,8 @@ in {
         profiles = {
           default = {
             userSettings = {
+              "update.mode" = "none";
+
               "continue.telemetryEnabled" = false;
 
               "diffEditor.ignoreTrimWhitespace" = false;
@@ -59,131 +61,145 @@ in {
               "editor.wordWrapColumn" = 120;
               "editor.fontLigatures" = true;
               "editor.tabSize" = 2;
+
+              # Nix IDE LSP Settings
+              "nix.enableLanguageServer" = true;
+              "nix.serverPath" = lib.getExe pkgs.nil;
+              "nix.formatterPath" = lib.getExe pkgs.alejandra;
+              # "nix.serverSettings" = {
+              #   nil = {
+              #     formatting = {
+              #       "command" = [(lib.getExe pkgs.alejandra)];
+              #     };
+              #   };
+              # };
             };
 
-            extensions = with pkgs.vscode-marketplace; [
-              # Nix
-              bbenoist.nix
-              # brettm12345.nixfmt-vscode
-              jnoortheen.nix-ide
-              jeff-hykin.better-nix-syntax
-              kamadorueda.alejandra
-              #?? perkovec.nix-extension-pack
+            extensions =
+              (with pkgs.vscode-extensions; [
+                # Nix
+                bbenoist.nix
+                # brettm12345.nixfmt-vscode
+                jnoortheen.nix-ide
+                jeff-hykin.better-nix-syntax
+                kamadorueda.alejandra
+                #?? perkovec.nix-extension-pack
+              ])
+              ++ (with pkgs.vscode-marketplace; [
+                # Rust
+                rust-lang.rust-analyzer
+                tamasfe.even-better-toml
+                dustypomerleau.rust-syntax
 
-              # Rust
-              rust-lang.rust-analyzer
-              tamasfe.even-better-toml
-              dustypomerleau.rust-syntax
+                # Golang
+                golang.go
 
-              # Golang
-              golang.go
+                # Gleam
+                gleam.gleam
 
-              # Gleam
-              gleam.gleam
+                # Nushell
+                thenuprojectcontributors.vscode-nushell-lang
 
-              # Nushell
-              thenuprojectcontributors.vscode-nushell-lang
+                # Dart/Flutter
+                dart-code.dart-code
+                dart-code.flutter
+                nash.awesome-flutter-snippets
 
-              # Dart/Flutter
-              dart-code.dart-code
-              dart-code.flutter
-              nash.awesome-flutter-snippets
+                # Python
+                ms-python.python
+                ms-python.vscode-pylance
+                ms-python.debugpy
+                ms-python.mypy-type-checker
+                magicstack.magicpython
 
-              # Python
-              ms-python.python
-              ms-python.vscode-pylance
-              ms-python.debugpy
-              ms-python.mypy-type-checker
-              magicstack.magicpython
+                # Markdown
+                yzhang.markdown-all-in-one
+                shd101wyy.markdown-preview-enhanced
+                davidanson.vscode-markdownlint
+                myml.vscode-markdown-plantuml-preview
+                unifiedjs.vscode-mdx
 
-              # Markdown
-              yzhang.markdown-all-in-one
-              shd101wyy.markdown-preview-enhanced
-              davidanson.vscode-markdownlint
-              myml.vscode-markdown-plantuml-preview
-              unifiedjs.vscode-mdx
+                # Haskell
+                haskell.haskell
 
-              # Haskell
-              haskell.haskell
+                # XML/YAML/Config
+                redhat.vscode-yaml
+                redhat.vscode-xml
 
-              # XML/YAML/Config
-              redhat.vscode-yaml
-              redhat.vscode-xml
+                # JavaScript/TypeScript
+                dbaeumer.vscode-eslint
+                yoavbls.pretty-ts-errors
 
-              # JavaScript/TypeScript
-              dbaeumer.vscode-eslint
-              yoavbls.pretty-ts-errors
+                # Web Development
+                shopify.ruby-lsp
+                styled-components.vscode-styled-components
+                svelte.svelte-vscode
+                ms-vscode.live-server
+                #?? pulkitgangwar.liveserver
+                dsznajder.es7-react-js-snippets
+                pulkitgangwar.nextjs-snippets
+                wix.vscode-import-cost
+                vincaslt.highlight-matching-tag
+                formulahendry.auto-close-tag
+                formulahendry.auto-rename-tag
+                george-alisson.html-preview-vscode
 
-              # Web Development
-              shopify.ruby-lsp
-              styled-components.vscode-styled-components
-              svelte.svelte-vscode
-              ms-vscode.live-server
-              #?? pulkitgangwar.liveserver
-              dsznajder.es7-react-js-snippets
-              pulkitgangwar.nextjs-snippets
-              wix.vscode-import-cost
-              vincaslt.highlight-matching-tag
-              formulahendry.auto-close-tag
-              formulahendry.auto-rename-tag
-              george-alisson.html-preview-vscode
+                # DevOps
+                hashicorp.terraform
+                ms-azuretools.vscode-docker
+                github.vscode-github-actions
+                github.vscode-pull-request-github
+                gitlab.gitlab-workflow
 
-              # DevOps
-              hashicorp.terraform
-              ms-azuretools.vscode-docker
-              github.vscode-github-actions
-              github.vscode-pull-request-github
-              gitlab.gitlab-workflow
+                # Git
+                eamodio.gitlens
+                mhutchie.git-graph
+                vivaxy.vscode-conventional-commits
+                donjayamanne.githistory
 
-              # Git
-              eamodio.gitlens
-              mhutchie.git-graph
-              vivaxy.vscode-conventional-commits
-              donjayamanne.githistory
+                # CSV/Data
+                mechatroner.rainbow-csv
 
-              # CSV/Data
-              mechatroner.rainbow-csv
+                # Icons/Themes
+                pkief.material-icon-theme
+                vscode-icons-team.vscode-icons
 
-              # Icons/Themes
-              pkief.material-icon-theme
-              vscode-icons-team.vscode-icons
+                # Formatters
+                esbenp.prettier-vscode
 
-              # Formatters
-              esbenp.prettier-vscode
+                # Direnv/Nix-shell
+                mkhl.direnv
 
-              # Direnv/Nix-shell
-              mkhl.direnv
+                # C/C++
+                llvm-vs-code-extensions.vscode-clangd
 
-              # C/C++
-              llvm-vs-code-extensions.vscode-clangd
+                # Miscellaneous
+                aaron-bond.better-comments
 
-              # Miscellaneous
-              aaron-bond.better-comments
+                editorconfig.editorconfig
+                oderwat.indent-rainbow
+                jebbs.plantuml
+                mushan.vscode-paste-image
+                shardulm94.trailing-spaces
+                tomoki1207.pdf
+                # lucono.karma-test-explorer
+                graphql.vscode-graphql
+                wushuaibuaa.autocomplete-english-word
+                shopify.ruby-extensions-pack
+                kisstkondoros.vscode-gutter-preview
+                legale.dts-formatter
+                # vadimcn.vscode-lldb
+                wholroyd.jinja
+                jmkrivocapich.drawfolderstructure
 
-              editorconfig.editorconfig
-              oderwat.indent-rainbow
-              jebbs.plantuml
-              mushan.vscode-paste-image
-              shardulm94.trailing-spaces
-              tomoki1207.pdf
-              # lucono.karma-test-explorer
-              graphql.vscode-graphql
-              wushuaibuaa.autocomplete-english-word
-              shopify.ruby-extensions-pack
-              kisstkondoros.vscode-gutter-preview
-              legale.dts-formatter
-              # vadimcn.vscode-lldb
-              wholroyd.jinja
-              jmkrivocapich.drawfolderstructure
+                ms-vscode-remote.remote-ssh
 
-              ms-vscode-remote.remote-ssh
-
-              # ms-dotnettools.vscode-dotnet-runtime # install from nixpkgs
-              # ms-dotnettools.csdevkit
-              # neikeq.godot-csharp-vscode # causes huge rebuild
-              # ms-dotnettools.csharp # causes huge rebuild
-              # ms-vscode.mono-debug
-            ];
+                # ms-dotnettools.vscode-dotnet-runtime # install from nixpkgs
+                # ms-dotnettools.csdevkit
+                # neikeq.godot-csharp-vscode # causes huge rebuild
+                # ms-dotnettools.csharp # causes huge rebuild
+                # ms-vscode.mono-debug
+              ]);
           };
         };
       };
