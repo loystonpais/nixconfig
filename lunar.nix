@@ -1,4 +1,10 @@
-{ config, pkgs, lib, inputs, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
+}:
 with lib; {
   imports = [
     # Directories with default.nix are generally module configurations
@@ -13,8 +19,7 @@ with lib; {
   networking.hostName = config.lunar.hostName;
   networking.networkmanager.enable = true;
   networking.firewall.enable = true;
-  networking.nameservers = [ "1.1.1.1" "8.8.8.8" "8.8.4.4" ];
-
+  networking.nameservers = ["1.1.1.1" "8.8.8.8" "8.8.4.4"];
 
   security.rtkit.enable = true;
 
@@ -50,8 +55,8 @@ with lib; {
       "loystonpais.cachix.org-1:lclfaBitH51Lw9WwBxQ4bbesdt7c01JlFbKoSZ0PMLc="
       # "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
     ];
-    experimental-features = [ "nix-command" "flakes" ];
-    trusted-users = [ "root" config.lunar.username ];
+    experimental-features = ["nix-command" "flakes"];
+    trusted-users = ["root" config.lunar.username];
   };
 
   nix.registry = {
@@ -59,5 +64,5 @@ with lib; {
     # nixpkgs-stable.flake = inputs.nixpkgs-24_11;
   };
 
-  system.nixos.tags = [ "lunar" ];
+  system.nixos.tags = ["lunar"];
 }
