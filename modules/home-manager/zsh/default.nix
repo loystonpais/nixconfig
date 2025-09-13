@@ -40,6 +40,7 @@
         collect = "nix-collect-garbage";
         collectd = "nix-collect-garbage -d";
         cpr = "rsync -avhP --partial --inplace";
+        lstr = "ls -tr";
       };
       history = {
         size = 10000000;
