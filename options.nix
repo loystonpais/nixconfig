@@ -83,6 +83,18 @@ in {
       default = true;
     };
 
+    flakePath = mkOption {
+      type = types.str;
+      description = "Path to nixconfig";
+      default = "/home/${config.lunar.username}/nixconfig";
+    };
+
+    wallpaper = mkOption {
+      type = types.nullOr types.str;
+      description = "Path to wallpaper";
+      default = null;
+    };
+
     specialisations = {
       enable = mkEnableOption "lunar specific specialisations";
       gruvbox.enable = mkEnableOption "enable gruvbox specialisation";
