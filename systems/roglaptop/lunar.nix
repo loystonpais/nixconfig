@@ -34,9 +34,11 @@
 
   # Exclusion
   lunar.modules.samba.enable = false;
+  lunar.modules.nvf.enable = false;
+  lunar.modules.distrobox.enable = false;
+  lunar.modules.plasma.enable = false;
 
-  home-manager.users.${config.lunar.username} = {
-    lunar.plasma.mode = "productive";
-    lunar.niri.enable = true;
-  };
+  lunar.modules.plasma.mode = "productive";
+  lunar.modules.stylix.enable = true;
+  lunar.modules.virtual-machine.nixvirt.enable = false;
 }
