@@ -25,6 +25,7 @@
     sops.secrets.wireguard-server-common-private-key.owner = config.lunar.username;
     sops.secrets."wireguard-client-${config.lunar.hostName}-private-key" = lib.mkIf (config.lunar.modules.vpn.wireguard.enableMode == "client" && config.lunar.modules.vpn.wireguard.clientPrivateKeyInSops) {owner = config.lunar.username;};
     sops.secrets.loy-ftp-sh-dns-update-url.owner = config.lunar.username;
+    sops.secrets.openrouter-key.owner = config.lunar.username;
     sops.secrets."postfix/sasl_passwd" = {
       owner = lib.mkIf config.services.postfix.enable config.services.postfix.user;
     };
@@ -40,6 +41,8 @@
       CACHIX_AUTH_TOKEN = config.sops.secrets.cachix-loystonpais-auth-token;
 
       ATARAXY_BOT_TOKEN = config.sops.secrets.ataraxy-bot-token;
+
+      OPENROUTER_KEY = config.sops.secrets.openrouter-key;
     };
 
     sops.secrets.auto-resume-builder = {
