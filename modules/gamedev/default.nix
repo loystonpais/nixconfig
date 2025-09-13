@@ -25,7 +25,7 @@
       # As for blender use blender-bin if graphics is set to nvidia or asuslinux
       (
         if config.lunar.graphicsMode == "nvidia" || config.lunar.graphicsMode == "asuslinux"
-        then inputs.blender-bin.packages.${system}.default
+        then blender # inputs.blender-bin.packages.${system}.default
         else blender
       )
     ];

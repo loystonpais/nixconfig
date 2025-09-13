@@ -6,7 +6,7 @@
 }: {
   config = lib.mkIf config.lunar.modules.multimedia.enable {
     environment.systemPackages = with pkgs; [
-      stremio
+      # stremio
       vlc
       spotify
     ];

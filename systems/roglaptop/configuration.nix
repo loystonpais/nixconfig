@@ -97,7 +97,6 @@
   environment.variables.OLLAMA_NOPRUNE = lib.mkDefault "true";
 
   environment.systemPackages = [
-    pkgs.brave
     pkgs.cachix
     pkgs.gcc
     pkgs.rclone
@@ -209,6 +208,7 @@
       };
 
       programs.obsidian.enable = true;
+      programs.chromium.enable = lib.mkForce false;
     }
   ];
 
