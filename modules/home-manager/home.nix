@@ -37,6 +37,12 @@
       # };
     };
   };
+
+  programs.kitty.enableGitIntegration = lib.mkDefault true;
+  programs.btop.enable = lib.mkDefault true;
+  programs.tmux.enable = lib.mkDefault true;
+  programs.zellij.enable = lib.mkDefault true;
+
   programs.zoxide = {
     enable = lib.mkDefault true;
     enableZshIntegration = lib.mkDefault true;
