@@ -1,10 +1,10 @@
 {
-  systemConfig,
+  osConfig,
   lib,
   pkgs,
   ...
 }: {
-  config = lib.mkIf systemConfig.lunar.modules.home-manager.program-collection.enable {
+  config = lib.mkIf osConfig.lunar.modules.program-collection.home.enable {
     home.packages = with pkgs; [
       nil # Nix server
 
@@ -20,7 +20,10 @@
       alejandra # Nix formatter
       ruby
       jq
+      yq
       bat
+      xonsh
+      rsync
     ];
   };
 }

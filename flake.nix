@@ -106,16 +106,6 @@
       inputs.home-manager.follows = "home-manager";
     };
 
-    nvf = {
-      url = "github:notashelf/nvf";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    NixVirt = {
-      url = "https://flakehub.com/f/AshleyYakeley/NixVirt/*.tar.gz";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -134,11 +124,6 @@
 
     blender-bin = {
       url = "github:edolstra/nix-warez?dir=blender";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    idk-shell-command = {
-      url = "github:loystonpais/idk-shell-command";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

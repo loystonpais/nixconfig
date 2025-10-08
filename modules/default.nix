@@ -1,9 +1,27 @@
 {
   lib,
   config,
+  inputs,
+  system,
   ...
 }: {
-  #imports = map (name: ./. + ( "/" + name)) (attrNames (readDir ./.));
+  config = {
+    home-manager = {
+      backupFileExtension = "nixbak";
+      extraSpecialArgs = {
+        inherit inputs;
+        inherit system;
+      };
+      sharedModules = [inputs.plasma-manager.homeModules.plasma-manager];
+      useGlobalPkgs = true;
+      useUserPackages = true;
+      users.${config.lunar.username} = {
+        imports = [
+          ./home.nix
+        ];
+      };
+    };
+  };
 
   imports = [
     ./misc
@@ -26,13 +44,18 @@
     ./vpn
     ./rclone
     ./niri
-    ./stylix
+    # ./stylix -- hard to maintain
     ./waybar
     ./plasma
-    ./nvf
+    # ./nvf
     ./bluetooth
     ./vscode
-
-    ./home-manager
+    ./docker
+    ./zed
+    ./zsh
+    ./git
+    ./hyprland
+    ./program-collection
+    ./fonts
   ];
 }

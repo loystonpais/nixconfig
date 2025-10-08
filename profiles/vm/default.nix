@@ -9,8 +9,6 @@ with lib; {
     lunar.modules.plasma.enable = mkDefault true;
     lunar.modules.multimedia.enable = mkDefault true;
 
-    lunar.modules.home-manager.enable = mkDefault true;
-
     lunar.modules.ssh.enable = mkDefault true;
 
     lunar.modules.secrets.enable = mkDefault true;

@@ -1,30 +1,20 @@
 {
   config,
-  systemConfig,
+  osConfig,
   pkgs,
   lib,
   inputs,
   system,
   ...
 }: {
-  home.username = systemConfig.lunar.username;
-  home.homeDirectory = "/home/" + systemConfig.lunar.username;
+  home.username = osConfig.lunar.username;
+  home.homeDirectory = "/home/" + osConfig.lunar.username;
 
   home.sessionVariables = {};
 
-  home.file = {
-    ".config/kate/lspclient/settings.json".source = ../../assets/kate_lsp.json;
-  };
-
-  programs.direnv = {
-    enable = true;
-    nix-direnv.enable = true;
-    enableZshIntegration = true;
-    enableBashIntegration = true;
-  };
-
   programs.ssh = {
     enable = true;
+    enableDefaultConfig = false;
     matchBlocks = {
       "*" = {
         setEnv = {
@@ -36,6 +26,20 @@
       #   forwardAgent = true;
       # };
     };
+  };
+
+  # This is the default config
+  programs.ssh.matchBlocks."*" = {
+    forwardAgent = false;
+    addKeysToAgent = "no";
+    compression = false;
+    serverAliveInterval = 0;
+    serverAliveCountMax = 3;
+    hashKnownHosts = false;
+    userKnownHostsFile = "~/.ssh/known_hosts";
+    controlMaster = "no";
+    controlPath = "~/.ssh/master-%r@%n:%p";
+    controlPersist = "no";
   };
 
   programs.kitty.enableGitIntegration = lib.mkDefault true;
@@ -55,10 +59,6 @@
       "text/html" = lib.mkDefault "zen.desktop";
       "text/markdown" = lib.mkDefault "zeditor.desktop";
       "text/plain" = lib.mkDefault "zeditor.desktop";
-      #"image/png" = ".desktop";
-      #"image/jpeg" = "pqiv.desktop";
-      #"image/gif" = "pqiv.desktop";
-      #"image/webp" = "pqiv.desktop";
       "application/pdf" = lib.mkDefault "okular.desktop";
       "x-scheme-handler/http" = lib.mkDefault "zen.desktop";
       "x-scheme-handler/https" = lib.mkDefault "zen.desktop";

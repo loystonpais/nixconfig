@@ -1,10 +1,10 @@
 {
-  systemConfig,
+  osConfig,
   lib,
   pkgs,
   ...
 }: {
-  config = lib.mkIf (systemConfig.lunar.modules.home-manager.zed.enable) {
+  config = lib.mkIf (osConfig.lunar.modules.zed.home.enable) {
     home.packages = [
       (pkgs.lunar.writeKioServiceMenu "open-with-zeditor" ''
         [Desktop Entry]

@@ -166,24 +166,6 @@ in {
 
       waydroid.enable = mkEnableOption "waydroid";
       samba.enable = mkEnableOption "samba";
-      home-manager = {
-        enable = mkEnableOption "home manager";
-        enableAllModules = mkEnableOption "all home configurations";
-        hyprland.enable = mkEnableOption "hyprland home configuration";
-        plasma.enable = mkEnableOption "plasma home configuration";
-        fonts.enable = mkEnableOption "fonts configuration";
-        program-collection.enable = mkEnableOption "program collection";
-        git.enable = mkEnableOption "git configuration";
-        zsh.enable = mkEnableOption "zsh configuration";
-        secrets.enable =
-          mkEnableOption
-          "home secrets configuration (needs secrets module to be enabled)";
-        zed.enable = mkEnableOption "zed editor configuration";
-        browsers = {
-          enableAll = mkEnableOption "browser configuration";
-          zen = {enable = mkEnableOption "zen browser configuration";};
-        };
-      };
 
       # browsers moved to modules
 

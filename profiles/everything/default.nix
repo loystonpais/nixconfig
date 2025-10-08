@@ -27,12 +27,15 @@ with lib; {
       niri.enable = mkDefault true;
       plasma.enable = mkDefault true;
       bluetooth.enable = mkDefault true;
-
-      home-manager = {
-        enable = mkDefault true;
-        enableAllModules = mkDefault true;
-      };
+      docker.enable = mkDefault true;
+      fonts.enable = mkDefault true;
+      git.enable = mkDefault true;
+      hyprland.enable = mkDefault true;
+      zsh.enable = mkDefault true;
+      program-collection.enable = mkDefault true;
+      zed.enable = mkDefault true;
     };
+
     lunar.specialisations.enable = mkDefault false;
   };
 }

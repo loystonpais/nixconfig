@@ -73,5 +73,9 @@
     environment.systemPackages = with pkgs; [
       sops
     ];
+
+    home-manager.users.${config.lunar.username}.imports = [
+      ./home.nix
+    ];
   };
 }
