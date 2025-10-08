@@ -1,5 +1,6 @@
 {
   fetchurl,
+  fetchFromGitHub,
   lib,
   pkgs,
   overrideConfig ? {},
@@ -10,8 +11,16 @@
       xeunshackle = "default-latest";
       aBadAvatar = "default-latest";
       aurora = "default-latest";
+      hexpatch = "default-latest";
 
+      # Enables hexpatch version which skips the intro
       xeunshackleAlternative = true;
+
+      # Useful utility scripts
+      installDefaultAuroraUtilityScripts = true;
+
+      # My collection of aurora skins from various sources
+      installAuroraSkins = true;
 
       launch = "aurora";
     }
@@ -62,9 +71,27 @@
     default-latest = default-v0_7b2;
   };
 
-  xeunshackleAlternativeDefaultXex = fetchurl {
-    url = "https://github.com/kryptik-dev/ABadAvatar/raw/2abfe702ca1ae9557bb05531a89ba4b61fd4c171/Copy%20To%20BadUpdatePayload%20Folder/default.xex";
-    hash = "sha256-ZHMGfQa8aNuaOjlicVlTIbbqnbSHmdlMzFeze0j8dD8=";
+  hexpatch = rec {
+    default-v1_3 = unzipped (fetchurl {
+      url = "https://github.com/kryptik-dev/HexPatch/releases/download/v1.3/HexPatch.zip";
+      hash = "sha256-VCW/QPhPr8RpffecF/huylq6TtVLfR9thNINm7suDV4=";
+    });
+
+    default-latest = default-v1_3;
+  };
+
+  xboxUnityAuroraScripts = fetchFromGitHub {
+    owner = "XboxUnity";
+    rev = "5404e79ab9e2efcbcad4b9339354d54ebd231dfb";
+    repo = "AuroraScripts";
+    hash = "sha256-tk7F2A2Udwedl4KehTTD8pN2NYKepZg7MZuPU1qj8go=";
+  };
+
+  auroraSkins = fetchFromGitHub {
+    owner = "loystonpais";
+    rev = "99dd235cec5677ce25aa7510d73f397b9452389d";
+    repo = "XboxAuroraSkinsMirror";
+    hash = "sha256-j8e/VR/UVYep8Jo6trPLvxj2qsczYN+YGHo6FP6IU3o=";
   };
 
   installScript = pkgs.writeShellApplication {
@@ -114,7 +141,7 @@
 
     ${opt (config.xeunshackleAlternative) ''
       rm $out/BadUpdatePayload/default.xex
-      cp ${xeunshackleAlternativeDefaultXex} $out/BadUpdatePayload/default.xex
+      find ${hexpatch.${config.hexpatch}} -name "default.xex" -exec cp {} $out/BadUpdatePayload/default.xex \;
       chmod u+w $out/BadUpdatePayload/default.xex
     ''}
 
@@ -127,6 +154,18 @@
 
         ${opt (config.launch == "aurora") ''
           sed -i''' -E "s|^Default =.*|Default = Usb:\\\\Apps\\\\Aurora\\\\Aurora.xex|" $out/launch.ini
+        ''}
+
+        ${opt (config.installDefaultAuroraUtilityScripts) ''
+          mkdir -p $out/Apps/Aurora/User/Scripts/Utility
+          cp -rfT ${xboxUnityAuroraScripts}/UtilityScripts $out/Apps/Aurora/User/Scripts/Utility
+        ''}
+
+        ${opt (config.installAuroraSkins) ''
+          mkdir -p $out/Apps/Aurora/Skins
+          find ${auroraSkins}/skins -type f -name "*.xzp" | while read -r f; do
+            cp "$f" $out/Apps/Aurora/Skins
+          done
         ''}
       ''
     }
