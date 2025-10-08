@@ -11,6 +11,13 @@
     url = "https://cdn.modrinth.com/data/BYfVnHa7/versions/vZZwrcPm/Simply%20Optimized-1.21.1-5.0.mrpack";
     hash = "sha256-n2BxHMmqpOEMsvDqRRYFfamcDCCT4ophUw7QAJQqXmg=";
   };
+
+  # A world dir
+  mcsr-practice-map = pkgs.fetchzip {
+    url = "https://github.com/Dibedy/The-MCSR-Practice-Map/releases/download/1.0.1/MCSR.Practice.v1.0.1.zip";
+    stripRoot = false;
+    hash = "sha256-ukedZCk6T+KyWqEtFNP1soAQSFSSzsbJKB3mU3kTbqA=";
+  };
 in {
   imports = [
     # Import the nixcraft home module
@@ -76,6 +83,7 @@ in {
               enable = true;
               autoStart = false;
             };
+            lazymc.enable = true;
           };
 
           # Example paper server
@@ -115,6 +123,12 @@ in {
               enable = true;
               version = "0.29.1";
             };
+          };
+
+          fsg-server = {
+            enable = true;
+            version = "1.16.1";
+            world = mcsr-practice-map;
           };
         };
       };
@@ -227,15 +241,15 @@ in {
             };
           };
 
-          forge = {
-            enable = true;
-            version = "1.21.8";
-            forgeLoader = {
-              enable = true;
-              version = "58.1.0";
-              hash = "sha256-jeh6IYS6WL3uwxvAtY2wEH3w/I1ORwRRbFVR92YsUcc=";
-            };
-          };
+          # forge = {
+          #   enable = true;
+          #   version = "1.21.8";
+          #   forgeLoader = {
+          #     enable = true;
+          #     version = "58.1.1";
+          #     hash = "sha256-GxDtLjPzEHcEeZ/QeOXDLpKuhK0T5yEAHaKuykCY0Tk=";
+          #   };
+          # };
 
           # forge-two = {
           #   enable = true;
@@ -267,6 +281,11 @@ in {
                 url = "https://cdn.modrinth.com/data/1uJaMUOm/versions/jIrVgBRv/SpeedrunPack-mc1.16.1-v5.3.0.mrpack";
                 hash = "sha256-uH/fGFrqP2UpyCupyGjzFB87LRldkPkcab3MzjucyPQ=";
               };
+            };
+
+            # Set saves
+            saves = {
+              "Practice Map" = mcsr-practice-map;
             };
 
             # place custom files
