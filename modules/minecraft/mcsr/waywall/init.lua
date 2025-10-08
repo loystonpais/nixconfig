@@ -1,7 +1,7 @@
 local waywall = require("waywall")
 local helpers = require("waywall.helpers")
 
-pcall(require, "stylix")
+local _stylix_ok, stylix = pcall(require, "stylix")
 
 local config = {
     input = {
@@ -13,7 +13,7 @@ local config = {
         confine_pointer = false,
     },
     theme = {
-        background = stylix.colors.withHashtag.base00 or "#303030",
+        background = (_stylix_ok and stylix.colors.withHashtag.base00) or "#303030",
     },
 }
 
