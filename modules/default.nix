@@ -57,5 +57,6 @@
     ./hyprland
     ./program-collection
     ./fonts
+    ./xonsh
   ];
 }
