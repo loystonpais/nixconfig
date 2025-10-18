@@ -14,6 +14,7 @@ with lib; {
     ./users
     ./options.nix
     ./specialisations
+    ./determinate.nix
   ];
 
   networking.hostName = config.lunar.hostName;
