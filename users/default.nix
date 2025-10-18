@@ -16,10 +16,5 @@
       initialPassword = config.lunar.username;
       packages = [];
     };
-
-    programs.zsh.enable =
-      if config.lunar.shell == pkgs.zsh
-      then true
-      else false;
   };
 }
