@@ -133,7 +133,7 @@
     };
 
     nixcraft = {
-      url = "path:///home/loystonpais/Shells/nixcraft";
+      url = "github:loystonpais/nixcraft";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
