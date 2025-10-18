@@ -50,10 +50,12 @@ with lib; {
   nix.settings = {
     substituters = lib.mkAfter [
       "https://loystonpais.cachix.org"
+      "https://nix-community.cachix.org"
       # "https://cache.garnix.io" /* Garnix is very slow and buggy for some reason */
     ];
     trusted-public-keys = [
       "loystonpais.cachix.org-1:lclfaBitH51Lw9WwBxQ4bbesdt7c01JlFbKoSZ0PMLc="
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       # "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
     ];
     experimental-features = ["nix-command" "flakes"];
