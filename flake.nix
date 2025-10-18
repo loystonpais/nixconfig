@@ -81,6 +81,8 @@
     # Nixpkgs
     nixpkgs.url = "nixpkgs/nixos-unstable";
 
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
+
     flake-utils = {
       url = "github:numtide/flake-utils";
     };
