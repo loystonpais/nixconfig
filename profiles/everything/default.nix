@@ -34,6 +34,7 @@ with lib; {
       zsh.enable = mkDefault true;
       program-collection.enable = mkDefault true;
       zed.enable = mkDefault true;
+      xonsh.enable = mkDefault true;
     };
 
     lunar.specialisations.enable = mkDefault false;
