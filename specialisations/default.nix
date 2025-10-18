@@ -5,7 +5,5 @@
   pkgs,
   ...
 }: {
-  imports = [
-    ./gruvbox
-  ];
+  imports = [];
 }
