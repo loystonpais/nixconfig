@@ -96,8 +96,14 @@ in {
                 charliermarsh.ruff
                 ms-python.python
                 ms-python.vscode-pylance
+
+                # Misc
+                christian-kohler.path-intellisense
               ])
               ++ (with pkgs.vscode-marketplace; [
+                # Xonsh
+                jnoortheen.xonsh
+
                 # Rust
                 rust-lang.rust-analyzer
                 tamasfe.even-better-toml
@@ -164,7 +170,8 @@ in {
                 mechatroner.rainbow-csv
 
                 # Icons/Themes
-                vscode-icons-team.vscode-icons
+                # vscode-icons-team.vscode-icons
+                pkief.material-icon-theme
 
                 # Formatters
                 esbenp.prettier-vscode
