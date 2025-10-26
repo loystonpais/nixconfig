@@ -1,4 +1,3 @@
-
 {
   config,
   lib,
@@ -14,6 +13,7 @@
       lunar.modules.xonsh.home.enable = lib.mkDefault true;
       home-manager.users.${config.lunar.username}.imports = [
         ./home.nix
+        ./external-home-module.nix
       ];
     }
   ]);
