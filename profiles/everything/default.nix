@@ -33,6 +33,7 @@ with lib; {
       program-collection.enable = mkDefault true;
       zed.enable = mkDefault true;
       xonsh.enable = mkDefault true;
+      dev.enable = mkDefault true;
     };
 
     lunar.specialisations.enable = mkDefault false;
