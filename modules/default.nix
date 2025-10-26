@@ -58,5 +58,6 @@
     ./program-collection
     ./fonts
     ./xonsh
+    ./dev
   ];
 }
