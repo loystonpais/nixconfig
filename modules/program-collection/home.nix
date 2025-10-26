@@ -24,6 +24,13 @@
       bat
       xonsh
       rsync
+      wl-clipboard
+
+      # Nix tooling
+      nurl
+      nix-du
+      nix-health
+      nix-heuristic-gc
     ];
   };
 }
