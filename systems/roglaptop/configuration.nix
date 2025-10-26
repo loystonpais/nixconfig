@@ -12,57 +12,13 @@
     ./vfio
   ];
 
-  # Prevents ollama from redownloading...
-  environment.variables.OLLAMA_NOPRUNE = lib.mkDefault "true";
-
   environment.systemPackages = [
-    pkgs.cachix
-    pkgs.gcc
-    pkgs.rclone
-    inputs.self.packages.${system}.nautilus-scripts
-    pkgs.devenv
-    pkgs.nix-update
-    pkgs.nautilus
     inputs.self.packages.${system}.iso2god-rs
-    pkgs.chromium
-    # pkgs.ungoogled-chromium
   ];
-
-  programs.starship = {
-    enable = true;
-  };
-
-  programs.zsh.enable = lib.mkForce false;
-
-  programs.xonsh = {
-    enable = true;
-    extraPackages = ps:
-      with ps; [
-        numpy
-        xonsh.xontribs.xontrib-vox
-        xonsh.xontribs.xonsh-direnv
-        # coconut
-        requests
-      ];
-  };
 
   users.users.${config.lunar.username} = {
     shell = lib.mkForce pkgs.xonsh;
   };
-
-  programs.direnv = {
-    enable = true;
-    enableXonshIntegration = true;
-    enableBashIntegration = true;
-    enableZshIntegration = true;
-  };
-
-  programs.zoxide = {
-    enable = true;
-    enableXonshIntegration = true;
-  };
-
-  lunar.modules.misc.supergfxd-lsof-overlay.enable = false;
 
   nixpkgs.overlays = [
     inputs.self.overlays.lunar
@@ -94,55 +50,18 @@
     # interfaces.enp7s0f3u1u2.useDHCP = true;
   };
 
-  # boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
+  lunar.wallpaper = "${inputs.self}/assets/wallpapers/green-leaves.jpg";
+  lunar.modules.plasma.enable = lib.mkForce true;
 
-  # systemd.services.auractl-wallpaper = let
-  #   scheme =
-  #     if lib.isAttrs config.stylix.base16Scheme
-  #     then builtins.toFile config.stylix.base16Scheme
-  #     else config.stylix.base16Scheme;
-  #   aura = "breathe";
-  #   offset = 10;
-  # in {
-  #   enable = true;
-  #   path = [pkgs.asusctl pkgs.yq];
-  #   script = ''
-  #     palette=($(yq ".palette[]" -r '${scheme}' | cut -c 2-))
+  services.displayManager.defaultSession = lib.mkForce "plasma";
 
-  #     # zone starts from 1
-  #     for zone in {1..4}; do
-  #       col=''${palette[(( $zone + ${builtins.toString offset} ))]}
-  #       asusctl aura "${aura}" -c "$col" -z $zone;
-  #       echo "Applied ${aura} $col to zone $zone";
-  #     done;
-  #   '';
-  #   serviceConfig = {
-  #     Type = "oneshot";
-  #   };
-  #   after = ["asusd.service"];
-  #   wantedBy = ["multi-user.target"];
-  # };
-
-  specialisation.plasma = {
-    configuration = {
-      config = {
-        lunar.wallpaper = "${inputs.self}/assets/wallpapers/green-leaves.jpg";
-        lunar.modules.niri.enable = lib.mkForce false;
-        lunar.modules.waybar.enable = lib.mkForce false;
-
-        lunar.modules.plasma.enable = lib.mkForce true;
-
-        services.displayManager.defaultSession = lib.mkForce "plasma";
-
-        systemd.services = {
-          "delete-hm-backups-${config.lunar.username}" = {
-            script = ''
-              find /home/${config.lunar.username}/.config -name "*.nixbak" -delete
-            '';
-            before = ["home-manager-${config.lunar.username}.service"];
-          };
-        };
-      };
+  systemd.services = {
+    "delete-hm-backups-${config.lunar.username}" = {
+      script = ''
+        find /home/${config.lunar.username}/.config -name "*.nixbak" -delete
+        rm /home/${config.lunar.username}/.gtkrc-2.0
+      '';
+      before = ["home-manager-${config.lunar.username}.service"];
     };
   };
 
