@@ -3,23 +3,33 @@
   lib,
   pkgs,
   ...
-}: let
-  # NOTE: This only handles btrfs
-  storageDriver =
-    if config.fileSystems."/".fsType == "btrfs"
-    then "btrfs"
-    else null;
-in {
+}: {
   config = lib.mkIf config.lunar.modules.distrobox.enable {
     environment.systemPackages = with pkgs; [distrobox];
 
-    # Using docker with distrobox
-    virtualisation.docker.enable = true;
+    virtualisation.podman = {
+      enable = true;
+      dockerCompat = true;
+    };
 
-    # Apparently it needs to know whether root is btrfs or not
-    virtualisation.docker.storageDriver = storageDriver;
+    environment.etc."distrobox/distrobox.conf".text = ''
+      container_additional_volumes="/nix/store:/nix/store:ro /etc/profiles/per-user:/etc/profiles/per-user:ro /etc/static/profiles/per-user:/etc/static/profiles/per-user:ro"
+    '';
 
-    # Adding user to the docker group
-    users.users.${config.lunar.username}.extraGroups = ["docker"];
+    users.users.${config.lunar.username} = {
+      extraGroups = ["podman"];
+      subGidRanges = [
+        {
+          count = 65536;
+          startGid = 1000;
+        }
+      ];
+      subUidRanges = [
+        {
+          count = 65536;
+          startUid = 1000;
+        }
+      ];
+    };
   };
 }
