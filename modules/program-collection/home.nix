@@ -24,6 +24,7 @@
       bat
       xonsh
       rsync
+      rclone
       wl-clipboard
 
       # Nix tooling
@@ -31,6 +32,9 @@
       nix-du
       nix-health
       nix-heuristic-gc
+
+      cachix
+      nix-update
     ];
   };
 }
