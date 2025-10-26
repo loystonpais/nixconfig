@@ -4,7 +4,7 @@
   lib,
   ...
 }: {
-  config = lib.mkIf osConfig.lunar.modules.home-manager.plasma.enable {
+  config = lib.mkIf osConfig.lunar.modules.plasma.home.enable {
     programs.plasma.input.mice = [
       {
         accelerationProfile = "none";

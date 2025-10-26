@@ -22,6 +22,7 @@
         whitesur-cursors
         whitesur-gtk-theme
         inputs.self.packages.${system}.kwin-modern-informative
+        kdePackages.krohnkite
       ];
 
       qt = {
@@ -49,11 +50,6 @@
 
       xdg.configFile = {
         "Kvantum/WhiteSur".source = "${pkgs.whitesur-kde}/share/Kvantum/WhiteSur";
-
-        "Kvantum/kvantum.kvconfig".text = ''
-          [General]
-          theme=WhiteSurDark
-        '';
       };
 
       programs.plasma = {
@@ -129,7 +125,7 @@
 
           "kdeglobals"."KDE"."widgetStyle" = {
             value = "kvantum-dark";
-            immutable = true;
+            immutable = false;
           };
         };
 
@@ -174,9 +170,9 @@
           cursor.theme = "WhiteSur-cursors";
           iconTheme = "WhiteSur-dark";
           colorScheme = "WhiteSurDark";
-          windowDecorations.theme = "__aurorae__svg__WhiteSur-dark";
+          windowDecorations.theme = "__aurorae__svg__WhiteSur-Sharp-dark";
           windowDecorations.library = "org.kde.kwin.aurorae";
-          wallpaper = "${pkgs.whitesur-kde}/share/wallpapers/WhiteSur-dark/contents/images/3840x2160.jpg";
+          wallpaper = osConfig.lunar.wallpaper;
           splashScreen = {
             theme = "None";
             engine = "none";
@@ -293,6 +289,91 @@
         };
       };
     }
+
+    (lib.mkIf (osConfig.lunar.modules.plasma.mode == "mac") {
+      programs.plasma = let
+        wallpaper = "${inputs.self}/assets/wallpapers/green-leaves.jpg";
+      in {
+        kscreenlocker.appearance.wallpaper = lib.mkForce wallpaper;
+        workspace.wallpaper = lib.mkForce wallpaper;
+        panels = lib.mkForce [
+          {
+            location = "top";
+            floating = true;
+            height = 40;
+            hiding = "normalpanel";
+            lengthMode = "fill";
+            screen = "all";
+
+            widgets = [
+              {
+                kickoff = {
+                  sortAlphabetically = true;
+                  icon = "nix-snowflake-white";
+                };
+              }
+
+              "org.kde.plasma.appmenu"
+              "org.kde.plasma.panelspacer"
+              "org.kde.plasma.marginsseparator"
+              "org.kde.plasma.pager"
+              "org.kde.plasma.marginsseparator"
+              "org.kde.plasma.systemtray"
+              "org.kde.plasma.marginsseparator"
+              "org.kde.plasma.digitalclock"
+              "org.kde.plasma.showdesktop"
+            ];
+          }
+
+          {
+            location = "bottom";
+            floating = true;
+            height = 64;
+            hiding = "dodgewindows";
+            lengthMode = "fit";
+            screen = "all";
+
+            widgets = [
+              {
+                iconTasks = let
+                  pkgNames = map (pkg:
+                    if lib.isDerivation pkg
+                    then pkg.name
+                    else baseNameOf pkg)
+                  osConfig.environment.systemPackages;
+                  pkgExistsByName = name: builtins.elem name pkgNames;
+                  pkgExistsThen = name: any:
+                    if pkgExistsByName name
+                    then [any]
+                    else [];
+                in {
+                  launchers =
+                    [
+                      "applications:org.kde.konsole.desktop"
+                      "applications:org.kde.dolphin.desktop"
+                    ]
+                    ++ (lib.flatten [
+                      (pkgExistsThen "vscode"
+                        "applications:code.desktop")
+
+                      (pkgExistsThen "virt-manager"
+                        "applications:virt-manager.desktop")
+
+                      "preferred://browser"
+
+                      (pkgExistsThen "heroic"
+                        "applications:com.heroicgameslauncher.hgl.desktop")
+
+                      (pkgExistsThen "prismlauncher"
+                        "applications:org.prismlauncher.PrismLauncher.desktop")
+                    ]);
+                };
+              }
+            ];
+          }
+        ];
+      };
+    })
 
     (
       lib.mkIf (osConfig.lunar.modules.plasma.mode == "productive")

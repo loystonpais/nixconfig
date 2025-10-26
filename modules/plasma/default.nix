@@ -10,7 +10,7 @@
     enable = lib.mkEnableOption "plasma";
     home.enable = lib.mkEnableOption "plasma home-manager";
     mode = lib.mkOption {
-      type = lib.types.enum ["productive" "default"];
+      type = lib.types.enum ["productive" "default" "mac"];
       default = "default";
     };
   };
