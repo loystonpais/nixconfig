@@ -24,10 +24,8 @@ with lib; {
       graphics.enable = mkDefault true;
       hardware.enable = mkDefault true;
       nixvim.enable = mkDefault true;
-      niri.enable = mkDefault true;
       plasma.enable = mkDefault true;
       bluetooth.enable = mkDefault true;
-      docker.enable = mkDefault true;
       fonts.enable = mkDefault true;
       git.enable = mkDefault true;
       hyprland.enable = mkDefault true;
