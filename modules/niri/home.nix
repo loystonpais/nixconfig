@@ -8,8 +8,7 @@
   ...
 }: {
   imports = [
-    # DO NOT import this as its already done by the os module
-    # inputs.niri-flake.homeModules.niri
+    inputs.niri-flake.homeModules.niri
   ];
 
   config = lib.mkIf osConfig.lunar.modules.niri.home.enable (lib.mkMerge [
@@ -40,7 +39,7 @@
         swaybg
         alacritty
         kitty
-        xwayland-satellite-unstable
+        xwayland-satellite
         pavucontrol
         libnotify
         playerctl
@@ -79,8 +78,6 @@
               ]
             );
 
-          xwayland-satellite.path = lib.getExe pkgs.xwayland-satellite-unstable;
-
           binds = {
             "XF86AudioRaiseVolume".action.spawn = ["wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"];
             "XF86AudioLowerVolume".action.spawn = ["wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"];
@@ -103,9 +100,9 @@
             "Mod+Alt+Right".action = sh "playerctl position 5+";
             "Mod+Alt+Left".action = sh "playerctl position 5-";
 
-            "Print".action = screenshot;
+            #"Print".action = screenshot;
             #"Ctrl-Print".action = screenshot-screen;
-            "Alt+Print".action = screenshot-window;
+            #"Alt+Print".action = screenshot-window;
 
             "Mod+Shift+Q".action = quit;
             "Ctrl+Alt+Delete".action = quit;
