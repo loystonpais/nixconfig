@@ -12,7 +12,7 @@
         inherit inputs;
         inherit system;
       };
-      sharedModules = [inputs.plasma-manager.homeModules.plasma-manager];
+
       useGlobalPkgs = true;
       useUserPackages = true;
       users.${config.lunar.username} = {

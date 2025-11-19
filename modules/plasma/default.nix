@@ -2,6 +2,7 @@
   lib,
   config,
   pkgs,
+  inputs,
   ...
 }: {
   imports = [];
@@ -16,6 +17,8 @@
   };
 
   config = lib.mkIf config.lunar.modules.plasma.enable {
+    home-manager.sharedModules = [inputs.plasma-manager.homeModules.plasma-manager];
+
     services.displayManager.defaultSession = lib.mkDefault "plasma";
     services.displayManager.sddm.wayland.enable = true;
     services.displayManager.sddm.enable = true;
