@@ -74,6 +74,8 @@ in {
               # };
 
               "python.analysis.typeCheckingMode" = "standard";
+
+              "pylsp.executable" = lib.getExe pkgs.python3Packages.python-lsp-server;
             };
 
             extensions =
@@ -99,6 +101,9 @@ in {
 
                 # Misc
                 christian-kohler.path-intellisense
+
+                # Makefile
+                ms-vscode.makefile-tools
               ])
               ++ (with pkgs.vscode-marketplace; [
                 # Xonsh
