@@ -12,6 +12,12 @@ in {
     programs.zsh.initContent =
       concatStringsSep "\n" (map (name: ''export '${name}'="$(cat ${vars.${name}.path})"'') (attrNames vars));
 
+    programs.xonsh.configHeader =
+      lib.concatMapAttrsStringSep "\n" (
+        name: secret: "\$${name} = $(cat ${lib.escapeShellArg secret.path})"
+      )
+      vars;
+
     home.packages = lib.mkMerge [
       (
         lib.mkIf
