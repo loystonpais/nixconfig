@@ -16,7 +16,7 @@ with pkgs;
         # Add shells to merge
       ];
 
-    buildInputs = [
+    packages = [
       # Add your custom build inputs here
       hello
     ];
@@ -26,6 +26,6 @@ with pkgs;
       # Initialize environment variables
       # export MY_ENV_VAR="my_value"
 
-      echo -e "\033[34;1;3;5m${name} initialized with packages ${pkgs.lib.concatStringsSep ", " (builtins.map (x: x.name) buildInputs)}\033[0m"
+      echo -e "\033[34;1;3;5m${name} initialized with packages ${pkgs.lib.concatStringsSep ", " (builtins.map (x: x.name) packages)}\033[0m"
     '';
   }
