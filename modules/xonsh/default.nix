@@ -19,6 +19,7 @@
             xonsh.xontribs.xonsh-direnv
             # coconut #? Doesn't work because of python verison mismatch
             requests
+            groq
           ];
       };
     }
