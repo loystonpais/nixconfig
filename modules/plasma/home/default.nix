@@ -40,8 +40,8 @@
       # apps such as gparted and libadwaita apps such as bottles
       xdg.portal = {
         enable = true;
-        extraPortals = with pkgs; [xdg-desktop-portal-gtk];
-        configPackages = with pkgs; [xdg-desktop-portal-gtk];
+        extraPortals = with pkgs; [kdePackages.xdg-desktop-portal-kde];
+        configPackages = with pkgs; [kdePackages.xdg-desktop-portal-kde];
       };
 
       home.file = {
