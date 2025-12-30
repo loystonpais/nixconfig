@@ -59,5 +59,6 @@
     ./fonts
     ./xonsh
     ./dev
+    ./emacs
   ];
 }
