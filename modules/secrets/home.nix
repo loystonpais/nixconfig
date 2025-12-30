@@ -23,7 +23,7 @@ in {
         lib.mkIf
         osConfig.lunar.modules.graphics.enable
         (attrValues (mapAttrs (name: attrs:
-          pkgs.writeShellScriptBin ("copy-" + name) "cat '${attrs.path}' | ${pkgs.xclip}/bin/xclip -selection c")
+          pkgs.writeShellScriptBin ("copy-" + name) "cat ${lib.escapeShellArg attrs.path} | ${pkgs.wl-clipboard}/bin/wl-copy")
         vars))
       )
     ];
