@@ -23,6 +23,7 @@
         whitesur-gtk-theme
         inputs.self.packages.${system}.kwin-modern-informative
         kdePackages.krohnkite
+        kdePackages.karousel
       ];
 
       qt = {
@@ -56,19 +57,6 @@
         overrideConfig = true;
         enable = true;
         windows.allowWindowsToRememberPositions = true;
-
-        hotkeys = {
-          commands = {
-            # Tall Macro
-            minecraft-tall = {
-              name = "Tall macro for minecraft";
-              key = "Meta+Space";
-              command = builtins.toString (pkgs.writeShellScript "tall-macro" ''
-                ${pkgs.wmctrl}/bin/wmctrl -r "Minecraft* 1.16.1" -e 1,$(( 1920 + (1920 / 2) - 280 / 2)),10,280,1000
-              '');
-            };
-          };
-        };
 
         window-rules = [
           {
