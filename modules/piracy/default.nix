@@ -6,8 +6,7 @@
 }: {
   config = lib.mkIf config.lunar.modules.piracy.enable {
     environment.systemPackages = with pkgs; [
-      qbittorrent
-      # stremio
+      qbittorrents
     ];
   };
 }
