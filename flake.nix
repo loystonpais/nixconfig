@@ -79,7 +79,7 @@
 
   inputs = {
     # Nixpkgs
-    nixpkgs.url = "nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
 
