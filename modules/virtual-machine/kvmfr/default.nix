@@ -20,18 +20,13 @@ in {
         default = "128";
         description = "Size of the shared memory device in megabytes.";
       };
-      user = mkOption {
-        type = types.str;
-        default = "root";
-        description = "Owner of the shared memory device.";
-      };
       group = mkOption {
-        type = types.str;
+        type = types.nonEmptyStr;
         default = "root";
         description = "Group of the shared memory device.";
       };
       mode = mkOption {
-        type = types.str;
+        type = types.nonEmptyStr;
         default = "0600";
         description = "Mode of the shared memory device.";
       };
@@ -49,7 +44,7 @@ in {
     ];
 
     services.udev.extraRules = optionals cfg.shm.enable ''
-      SUBSYSTEM=="kvmfr", OWNER="${cfg.shm.user}", GROUP="${cfg.shm.group}", MODE="${cfg.shm.mode}"
+      SUBSYSTEM=="kvmfr", GROUP="${cfg.shm.group}", MODE="${cfg.shm.mode}", TAG+="uaccess"
     '';
 
     lunar.modules.virtual-machine.cgroupDevices = [
