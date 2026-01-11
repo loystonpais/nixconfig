@@ -48,8 +48,8 @@ with builtins;
       excludeDefaultNix ? true,
       importPaths ? true,
     }: let
-      dirs = lib.attrsets.optionalAttrs includeDirs readDir'dirs path;
-      files = lib.attrsets.optionalAttrs includeFiles readDir'nixFiles path;
+      dirs = lib.attrsets.optionalAttrs includeDirs (readDir'dirs path);
+      files = lib.attrsets.optionalAttrs includeFiles (readDir'nixFiles path);
 
       attrs = lib.trivial.pipe (dirs // files) [
         # Remove the files / folders in the exclusion list
