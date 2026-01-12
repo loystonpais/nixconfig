@@ -86,7 +86,7 @@ in {
     flakePath = mkOption {
       type = types.str;
       description = "Path to nixconfig";
-      default = "/home/${config.lunar.username}/nixconfig";
+      default = "/etc/nixos";
     };
 
     wallpaper = mkOption {
@@ -178,10 +178,6 @@ in {
           default = {};
           description = "environment variables to be set from the sops secrets";
         };
-      };
-
-      nixvim = {
-        enable = mkEnableOption "nixvim";
       };
 
       winapps.enable = mkEnableOption "winapps";
