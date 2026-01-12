@@ -23,42 +23,8 @@
     };
   };
 
-  imports = [
-    ./misc
-    ./distrobox
-    ./gamedev
-    ./gaming
-    ./minecraft
-    ./multimedia
-    ./piracy
-    ./samba
-    ./virtual-machine
-    ./waydroid
-    ./browsers
-    ./android
-    ./ssh
-    ./secrets
-    ./hardware
-    ./audio
-    ./graphics
-    ./vpn
-    ./rclone
-    ./niri
-    # ./stylix -- hard to maintain
-    ./waybar
-    ./plasma
-    # ./nvf
-    ./bluetooth
-    ./vscode
-    ./docker
-    ./zed
-    ./zsh
-    ./git
-    ./hyprland
-    ./program-collection
-    ./fonts
-    ./xonsh
-    ./dev
-    ./emacs
-  ];
+  imports = lib.attrValues (inputs.self.lib.importDir {
+    path = ./.;
+    includeFiles = false;
+  });
 }
