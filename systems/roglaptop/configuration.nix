@@ -16,6 +16,10 @@
     inputs.self.packages.${system}.iso2god-rs
   ];
 
+  services.flatpak.enable = true;
+
+  lunar.modules.emacs.enable = true;
+
   users.users.${config.lunar.username} = {
     shell = lib.mkForce pkgs.xonsh;
   };
@@ -31,12 +35,6 @@
     device = "/dev/disk/by-uuid/BA16A4A516A463DB";
     fsType = "ntfs-3g";
     options = ["nofail" "rw" "uid=${builtins.toString config.users.users.${config.lunar.username}.uid}"];
-  };
-
-  fileSystems."/mnt/seagate" = {
-    device = "/dev/disk/by-uuid/0033d291-3466-4b6d-be98-35d615af7571";
-    fsType = "xfs";
-    options = ["nofail"];
   };
 
   programs.kdeconnect.enable = true;
@@ -55,17 +53,11 @@
 
   services.displayManager.defaultSession = lib.mkForce "plasma";
 
-  systemd.services = {
-    "delete-hm-backups-${config.lunar.username}" = {
-      script = ''
-        find /home/${config.lunar.username}/.config -name "*.nixbak" -delete
-        rm /home/${config.lunar.username}/.gtkrc-2.0
-      '';
-      before = ["home-manager-${config.lunar.username}.service"];
-    };
-  };
-
   boot.tmp.cleanOnBoot = true;
+
+  lunar.modules.misc.libadwaita-without-adwaita-overlay.enable = false;
+
+  boot.binfmt.emulatedSystems = ["aarch64-linux"];
 
   system.stateVersion = "23.11"; # Did you read the comment?
 }

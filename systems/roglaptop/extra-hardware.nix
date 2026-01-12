@@ -22,6 +22,7 @@
 
     networking.interfaces.wlo1.useDHCP = lib.mkDefault true;
     networking.interfaces.enp4s0.useDHCP = lib.mkDefault true;
+    #! networking.interfaces.enp6s0f4u1.useDHCP = lib.mkDefault true; # USB Tethering
 
     hardware.i2c.enable = true;
 
