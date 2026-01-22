@@ -103,6 +103,15 @@
       inputs.home-manager.follows = "home-manager";
     };
 
+    ### DMS START
+
+    dms = {
+      url = "github:AvengeMedia/DankMaterialShell/stable";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    ### DMS END
+
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
