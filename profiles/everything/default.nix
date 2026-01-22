@@ -23,7 +23,6 @@ with lib; {
       audio.enable = mkDefault true;
       graphics.enable = mkDefault true;
       hardware.enable = mkDefault true;
-      nixvim.enable = mkDefault true;
       plasma.enable = mkDefault true;
       bluetooth.enable = mkDefault true;
       fonts.enable = mkDefault true;
