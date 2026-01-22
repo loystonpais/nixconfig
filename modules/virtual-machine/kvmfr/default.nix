@@ -27,7 +27,7 @@ in {
       };
       mode = mkOption {
         type = types.nonEmptyStr;
-        default = "0600";
+        default = "0660";
         description = "Mode of the shared memory device.";
       };
     };
