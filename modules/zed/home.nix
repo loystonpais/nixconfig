@@ -98,13 +98,13 @@
         pkgs.shellcheck
       ];
       userSettings = {
-        hour_format = "hour12";
         auto_update = false;
         terminal = {
           working_directory = "current_project_directory";
           detect_venv = "off";
         };
-        theme = lib.mkForce "JetBrains New Dark";
+        icon_theme = "VSCode Icons for Zed (Dark)";
+        theme = lib.mkForce "Colorizer";
         load_direnv = "shell_hook";
         base_keymap = "VSCode";
         show_whitespaces = "all";
@@ -115,17 +115,57 @@
           coloring = "indent_aware";
         };
         inlay_hints.enabled = true;
-        inactive_opacity = "0.5";
         auto_install_extensions = true;
 
         # Panels
         outline_panel.dock = "right";
         project_panel.dock = "right";
 
-        font_family = lib.mkDefault "Fira Code";
         buffer_font_family = lib.mkDefault "Fira Code";
         terminal.font_family = lib.mkDefault "Fira Code";
         format_on_save = "on";
+
+        title_bar = {
+          show_onboarding_banner = false;
+          show_project_items = false;
+          show_user_menu = false;
+        };
+
+        tab_bar = {
+          show = false;
+        };
+
+        toolbar = {
+          quick_actions = false;
+        };
+
+        status_bar = {
+          "experimental.show" = false;
+        };
+
+        project_panel = {
+          default_width = 400;
+          hide_root = true;
+          auto_fold_dirs = false;
+          starts_open = false;
+          scrollbar = {
+            show = "never";
+          };
+          indent_guides = {
+            show = "never";
+          };
+        };
+
+        outline_panel = {
+          default_width = 300;
+          indent_guides = {
+            show = "never";
+          };
+        };
+
+        file_finder = {
+          modal_max_width = "large";
+        };
 
         node = {
           path = lib.getExe pkgs.nodejs;
@@ -158,7 +198,6 @@
               };
             };
             tab_size = 2;
-            hard_tab = false;
           };
 
           Python = {
@@ -191,7 +230,8 @@
           */
 
           Zig = {
-            format_on_save = "language_server";
+            format_on_save = "on";
+            formatter = "language_server";
             code_actions_on_format = {
               "source.fixAll" = true;
               "source.organizeImports" = true;
@@ -207,19 +247,15 @@
         */
 
         lsp = {
-          zls = {
-            binary.path_lookup = true;
-          };
+          zls = {};
 
           dart = {
-            binary.path_lookup = true;
             settings = {
               lineLength = 140;
             };
           };
 
           omnisharp = {
-            binary.path_lookup = true;
             binary.arguments = ["optional" "additional" "args" "-lsp"];
           };
 
@@ -228,7 +264,6 @@
               diagnostics = true;
               formatting = true;
             };
-            binary.path_lookup = true;
             settings = {
               use_bundler = false;
             };
@@ -244,21 +279,15 @@
                 pythonPath = ".venv/bin/python";
               };
             };
-            binary.path_lookup = true;
           };
 
           hls = {
             initialization_options = {
               haskell.formattingProvider = "fourmolu";
             };
-            binary.path_lookup = true;
           };
 
           rust-analyzer = {
-            binary = {
-              #path = lib.getExe pkgs.rust-analyzer;
-              path_lookup = true;
-            };
             settings = {
               diagnostics = {
                 enable = true;
