@@ -30,6 +30,9 @@
       owner = lib.mkIf config.services.postfix.enable config.services.postfix.user;
     };
 
+    sops.secrets.mc-offline-username.owner = config.lunar.username;
+    sops.secrets.mc-offline-uuid.owner = config.lunar.username;
+
     lunar.modules.secrets.environmentVariablesFromSops = {
       IDK_GROQ_API_KEY = config.sops.secrets.groq-personal-use-key;
       GROQ_API_KEY = config.sops.secrets.groq-personal-use-key;
@@ -43,13 +46,9 @@
       ATARAXY_BOT_TOKEN = config.sops.secrets.ataraxy-bot-token;
 
       OPENROUTER_KEY = config.sops.secrets.openrouter-key;
-    };
 
-    sops.secrets.auto-resume-builder = {
-      format = "dotenv";
-      sopsFile = ../../secrets/auto-resume-builder.env;
-      key = "";
-      owner = config.lunar.username;
+      MC_OFFLINE_USERNAME = config.sops.secrets.mc-offline-username;
+      MC_OFFLINE_UUID = config.sops.secrets.mc-offline-uuid;
     };
 
     sops.secrets."business-profile.jpg" = {
