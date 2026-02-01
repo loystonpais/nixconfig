@@ -27,7 +27,11 @@
 
     # Qt themes need this to work
     {
-      environment.systemPackages = with pkgs; [kdePackages.qt6ct];
+      environment.systemPackages = with pkgs; [
+        kdePackages.qt6ct
+
+        libsForQt5.qt5ct
+      ];
     }
 
     # Terminal
@@ -52,9 +56,13 @@
     {
       environment.systemPackages = with pkgs; [
         kdePackages.dolphin
+        kdePackages.ark
+        kdePackages.gwenview
+        kdePackages.spectacle
       ];
     }
 
+    #* Unrelated. This is only unabled if home is disabled
     (lib.mkIf (!config.lunar.modules.dms.home.enable) (lib.mkMerge [
       {
         programs.dms-shell = {
@@ -78,28 +86,6 @@
       # {
       #   services.dbus.enable = true;
       #   security.polkit.enable = true;
-
-      #   xdg = {
-      #     portal = {
-      #       enable = true;
-      #       xdgOpenUsePortal = true;
-      #       config = {
-      #         common.default = [
-      #           "gtk"
-      #           "gnome"
-      #         ];
-      #         # niri.default = [
-      #         #   "gtk"
-      #         #   "gnome"
-      #         # ];
-      #         # niri."org.freedesktop.impl.portal.FileChooser" = ["gtk"];
-      #       };
-      #       extraPortals = [
-      #         pkgs.xdg-desktop-portal-gtk
-      #         pkgs.xdg-desktop-portal-gnome
-      #       ];
-      #     };
-      #   };
       # }
     ]))
   ]);
