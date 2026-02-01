@@ -15,5 +15,9 @@
       fira-code
       fira-code-symbols
     ];
+
+    home.file = {
+      ".local/share/fonts/InterVariable.ttf".source = ../../assets/fonts/InterVariable.ttf;
+    };
   };
 }
