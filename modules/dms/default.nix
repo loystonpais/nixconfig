@@ -57,9 +57,18 @@
       environment.systemPackages = with pkgs; [
         kdePackages.dolphin
         kdePackages.ark
-        kdePackages.gwenview
+        kdePackages.gwenviewp
         kdePackages.spectacle
+
+        nautilus
       ];
+    }
+
+    # Needed services
+    {
+      services.upower.enable = true;
+      services.power-profiles-daemon.enable = true;
+      services.accounts-daemon.enable = lib.mkDefault true;
     }
 
     #* Unrelated. This is only unabled if home is disabled
@@ -82,11 +91,6 @@
           enableCalendarEvents = true; # Calendar integration (khal)
         };
       }
-
-      # {
-      #   services.dbus.enable = true;
-      #   security.polkit.enable = true;
-      # }
     ]))
   ]);
 }
