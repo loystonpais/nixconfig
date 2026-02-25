@@ -7,7 +7,7 @@
 
       size = 32;
       group = "kvm";
-      mode = "0600";
+      mode = "0660";
     };
   };
 }

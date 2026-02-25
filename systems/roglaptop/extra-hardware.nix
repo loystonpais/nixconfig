@@ -12,18 +12,6 @@
       nvidiaBusId = "PCI:01:00:0";
     };
 
-    networking.dhcpcd.extraConfig = ''
-      interface wlo1
-      metric 99
-
-      interface enp4s0
-      metric 98
-    '';
-
-    networking.interfaces.wlo1.useDHCP = lib.mkDefault true;
-    networking.interfaces.enp4s0.useDHCP = lib.mkDefault true;
-    #! networking.interfaces.enp6s0f4u1.useDHCP = lib.mkDefault true; # USB Tethering
-
     hardware.i2c.enable = true;
 
     services.pipewire.extraConfig.pipewire."80-combined" = {

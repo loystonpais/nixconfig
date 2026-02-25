@@ -34,8 +34,7 @@
     };
 
     plasma.mode = "mac";
-    plasma.enable = true;
-    plasma.home.enable = true;
+    plasma.enable = false;
 
     # Exclusion
     samba.enable = false;
