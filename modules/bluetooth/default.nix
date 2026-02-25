@@ -17,6 +17,10 @@
     }
 
     {
+      hardware.bluetooth.enable = true;
+    }
+
+    {
       # Fixes random bluetooth headset disconnection
       hardware.bluetooth.settings = {
         General = {
