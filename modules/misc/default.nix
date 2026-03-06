@@ -44,7 +44,6 @@
           nil # Nix server
 
           # useful sh commands
-          zoxide
           lsd
           fd
           tldr
@@ -57,6 +56,7 @@
           jq
           bat
           rsync
+          htop
           #  inputs.idk-shell-command.packages.${system}.default
         ];
       }
