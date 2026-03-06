@@ -26,6 +26,7 @@
           gparted
           ayugram-desktop
           obsidian
+          baobab
           ente-auth
         ];
       }
