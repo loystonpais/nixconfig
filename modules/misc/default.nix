@@ -24,7 +24,7 @@
 
         environment.systemPackages = with pkgs; [
           gparted
-          telegram-desktop
+          ayugram-desktop
           obsidian
           ente-auth
         ];
