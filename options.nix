@@ -180,8 +180,6 @@ in {
         };
       };
 
-      winapps.enable = mkEnableOption "winapps";
-
       rclone = {
         mega500.enable = mkEnableOption "rclone mega500";
         mega800.enable = mkEnableOption "rclone mega800";
