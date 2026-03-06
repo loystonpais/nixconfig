@@ -32,6 +32,11 @@
       }
     )
 
+    {
+      # Prevents ollama from redownloading...
+      environment.variables.OLLAMA_NOPRUNE = lib.mkDefault "true";
+    }
+
     (
       # cli apps
       {
