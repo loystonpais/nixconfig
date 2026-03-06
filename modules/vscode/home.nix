@@ -213,6 +213,11 @@ in {
                 # neikeq.godot-csharp-vscode # causes huge rebuild
                 # ms-dotnettools.csharp # causes huge rebuild
                 # ms-vscode.mono-debug
+
+                # dankshell stuff
+                # danklinux.dms-theme
+
+                kdl-org.kdl
               ]);
           };
         };
