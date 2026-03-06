@@ -28,14 +28,14 @@
     };
 
     services.supergfxd.settings = {
-      mode = "Hybrid";
-      vfio_enable = true;
-      vfio_save = true;
-      gfx_vfio_enable = true;
-      always_reboot = false;
-      no_logind = false;
-      logout_timeout_s = 180;
-      hotplug_type = "None";
+      mode = lib.mkDefault "Hybrid";
+      vfio_enable = lib.mkDefault true;
+      vfio_save = lib.mkDefault true;
+      gfx_vfio_enable = lib.mkDefault true;
+      always_reboot = lib.mkDefault false;
+      no_logind = lib.mkDefault false;
+      logout_timeout_s = lib.mkDefault 180;
+      hotplug_type = lib.mkDefault "None";
     };
   };
 }
