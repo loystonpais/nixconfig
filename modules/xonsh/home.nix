@@ -2,6 +2,7 @@
   osConfig,
   config,
   lib,
+  pkgs,
   ...
 }: {
   config = lib.mkIf osConfig.lunar.modules.xonsh.enable (lib.mkMerge [
@@ -19,6 +20,19 @@
         recursive = true;
         source = ./rc.d;
       };
+    }
+
+    # Setting aliases
+    {
+      programs.xonsh.aliases = {
+        ls = "lsd";
+        lst = "lsd -tr";
+        la = "lsd -alh";
+      };
+
+      home.packages = with pkgs; [
+        lsd
+      ];
     }
   ]);
 }
