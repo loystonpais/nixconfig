@@ -57,7 +57,7 @@
       environment.systemPackages = with pkgs; [
         kdePackages.dolphin
         kdePackages.ark
-        kdePackages.gwenviewp
+        kdePackages.gwenview
         kdePackages.spectacle
 
         nautilus
