@@ -20,6 +20,7 @@
     {
       virtualisation.podman = {
         enable = true;
+        dockerCompat = lib.mkIf (!config.lunar.modules.docker.enable) (lib.mkDefault true);
       };
 
       environment.systemPackages = with pkgs; [
