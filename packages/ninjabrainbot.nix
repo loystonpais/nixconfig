@@ -6,6 +6,7 @@
   makeWrapper,
   jre,
   libxkbcommon,
+  libx11,
   xorg,
   javaOptions ? [
     "-Dswing.defaultlaf=javax.swing.plaf.metal.MetalLookAndFeel"
@@ -39,7 +40,7 @@ stdenv.mkDerivation rec {
       --prefix LD_LIBRARY_PATH : ${
       lib.makeLibraryPath [
         libxkbcommon
-        xorg.libX11
+        libx11
         xorg.libXt
         xorg.libXtst
         xorg.libXinerama
