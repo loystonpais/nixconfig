@@ -7,8 +7,6 @@
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHtN04FVSVonasScikFfltCPFJkSWa3t3z+wo+JA8GGd loyston500@gmail.com"
   ];
 
-  # Set your profile
-  lunar.profile.everything.enable = true;
   lunar.modules = {
     virtual-machine.cgroupDevices = [
       #"/dev/input/by-id/usb-Razer_Razer_DeathAdder_Essential-event-mouse"
@@ -32,16 +30,6 @@
         port = 5555;
       };
     };
-
-    plasma.mode = "mac";
-    plasma.enable = false;
-
-    # Exclusion
-    samba.enable = false;
-    virtual-machine.nixvirt.enable = false;
-    winapps.enable = false;
-    waydroid.enable = false;
-    hyprland.enable = false;
   };
 
   lunar.expensiveBuilds = true;

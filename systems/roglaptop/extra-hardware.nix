@@ -6,8 +6,6 @@
 }: {
   config = {
     hardware.nvidia.prime = {
-      offload.enable = true;
-      offload.enableOffloadCmd = true;
       amdgpuBusId = "PCI:06:00:0";
       nvidiaBusId = "PCI:01:00:0";
     };

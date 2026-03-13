@@ -10,25 +10,13 @@
     ./lunar.nix
     ./extra-hardware.nix
     ./vfio
+    ./backdrive-hybernation.nix
   ];
 
   environment.systemPackages = [
     inputs.self.packages.${system}.iso2god-rs
     pkgs.ddcutil
   ];
-
-  # home-manager.users.${config.lunar.username}.imports = [
-  #   {
-  #     dconf.settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
-  #     dconf.settings."org/gnome/desktop/interface".gtk-theme = "Adwaita-dark";
-  #     qt = {
-  #       enable = true;
-  #       platformTheme.name = "kde";
-  #       style.name = "breeze";
-  #     };
-  #     home.file.".config/kdeglobals".source = "${pkgs.kdePackages.breeze}/share/color-schemes/BreezeDark.colors";
-  #   }
-  # ];
 
   services.flatpak.enable = true;
 
@@ -65,9 +53,29 @@
     ];
   };
 
+  hardware.nvidia.prime = {
+    offload.enable = true;
+    offload.enableOffloadCmd = true;
+  };
+
+  lunar.modules.distrobox.enable = true;
+  lunar.modules.podman.enable = true;
+
   boot.tmp.cleanOnBoot = true;
 
   lunar.modules.misc.libadwaita-without-adwaita-overlay.enable = false;
+
+  # Set your profile
+  lunar.profile.everything.enable = true;
+
+  lunar.modules.plasma.mode = "mac";
+  lunar.modules.plasma.enable = false;
+
+  # Exclusion
+  lunar.modules.samba.enable = false;
+  lunar.modules.virtual-machine.nixvirt.enable = false;
+  lunar.modules.waydroid.enable = false;
+  lunar.modules.hyprland.enable = false;
 
   boot.binfmt.emulatedSystems = ["aarch64-linux"];
 
