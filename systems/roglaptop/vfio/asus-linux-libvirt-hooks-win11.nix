@@ -40,7 +40,7 @@
         # EXAMPLE=0-3,8-11
         # EXAMPLE=0,4,8,12
         # EXAMPLE=0-3,8,11,12-15
-        VM_ISOLATED_CPUS=0-7
+        HOST_ALLOWED_CPUS=0-7 #* 8-15 are freed for vm
         SYS_TOTAL_CPUS=0-15
       '';
 
@@ -120,9 +120,9 @@
           source "${vmVarsConf}"
 
           ## Isolate CPU cores as per set variable
-          systemctl set-property --runtime -- user.slice AllowedCPUs=$VM_ISOLATED_CPUS
-          systemctl set-property --runtime -- system.slice AllowedCPUs=$VM_ISOLATED_CPUS
-          systemctl set-property --runtime -- init.scope AllowedCPUs=$VM_ISOLATED_CPUS
+          systemctl set-property --runtime -- user.slice AllowedCPUs=$HOST_ALLOWED_CPUS
+          systemctl set-property --runtime -- system.slice AllowedCPUs=$HOST_ALLOWED_CPUS
+          systemctl set-property --runtime -- init.scope AllowedCPUs=$HOST_ALLOWED_CPUS
 
           sleep 1
         '';
