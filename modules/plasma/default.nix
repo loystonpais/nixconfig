@@ -19,10 +19,8 @@
   config = lib.mkIf config.lunar.modules.plasma.enable {
     home-manager.sharedModules = [inputs.plasma-manager.homeModules.plasma-manager];
 
-    services.displayManager.defaultSession = lib.mkDefault "plasma";
-    services.displayManager.sddm.wayland.enable = true;
-    services.displayManager.sddm.enable = true;
     services.desktopManager.plasma6.enable = true;
+    services.displayManager.defaultSession = lib.mkDefault "plasma";
     services.displayManager.sddm.wayland.compositor = lib.mkDefault "kwin";
 
     environment.plasma6.excludePackages = with pkgs.kdePackages; [
@@ -31,7 +29,6 @@
 
     environment.systemPackages = with pkgs;
       [
-        kdePackages.sddm-kcm
         kdePackages.qtstyleplugin-kvantum
         kdePackages.plasma-browser-integration
       ]
@@ -45,5 +42,7 @@
     home-manager.users.${config.lunar.username}.imports = [
       ./home
     ];
+
+    lunar.modules.sddm.enable = lib.mkDefault true;
   };
 }
