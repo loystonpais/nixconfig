@@ -31,7 +31,6 @@
 
         # Force disable gpu stuff
         services.asusd.enable = lib.mkForce false;
-        services.asusd.enableUserService = lib.mkForce false;
         services.supergfxd.enable = lib.mkForce false;
 
         # hardware.nvidia.enabled = lib.mkForce false;
