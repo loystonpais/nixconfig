@@ -42,6 +42,7 @@
         cpr = "rsync -avhP --partial --inplace";
         lstr = "ls -tr";
       };
+
       history = {
         size = 10000000;
         save = 10000000;

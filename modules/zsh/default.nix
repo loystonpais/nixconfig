@@ -10,6 +10,10 @@
 
   config = lib.mkIf config.lunar.modules.zsh.enable (lib.mkMerge [
     {
+      programs.zsh.enable = lib.mkDefault true;
+    }
+
+    {
       lunar.modules.zsh.home.enable = lib.mkDefault true;
       home-manager.users.${config.lunar.username}.imports = [
         ./home.nix
