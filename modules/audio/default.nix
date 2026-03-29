@@ -22,7 +22,7 @@
     };
 
     environment.systemPackages = with pkgs; [
-      helvum
+      crosspipe #? Helvum is removed
       pwvucontrol
     ];
 
