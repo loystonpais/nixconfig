@@ -14,6 +14,8 @@
 
     lunar.profile.vps.enable = true;
 
+    lunar.modules.program-collection.enable = true;
+
     # lunar.modules.rclone = {
     #   dropbox500.enable = true;
     #   pcloud500.enable = true;
