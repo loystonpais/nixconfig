@@ -14,15 +14,11 @@
 
   imports = [
     ./lunar.nix
-    ./services/nginx.nix
-    ./services/gitea.nix
-    ./services/flarum.nix
-    # ./services/portfolio-website.nix
   ];
 
   # For minecraft
   networking.firewall = {
-    enable = true;
+    enable = lib.mkForce false; #! Make it false for now
     allowedTCPPorts = [25565 1888];
   };
   # Needed to allow forwarding
@@ -32,11 +28,8 @@
   # Must replace with ssh module configuration
   users.users.${config.lunar.username}.openssh.authorizedKeys.keys = config.lunar.sshPublicKeys;
 
-  home-manager.users.${config.lunar.username}.imports = [
-    ({lib, ...}: {
-      programs.zsh.oh-my-zsh.theme = lib.mkForce "afowler";
-    })
-  ];
+  # If you wish to to use boot.loader.grub.efiInstallAsRemovable, then turn off boot.loader.efi.canTouchEfiVariables
+  boot.loader.efi.canTouchEfiVariables = lib.mkForce false;
 
   systemd.services.loy-ftp-sh-dns-update = {
     enable = true;

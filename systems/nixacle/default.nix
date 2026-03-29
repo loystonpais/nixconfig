@@ -5,16 +5,16 @@
   inputs,
   ...
 }:
-inputs.nixpkgs.lib.nixosSystem {
+inputs.nixpkgs.lib.nixosSystem rec {
   system = "x86_64-linux";
 
   specialArgs = {
     inherit inputs;
-    inherit self;
+    inherit system;
   };
 
   modules = [
-    ./oracle # DO NOT REMOVE
+    ./infect/configuration.nix
 
     self.nixosModules.default
     self.nixosModules.extras.home-manager.unstable

@@ -1,15 +1,14 @@
-{
-  modulesPath,
-  config,
-  ...
-}: {
+{modulesPath, ...}: {
   imports = [(modulesPath + "/profiles/qemu-guest.nix")];
-  boot.loader.grub = {
-    efiSupport = true;
-    efiInstallAsRemovable = true;
-    device = "nodev";
+  boot.loader = {
+    efi.efiSysMountPoint = "/boot/efi";
+    grub = {
+      efiSupport = true;
+      efiInstallAsRemovable = true;
+      device = "nodev";
+    };
   };
-  fileSystems."/boot" = {
+  fileSystems."/boot/efi" = {
     device = "/dev/disk/by-uuid/2B75-2AD5";
     fsType = "vfat";
   };
@@ -18,11 +17,6 @@
   fileSystems."/" = {
     device = "/dev/sda3";
     fsType = "xfs";
-  };
-  fileSystems.${config.lunar.nixacle.datablock1.path} = {
-    device = "/dev/disk/by-label/datablk1";
-    fsType = "xfs";
-    options = ["nofail"];
   };
   swapDevices = [{device = "/dev/sda2";}];
 }
