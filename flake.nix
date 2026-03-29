@@ -75,12 +75,27 @@
     templates = importTemplates ./templates;
 
     overlays = importDir' ./overlays;
+
+    # TODO: move this to top
+    den =
+      (inputs.nixpkgs.lib.evalModules {
+        modules = [(inputs.import-tree ./den-modules)];
+        specialArgs.inputs = inputs;
+      }).config;
   };
 
   inputs = {
-    # Nixpkgs
+    # Nixpkgs Unstable channel
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
+    # TODO: add nixpkgs stable channel
+
+    # Dendritic Flake things
+    import-tree.url = "github:vic/import-tree";
+    flake-aspects.url = "github:vic/flake-aspects";
+    den.url = "github:vic/den";
+
+    # Using determinate nix for more performant nix tooling
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
 
     flake-utils = {
