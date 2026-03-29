@@ -29,7 +29,7 @@ in {
       type = types.package;
       description = "Default shell package";
       example = pkgs.zsh;
-      default = pkgs.xonsh;
+      default = pkgs.zsh;
     };
 
     username = mkOption {
