@@ -15,7 +15,7 @@
     };
   };
 
-  config = lib.mkMerge [
+  config = lib.mkIf config.lunar.modules.misc.enable (lib.mkMerge [
     ( # gui apps
       {
         programs.kdeconnect.enable = true;
@@ -90,5 +90,5 @@
         };
       }
     )
-  ];
+  ]);
 }
