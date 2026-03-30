@@ -12,7 +12,7 @@
   config = lib.mkIf config.lunar.modules.secrets.enable {
     sops.defaultSopsFile = ../../secrets/secrets.yaml;
     sops.defaultSopsFormat = "yaml";
-    sops.age.keyFile = "/home/${config.lunar.username}/.config/sops/age/keys.txt";
+    sops.age.keyFile = "/root/.${config.lunar.username}-sops-age-keys";
 
     sops.secrets.groq-personal-use-key.owner = config.lunar.username;
     sops.secrets.gemini-api-key.owner = config.lunar.username;
