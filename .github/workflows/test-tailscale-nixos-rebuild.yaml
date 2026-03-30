@@ -28,7 +28,11 @@ jobs:
         run: |
           mkdir -p ~/.ssh
           ssh-keyscan -H nixacle >> ~/.ssh/known_hosts
- 
+
+      - name: Install nixos-rebuild
+        run: |
+          nix profile add nixpkgs#nixos-rebuild-ng
+
       - name: Deploy NixOS
         run: |
           nixos-rebuild test \
