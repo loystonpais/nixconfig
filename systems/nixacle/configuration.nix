@@ -31,6 +31,11 @@
   # If you wish to to use boot.loader.grub.efiInstallAsRemovable, then turn off boot.loader.efi.canTouchEfiVariables
   boot.loader.efi.canTouchEfiVariables = lib.mkForce false;
 
+  services.tailscale = {
+    enable = true;
+    # Enable tailscale at startup
+  };
+
   systemd.services.loy-ftp-sh-dns-update = {
     enable = true;
     path = [pkgs.curl];
@@ -42,4 +47,6 @@
     after = ["network.target"];
     wantedBy = ["multi-user.target"];
   };
+
+  boot.kernelPackages = pkgs.linuxPackages_6_12;
 }
