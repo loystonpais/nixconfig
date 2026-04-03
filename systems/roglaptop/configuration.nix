@@ -73,6 +73,9 @@
     options = ["nofail" "rw" "uid=${toString config.users.users.${config.lunar.username}.uid}"];
   };
 
+  lunar.modules.cuda.enable = true;
+  # lunar.modules.handy.enable = true;
+
   programs.kdeconnect.enable = true;
 
   lunar.modules.niri.enable = true;
