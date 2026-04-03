@@ -27,11 +27,6 @@ in {
           };
         }
 
-        #! TO BE REMOVED LATER
-        {
-          programs.zen-browser.suppressXdgMigrationWarning = true;
-        }
-
         # https://github.com/0xc000022070/zen-browser-flake#xdg-mime-associations
         {
           xdg.mimeApps = let
