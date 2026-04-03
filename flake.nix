@@ -1,114 +1,33 @@
 {
-  description = "The Lunar Flake";
+  description = "Lunar NixOS Configuration";
 
-  outputs = {
-    self,
-    flake-utils,
-    nixpkgs,
-    ...
-  } @ inputs: let
-    lib = nixpkgs.lib.extend (final: prev: {lunar = import ./lib prev;});
-
-    inherit (lib.lunar) importDir' importDir importTemplates importNixosSystems;
-    inherit (builtins) mapAttrs;
-
-    eachSystem = flake-utils.lib.eachDefaultSystem (system: let
-      pkgs = import nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
-        overlays = [self.overlays.lunar];
-      };
-    in {
-      packages = let
-        packagesFromDir =
-          mapAttrs (name: path: pkgs.callPackage path {})
-          (importDir {
-            path = ./packages;
-            importPaths = false;
-          });
-        otherPackages = rec {
-          bw-set-age-key = pkgs.callPackage ./scripts/bw-set-age-key.nix {};
-          install = pkgs.callPackage ./scripts/install.nix {inherit bw-set-age-key;};
-        };
-        packages' = packagesFromDir // otherPackages;
-      in
-        packages';
-
-      apps = {
-        bw-set-age-key = {
-          type = "app";
-          program = pkgs.lib.getExe self.packages.${system}.bw-set-age-key;
-        };
-        install = {
-          type = "app";
-          program = pkgs.lib.getExe self.packages.${system}.install;
-        };
-      };
-
-      formatter = pkgs.alejandra;
-    });
-  in {
-    inherit (eachSystem) packages apps formatter;
-
-    lib = lib.lunar;
-
-    nixosConfigurations = importNixosSystems ./systems {
-      inherit self inputs;
-    };
-
-    nixOnDroidConfigurations = mapAttrs (n: v:
-      v {
-        inherit self inputs;
-      })
-    (importDir' ./nix-on-droid/instances);
-
-    nixosModules = rec {
-      lunar = import ./lunar.nix;
-      default = lunar;
-      extras = {
-        home-manager = {
-          unstable = inputs.home-manager.nixosModules.home-manager;
-        };
-      };
-    };
-
-    templates = importTemplates ./templates;
-
-    overlays = importDir' ./overlays;
-
-    # TODO: move this to top
-    den =
-      (inputs.nixpkgs.lib.evalModules {
-        modules = [(inputs.import-tree ./den-modules)];
-        specialArgs.inputs = inputs;
-      }).config;
-  };
+  outputs = inputs: let
+    withSystem = system: let
+      inputs' = builtins.mapAttrs (_: builtins.mapAttrs (_: value: value.${system})) inputs;
+      self'.packages.hello = inputs.nixpkgs.legacyPackages.${system}.hello;
+    in
+      cb: cb {inherit inputs' self';};
+  in
+    (inputs.nixpkgs.lib.evalModules {
+      modules = [
+        inputs.den.flakeModule
+        (inputs.import-tree ./modules)
+      ];
+      specialArgs.inputs = inputs;
+      specialArgs.withSystem = withSystem;
+    }).config.flake;
 
   inputs = {
-    # Nixpkgs Unstable channel
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    # TODO: add nixpkgs stable channel
-
-    # Dendritic Flake things
     import-tree.url = "github:vic/import-tree";
+
     flake-aspects.url = "github:vic/flake-aspects";
+
     den.url = "github:vic/den";
-
-    # Using determinate nix for more performant nix tooling
-    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
-
-    flake-utils = {
-      url = "github:numtide/flake-utils";
-    };
 
     home-manager = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nur = {
-      url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -118,31 +37,26 @@
       inputs.home-manager.follows = "home-manager";
     };
 
-    ### DMS START
-
     dms = {
       url = "github:AvengeMedia/DankMaterialShell/stable";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    ### DMS END
 
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # User flakes
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
 
-    blender-bin = {
-      url = "github:edolstra/nix-warez?dir=blender";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # blender-bin = {
+    #   url = "github:edolstra/nix-warez?dir=blender";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     nix-vscode-extensions = {
       url = "github:nix-community/nix-vscode-extensions";
@@ -153,5 +67,7 @@
       url = "github:loystonpais/nixcraft";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
   };
 }

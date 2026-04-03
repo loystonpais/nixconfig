@@ -1,1 +1,0 @@
-Default Config with direnv

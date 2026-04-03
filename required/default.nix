@@ -1,7 +1,0 @@
-{...}: {
-  imports = [
-    ./boot
-    ./graphics
-    ./locale
-  ];
-}
