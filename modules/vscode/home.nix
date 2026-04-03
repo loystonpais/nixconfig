@@ -218,6 +218,10 @@ in {
                 # danklinux.dms-theme
 
                 kdl-org.kdl
+
+                ## AI Slops
+                sst-dev.opencode
+                moonshot-ai.kimi-code
               ]);
           };
         };
