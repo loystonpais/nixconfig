@@ -1,0 +1,182 @@
+# Agent Instructions for /etc/nixos (Lunar Nix)
+
+## Project Overview
+
+Lunar Nix is a personal NixOS configuration using the **dendritic pattern** (inspired by [vic/den](https://github.com/vic/den)). It manages multiple hosts (laptops, desktops, servers) with a declarative, aspect-oriented approach.
+
+---
+
+## Step 1: Setup
+
+First, check if the `den/` directory exists:
+
+```bash
+ls den/
+```
+
+If **not found**, clone it:
+
+```bash
+git clone https://github.com/vic/den.git den/
+```
+
+---
+
+## Step 2: Read These Files First
+
+1. **`README.md`** - Project overview
+2. **`den/AGENTS_EXAMPLE.md`** - Dendritic pattern documentation (read this before touching any code!)
+
+---
+
+## Repository Structure
+
+```
+/etc/nixos/
+├── flake.nix           # Main flake entry point
+├── modules/
+│   ├── defaults.nix    # Global defaults applied to all entities
+│   ├── den.nix         # Creates "lunar" namespace from den
+│   ├── hosts.nix       # Host declarations
+│   ├── schema.nix      # Entity schema definitions
+│   ├── outputs.nix     # Flake output generation
+│   ├── hosts/          # Host-specific configurations
+│   ├── lunar/          # Feature modules (aspects)
+│   │   ├── plasma.nix  # KDE Plasma 6
+│   │   ├── gaming.nix  # Steam, GameMode, PRIME offload
+│   │   ├── dev.nix     # devenv, VSCode extensions
+│   │   ├── audio.nix   # PipeWire configuration
+│   │   ├── browsers.nix # Firefox, Zen Browser, Chromium
+│   │   └── ...
+│   └── users/
+│       └── loystonpais/ # Primary user configuration
+├── packages/           # Custom Nix packages
+├── den/                # The den framework
+└── secrets/            # SOPS-encrypted secrets
+```
+
+---
+
+## Key Concepts
+
+### Dendritic Pattern
+
+The pattern uses **aspects** as the primary unit of organization. An aspect declares behavior per Nix class (`nixos`, `homeManager`, etc.):
+
+```nix
+lunar.plasma = mode: {
+  nixos = { pkgs, ... }: { ... };
+  homeManager = { pkgs, ... }: { ... };
+  provides.some-feature = { ... };
+};
+```
+
+### Parametric Dispatch
+
+Functions use `builtins.functionArgs` introspection. They only activate when their required arguments are present:
+- `{ host, ... }` matches any context with `host`
+- `{ host, user }` only matches when both exist
+- `{ home }` matches standalone home contexts only
+
+### Context Pipeline
+
+Host/User/Home declarations flow through `den.ctx` to resolve into fully applied Nix module inputs.
+
+---
+
+## Important Conventions
+
+### Lunar Namespace
+
+Features are defined in `modules/lunar/` and automatically available as `lunar.<feature>` through the `den.namespace` mechanism in `modules/den.nix`.
+
+### Host Configurations
+
+```nix
+den.aspects.myhost = {
+  includes = [ den.aspects.myuser ];
+  nixos = { ... }: { ... };
+  homeManager = { ... }: { ... };
+};
+```
+
+### User Configurations
+
+```nix
+den.aspects.loystonpais = {
+  includes = [
+    den.provides.primary-user
+    (den.provides.user-shell "zsh")
+  ];
+  nixos = { pkgs, ... }: { ... };
+  homeManager = { pkgs, ... }: { ... };
+};
+```
+
+### Underscore-prefixed Directories
+
+Directories and files starting with `_` (e.g., `_hw/`, `_vfio/`, `_services/`, `_infect/`) are **not auto-imported**. They are intentionally kept outside the dendritic pattern:
+
+- Either because it doesn't make sense to convert them yet
+- Or the conversion is work in progress
+
+These need to be explicitly imported where needed.
+
+### Default Module Loading Pattern
+
+```nix
+# modules/hosts/<host>/_services/default.nix
+{
+  imports = let
+    dir = builtins.readDir ./.;
+    toImport = name: type:
+      if type == "regular" && name != "default.nix" && builtins.hasSuffix ".nix" name
+      then ./${name}
+      else null;
+  in
+    builtins.filter (x: x != null) (builtins.attrValues (builtins.mapAttrs toImport dir));
+}
+```
+
+---
+
+## Feature Highlights
+
+- **Desktop**: KDE Plasma 6 with WhiteSur theme
+- **Gaming**: Steam, Heroic, PrismLauncher, MangoHUD, GameMode, NVIDIA PRIME offload
+- **Development**: devenv, VSCode (60+ extensions), Godot, Blender
+- **Containers**: Podman, Distrobox, Flatpak
+- **Virtualization**: Libvirt/QEMU, KVMFR (Looking Glass), Waydroid
+- **Browsers**: Firefox, Zen Browser, Chromium (Brave)
+- **Audio**: PipeWire with ALSA, Pulse, Jack support
+- **Shell**: xonsh (primary), zsh, bash with Starship prompt
+- **Secrets**: SOPS with age encryption
+- **Remote Deploy**: Tailscale SSH, nixos-rebuild over SSH
+
+---
+
+## Key Files for Reference
+
+| File | Purpose |
+|------|---------|
+| `flake.nix` | Main flake entry point |
+| `modules/defaults.nix` | Global defaults (mutual providers, nixpkgs config) |
+| `modules/den.nix` | Lunar namespace creation |
+| `modules/schema.nix` | Schema base modules |
+| `modules/users/loystonpais/loystonpais.nix` | Primary user configuration |
+| `den/nix/lib/parametric.nix` | Parametric dispatch logic |
+| `den/modules/options.nix` | `den.hosts`, `den.homes`, `den.schema` options |
+
+---
+
+## CI/CD
+
+- **Cachix**: Pushes built packages to `loystonpais.cachix.org`
+- **Remote Rebuild**: Uses Tailscale to deploy to remote hosts
+
+---
+
+## DO NOT MODIFY
+
+- `den/` directory (submodule, update via git)
+- `flake.lock` (auto-generated)
