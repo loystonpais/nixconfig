@@ -21,11 +21,11 @@
       services.tailscale.enable = true;
 
       networking.firewall = {
-        enable = lib.mkForce false;
+        enable = true;
         allowedTCPPorts = [25565 1888];
       };
 
-      services.openssh.settings.GatewayPorts = "yes";
+      services.openssh.settings.GatewayPorts = "clientspecified";
 
       boot.loader.efi.canTouchEfiVariables = lib.mkForce false;
     };
