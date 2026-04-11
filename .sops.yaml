@@ -1,7 +1,9 @@
 keys:
   - &primary age1hkxy9mtywry2cmgzn27frujrjch5rlg5vnwnmxmdw67vggfs7vcs8gwunj
+  - &roglaptop age105vhyxu8gh00fq2ex5ktkhchzwtcu9fkv7zvradajmcf57tkhcusrxvwa4
 creation_rules:
-  - path_regex: (secrets/(secrets|.*)\.(yaml|env)$|.*$)
+  - path_regex: secrets/.*
     key_groups:
-    - age:
-      - *primary
+      - age:
+        - *primary
+        - *roglaptop
