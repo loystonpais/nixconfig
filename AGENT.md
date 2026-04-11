@@ -86,6 +86,33 @@ Host/User/Home declarations flow through `den.ctx` to resolve into fully applied
 
 ## Important Conventions
 
+### Commit Message Format
+
+Use the format: `area: description`
+
+- **area**: Can be:
+  - A module name from `modules/lunar/` (e.g., `sops`, `ssh`, `secrets`, `vscode`, `audio`, `plasma`, `podman`, `browser`)
+  - A hostname when changing code in `modules/hosts/<hostname>`
+  - `lunar:` or `flake:` for changes to the flake in general
+  - Combined with more context when needed (e.g., `modules: android:`)
+
+Examples from this project:
+```
+sops: add useful packages
+ssh: fix ssh on some terms
+secrets: add new pub key
+vscode: add AI extensions
+flake: add cache priority
+roglaptop: enable cuda
+lunar: add AGENT.md and README.md
+```
+
+Rules:
+- Use lowercase for area and description
+- No period at the end
+- Keep it to one line
+- Use imperative mood ("add", "fix", "update", "remove" not "added", "fixed")
+
 ### Lunar Namespace
 
 Features are defined in `modules/lunar/` and automatically available as `lunar.<feature>` through the `den.namespace` mechanism in `modules/den.nix`.
