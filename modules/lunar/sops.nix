@@ -1,6 +1,7 @@
 {
   den,
   inputs,
+  lib,
   ...
 }: {
   lunar.sops = {
@@ -12,7 +13,9 @@
       config,
       pkgs,
       ...
-    }: {
+    }: let
+      vars = config.sops.secrets or {};
+    in {
       imports = [
         inputs.sops-nix.nixosModules.sops
       ];
@@ -73,12 +76,32 @@
       };
     };
 
-    homeManager = {
-      osConfig,
-      lib,
-      ...
-    }: let
-      vars = osConfig.sops.secrets or {};
+    homeManager = {osConfig, ...}: let
+      vars = {
+        IDK_GROQ_API_KEY = osConfig.sops.secrets.groq-personal-use-key;
+        GROQ_API_KEY = osConfig.sops.secrets.groq-personal-use-key;
+        GEMINI_API_KEY = osConfig.sops.secrets.gemini-api-key;
+        GITHUB_KEY = osConfig.sops.secrets.github-key;
+        GITEA_KEY = osConfig.sops.secrets.gitea-key;
+
+        CACHIX_LOYSTONPAIS_AUTH_TOKEN = osConfig.sops.secrets.cachix-loystonpais-auth-token;
+        CACHIX_AUTH_TOKEN = osConfig.sops.secrets.cachix-loystonpais-auth-token;
+
+        ATARAXY_BOT_TOKEN = osConfig.sops.secrets.ataraxy-bot-token;
+
+        OPENROUTER_KEY = osConfig.sops.secrets.openrouter-key;
+
+        MC_OFFLINE_USERNAME = osConfig.sops.secrets.mc-offline-username;
+        MC_OFFLINE_UUID = osConfig.sops.secrets.mc-offline-uuid;
+      };
+
+      toEnvVar = str:
+        lib.toUpper (
+          builtins.replaceStrings
+          ["-" "." " " "/"]
+          ["_" "_" "_" "_"]
+          str
+        );
     in {
       programs.zsh.initContent = lib.mkIf (vars != {}) (
         builtins.concatStringsSep "\n" (map (name: ''export '${name}'="$(cat ${vars.${name}.path})"'') (builtins.attrNames vars))
@@ -88,16 +111,5 @@
         builtins.concatStringsSep "\n" (map (name: ''export '${name}'="$(cat ${vars.${name}.path})"'') (builtins.attrNames vars))
       );
     };
-
-    # provides.env-vars = {
-    #   homeManager = {
-    #     osConfig,
-    #     lib,
-    #     ...
-    #   }: let
-    #     vars = osConfig.sops.secrets or {};
-    #   in {
-    #   };
-    # };
   };
 }
