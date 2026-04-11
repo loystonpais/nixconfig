@@ -47,7 +47,7 @@
         "interface-name:microvm*"
       ];
 
-      networking.firewall.enable = lib.mkForce false;
+      networking.firewall.enable = true;
 
       hardware.nvidia.prime = {
         offload.enable = true;
