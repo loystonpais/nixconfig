@@ -23,10 +23,13 @@
       sops = {
         defaultSopsFile = "${inputs.self.outPath}/secrets/secrets.yaml";
         defaultSopsFormat = "yaml";
-        age.keyFile = "/root/.loystonpais-sops-age-keys";
       };
 
-      environment.systemPackages = [pkgs.sops];
+      environment.systemPackages = with pkgs; [
+        sops
+        ssh-to-age
+        nano
+      ];
 
       sops.secrets = {
         groq-personal-use-key.owner = config.users.users.${user.userName}.name;
