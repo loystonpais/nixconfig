@@ -18,267 +18,263 @@
       lib,
       osConfig,
       ...
-    }: {
-      config = (lib.mkMerge [
-        {
-          programs.vscode = {
-            enable = true;
+    }: let
+      # Common settings shared across all profiles
+      commonSettings = {
+        "update.mode" = "none";
+        "continue.telemetryEnabled" = false;
+        "diffEditor.ignoreTrimWhitespace" = false;
+        "extensions.autoUpdate" = false;
+        "explorer.confirmDragAndDrop" = false;
+        "git.enableSmartCommit" = true;
+        "redhat.telemetry.enabled" = false;
+        "security.workspace.trust.untrustedFiles" = "open";
+        "telemetry.enableCrashReporter" = false;
+        "telemetry.enableTelemetry" = false;
+        "telemetry.telemetryLevel" = "off";
+        "workbench.sideBar.location" = "right";
+        "terminal.integrated.copyOnSelection" = true;
+        "terminal.integrated.cursorBlinking" = true;
+        "terminal.integrated.cursorStyle" = "line";
+        "terminal.integrated.persistentSessionScrollback" = 1000;
+        "terminal.integrated.ignoreBracketedPasteMode" = false;
+        "terminal.integrated.rightClickBehavior" = "paste";
+        "terminal.integrated.scrollback" = 3000;
+        "window.closeOnFileDelete" = true;
+        "workbench.colorTheme" = "Dark Modern";
+        "workbench.iconTheme" = "vscode-icons";
+        "workbench.preferredDarkColorTheme" = "Dark Modern";
+        "workbench.statusBar.visible" = true;
+        "editor.formatOnSave" = true;
+        "editor.wordWrap" = "on";
+        "editor.wordWrapColumn" = 120;
+        "editor.fontLigatures" = true;
+        "editor.tabSize" = 2;
 
-            mutableExtensionsDir = false;
+        # Core Nix support (important for this repo)
+        "nix.enableLanguageServer" = true;
+        "nix.serverPath" = lib.getExe pkgs.nixd;
+        "nix.formatterPath" = lib.getExe pkgs.alejandra;
+      };
 
-            profiles = {
-              default = {
-                userSettings = {
-                  "update.mode" = "none";
+      # Common extensions shared across all profiles
+      commonExtensions =
+        (with pkgs.vscode-extensions; [
+          # Essential Nix support
+          bbenoist.nix
+          jnoortheen.nix-ide
+          kamadorueda.alejandra
+          jeff-hykin.better-nix-syntax
 
-                  "continue.telemetryEnabled" = false;
+          # Essential workflow
+          mkhl.direnv
+          ms-vscode-remote.remote-ssh
+          christian-kohler.path-intellisense
+        ])
+        ++ (with pkgs.vscode-marketplace; [
+          # Essential UI/UX
+          pkief.material-icon-theme
+          eamodio.gitlens
+          mhutchie.git-graph
+          vivaxy.vscode-conventional-commits
+          aaron-bond.better-comments
+          editorconfig.editorconfig
+          oderwat.indent-rainbow
+          shardulm94.trailing-spaces
+          kisstkondoros.vscode-gutter-preview
+        ]);
+    in {
+      config = {
+        programs.vscode = {
+          enable = true;
+          mutableExtensionsDir = false;
 
-                  "diffEditor.ignoreTrimWhitespace" = false;
+          profiles = {
+            # 1. Default Profile: Core configuration + Essential Nix
+            default = {
+              userSettings = commonSettings;
+              extensions = commonExtensions;
+            };
 
-                  "extensions.autoUpdate" = false;
-
-                  "explorer.confirmDragAndDrop" = false;
-
-                  "git.enableSmartCommit" = true;
-
-                  "redhat.telemetry.enabled" = false;
-
-                  "security.workspace.trust.untrustedFiles" = "open";
-
-                  "telemetry.enableCrashReporter" = false;
-                  "telemetry.enableTelemetry" = false;
-                  "telemetry.telemetryLevel" = "off";
-
-                  "workbench.sideBar.location" = "right";
-
-                  "terminal.integrated.copyOnSelection" = true;
-                  "terminal.integrated.cursorBlinking" = true;
-                  "terminal.integrated.cursorStyle" = "line";
-                  "terminal.integrated.persistentSessionScrollback" = 1000;
-                  "terminal.integrated.ignoreBracketedPasteMode" = false;
-                  "terminal.integrated.rightClickBehavior" = "paste";
-                  "terminal.integrated.scrollback" = 3000;
-
-                  "window.closeOnFileDelete" = true;
-
-                  "workbench.colorTheme" = "Dark Modern";
-                  "workbench.iconTheme" = "vscode-icons";
-                  "workbench.preferredDarkColorTheme" = "Dark Modern";
-                  "workbench.statusBar.visible" = true;
-
-                  "editor.formatOnSave" = true;
-                  "editor.wordWrap" = "on";
-                  "editor.wordWrapColumn" = 120;
-                  "editor.fontLigatures" = true;
-                  "editor.tabSize" = 2;
-
-                  # Nix IDE LSP Settings
+            # 2. Nix & Shell Dev Profile
+            nix-dev = {
+              userSettings =
+                commonSettings
+                // {
                   "nix.enableLanguageServer" = true;
-                  "nix.serverPath" = lib.getExe pkgs.nixd;
-                  "nix.formatterPath" = lib.getExe pkgs.alejandra;
-                  # "nix.serverSettings" = {
-                  #   nil = {
-                  #     formatting = {
-                  #       "command" = [(lib.getExe pkgs.alejandra)];
-                  #     };
-                  #   };
-                  # };
+                };
+              extensions =
+                commonExtensions
+                ++ (with pkgs.vscode-marketplace; [
+                  jnoortheen.xonsh
+                  thenuprojectcontributors.vscode-nushell-lang
+                ]);
+            };
 
+            # 3. Web & Frontend Dev Profile
+            web-dev = {
+              userSettings = commonSettings;
+              extensions =
+                commonExtensions
+                ++ (with pkgs.vscode-marketplace; [
+                  # JS/TS
+                  dbaeumer.vscode-eslint
+                  yoavbls.pretty-ts-errors
+                  esbenp.prettier-vscode
+
+                  # React / Next.js
+                  dsznajder.es7-react-js-snippets
+                  pulkitgangwar.nextjs-snippets
+
+                  # Styles
+                  styled-components.vscode-styled-components
+                  vincaslt.highlight-matching-tag
+                  formulahendry.auto-close-tag
+                  formulahendry.auto-rename-tag
+
+                  # Frameworks
+                  svelte.svelte-vscode
+                  shopify.ruby-lsp
+                  shopify.ruby-extensions-pack
+
+                  # Web Tools
+                  ms-vscode.live-server
+                  wix.vscode-import-cost
+
+                  # Docs
+                  yzhang.markdown-all-in-one
+                  davidanson.vscode-markdownlint
+                  unifiedjs.vscode-mdx
+                ]);
+            };
+
+            # 4. Data Science & Python Profile
+            data-dev = {
+              userSettings =
+                commonSettings
+                // {
                   "python.analysis.typeCheckingMode" = "standard";
-
                   "pylsp.executable" = lib.getExe pkgs.python3Packages.python-lsp-server;
                 };
-
-                extensions =
-                  (with pkgs.vscode-extensions; [
-                    # Nix
-                    bbenoist.nix
-                    # brettm12345.nixfmt-vscode
-                    jnoortheen.nix-ide
-                    jeff-hykin.better-nix-syntax
-                    kamadorueda.alejandra
-                    #?? perkovec.nix-extension-pack
-
-                    # Jupyter stuff
-                    ms-toolsai.jupyter
-
-                    # Elixir
-                    elixir-lsp.vscode-elixir-ls
-
-                    # Python
-                    charliermarsh.ruff
-                    ms-python.python
-                    ms-python.vscode-pylance
-
-                    # Misc
-                    christian-kohler.path-intellisense
-
-                    # Makefile
-                    ms-vscode.makefile-tools
-                  ])
-                  ++ (with pkgs.vscode-marketplace; [
-                    # Xonsh
-                    jnoortheen.xonsh
-
-                    # Rust
-                    rust-lang.rust-analyzer
-                    tamasfe.even-better-toml
-
-                    # Golang
-                    golang.go
-
-                    # Gleam
-                    gleam.gleam
-
-                    # Nushell
-                    thenuprojectcontributors.vscode-nushell-lang
-
-                    # Dart/Flutter
-                    dart-code.dart-code
-                    dart-code.flutter
-                    nash.awesome-flutter-snippets
-
-                    # Markdown
-                    yzhang.markdown-all-in-one
-                    davidanson.vscode-markdownlint
-                    unifiedjs.vscode-mdx
-
-                    # Haskell
-                    haskell.haskell
-
-                    # XML/YAML/Config
-                    redhat.vscode-yaml
-                    redhat.vscode-xml
-
-                    # JavaScript/TypeScript
-                    dbaeumer.vscode-eslint
-                    yoavbls.pretty-ts-errors
-
-                    # Web Development
-                    shopify.ruby-lsp
-                    styled-components.vscode-styled-components
-                    svelte.svelte-vscode
-                    ms-vscode.live-server
-                    dsznajder.es7-react-js-snippets
-                    pulkitgangwar.nextjs-snippets
-                    wix.vscode-import-cost
-                    vincaslt.highlight-matching-tag
-                    formulahendry.auto-close-tag
-                    formulahendry.auto-rename-tag
-
-                    # DevOps
-                    hashicorp.terraform
-
-                    #* Extension below replaces ms-azuretools.vscode-docker
-                    ms-azuretools.vscode-containers
-                    ms-vscode-remote.remote-containers
-
-                    github.vscode-github-actions
-                    github.vscode-pull-request-github
-                    gitlab.gitlab-workflow
-
-                    # Git
-                    eamodio.gitlens
-                    mhutchie.git-graph
-                    vivaxy.vscode-conventional-commits
-
-                    # CSV/Data
-                    mechatroner.rainbow-csv
-
-                    # Icons/Themes
-                    # vscode-icons-team.vscode-icons
-                    pkief.material-icon-theme
-
-                    # Formatters
-                    esbenp.prettier-vscode
-
-                    # Direnv/Nix-shell
-                    mkhl.direnv
-
-                    # C/C++
-                    llvm-vs-code-extensions.vscode-clangd
-
-                    # Miscellaneous
-                    aaron-bond.better-comments
-
-                    editorconfig.editorconfig
-                    oderwat.indent-rainbow
-                    jebbs.plantuml
-                    mushan.vscode-paste-image
-                    shardulm94.trailing-spaces
-                    tomoki1207.pdf
-                    # lucono.karma-test-explorer
-                    # graphql.vscode-graphql
-                    # wushuaibuaa.autocomplete-english-word
-                    shopify.ruby-extensions-pack
-                    kisstkondoros.vscode-gutter-preview
-                    legale.dts-formatter
-                    # vadimcn.vscode-lldb
-                    # wholroyd.jinja
-                    jmkrivocapich.drawfolderstructure
-
-                    ms-vscode-remote.remote-ssh
-
-                    # ms-dotnettools.vscode-dotnet-runtime # install from nixpkgs
-                    # ms-dotnettools.csdevkit
-                    # neikeq.godot-csharp-vscode # causes huge rebuild
-                    # ms-dotnettools.csharp # causes huge rebuild
-                    # ms-vscode.mono-debug
-
-                    # dankshell stuff
-                    # danklinux.dms-theme
-
-                    kdl-org.kdl
-                  ]);
-              };
+              extensions =
+                commonExtensions
+                ++ (with pkgs.vscode-extensions; [
+                  ms-toolsai.jupyter
+                  charliermarsh.ruff
+                  ms-python.python
+                  ms-python.vscode-pylance
+                ])
+                ++ (with pkgs.vscode-marketplace; [
+                  mechatroner.rainbow-csv
+                ]);
             };
-          };
-        }
 
-        # Configuation For Godot
-        {
-          programs.vscode = {
-            profiles.default = {
-              userSettings = {
-                "csharp.toolsDotnetPath" = "${pkgs.dotnet-sdk_9}/bin/dotnet";
-                "dotnetAcquisitionExtension.sharedExistingDotnetPath" = "${pkgs.dotnet-sdk_9}/bin/dotnet";
-                "dotnetAcquisitionExtension.existingDotnetPath" = [
-                  {
-                    "extensionId" = "ms-dotnettools.csharp";
-                    "path" = "${pkgs.dotnet-sdk_9}/bin/dotnet";
-                  }
-                  {
-                    "extensionId" = "ms-dotnettools.csdevkit";
-                    "path" = "${pkgs.dotnet-sdk_9}/bin/dotnet";
-                  }
-                  {
-                    "extensionId" = "woberg.godot-dotnet-tools";
-                    "path" = "${pkgs.dotnet-sdk_8}/bin/dotnet"; # Godot-Mono uses DotNet8 version.
-                  }
-                ];
-                "godotTools.lsp.serverPort" = 6005;
-                "omnisharp" = {
-                  # OminiSharp is a custom LSP for C#
-                  "path" = "${pkgs.omnisharp-roslyn}/bin/OmniSharp";
-                  "sdkPath" = "${pkgs.dotnet-sdk_9}";
-                  "dotnetPath" = "${pkgs.dotnet-sdk_9}/bin/dotnet";
+            # 5. Systems & Backend Dev Profile
+            sys-dev = {
+              userSettings = commonSettings;
+              extensions =
+                commonExtensions
+                ++ (with pkgs.vscode-extensions; [
+                  elixir-lsp.vscode-elixir-ls
+                ])
+                ++ (with pkgs.vscode-marketplace; [
+                  # Rust
+                  rust-lang.rust-analyzer
+                  tamasfe.even-better-toml
+
+                  # Go
+                  golang.go
+
+                  # Gleam
+                  gleam.gleam
+
+                  # Haskell
+                  haskell.haskell
+
+                  # C/C++
+                  llvm-vs-code-extensions.vscode-clangd
+                  ms-vscode.makefile-tools
+
+                  # Others
+                  kdl-org.kdl
+                  legale.dts-formatter
+                ]);
+            };
+
+            # 6. DevOps & Infrastructure Profile
+            devops = {
+              userSettings = commonSettings;
+              extensions =
+                commonExtensions
+                ++ (with pkgs.vscode-marketplace; [
+                  hashicorp.terraform
+                  ms-azuretools.vscode-containers
+                  ms-vscode-remote.remote-containers
+                  github.vscode-github-actions
+                  github.vscode-pull-request-github
+                  gitlab.gitlab-workflow
+                  redhat.vscode-yaml
+                  redhat.vscode-xml
+                ]);
+            };
+
+            # 7. Mobile Development Profile
+            mobile-dev = {
+              userSettings = commonSettings;
+              extensions =
+                commonExtensions
+                ++ (with pkgs.vscode-marketplace; [
+                  dart-code.dart-code
+                  dart-code.flutter
+                  nash.awesome-flutter-snippets
+                ]);
+            };
+
+            # 8. Godot & C# Profile
+            godot-csharp = {
+              userSettings =
+                commonSettings
+                // {
+                  "csharp.toolsDotnetPath" = "${pkgs.dotnet-sdk_9}/bin/dotnet";
+                  "dotnetAcquisitionExtension.sharedExistingDotnetPath" = "${pkgs.dotnet-sdk_9}/bin/dotnet";
+                  "dotnetAcquisitionExtension.existingDotnetPath" = [
+                    {
+                      "extensionId" = "ms-dotnettools.csharp";
+                      "path" = "${pkgs.dotnet-sdk_9}/bin/dotnet";
+                    }
+                    {
+                      "extensionId" = "ms-dotnettools.csdevkit";
+                      "path" = "${pkgs.dotnet-sdk_9}/bin/dotnet";
+                    }
+                    {
+                      "extensionId" = "woberg.godot-dotnet-tools";
+                      "path" = "${pkgs.dotnet-sdk_8}/bin/dotnet";
+                    }
+                  ];
+                  "godotTools.lsp.serverPort" = 6005;
+                  "omnisharp" = {
+                    "path" = "${pkgs.omnisharp-roslyn}/bin/OmniSharp";
+                    "sdkPath" = "${pkgs.dotnet-sdk_9}";
+                    "dotnetPath" = "${pkgs.dotnet-sdk_9}/bin/dotnet";
+                  };
                 };
-              };
-              extensions = with pkgs.vscode-extensions; [
-                geequlim.godot-tools # For Godot GDScript support
-                woberg.godot-dotnet-tools # For Godot C# support
-                ms-dotnettools.csdevkit
-                ms-dotnettools.csharp
-                ms-dotnettools.vscode-dotnet-runtime
-              ];
+              extensions =
+                commonExtensions
+                ++ (with pkgs.vscode-extensions; [
+                  geequlim.godot-tools
+                  woberg.godot-dotnet-tools
+                  ms-dotnettools.csdevkit
+                  ms-dotnettools.csharp
+                  ms-dotnettools.vscode-dotnet-runtime
+                ]);
             };
           };
+        };
 
-          home.packages = [
-            pkgs.dotnetCorePackages.dotnet_9.sdk # For Godot-Mono VSCode-Extension CSharp
-          ];
-        }
-      ]);
+        home.packages = [
+          pkgs.dotnetCorePackages.dotnet_9.sdk
+        ];
+      };
     };
   };
 }
