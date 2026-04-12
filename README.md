@@ -1,5 +1,7 @@
 # Lunar Nix
 
+![logo](assets/artwork/logo.svg)
+
 A personal NixOS configuration for a reliable, reproducible desktop setup.
 
 ## What is NixOS?
