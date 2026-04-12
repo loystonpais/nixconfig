@@ -86,12 +86,16 @@ Host/User/Home declarations flow through `den.ctx` to resolve into fully applied
 
 ## Important Conventions
 
+### Terminology: "Aspect" Not "Module"
+
+This configuration uses the **dendritic pattern** where the primary unit of organization is called an **aspect** (not a module). Files in `modules/lunar/` are **aspects**, not modules. When referring to these, always use "aspect" (e.g., "the podman aspect", "add a new aspect").
+
 ### Commit Message Format
 
 Use the format: `area: description`
 
 - **area**: Can be:
-  - A module name from `modules/lunar/` (e.g., `sops`, `ssh`, `secrets`, `vscode`, `audio`, `plasma`, `podman`, `browser`)
+  - An aspect name from `modules/lunar/` (e.g., `sops`, `ssh`, `secrets`, `vscode`, `audio`, `plasma`, `podman`, `browser`)
   - A hostname when changing code in `modules/hosts/<hostname>`
   - `lunar:` or `flake:` for changes to the flake in general
   - Combined with more context when needed (e.g., `modules: android:`)
