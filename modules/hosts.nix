@@ -14,5 +14,17 @@
         loystonpais = {};
       };
     };
+
+    nixacle = {
+      users = {
+        loystonpais = {};
+      };
+    };
+
+    diviner = {
+      users = {
+        loystonpais = {};
+      };
+    };
   };
 }
