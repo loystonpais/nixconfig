@@ -1,6 +1,7 @@
 {
   den,
   lunar,
+  lib,
   ...
 }: {
   den.aspects.loystonpais = {
@@ -10,7 +11,11 @@
       den.provides.define-user
     ];
 
-    nixos = {pkgs, ...}: {
+    nixos = {
+      pkgs,
+      config,
+      ...
+    }: {
       time.timeZone = "Asia/Kolkata";
 
       i18n = {
@@ -27,6 +32,7 @@
         openssh.authorizedKeys.keys = [
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHtN04FVSVonasScikFfltCPFJkSWa3t3z+wo+JA8GGd loyston500@gmail.com"
         ];
+        initialPassword = "loystonpais";
       };
 
       environment.systemPackages = with pkgs; [
@@ -39,6 +45,7 @@
         file
         busybox
         python3
+        ruby
         unar
         nil
         lsd
@@ -46,15 +53,27 @@
         broot
         compsize
         alejandra
-        ruby
         jq
         rsync
+        gh
+        pass
+        jq
+        yq
+        fzf
+        bat
+        yt-dlp
+
+        python3Packages.markitdown
       ];
 
       nix = {
         settings = {
           trusted-users = ["loystonpais"];
         };
+      };
+
+      security.acme = {
+        defaults.email = "loyston500@gmail.com";
       };
 
       home-manager = {
@@ -64,6 +83,8 @@
       };
 
       networking.networkmanager.enable = true;
+
+      virtualisation.vmVariant.networking.hostName = lib.mkForce "${config.networking.hostName}-vm";
     };
 
     homeManager = {pkgs, ...}: {
@@ -114,7 +135,6 @@
         lunar.browsers
         lunar.fonts
         lunar.graphics
-        lunar.hardware
         lunar.gaming
         (lunar.gamedev {cudaTools = true;})
         lunar.minecraft
@@ -131,10 +151,49 @@
         lunar.xonsh
         lunar.ssh
         lunar.vscode
-        lunar.dev
         lunar.git
         lunar.hardware
         lunar.tailscale
+      ];
+    };
+
+    provides.nixacle = {
+      includes = [
+        lunar.determinate
+        lunar.tailscale
+        lunar.ssh
+        lunar.git
+        lunar.dev
+        lunar.sops
+
+        lunar.server
+        lunar.server._.linux-kernel-618-temp-boot-fix
+        lunar.server._.oracle-alwaysfree-e2-instance
+        lunar.server._.share-host-secrets
+
+        lunar.acme
+        (lunar.acme._.freedns-afraid {domainName = "loy.ftp.sh";})
+
+        # TODO: Remove this later when the dep with lunar.dev is removed
+        lunar.xonsh
+      ];
+    };
+
+    provides.diviner = {
+      includes = [
+        lunar.determinate
+        lunar.tailscale
+        lunar.ssh
+        lunar.git
+        lunar.dev
+        lunar.sops
+
+        lunar.server
+        lunar.server._.linux-kernel-618-temp-boot-fix
+        lunar.server._.oracle-alwaysfree-e2-instance
+
+        # TODO: Remove this later when the dep with lunar.dev is removed
+        lunar.xonsh
       ];
     };
   };
