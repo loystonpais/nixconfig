@@ -41,7 +41,6 @@
 
       sops.secrets = {
         wireguard-server-common-private-key.owner = config.users.users.${user.userName}.name;
-        "wireguard-client-${config.networking.hostName}-private-key".owner = config.users.users.${user.userName}.name;
       };
 
       sops.secrets = {
@@ -77,6 +76,8 @@
         nixacle-gitea-db-password.owner = config.users.users.${user.userName}.name;
         gitea-key.owner = config.users.users.${user.userName}.name;
       };
+
+      sops.secrets."freedns-afraid-domains/loy.ftp.sh/update-url".owner = config.users.users.${user.userName}.name;
     };
 
     homeManager = {osConfig, ...}: let
