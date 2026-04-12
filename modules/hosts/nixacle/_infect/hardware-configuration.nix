@@ -1,5 +1,5 @@
-{inputs, ...}: {
-  imports = ["${inputs.nixpkgs}/nixos/modules/profiles/qemu-guest.nix"];
+{modulesPath, ...}: {
+  imports = [(modulesPath + "/profiles/qemu-guest.nix")];
   boot.loader = {
     efi.efiSysMountPoint = "/boot/efi";
     grub = {
