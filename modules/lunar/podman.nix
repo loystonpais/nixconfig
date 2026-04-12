@@ -1,5 +1,9 @@
 {den, ...}: {
-  lunar.podman = {user, ...}: {
+  lunar.podman = {
+    user,
+    enableDocker ? true,
+    ...
+  }: {
     nixos = {
       pkgs,
       lib,
@@ -10,7 +14,7 @@
         {
           virtualisation.podman = {
             enable = true;
-            #! TODO dockerCompat = lib.mkDefault true;
+            dockerCompat = !enableDocker;
           };
 
           environment.systemPackages = with pkgs; [
@@ -33,6 +37,15 @@
               }
             ];
           };
+        }
+
+        {
+          virtualisation.docker = {
+            enable = true;
+          };
+
+          # Optional: Add your user to the "docker" group to run docker without sudo
+          users.users.${user.userName}.extraGroups = ["docker"];
         }
       ];
     };
