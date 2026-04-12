@@ -3,3 +3,4 @@ result
 .direnv
 .stash
 den
+*.qcow2
