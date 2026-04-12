@@ -153,22 +153,6 @@ Directories and files starting with `_` (e.g., `_hw/`, `_vfio/`, `_services/`, `
 
 These need to be explicitly imported where needed.
 
-### Default Module Loading Pattern
-
-```nix
-# modules/hosts/<host>/_services/default.nix
-{
-  imports = let
-    dir = builtins.readDir ./.;
-    toImport = name: type:
-      if type == "regular" && name != "default.nix" && builtins.hasSuffix ".nix" name
-      then ./${name}
-      else null;
-  in
-    builtins.filter (x: x != null) (builtins.attrValues (builtins.mapAttrs toImport dir));
-}
-```
-
 ---
 
 ## Feature Highlights
