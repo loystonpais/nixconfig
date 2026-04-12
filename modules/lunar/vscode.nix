@@ -89,6 +89,9 @@
           enable = true;
           mutableExtensionsDir = false;
 
+          userSettings = commonSettings;
+          extensions = commonExtensions;
+
           profiles = {
             # 1. Default Profile: Core configuration + Essential Nix
             default = {
