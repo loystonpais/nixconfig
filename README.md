@@ -1,8 +1,18 @@
 # Lunar Nix
 
-![logo](assets/artwork/logo.svg)
+<p align="center">
+  <img src="assets/artwork/logo.svg" width="200" alt="Lunar Nix logo">
+</p>
 
 A personal NixOS configuration for a reliable, reproducible desktop setup.
+
+## Infrastructure
+
+This configuration manages both desktops and cloud VPS:
+
+- **Desktops** - Personal workstations with KDE Plasma 6
+- **nixacle** - Cloud VPS running services and workloads
+- **diviner** - Cloud VPS for additional services
 
 ## What is NixOS?
 
