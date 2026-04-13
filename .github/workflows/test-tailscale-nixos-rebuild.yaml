@@ -35,6 +35,7 @@ jobs:
 
       - name: Deploy NixOS
         run: |
-          nixos-rebuild test \
+          nixos-rebuild switch \
             --flake .#nixacle \
+            --use-substitutes \
             --target-host root@nixacle
