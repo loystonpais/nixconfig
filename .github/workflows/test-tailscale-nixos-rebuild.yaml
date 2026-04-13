@@ -37,5 +37,4 @@ jobs:
         run: |
           nixos-rebuild test \
             --flake .#nixacle \
-            --build-host localhost \
             --target-host root@nixacle
