@@ -85,6 +85,8 @@
       networking.networkmanager.enable = true;
 
       virtualisation.vmVariant.networking.hostName = lib.mkForce "${config.networking.hostName}-vm";
+
+      programs.nix-ld.enable = true;
     };
 
     homeManager = {pkgs, ...}: {
