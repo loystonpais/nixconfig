@@ -8,6 +8,8 @@
     includes = [
       lunar.tailscale
       lunar.ssh
+
+      lunar.server._.vm-enhancements
     ];
     nixos = {pkgs, ...}: {
       services.tailscale.enable = true;
@@ -67,6 +69,34 @@
           virtualisation = {
             memorySize = 1024;
             cores = 1;
+          };
+        };
+      };
+    };
+
+    provides.storage-management = {
+      nixos = {...}: {
+        nix.gc = {
+          automatic = true;
+          dates = "weekly";
+          options = "--delete-older-than 30d";
+        };
+      };
+    };
+
+    provides.vm-enhancements = {
+      host,
+      user,
+      ...
+    }: {
+      nixos = {...}: {
+        virtualisation = {
+          vmVariant = {
+            services.getty.autologinUser = user.userName;
+          };
+
+          vmVariantWithBootLoader = {
+            services.getty.autologinUser = user.userName;
           };
         };
       };

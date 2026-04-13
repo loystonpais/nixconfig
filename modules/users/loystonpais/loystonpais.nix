@@ -172,6 +172,8 @@
         lunar.server._.linux-kernel-618-temp-boot-fix
         lunar.server._.oracle-alwaysfree-e2-instance
         lunar.server._.share-host-secrets
+        lunar.server._.storage-management
+        lunar.server._.vm-enhancements
 
         lunar.acme
         (lunar.acme._.freedns-afraid {domainName = "loy.ftp.sh";})
