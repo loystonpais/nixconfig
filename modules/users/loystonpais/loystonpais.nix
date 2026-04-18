@@ -58,10 +58,11 @@
         gh
         pass
         jq
-        yq
+        yq-go
         fzf
         bat
         yt-dlp
+        fd
 
         python3Packages.markitdown
       ];
@@ -94,8 +95,6 @@
         packages = with pkgs; [
           htop
         ];
-
-        stateVersion = "25.11";
       };
 
       programs.git = {
@@ -110,6 +109,8 @@
           };
         };
       };
+
+      home.stateVersion = lib.mkDefault "25.11";
     };
 
     provides.substituters = {
@@ -156,6 +157,8 @@
         lunar.git
         lunar.hardware
         lunar.tailscale
+        lunar.android
+        lunar.devenv
       ];
     };
 
@@ -174,6 +177,7 @@
         lunar.server._.share-host-secrets
         lunar.server._.storage-management
         lunar.server._.vm-enhancements
+        lunar.server._.no-ipv6
 
         lunar.acme
         (lunar.acme._.freedns-afraid {domainName = "loy.ftp.sh";})
@@ -195,6 +199,10 @@
         lunar.server
         lunar.server._.linux-kernel-618-temp-boot-fix
         lunar.server._.oracle-alwaysfree-e2-instance
+        lunar.server._.share-host-secrets
+        lunar.server._.storage-management
+        lunar.server._.vm-enhancements
+        lunar.server._.no-ipv6
 
         # TODO: Remove this later when the dep with lunar.dev is removed
         lunar.xonsh
