@@ -2,9 +2,8 @@
   lunar.cuda = {
     nixos = {...}: {
       nix.settings = {
-        substituters = ["https://cache.nixos-cuda.org" "https://cache.flox.dev"];
+        substituters = ["https://cache.flox.dev"];
         trusted-public-keys = [
-          "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="
           "cache.flox.dev:6Xu+CmU56tJCzVa2YpS2IZ+Ib73z6eXALm94RdU4pQE="
         ];
       };
@@ -14,6 +13,15 @@
         owner = "flox";
         repo = "nixpkgs";
         ref = "unstable";
+      };
+    };
+
+    provides.nixos-cuda-cache = {
+      nix.settings = {
+        substituters = ["https://cache.nixos.org"];
+        trusted-public-keys = [
+          "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="
+        ];
       };
     };
   };
