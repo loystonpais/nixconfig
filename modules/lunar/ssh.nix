@@ -1,6 +1,6 @@
 {den, ...}: {
   lunar.ssh = {
-    nixos = {...}: {
+    nixos = {pkgs, ...}: {
       services.openssh = {
         enable = true;
         ports = [22];
@@ -21,10 +21,13 @@
           to = 61000;
         }
       ];
+
+      environment.systemPackages = with pkgs; [proxychains-ng];
     };
 
     homeManager = {...}: {
       programs.ssh = {
+        enableDefaultConfig = false;
         enable = true;
         matchBlocks = {
           "*" = {
