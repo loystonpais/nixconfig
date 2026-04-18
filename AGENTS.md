@@ -1,4 +1,4 @@
-# Agent Instructions for /etc/nixos (Lunar Nix)
+# Agent Instructions for (Lunar Nix)
 
 ## Project Overview
 
