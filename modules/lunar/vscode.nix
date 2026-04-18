@@ -16,7 +16,6 @@
     homeManager = {
       pkgs,
       lib,
-      osConfig,
       ...
     }: let
       # Common settings shared across all profiles
@@ -82,15 +81,14 @@
           oderwat.indent-rainbow
           shardulm94.trailing-spaces
           kisstkondoros.vscode-gutter-preview
+
+          datakurre.devenv
         ]);
     in {
       config = {
         programs.vscode = {
           enable = true;
           mutableExtensionsDir = false;
-
-          userSettings = commonSettings;
-          extensions = commonExtensions;
 
           profiles = {
             # 1. Default Profile: Core configuration + Essential Nix
