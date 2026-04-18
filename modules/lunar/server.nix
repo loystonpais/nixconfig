@@ -101,5 +101,11 @@
         };
       };
     };
+
+    provides.no-ipv6 = {
+      nixos = {...}: {
+        networking.enableIPv6 = false;
+      };
+    };
   };
 }
