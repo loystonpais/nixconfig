@@ -63,8 +63,11 @@
       };
 
       system.nixos.tags = ["lunar"];
-    };
 
-    homeManager.home.stateVersion = lib.mkDefault "23.11";
+      environment.variables = rec {
+        LUNAR_NIXPKGS_REV = inputs.nixpkgs.rev;
+        LUNAR_NIXPKGS_URL = "github:NixOS/nixpkgs/${LUNAR_NIXPKGS_REV}";
+      };
+    };
   };
 }
