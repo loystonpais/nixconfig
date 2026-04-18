@@ -278,8 +278,7 @@
           programs.konsole = {
             enable = true;
             customColorSchemes = {
-              #DarkPastelsModified = inputs.self.outPath + "/assets/konsole/themes/DarkPastelsModified.colorscheme";
-              DarkPastelsModified = ../../../assets/konsole/themes/DarkPastelsModified.colorscheme;
+              DarkPastelsModified = "${inputs.self.outPath}/assets/konsole/themes/DarkPastelsModified.colorscheme";
             };
             defaultProfile = "Lunar";
             profiles = {
