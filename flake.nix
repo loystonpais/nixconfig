@@ -20,6 +20,10 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
+    nixpkgs-frequent-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+    nixpkgs-latest-release.url = "github:NixOS/nixpkgs/nixos-25.11";
+
     import-tree.url = "github:vic/import-tree";
 
     flake-aspects.url = "github:vic/flake-aspects";
@@ -60,11 +64,6 @@
 
     nix-vscode-extensions = {
       url = "github:nix-community/nix-vscode-extensions";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nixcraft = {
-      url = "github:loystonpais/nixcraft";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

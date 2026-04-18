@@ -146,27 +146,6 @@
         "url": "https://flakehub.com/f/hercules-ci/flake-parts/0.1"
       }
     },
-    "flake-parts_2": {
-      "inputs": {
-        "nixpkgs-lib": [
-          "nixcraft",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1765835352,
-        "narHash": "sha256-XswHlK/Qtjasvhd1nOa1e8MgZ8GS//jBoTqWtrS1Giw=",
-        "owner": "hercules-ci",
-        "repo": "flake-parts",
-        "rev": "a34fae9c08a15ad73f295041fec82323541400a9",
-        "type": "github"
-      },
-      "original": {
-        "owner": "hercules-ci",
-        "repo": "flake-parts",
-        "type": "github"
-      }
-    },
     "git-hooks-nix": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -269,27 +248,6 @@
         "type": "github"
       }
     },
-    "nixcraft": {
-      "inputs": {
-        "flake-parts": "flake-parts_2",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1773797009,
-        "narHash": "sha256-mqN32x/3sQ05qbv4Qj1k74eucRwzctQGOj1XdQS2aTo=",
-        "owner": "loystonpais",
-        "repo": "nixcraft",
-        "rev": "80cdab9c2a1855be3a8b723b68752b62a9949b31",
-        "type": "github"
-      },
-      "original": {
-        "owner": "loystonpais",
-        "repo": "nixcraft",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1761597516,
@@ -317,6 +275,38 @@
         "owner": "NixOS",
         "repo": "nixpkgs",
         "rev": "a62e6edd6d5e1fa0329b8653c801147986f8d446",
+        "type": "github"
+      }
+    },
+    "nixpkgs-frequent-unstable": {
+      "locked": {
+        "lastModified": 1776169885,
+        "narHash": "sha256-l/iNYDZ4bGOAFQY2q8y5OAfBBtrDAaPuRQqWaFHVRXM=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "4bd9165a9165d7b5e33ae57f3eecbcb28fb231c9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs-latest-release": {
+      "locked": {
+        "lastModified": 1776067740,
+        "narHash": "sha256-B35lpsqnSZwn1Lmz06BpwF7atPgFmUgw1l8KAV3zpVQ=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "7e495b747b51f95ae15e74377c5ce1fe69c1765f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-25.11",
+        "repo": "nixpkgs",
         "type": "github"
       }
     },
@@ -420,8 +410,9 @@
         "home-manager": "home-manager",
         "import-tree": "import-tree",
         "nix-vscode-extensions": "nix-vscode-extensions",
-        "nixcraft": "nixcraft",
         "nixpkgs": "nixpkgs_3",
+        "nixpkgs-frequent-unstable": "nixpkgs-frequent-unstable",
+        "nixpkgs-latest-release": "nixpkgs-latest-release",
         "plasma-manager": "plasma-manager",
         "sops-nix": "sops-nix",
         "zen-browser": "zen-browser"
