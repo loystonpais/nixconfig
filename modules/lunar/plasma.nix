@@ -3,7 +3,7 @@
   inputs,
   ...
 }: {
-  lunar.plasma = mode: {
+  lunar.plasma = {mode ? "mac", ...}: {
     nixos = {
       pkgs,
       lib,
@@ -215,7 +215,6 @@
               colorScheme = "WhiteSurDark";
               windowDecorations.theme = "__aurorae__svg__WhiteSur-Sharp-dark";
               windowDecorations.library = "org.kde.kwin.aurorae";
-              #! wallpaper = osConfig.lunar.wallpaper;
               splashScreen = {
                 theme = "None";
                 engine = "none";
@@ -241,16 +240,10 @@
 
                   {
                     iconTasks = {
-                      launchers =
-                        [
-                          "applications:org.kde.dolphin.desktop"
-                          "applications:org.kde.konsole.desktop"
-                        ]
-                        ++
-                        # This is to add if the package is installed
-                        lib.optional
-                        (lib.elem pkgs.vscode osConfig.environment.systemPackages)
-                        "applications:code.desktop";
+                      launchers = [
+                        "applications:org.kde.dolphin.desktop"
+                        "applications:org.kde.konsole.desktop"
+                      ];
                     };
                   }
                 ];

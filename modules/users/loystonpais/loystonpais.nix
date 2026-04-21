@@ -132,7 +132,7 @@
         lunar.distrobox
         lunar.podman
         lunar.misc
-        (lunar.plasma "mac")
+        (lunar.plasma)
         lunar.niri
         lunar.dms
         lunar.browsers
