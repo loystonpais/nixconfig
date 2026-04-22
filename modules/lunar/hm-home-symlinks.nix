@@ -25,6 +25,8 @@ in {
           else {}
       ) (builtins.readDir base);
   in {
-    homeManager.home.file = lib.mapAttrs (_: path: {source = path;}) (collectFiles dir "");
+    homeManager = {config, ...}: {
+      home.file = lib.mapAttrs (rel: abs: {source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/hm-home-symlinks/${user.userName}/${rel}";}) (collectFiles dir "");
+    };
   };
 }
