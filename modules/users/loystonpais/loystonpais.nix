@@ -188,6 +188,12 @@
         lunar.acme
         (lunar.acme._.freedns-afraid {domainName = "loy.ftp.sh";})
 
+        (lunar.rclone {
+          remotes = [
+            "dropbox500"
+          ];
+        })
+
         # TODO: Remove this later when the dep with lunar.dev is removed
         lunar.xonsh
       ];
