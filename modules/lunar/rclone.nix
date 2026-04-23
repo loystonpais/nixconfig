@@ -5,6 +5,9 @@
 }: {
   # mounts go at /mnt/rclone/<name>
   lunar.rclone = {
+    remotes ? [],
+    unions ? [],
+  }: {
     nixos = {
       lib,
       config,
@@ -59,28 +62,28 @@
       mkRcloneFsWithRcloneIniSecret = name: mkRcloneFsWithSecretConfig name config.sops.secrets."rclone.conf";
       mkRcloneFsWithRcloneUnionIniTemplate = name: mkRcloneFsWithSecretConfig name config.sops.templates."rclone-with-unions.conf";
     in {
-      config = {
-        environment.systemPackages = with pkgs; [rclone];
-        sops.templates."rclone-with-unions.conf".content = ''
-          ${config.sops.placeholder."rclone.conf"}
+      environment.systemPackages = with pkgs; [
+        rclone
+      ];
+      sops.templates."rclone-with-unions.conf".content = ''
+        ${config.sops.placeholder."rclone.conf"}
 
-          ${toINI {} unionConfig}
-        '';
-        fileSystems = let
-          individualMounts = listToAttrs (map (remoteName: {
-              name = mkDefaultMountPath remoteName;
-              value = lib.mkIf config.lunar.modules.rclone.${remoteName}.enable (mkRcloneFsWithRcloneIniSecret remoteName);
-            })
-            allRemotes);
+        ${toINI {} unionConfig}
+      '';
+      fileSystems = let
+        individualMounts = listToAttrs (map (remoteName: {
+            name = mkDefaultMountPath remoteName;
+            value = lib.mkIf (builtins.elem remoteName remotes) (mkRcloneFsWithRcloneIniSecret remoteName);
+          })
+          allRemotes);
 
-          unionMounts = listToAttrs (map (unionName: {
-              name = mkDefaultMountPath unionName;
-              value = lib.mkIf config.lunar.modules.rclone.unions.${unionName}.enable (mkRcloneFsWithRcloneUnionIniTemplate unionName);
-            })
-            allUnions);
-        in
-          individualMounts // unionMounts;
-      };
+        unionMounts = listToAttrs (map (unionName: {
+            name = mkDefaultMountPath unionName;
+            value = lib.mkIf (builtins.elem unionName unions) (mkRcloneFsWithRcloneUnionIniTemplate unionName);
+          })
+          allUnions);
+      in
+        individualMounts // unionMounts;
     };
   };
 }
