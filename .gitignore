@@ -4,3 +4,7 @@ result
 .stash
 den
 *.qcow2
+
+.devenv
+
+.pre-commit-config.yaml
