@@ -1,12 +1,26 @@
-{den, ...}: {
+{
+  den,
+  lib,
+  inputs,
+  ...
+}: {
   lunar.niri = {
     nixos = {pkgs, ...}: {
-      programs.niri.enable = true;
+      imports = [
+        inputs.niri.nixosModules.niri
+      ];
+
+      programs.niri = {
+        enable = true;
+        package = pkgs.niri;
+      };
+
       environment.systemPackages = with pkgs; [
         xwayland-satellite
         labwc
       ];
-      services.displayManager.dms-greeter.compositor.name = "niri";
+
+      services.displayManager.dms-greeter.compositor.name = lib.mkDefault "niri";
     };
 
     homeManager = {
@@ -16,9 +30,14 @@
     }: {
       xdg.portal = {
         enable = true;
-        extraPortals = with pkgs; [xdg-desktop-portal-gtk xdg-desktop-portal-gnome];
-        configPackages = with pkgs; [xdg-desktop-portal-gtk xdg-desktop-portal-gnome];
+        extraPortals = with pkgs; [
+          xdg-desktop-portal-gtk
+        ];
       };
+    };
+
+    provides.cache = {
+      nixos.niri-flake.cache.enable = true;
     };
   };
 }
