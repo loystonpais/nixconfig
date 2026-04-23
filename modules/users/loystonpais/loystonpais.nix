@@ -88,6 +88,8 @@
       virtualisation.vmVariant.networking.hostName = lib.mkForce "${config.networking.hostName}-vm";
 
       programs.nix-ld.enable = true;
+
+      programs.bash.blesh.enable = true;
     };
 
     homeManager = {pkgs, ...}: {
@@ -133,8 +135,6 @@
         lunar.podman
         lunar.misc
         (lunar.plasma)
-        lunar.niri
-        lunar.dms
         lunar.browsers
         lunar.fonts
         lunar.graphics
@@ -159,6 +159,12 @@
         lunar.tailscale
         lunar.android
         lunar.devenv
+
+        lunar.niri
+
+        lunar.dms
+        lunar.dms._.via-niri
+        lunar.dms._.greeter
       ];
     };
 
