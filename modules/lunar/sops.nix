@@ -33,6 +33,7 @@
 
       sops.secrets = {
         groq-personal-use-key.owner = config.users.users.${user.userName}.name;
+        groq-key-portfolio-site.owner = config.users.users.${user.userName}.name;
         gemini-api-key.owner = config.users.users.${user.userName}.name;
         github-key.owner = config.users.users.${user.userName}.name;
         openrouter-key.owner = config.users.users.${user.userName}.name;
