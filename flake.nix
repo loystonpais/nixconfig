@@ -67,6 +67,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    niri = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
   };
 }
