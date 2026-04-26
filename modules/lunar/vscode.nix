@@ -29,9 +29,11 @@
       "terminal.integrated.rightClickBehavior" = "paste";
       "terminal.integrated.scrollback" = 3000;
       "window.closeOnFileDelete" = true;
-      "workbench.colorTheme" = "Dark Modern";
+
+      "workbench.colorTheme" = "Dark 2026";
+      "workbench.preferredDarkColorTheme" = "Dark 2026";
+
       "workbench.iconTheme" = "vscode-icons";
-      "workbench.preferredDarkColorTheme" = "Dark Modern";
       "workbench.statusBar.visible" = true;
       "editor.formatOnSave" = true;
       "editor.wordWrap" = "on";
