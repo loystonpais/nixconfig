@@ -18,11 +18,9 @@
     }).config.flake;
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "https://flakehub.com/f/DeterminateSystems/nixpkgs-weekly/0.1";
 
-    nixpkgs-frequent-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-
-    nixpkgs-latest-release.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs-stable.url = "https://flakehub.com/f/NixOS/nixpkgs/0";
 
     import-tree.url = "github:vic/import-tree";
 
