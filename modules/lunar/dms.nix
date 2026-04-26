@@ -2,6 +2,7 @@
   den,
   inputs,
   lunar,
+  lib,
   ...
 }: {
   lunar.dms = {
@@ -36,6 +37,14 @@
       services.upower.enable = true;
       services.power-profiles-daemon.enable = true;
       services.accounts-daemon.enable = true;
+
+      #### NIRI
+
+      # Disable niri-flake's own polkit to allow dms's own
+      # NOTE: This USER service is defined in NIXOS not homeManager
+      systemd.user.services.niri-flake-polkit.enable = false;
+
+      ####
     };
 
     homeManager = {
@@ -51,6 +60,7 @@
     in {
       imports = [
         inputs.dms.homeModules.dank-material-shell
+        inputs.dms.homeModules.niri
       ];
 
       systemd.user.services.dms = {
@@ -85,6 +95,36 @@
       #? Are these needed ?
       dconf.enable = true;
       dconf.settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
+
+      #### NIRI
+
+      #! Just make it work for Niri
+      xdg.configFile.niri-config-dms.text =
+        (
+          lib.mkIf
+          (config.home.file.".config/niri/mutable.kdl" or {enable = false;}).enable
+        )
+        ''
+          include "./mutable.kdl"
+        '';
+
+      ####
+    };
+
+    provides.default-browser = {
+      homeManager = {
+        pkgs,
+        lib,
+        ...
+      }: {
+        xdg.mimeApps = {
+          enable = true;
+          defaultApplications = {
+            "x-scheme-handler/http" = "dms-open.desktop";
+            "x-scheme-handler/https" = "dms-open.desktop";
+          };
+        };
+      };
     };
 
     provides.greeter = {user, ...}: {
@@ -96,47 +136,38 @@
       };
     };
 
-    provides.via-systemd = {
-      homeManager = {...}: {
+    provides.via-systemd = {desktops ? null, ...}: let
+      desktopPattern = builtins.concatStringsSep "|" desktops;
+    in {
+      homeManager = {
+        pkgs,
+        lib,
+        ...
+      }: {
         programs.dank-material-shell = {
           systemd = {
             enable = true;
             restartIfChanged = true;
           };
         };
+
+        systemd.user.services.dms.Service.ExecCondition = lib.mkIf (desktops != null) "${lib.getExe pkgs.bash} -c 'case \"$XDG_CURRENT_DESKTOP\" in ${desktopPattern}) exit 0;; *) exit 1;; esac'";
       };
     };
 
     provides.via-niri = {
-      nixos = {...}: {
-        # Disable niri-flake's own polkit to allow dms's own
-        # NOTE: This USER service is defined in NIXOS not homeManager
-        systemd.user.services.niri-flake-polkit.enable = false;
-      };
+      nixos = {...}: {};
 
       homeManager = {
         lib,
         config,
         ...
       }: {
-        imports = [
-          inputs.dms.homeModules.niri
-        ];
         programs.dank-material-shell = {
           niri = {
             enableSpawn = true;
           };
         };
-
-        #! Just make it work for now
-        xdg.configFile.niri-config-dms.text =
-          (
-            lib.mkIf
-            (config.home.file.".config/niri/mutable.kdl" or {enable = false;}).enable
-          )
-          ''
-            include "./mutable.kdl"
-          '';
       };
     };
   };
