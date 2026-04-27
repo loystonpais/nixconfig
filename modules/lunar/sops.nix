@@ -32,53 +32,55 @@
       ];
 
       sops.secrets = {
-        groq-personal-use-key.owner = config.users.users.${user.userName}.name;
-        groq-key-portfolio-site.owner = config.users.users.${user.userName}.name;
-        gemini-api-key.owner = config.users.users.${user.userName}.name;
-        github-key.owner = config.users.users.${user.userName}.name;
-        openrouter-key.owner = config.users.users.${user.userName}.name;
-        cachix-loystonpais-auth-token.owner = config.users.users.${user.userName}.name;
+        groq-personal-use-key.owner = user.userName;
+        groq-key-portfolio-site.owner = user.userName;
+        groq-key-800-personal.owner = user.userName;
+
+        gemini-api-key.owner = user.userName;
+        github-key.owner = user.userName;
+        openrouter-key.owner = user.userName;
+        cachix-loystonpais-auth-token.owner = user.userName;
       };
 
       sops.secrets = {
-        wireguard-server-common-private-key.owner = config.users.users.${user.userName}.name;
+        wireguard-server-common-private-key.owner = user.userName;
       };
 
       sops.secrets = {
-        mc-offline-username.owner = config.users.users.${user.userName}.name;
-        mc-offline-uuid.owner = config.users.users.${user.userName}.name;
+        mc-offline-username.owner = user.userName;
+        mc-offline-uuid.owner = user.userName;
       };
 
       sops.secrets = {
         "business-profile.jpg" = {
           format = "binary";
           sopsFile = ../../secrets/files/business-profile.jpg.enc;
-          owner = config.users.users.${user.userName}.name;
+          owner = user.userName;
         };
         "college-logo.jpg" = {
           format = "binary";
           sopsFile = ../../secrets/files/college-logo.jpg.enc;
-          owner = config.users.users.${user.userName}.name;
+          owner = user.userName;
         };
         "rclone.conf" = {
           format = "ini";
           sopsFile = ../../secrets/rclone.ini;
-          owner = config.users.users.${user.userName}.name;
+          owner = user.userName;
         };
       };
 
       sops.secrets = {
-        ataraxy-bot-token.owner = config.users.users.${user.userName}.name;
-        ataraxy-environment-file.owner = config.users.users.${user.userName}.name;
+        ataraxy-bot-token.owner = user.userName;
+        ataraxy-environment-file.owner = user.userName;
       };
 
       sops.secrets = {
-        loy-ftp-sh-dns-update-url.owner = config.users.users.${user.userName}.name;
-        nixacle-gitea-db-password.owner = config.users.users.${user.userName}.name;
-        gitea-key.owner = config.users.users.${user.userName}.name;
+        loy-ftp-sh-dns-update-url.owner = user.userName;
+        nixacle-gitea-db-password.owner = user.userName;
+        gitea-key.owner = user.userName;
       };
 
-      sops.secrets."freedns-afraid-domains/loy.ftp.sh/update-url".owner = config.users.users.${user.userName}.name;
+      sops.secrets."freedns-afraid-domains/loy.ftp.sh/update-url".owner = user.userName;
     };
 
     homeManager = {osConfig, ...}: let
