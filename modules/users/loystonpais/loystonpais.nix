@@ -4,7 +4,9 @@
   lib,
   ...
 }: {
-  den.aspects.loystonpais = {
+  den.aspects.loystonpais = let
+    infisical.projectId = "7387bfdf-3d2a-4397-8af6-dd4ff5f8fd6a";
+  in {
     includes = [
       den.provides.primary-user
       (den.provides.user-shell "zsh")
@@ -175,6 +177,12 @@
 
         lunar.agents
         lunar.agents._.prompt-notify-via-zenity
+
+        lunar.infisical
+        (lunar.infisical._.secret-sync {
+          projectId = infisical.projectId;
+          syncSec = "5h";
+        })
       ];
     };
 
@@ -202,6 +210,12 @@
           remotes = [
             "dropbox500"
           ];
+        })
+
+        lunar.infisical
+        (lunar.infisical._.secret-sync {
+          projectId = infisical.projectId;
+          syncSec = "1h";
         })
 
         # TODO: Remove this later when the dep with lunar.dev is removed
