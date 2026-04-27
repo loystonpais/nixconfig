@@ -169,8 +169,12 @@
         lunar.niri
 
         lunar.dms
-        lunar.dms._.via-niri
+        (lunar.dms._.via-systemd {desktops = ["niri"];})
         lunar.dms._.greeter
+        lunar.dms._.default-browser
+
+        lunar.agents
+        lunar.agents._.prompt-notify-via-zenity
       ];
     };
 
