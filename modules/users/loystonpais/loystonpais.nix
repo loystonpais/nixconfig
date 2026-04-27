@@ -63,6 +63,12 @@
         bat
         yt-dlp
         fd
+        libnotify
+        zenity
+        rbw
+        pinentry-curses
+        grim
+        slurp
 
         python3Packages.markitdown
       ];
