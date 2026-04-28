@@ -22,6 +22,8 @@
               dir = "${homeDir}/.infisical-secret-sync";
               envFile = "${dir}/secrets.env";
               envFileTmp = "${envFile}.tmp";
+
+              mappedSecretsDir = "${dir}/secrets";
             };
           in {
             nixos = {
@@ -56,8 +58,32 @@
                         > "${envFileTmp}"
 
                       mv "${envFileTmp}" ${envFile}
-
                       chmod 600 "${envFile}"
+
+                      mkdir -p "${mappedSecretsDir}"
+
+                      # Collect current secret keys from the env file
+                      declare -A current_keys
+                      while IFS= read -r line || [[ -n "$line" ]]; do
+                        [[ "$line" =~ ^[[:space:]]*# ]] && continue
+                        [[ -z "''${line// }" ]] && continue
+                        key="''${line%%=*}"
+                        value="''${line#*=}"
+                        value="''${value#\"}" value="''${value%\"}"
+                        value="''${value#\'}" value="''${value%\'}"
+                        [[ -z "$key" ]] && continue
+                        printf '%s' "$value" > "${mappedSecretsDir}/$key"
+                        current_keys["$key"]=1
+                      done < "${envFile}"
+
+                      # Remove secrets that no longer exist
+                      for secret_file in "${mappedSecretsDir}"/*; do
+                        [[ -e "$secret_file" ]] || continue
+                        fname="$(basename "$secret_file")"
+                        if [[ -z "''${current_keys[$fname]+_}" ]]; then
+                          rm -f "$secret_file"
+                        fi
+                      done
                     '';
 
                     ProtectHome = false;
