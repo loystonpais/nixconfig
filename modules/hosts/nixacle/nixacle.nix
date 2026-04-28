@@ -42,6 +42,15 @@
                 proxy_set_header X-Forwarded-Proto $scheme;
               '';
             };
+
+            "/projects/fake-online-test" = {
+              root = "/var/www";
+              extraConfig = ''
+                expires -1;
+                add_header Cache-Control "no-store, no-cache, must-revalidate, proxy-revalidate";
+              '';
+              tryFiles = "$uri $uri/ =404";
+            };
           };
         };
       };
