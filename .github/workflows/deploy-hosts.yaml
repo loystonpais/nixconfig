@@ -1,0 +1,60 @@
+name: Deploy
+on:
+  workflow_dispatch:
+    inputs:
+      host:
+        description: "Target host (e.g. nixacle, diviner)"
+        required: true
+        type: string
+      flake:
+        description: "Flake attribute (defaults to host)"
+        required: false
+        type: string
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        host: ${{ github.event_name == 'schedule' && fromJSON('["nixacle", "diviner"]') || fromJSON(format('["{0}"]', inputs.host)) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v14
+        with:
+          extra-conf: |
+            experimental-features = nix-command flakes
+
+      - name: Restore and save Nix store
+        uses: nix-community/cache-nix-action@v7
+        with:
+          primary-key: nix-${{ runner.os }}-${{ hashFiles('flake.lock') }}
+          restore-prefixes-first-match: nix-${{ runner.os }}-
+          gc-max-store-size-linux: 1G
+          purge: true
+          purge-prefixes: nix-${{ runner.os }}-
+          purge-created: 0
+          purge-last-accessed: P1DT12H
+          purge-primary-key: never
+
+      - name: Connect to Tailscale
+        uses: tailscale/github-action@v4
+        with:
+          oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+          oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
+          tags: tag:ci
+          ping: ${{ matrix.host }}
+
+      - name: Trust Tailscale SSH host
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -T 30 ${{ matrix.host }} >> ~/.ssh/known_hosts 2>/dev/null
+
+      - name: Deploy NixOS
+        run: |
+          nix run nixpkgs#nixos-rebuild -- switch \
+            --flake .#${{ inputs.flake || matrix.host }} \
+            --use-substitutes \
+            --target-host root@${{ matrix.host }}
