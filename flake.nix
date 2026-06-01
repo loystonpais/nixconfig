@@ -22,8 +22,6 @@
 
     nixpkgs-stable.url = "https://flakehub.com/f/NixOS/nixpkgs/0";
 
-    finix.url = "github:finix-community/finix?ref=main";
-
     import-tree.url = "github:vic/import-tree";
 
     flake-aspects.url = "github:vic/flake-aspects";
@@ -70,6 +68,7 @@
     niri = {
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs-stable.follows = "nixpkgs-stable";
     };
 
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
