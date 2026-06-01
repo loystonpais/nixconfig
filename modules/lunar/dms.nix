@@ -138,11 +138,16 @@
       };
     };
 
-    provides.greeter = {user, ...}: {
+    provides.greeter = {
+      user,
+      compositor ? null,
+      ...
+    }: {
       nixos = {config, ...}: {
         services.displayManager.dms-greeter = {
           enable = true;
           configHome = config.home-manager.users.${user.userName}.home.homeDirectory;
+          compositor.name = lib.mkIf (compositor != null) compositor;
         };
 
         #TODO: Check this out

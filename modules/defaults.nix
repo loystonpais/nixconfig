@@ -46,7 +46,7 @@
       };
 
       nix.settings = {
-        substituters = lib.mkBefore [
+        substituters = [
           "https://cache.nixos.org/"
           "https://nix-community.cachix.org?priority=5"
         ];

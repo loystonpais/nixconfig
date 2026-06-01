@@ -9,7 +9,7 @@
   in {
     includes = [
       den.provides.primary-user
-      (den.provides.user-shell "zsh")
+      (den.provides.user-shell "bash")
       den.provides.define-user
     ];
 
@@ -151,6 +151,58 @@
       };
     };
 
+    provides.jailed-agents = {
+      includes = [
+        lunar.agents
+        (lunar.agents._.jailed (pkgs: {
+            gemini = {
+              pkg = pkgs.gemini-cli;
+              perms = c:
+                with c; [
+                  (set-argv [
+                    "--yolo"
+                    (noescape "\"$@\"")
+                  ])
+
+                  (set-env "GEMINI_TELEMETRY_ENABLED" "0")
+                ];
+            };
+
+            claude = {
+              pkg = pkgs.claude-code;
+            };
+
+            opencode = {
+              pkg = pkgs.opencode;
+            };
+
+            bash = {
+              pkg = pkgs.bashInteractive;
+            };
+
+            local-agy = {
+              pkg = pkgs.writeShellScriptBin "agy" ''
+                exec $HOME/.local/bin/agy
+              '';
+
+              perms = c:
+                with c; [
+                  # Antigravity CLI prioritizes dbus to store and access secrets, just restrict it.
+                  (dbus {
+                    talk = ["org.freedesktop.Notifications" "org.freedesktop.portal.Desktop"];
+                  })
+                ];
+            };
+          }) (
+            builtins.listToAttrs (map (scope: {
+              name = scope;
+              value.perms = c:
+                with c; [];
+            }) ["800" "200" "500" "1000"])
+          ) {})
+      ];
+    };
+
     provides.roglaptop = {
       includes = [
         lunar.determinate
@@ -187,59 +239,25 @@
         lunar.zed
 
         lunar.neovim
-        lunar.neovim._.lazyvim-declarative
+        # lunar.neovim._.lazyvim-declarative #! BUILD FAILURE
         lunar.neovim._.astronvim
 
         lunar.niri
 
         lunar.dms
-        (lunar.dms._.via-systemd {desktops = ["niri"];})
+        (lunar.dms._.via-systemd {desktops = ["niri" "Hyprland"];})
         lunar.dms._.greeter
         lunar.dms._.default-browser
 
+        lunar.hyprland
+
         lunar.agents
-        (lunar.agents._.jailed (pkgs: {
-            gemini = {
-              pkg = pkgs.gemini-cli;
-              perms = c:
-                with c; [
-                  (set-argv [
-                    "--yolo"
-                    (noescape "\"$@\"")
-                  ])
-
-                  (set-env "GEMINI_TELEMETRY_ENABLED" "0")
-                ];
-            };
-
-            claude = {
-              pkg = pkgs.claude-code;
-            };
-
-            opencode = {
-              pkg = pkgs.opencode;
-            };
-
-            bash = {
-              pkg = pkgs.bashInteractive;
-            };
-          }) (
-            builtins.listToAttrs (map (scope: {
-              name = scope;
-              value.perms = c:
-                with c; [];
-            }) ["800" "200" "500" "1000"])
-          ) {})
+        den.aspects.loystonpais.provides.jailed-agents
 
         lunar.infisical
         (lunar.infisical._.secret-sync {
           projectId = infisical.projectId;
-          syncSec = "5h";
-        })
-
-        (lunar.acme._.dedyn-io {
-          domain = "test.loy";
-          cert = null;
+          syncSec = "10h";
         })
       ];
     };
@@ -252,34 +270,8 @@
         lunar.dev
 
         lunar.agents
-        (lunar.agents._.jailed (pkgs: {
-            gemini = {
-              pkg = pkgs.gemini-cli;
-              perms = c:
-                with c; [
-                  (set-argv [
-                    "--yolo"
-                    (noescape "\"$@\"")
-                  ])
 
-                  (set-env "GEMINI_TELEMETRY_ENABLED" "0")
-                ];
-            };
-
-            claude = {
-              pkg = pkgs.claude-code;
-            };
-
-            opencode = {
-              pkg = pkgs.opencode;
-            };
-          }) (
-            builtins.listToAttrs (map (scope: {
-              name = scope;
-              value.perms = c:
-                with c; [];
-            }) ["800" "200" "500" "1000"])
-          ) {})
+        den.aspects.loystonpais.provides.jailed-agents
 
         # TODO: Remove this later when the dep with lunar.dev is removed
         lunar.xonsh

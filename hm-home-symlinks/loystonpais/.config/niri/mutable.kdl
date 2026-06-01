@@ -649,19 +649,24 @@ binds {
         spawn "shutdown" "now";
     }
 
-    MouseForward {
-        spawn "bash" "/home/loystonpais/Shells/shotllayer/run.sh";
-    }
+    //MouseForward {
+    //    spawn  "bash" "/home/loystonpais/Shells/converse/speak-clipboard.sh";
+    //}
 
-    MouseBack {
-        spawn "bash" "/home/loystonpais/Shells/shotllayer/set-screenshot-slurp.sh"
-    }
+     MouseForward {
+         spawn "bash" "/home/loystonpais/Shells/shotllayer/run.sh";
+     }
+
+     MouseBack {
+         spawn "bash" "/home/loystonpais/Shells/shotllayer/set-screenshot-slurp.sh"
+     }
 }
 
 environment {
     XDG_CURRENT_DESKTOP "niri"
     QT_QPA_PLATFORM "wayland"
     ELECTRON_OZONE_PLATFORM_HINT "auto"
+    _JAVA_AWT_WM_NONREPARENTING "1"
 }
 
 window-rule {
@@ -678,6 +683,13 @@ window-rule {
     match app-id="com.mitchellh.ghostty"
     match app-id="kitty"
     draw-border-with-background false
+}
+
+window-rule {
+    match app-id="^(Emulator|Android Emulator)$"
+    default-column-width {}
+    default-window-height {}
+    open-floating true
 }
 
 window-rule {
@@ -743,7 +755,7 @@ layer-rule {
     match namespace="^dms:bar$"
 
     shadow {
-        on
+        // on
         // off
         softness 40
         spread 5
