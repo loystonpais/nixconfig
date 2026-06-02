@@ -7,7 +7,9 @@
   agentJailLib = {
     pkgs,
     jail-nix,
-    homesPath,
+    agentDirPath,
+    homesPath ? "${agentDirPath}/home",
+    globalSkillsPath ? "${agentDirPath}/skills",
     ...
   }: {
     # jailed :: String -> AttrSet -> Derivation
@@ -40,10 +42,30 @@
                 '')
                 (unsafe-add-raw-args "--bind-try ${agentHome}/${escape path} ~/${escape path}")
               ];
+
+            bind-home = path:
+              compose [
+                (add-runtime ''
+                  mkdir -p ~/${escape path}
+                  mkdir -p ${agentHome}/${escape path}
+                '')
+                (unsafe-add-raw-args "--bind ~/${escape path} ~/${escape path}")
+              ];
+
+            bind-skills-to-global-skills = path:
+              compose [
+                (add-runtime ''
+                  mkdir -p ~/${escape path}
+                  mkdir -p ${escape globalSkillsPath}
+                '')
+                (readwrite globalSkillsPath)
+                (unsafe-add-raw-args "--bind ${escape globalSkillsPath} ~/${escape path}")
+              ];
           };
 
         basePermissions = c:
           with c; [
+            (unsafe-add-raw-args "--ro-bind / /")
             (unsafe-add-raw-args "--bind /proc /proc")
             (unsafe-add-raw-args "--dev /dev") # a new /dev removes access to drives
             (unsafe-add-raw-args "--bind /tmp /tmp") # /tmp needn't be tmpfs always
@@ -53,8 +75,10 @@
 
             (unsafe-add-raw-args "--ro-bind ~ ~") # Make home ro
 
-            fake-passwd
-            network
+            (unsafe-add-raw-args "--share-net")
+            (add-runtime ''
+              RUNTIME_ARGS+=(--share-net)
+            '')
 
             # Mount the agent's home as rw
             (readwrite agentHome)
@@ -85,19 +109,28 @@
             (try-readwrite (noescape "~/.pyenv"))
             (try-readwrite (noescape "~/.poetry"))
             (try-readwrite (noescape "~/.config/pypoetry"))
+            (try-readwrite (noescape "~/.local/state/blesh"))
 
             (try-readwrite (noescape "~/.local/share/rtk"))
+
+            (try-readwrite (noescape "~/.local/share/zoxide"))
             # TODO: add more rw paths
 
             # Bind some paths from agent home to real home like .gemini
             (bind-agent-home-to-home ".gemini")
             (bind-agent-home-to-home ".claude")
             (bind-agent-home-to-home ".codex")
+            (bind-agent-home-to-home ".antigravitycli")
 
             (bind-agent-home-to-home ".config/opencode")
             (bind-agent-home-to-home ".local/share/opencode")
             (bind-agent-home-to-home ".local/state/opencode")
             #
+
+            # Keep these global, like mcp configs etc..
+            (bind-home ".gemini/config")
+
+            (bind-skills-to-global-skills ".gemini/skills")
 
             (fwd-env "PATH") # forward paths from outside
 
@@ -111,6 +144,12 @@
   };
 in {
   lunar.agents = {
+    nixos = {pkgs, ...}: {
+      environment.systemPackages = with pkgs; [
+        mcp-nixos
+      ];
+    };
+
     # TODO: Is there a better way to do this?
     provides.jailed = mkAgents: mkScopes: {extraPerms ? (_: [])}:
       lib.mkMerge [
@@ -131,7 +170,7 @@ in {
               (agentJailLib {
                 inherit pkgs;
                 inherit (inputs) jail-nix;
-                homesPath = "${config.home.homeDirectory}/Agents/home";
+                agentDirPath = "${config.home.homeDirectory}/Agents";
               })
               jailed
               ;
@@ -181,41 +220,5 @@ in {
             );
         }
       ];
-
-    homeManager = {
-      pkgs,
-      jail,
-      ...
-    }: {
-    };
-
-    # provides.prompt-notify-via-zenity = lib.mkMerge [
-    #   {
-    #     homeManager = {pkgs, ...}: {
-    #       home.packages = with pkgs; [zenity];
-    #     };
-    #   }
-
-    #   (addTextToAllGlobalPromptFiles ''
-    #     # Task Completion Notifications
-
-    #     After completing every task, notify the user using `zenity`. Run the following command in the terminal as the final step:
-
-    #     ```bash
-    #     zenity --notification --text="<short summary of what was completed>"
-    #     ```
-
-    #     Examples:
-    #     ```bash
-    #     zenity --notification --text="Build complete"
-    #     zenity --notification --text="Files refactored successfully"
-    #     zenity --notification --text="Tests passed"
-    #     zenity --notification --text="Dependency installation done"
-    #     ```
-
-    #     Keep the message short and specific to what was just done. Always run this as the last step, after all other work is finished.
-
-    #   '')
-    # ];
   };
 }
