@@ -645,6 +645,10 @@ binds {
         spawn "dms" "ipc" "call" "spotlight" "toggle";
     }
 
+    Mod+Shift+Space allow-when-locked=true {
+        spawn-sh "playerctl play-pause";
+    }
+
     Mod+Shift+Ctrl+P {
         spawn "shutdown" "now";
     }
