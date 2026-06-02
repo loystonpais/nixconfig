@@ -90,6 +90,13 @@
         defaults.email = "loyston500@gmail.com";
       };
 
+      security.sudo.keepTerminfo = true;
+
+      security.sudo.extraConfig = ''
+        Defaults:loystonpais pwfeedback,timestamp_timeout=60,!tty_tickets
+        Defaults env_keep += "COLORTERM LS_COLORS"
+      '';
+
       home-manager = {
         backupFileExtension = "nixbak";
         useGlobalPkgs = true;
