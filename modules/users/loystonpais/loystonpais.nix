@@ -182,7 +182,7 @@
 
             local-agy = {
               pkg = pkgs.writeShellScriptBin "agy" ''
-                exec $HOME/.local/bin/agy
+                exec $HOME/.local/bin/agy "$@"
               '';
 
               perms = c:
