@@ -109,7 +109,7 @@
       config = {
         programs.vscode = {
           enable = true;
-          mutableExtensionsDir = false;
+          mutableExtensionsDir = true;
 
           profiles = {
             # 1. Default Profile: Core configuration + Essential Nix
@@ -154,7 +154,6 @@
                   formulahendry.auto-rename-tag
 
                   # Frameworks
-                  svelte.svelte-vscode
                   shopify.ruby-lsp
                   shopify.ruby-extensions-pack
 
@@ -232,7 +231,7 @@
               extensions =
                 commonExtensions
                 ++ (with pkgs.vscode-marketplace; [
-                  vscjava.vscode-gradle
+                  # vscjava.vscode-gradle #! BUILD FAILURE
                   dotjoshjohnson.xml
                   mathiasfrohlich.kotlin
                 ]);
