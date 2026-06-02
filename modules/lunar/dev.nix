@@ -21,7 +21,11 @@
       ];
     };
 
-    homeManager = {config, ...}: {
+    homeManager = {
+      config,
+      pkgs,
+      ...
+    }: {
       home.shell.enableShellIntegration = true;
 
       programs.starship = {
@@ -77,17 +81,25 @@
 
       programs.zsh = {
         enable = true;
-        enableCompletion = true;
+        enableCompletion = false;
         enableVteIntegration = true;
-        completionInit = "autoload -U compinit && compinit -i";
         autocd = true;
         syntaxHighlighting.enable = true;
         autosuggestion = {
           enable = true;
           strategy = ["history" "completion"];
+          highlight = "fg=244";
         };
 
         historySubstringSearch.enable = true;
+
+        plugins = [
+          {
+            name = "zsh-autocomplete";
+            src = pkgs.zsh-autocomplete;
+            file = "share/zsh-autocomplete/zsh-autocomplete.plugin.zsh";
+          }
+        ];
 
         initContent = ''
           # Enable completion menu selection (navigate with arrow keys)
