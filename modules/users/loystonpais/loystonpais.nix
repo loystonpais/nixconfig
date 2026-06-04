@@ -9,7 +9,7 @@
   in {
     includes = [
       den.provides.primary-user
-      (den.provides.user-shell "bash")
+      (den.provides.user-shell "zsh")
       den.provides.define-user
     ];
 
