@@ -78,9 +78,31 @@
       programs.zsh = {
         enable = true;
         enableCompletion = true;
+        enableVteIntegration = true;
+        completionInit = "autoload -U compinit && compinit -i";
         autocd = true;
         syntaxHighlighting.enable = true;
-        autosuggestion.enable = true;
+        autosuggestion = {
+          enable = true;
+          strategy = ["history" "completion"];
+        };
+
+        historySubstringSearch.enable = true;
+
+        initContent = ''
+          # Enable completion menu selection (navigate with arrow keys)
+          zstyle ':completion:*' menu select
+
+          # Case-insensitive, partial-word, and substring completion
+          zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
+
+          # Enable colorized completion lists using LS_COLORS
+          zstyle ':completion:*' list-colors ""
+
+          # Complete . and ..
+          zstyle ':completion:*' special-dirs true
+
+        '';
 
         history = {
           size = 10000000;
@@ -91,6 +113,7 @@
           expireDuplicatesFirst = true;
           extended = true;
           share = true;
+          append = true;
           path = "${config.home.homeDirectory}/.zsh_history";
         };
       };
