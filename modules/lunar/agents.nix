@@ -101,6 +101,7 @@
             (try-readwrite (noescape "~/.nix-defexpr"))
 
             (try-readwrite (noescape "~/.local/lib"))
+            (try-readwrite (noescape "~/.local/bin"))
             (try-readwrite (noescape "~/.local/share/virtualenvs"))
             (try-readwrite (noescape "~/.cache/pip"))
             (try-readwrite (noescape "~/.cache/uv"))
