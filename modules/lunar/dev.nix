@@ -58,14 +58,6 @@
           status = {
             disabled = false;
           };
-
-          custom.tmux = {
-            command = "echo tmux";
-            when = ''test "$TMUX"'';
-            format = "[$symbol]($style) ";
-            symbol = "🪟 ";
-            style = "bold blue";
-          };
         };
       };
 
@@ -81,7 +73,7 @@
 
       programs.zsh = {
         enable = true;
-        enableCompletion = false;
+        enableCompletion = true;
         enableVteIntegration = true;
         autocd = true;
         syntaxHighlighting.enable = true;
@@ -93,27 +85,20 @@
 
         historySubstringSearch.enable = true;
 
-        plugins = [
-          {
-            name = "zsh-autocomplete";
-            src = pkgs.zsh-autocomplete;
-            file = "share/zsh-autocomplete/zsh-autocomplete.plugin.zsh";
-          }
-        ];
-
         initContent = ''
-          # Enable completion menu selection (navigate with arrow keys)
-          zstyle ':completion:*' menu select
+          # Completion styling
+          zstyle ':completion:*' menu select                        # arrow-key menu selection
+          zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' # case-insensitive matching
+          zstyle ':completion:*' list-colors "''${(s.:.)LS_COLORS}"  # colored completions
+          zstyle ':completion:*' group-name '''                      # group results by category
+          zstyle ':completion:*:descriptions' format '%F{yellow}-- %d --%f'
+          zstyle ':completion:*:messages'     format '%F{purple}-- %d --%f'
+          zstyle ':completion:*:warnings'     format '%F{red}-- no matches --%f'
+          zstyle ':completion:*' squeeze-slashes true
+          zstyle ':completion:*' complete-options true
 
-          # Case-insensitive, partial-word, and substring completion
-          zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
-
-          # Enable colorized completion lists using LS_COLORS
-          zstyle ':completion:*' list-colors ""
-
-          # Complete . and ..
-          zstyle ':completion:*' special-dirs true
-
+          # Keybinds: shift-tab to reverse through menu
+          bindkey '^[[Z' reverse-menu-complete
         '';
 
         history = {
