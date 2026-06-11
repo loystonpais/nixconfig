@@ -44,10 +44,13 @@
       "nix.enableLanguageServer" = true;
       "nix.serverPath" = lib.getExe pkgs.nixd;
       "nix.formatterPath" = lib.getExe pkgs.alejandra;
+
+      "python.analysis.typeCheckingMode" = "standard";
+      "pylsp.executable" = lib.getExe pkgs.python3Packages.python-lsp-server;
     };
 
-    mkCommonExtensions = {pkgs, ...}:
-      (with pkgs.vscode-extensions; [
+    mkCommonExtensions = {pkgs, ...}: (with pkgs.vscode-extensions;
+      with pkgs.vscode-marketplace; [
         # Essential Nix support
         bbenoist.nix
         jnoortheen.nix-ide
@@ -58,8 +61,52 @@
         mkhl.direnv
         ms-vscode-remote.remote-ssh
         christian-kohler.path-intellisense
-      ])
-      ++ (with pkgs.vscode-marketplace; [
+
+        donjayamanne.githistory
+
+        davidanson.vscode-markdownlint
+
+        ms-toolsai.jupyter
+        charliermarsh.ruff
+        ms-python.python
+        ms-python.vscode-pylance
+        #elixir-lsp.vscode-elixir
+
+        jnoortheen.xonsh
+        thenuprojectcontributors.vscode-nushell-lang
+
+        hashicorp.terraform
+        ms-azuretools.vscode-containers
+        ms-vscode-remote.remote-containers
+        github.vscode-github-actions
+        github.vscode-pull-request-github
+        gitlab.gitlab-workflow
+
+        redhat.vscode-yaml
+        redhat.vscode-xml
+
+        mechatroner.rainbow-csv
+
+        # Rust
+        rust-lang.rust-analyzer
+        tamasfe.even-better-toml
+
+        # Go
+        golang.go
+
+        # Gleam
+        gleam.gleam
+
+        # Haskell
+        haskell.haskell
+
+        # C/C++
+        llvm-vs-code-extensions.vscode-clangd
+        ms-vscode.makefile-tools
+        ms-vscode.cpptools
+        ms-vscode.cmake-tools
+        xaver.clang-format
+
         # Essential UI/UX
         pkief.material-icon-theme
         eamodio.gitlens
@@ -80,6 +127,8 @@
         # Others
         kdl-org.kdl
         legale.dts-formatter
+
+        tomoki1207.pdf
       ]);
   in {
     nixos = {pkgs, ...}: {
@@ -115,126 +164,60 @@
             # 1. Default Profile: Core configuration + Essential Nix
             default = {
               userSettings = commonSettings;
-              extensions =
-                commonExtensions
-                ++ (with pkgs.vscode-marketplace; [
-                  jnoortheen.xonsh
-                  thenuprojectcontributors.vscode-nushell-lang
-
-                  hashicorp.terraform
-                  ms-azuretools.vscode-containers
-                  ms-vscode-remote.remote-containers
-                  github.vscode-github-actions
-                  github.vscode-pull-request-github
-                  gitlab.gitlab-workflow
-
-                  redhat.vscode-yaml
-                  redhat.vscode-xml
-                ]);
+              extensions = commonExtensions;
             };
 
             web = {
               userSettings = commonSettings;
               extensions =
                 commonExtensions
-                ++ (with pkgs.vscode-marketplace; [
-                  # JS/TS
-                  dbaeumer.vscode-eslint
-                  yoavbls.pretty-ts-errors
-                  esbenp.prettier-vscode
+                ++ (with pkgs.vscode-extensions;
+                  with pkgs.vscode-marketplace; [
+                    # JS/TS
+                    dbaeumer.vscode-eslint
+                    yoavbls.pretty-ts-errors
+                    esbenp.prettier-vscode
 
-                  # React / Next.js
-                  dsznajder.es7-react-js-snippets
-                  pulkitgangwar.nextjs-snippets
+                    # React / Next.js
+                    dsznajder.es7-react-js-snippets
+                    pulkitgangwar.nextjs-snippets
 
-                  # Styles
-                  styled-components.vscode-styled-components
-                  vincaslt.highlight-matching-tag
-                  formulahendry.auto-close-tag
-                  formulahendry.auto-rename-tag
+                    # Styles
+                    styled-components.vscode-styled-components
+                    vincaslt.highlight-matching-tag
+                    formulahendry.auto-close-tag
+                    formulahendry.auto-rename-tag
 
-                  # Frameworks
-                  shopify.ruby-lsp
-                  shopify.ruby-extensions-pack
+                    # Frameworks
+                    shopify.ruby-lsp
+                    shopify.ruby-extensions-pack
 
-                  # Web Tools
-                  ms-vscode.live-server
-                  wix.vscode-import-cost
+                    # Web Tools
+                    ms-vscode.live-server
+                    wix.vscode-import-cost
 
-                  # Docs
-                  yzhang.markdown-all-in-one
-                  davidanson.vscode-markdownlint
-                  unifiedjs.vscode-mdx
-                ]);
-            };
-
-            python = {
-              userSettings =
-                commonSettings
-                // {
-                  "python.analysis.typeCheckingMode" = "standard";
-                  "pylsp.executable" = lib.getExe pkgs.python3Packages.python-lsp-server;
-                };
-              extensions =
-                commonExtensions
-                ++ (with pkgs.vscode-extensions; [
-                  ms-toolsai.jupyter
-                  charliermarsh.ruff
-                  ms-python.python
-                  ms-python.vscode-pylance
-                ])
-                ++ (with pkgs.vscode-marketplace; [
-                  mechatroner.rainbow-csv
-                ]);
-            };
-
-            sysdev = {
-              userSettings = commonSettings;
-              extensions =
-                commonExtensions
-                ++ (with pkgs.vscode-extensions; [
-                  elixir-lsp.vscode-elixir-ls
-                ])
-                ++ (with pkgs.vscode-marketplace; [
-                  # Rust
-                  rust-lang.rust-analyzer
-                  tamasfe.even-better-toml
-
-                  # Go
-                  golang.go
-
-                  # Gleam
-                  gleam.gleam
-
-                  # Haskell
-                  haskell.haskell
-
-                  # C/C++
-                  llvm-vs-code-extensions.vscode-clangd
-                  ms-vscode.makefile-tools
-                ]);
+                    # Docs
+                    yzhang.markdown-all-in-one
+                    davidanson.vscode-markdownlint
+                    unifiedjs.vscode-mdx
+                  ]);
             };
 
             flutter = {
               userSettings = commonSettings;
               extensions =
                 commonExtensions
-                ++ (with pkgs.vscode-marketplace; [
-                  dart-code.dart-code
-                  dart-code.flutter
-                  nash.awesome-flutter-snippets
-                ]);
-            };
+                ++ (with pkgs.vscode-extensions;
+                  with pkgs.vscode-marketplace; [
+                    dart-code.dart-code
+                    dart-code.flutter
+                    nash.awesome-flutter-snippets
 
-            android = {
-              userSettings = commonSettings;
-              extensions =
-                commonExtensions
-                ++ (with pkgs.vscode-marketplace; [
-                  # vscjava.vscode-gradle #! BUILD FAILURE
-                  dotjoshjohnson.xml
-                  mathiasfrohlich.kotlin
-                ]);
+                    # Android
+                    # vscjava.vscode-gradle #! BUILD FAILURE
+                    dotjoshjohnson.xml
+                    mathiasfrohlich.kotlin
+                  ]);
             };
           };
         };
@@ -287,13 +270,14 @@
               };
             extensions =
               commonExtensions
-              ++ (with pkgs.vscode-extensions; [
-                geequlim.godot-tools
-                woberg.godot-dotnet-tools
-                ms-dotnettools.csdevkit
-                ms-dotnettools.csharp
-                ms-dotnettools.vscode-dotnet-runtime
-              ]);
+              ++ (with pkgs.vscode-extensions;
+                with pkgs.vscode-marketplace; [
+                  geequlim.godot-tools
+                  woberg.godot-dotnet-tools
+                  ms-dotnettools.csdevkit
+                  ms-dotnettools.csharp
+                  ms-dotnettools.vscode-dotnet-runtime
+                ]);
           };
         };
 
