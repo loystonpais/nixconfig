@@ -19,6 +19,10 @@
       home.file = {
         ".local/share/fonts/InterVariable.ttf".source = "${inputs.self.outPath}/assets/fonts/InterVariable.ttf";
       };
+
+      programs.vscode.userSettings = {
+        "terminal.integrated.fontFamily" = "'Fira Code', 'Symbols Nerd Font'";
+      };
     };
   };
 }
