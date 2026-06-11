@@ -218,12 +218,10 @@
         lunar.distrobox
         lunar.podman
         lunar.misc
-        (lunar.plasma)
         lunar.browsers
         lunar.fonts
         lunar.graphics
         lunar.gaming
-        (lunar.gamedev {cudaTools = true;})
         lunar.minecraft
         lunar.multimedia
         lunar.piracy
@@ -244,10 +242,7 @@
         lunar.android
         lunar.devenv
         lunar.zed
-
-        lunar.neovim
-        # lunar.neovim._.lazyvim-declarative #! BUILD FAILURE
-        lunar.neovim._.astronvim
+        lunar.cyber
 
         lunar.niri
 
@@ -255,8 +250,6 @@
         (lunar.dms._.via-systemd {desktops = ["niri" "Hyprland"];})
         lunar.dms._.greeter
         lunar.dms._.default-browser
-
-        lunar.hyprland
 
         lunar.agents
         den.aspects.loystonpais.provides.jailed-agents
