@@ -155,7 +155,6 @@
               default_width = 400;
               hide_root = true;
               auto_fold_dirs = false;
-              starts_open = false;
               scrollbar = {
                 show = "never";
               };
