@@ -70,12 +70,11 @@
         zenity
         rbw
         pinentry-curses
-        grim
-        slurp
         yazi
         tmux
         zellij
         bubblewrap
+        htop
 
         python3Packages.markitdown
       ];
@@ -112,13 +111,7 @@
       programs.bash.blesh.enable = true;
     };
 
-    homeManager = {pkgs, ...}: {
-      home = {
-        packages = with pkgs; [
-          htop
-        ];
-      };
-
+    homeManager = {...}: {
       programs.git = {
         enable = true;
         settings = {
