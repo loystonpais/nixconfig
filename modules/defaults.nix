@@ -4,7 +4,13 @@
   inputs,
   lib,
   ...
-}: {
+}: let
+  mkPkgsStable = pkgs:
+    import inputs.nixpkgs-stable {
+      inherit (pkgs.stdenv.hostPlatform) system;
+      config.allowUnfree = true;
+    };
+in {
   flake.den = den;
 
   den.schema.user.includes = [den._.mutual-provider];
@@ -36,6 +42,8 @@
       config,
       ...
     }: {
+      _module.args.pkgs-stable = mkPkgsStable pkgs;
+
       nixpkgs = {
         config = {
           allowUnfree = lib.mkDefault true;
@@ -68,6 +76,10 @@
         LUNAR_NIXPKGS_REV = inputs.nixpkgs.rev;
         LUNAR_NIXPKGS_URL = "github:NixOS/nixpkgs/${LUNAR_NIXPKGS_REV}";
       };
+    };
+
+    homeManager = {pkgs, ...}: {
+      _module.args.pkgs-stable = mkPkgsStable pkgs;
     };
   };
 }
