@@ -6,7 +6,6 @@
           grim
           slurp
           swappy
-          ksnip
           satty
 
           wl-clipboard
