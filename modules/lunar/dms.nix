@@ -10,10 +10,13 @@
       lunar.kitty
 
       lunar.dms._.theme-fixes
+
+      lunar.wayland._.tools
     ];
     nixos = {
       pkgs,
       config,
+      inputs',
       ...
     }: {
       environment.systemPackages = with pkgs; [
