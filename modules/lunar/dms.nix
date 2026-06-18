@@ -10,8 +10,10 @@
       lunar.kitty
 
       lunar.dms._.theme-fixes
+      lunar.dms._.fix-java-apps
 
       lunar.wayland._.tools
+      lunar.audio._.tools
     ];
     nixos = {
       pkgs,
@@ -174,6 +176,18 @@
         };
 
         systemd.user.services.dms.Service.ExecCondition = lib.mkIf (desktops != null) "${lib.getExe pkgs.bash} -c 'case \"$XDG_CURRENT_DESKTOP\" in ${desktopPattern}) exit 0;; *) exit 1;; esac'";
+      };
+    };
+
+    provides.fix-java-apps = {
+      homeManager = {...}: {
+        systemd.user.services.dms = {
+          Service = {
+            Environment = [
+              "_JAVA_AWT_WM_NONREPARENTING=1"
+            ];
+          };
+        };
       };
     };
 
