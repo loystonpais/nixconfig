@@ -75,8 +75,9 @@
         zellij
         bubblewrap
         htop
-
+        lua
         python3Packages.markitdown
+        nodejs
       ];
 
       nix = {
