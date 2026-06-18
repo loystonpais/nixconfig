@@ -68,6 +68,8 @@ in {
       nix.registry = {
         lunar.flake = inputs.self;
         nixpkgs.flake = inputs.nixpkgs;
+
+        nixpkgs-stable.flake = inputs.nixpkgs-stable;
       };
 
       system.nixos.tags = ["lunar"];
@@ -75,6 +77,9 @@ in {
       environment.variables = rec {
         LUNAR_NIXPKGS_REV = inputs.nixpkgs.rev;
         LUNAR_NIXPKGS_URL = "github:NixOS/nixpkgs/${LUNAR_NIXPKGS_REV}";
+
+        LUNAR_NIXPKGS_STABLE_REV = inputs.nixpkgs-stable.rev;
+        LUNAR_NIXPKGS_STABLE_URL = "github:NixOS/nixpkgs/${LUNAR_NIXPKGS_STABLE_REV}";
       };
     };
 
