@@ -16,25 +16,25 @@
 
   #! Set these values carefully
   swapPriority = 5;
-  swapSize = 1024 * 20; # 20GB
+  swapSize = 1024 * 32; # 32GB
 
   # Set this value later when the swapfile is created, if not known then keep it null
   /*
-  To get the resume offset:
+    To get the resume offset:
 
   Z❯ sudo filefrag -v /mnt/backdrive/hibernation | head
   Filesystem type is: ef53
-  File size of /mnt/backdrive/hibernation is 21474836480 (5242880 blocks of 4096 bytes)
+  File size of /mnt/backdrive/hibernation is 34359738368 (8388608 blocks of 4096 bytes)
    ext:     logical_offset:        physical_offset: length:   expected: flags:
-     0:        0..    4095:   52461568..  52465663:   4096:
-     1:     4096..   28671:   55083008..  55107583:  24576:   52465664:
-     2:    28672..   40959:   55332864..  55345151:  12288:   55107584:
-     3:    40960..   83967:   55531520..  55574527:  43008:   55345152:
-     4:    83968..  178175:   55607296..  55701503:  94208:   55574528:
-     5:   178176..  311295:   55703552..  55836671: 133120:   55701504:
-     6:   311296..  540671:   55869440..  56098815: 229376:   55836672:
+     0:        0..    2047:    1359872..   1361919:   2048:
+     1:     2048..    4095:    2037760..   2039807:   2048:    1361920:
+     2:     4096..    6143:    2742272..   2744319:   2048:    2039808:
+     3:     6144..    8191:    3037184..   3039231:   2048:    2744320:
+     4:     8192..   10239:    3747840..   3749887:   2048:    3039232:
+     5:    10240..   12287:    3753984..   3756031:   2048:    3749888:
+     6:    12288..   14335:    3762176..   3764223:   2048:    3756032:
   */
-  resumeOffset = 52461568;
+  resumeOffset = 1359872;
 in {
   specialisation.backdrive-hibernation = {
     configuration = lib.mkMerge [
