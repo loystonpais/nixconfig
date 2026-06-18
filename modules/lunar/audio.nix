@@ -13,5 +13,17 @@
 
       environment.systemPackages = with pkgs; [crosspipe pwvucontrol];
     };
+
+    provides.tools = {
+      nixos = {pkgs, ...}: {
+        environment.systemPackages = with pkgs; [
+          playerctl
+
+          crosspipe
+
+          pwvucontrol
+        ];
+      };
+    };
   };
 }
