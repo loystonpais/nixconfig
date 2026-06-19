@@ -129,6 +129,9 @@
           wordlists
         ];
 
+      environment.etc."lunar/cyber/wordlists".source = "${pkgs.wordlists}/share/wordlists";
+      environment.etc."wordlists".source = config.environment.etc."lunar/cyber/wordlists".source;
+
       environment.etc."lunar/cyber/jython-jar".source = pkgs.jython;
       environment.etc."lunar/cyber/jruby-jar".source = pkgs.jruby;
 
