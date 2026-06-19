@@ -47,6 +47,16 @@
 
       "python.analysis.typeCheckingMode" = "standard";
       "pylsp.executable" = lib.getExe pkgs.python3Packages.python-lsp-server;
+
+      "rubyLsp.bundleGemfile" = "";
+      "rubyLsp.customRubyCommand" = lib.getExe' pkgs.ruby "ruby";
+      "rubyLsp.lspPath" = lib.getExe' pkgs.rubyPackages.ruby-lsp "ruby-lsp";
+      "rubyLsp.pullDiagnosticsOn" = "save";
+      "rubyLsp.rubyVersionManager" = "none";
+      "[ruby]" = {
+        editor.defaultFormatter = "shopify.ruby-lsp";
+        editor.formatOnSave = true;
+      };
     };
 
     mkCommonExtensions = {pkgs, ...}: (with pkgs.vscode-extensions;
@@ -129,6 +139,12 @@
         legale.dts-formatter
 
         tomoki1207.pdf
+
+        # Ruby
+        shopify.ruby-lsp
+
+        # Lua
+        sumneko.lua
       ]);
   in {
     nixos = {pkgs, ...}: {
