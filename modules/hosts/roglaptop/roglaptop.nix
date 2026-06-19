@@ -54,6 +54,8 @@
         offload.enableOffloadCmd = true;
       };
 
+      hardware.nvidia.powerManagement.enable = lib.mkForce true;
+
       boot.loader.grub = {
         enable = true;
         efiSupport = true;
