@@ -22,7 +22,14 @@
       # & https://github.com/xiv3r/Burpsuite-Professional
       burpsuite-pro = let
         pname = "burpsuite-pro";
-        jdk = pkgs.jetbrains.jdk-no-jcef-21; # Use 21 or else activation won't work
+
+        # Use java version 21 or else activation won't work
+
+        # This one provides better UI but unfortunately a lot of UI elements
+        # like file picker appear broken
+        # jdk = pkgs.jetbrains.jdk-no-jcef-21;
+
+        jdk = pkgs.jdk21;
 
         loader = pkgs.fetchurl {
           url = "https://github.com/xiv3r/Burpsuite-Professional/raw/86b7e0234b7162394fc412921ecc7e14ee07bce8/loader.jar";
@@ -111,16 +118,29 @@
           metasploit
 
           zap
+
+          rustscan
         ];
+
+      environment.etc."lunar/cyber/jython-jar".source = pkgs.jython;
+      environment.etc."lunar/cyber/jruby-jar".source = pkgs.jruby;
 
       programs.wireshark = {
         enable = true;
         dumpcap.enable = true;
+        package = pkgs.wireshark-cli;
       };
 
       users.users.${user.userName} = {
         extraGroups = ["wireshark"];
       };
+    };
+
+    homeManager = {pkgs-stable, ...}: let
+      pkgs = pkgs-stable;
+    in {
+      home.file.".lunar/cyber/jython-jar".source = pkgs.jython;
+      home.file.".lunar/cyber/jruby-jar".source = pkgs.jruby;
     };
   };
 }
