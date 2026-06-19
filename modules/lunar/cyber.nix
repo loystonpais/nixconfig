@@ -106,7 +106,7 @@
 
           wireshark
 
-          # burpsuite
+          burpsuite
           burpsuite-pro
 
           dnsutils
@@ -120,6 +120,13 @@
           zap
 
           rustscan
+
+          nikto
+
+          dirbuster
+          gobuster
+
+          wordlists
         ];
 
       environment.etc."lunar/cyber/jython-jar".source = pkgs.jython;
