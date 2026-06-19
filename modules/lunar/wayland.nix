@@ -11,6 +11,8 @@
           wl-clipboard
           wl-gammactl
           wl-color-picker
+
+          imagemagick
         ];
       };
     };
