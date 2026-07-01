@@ -337,6 +337,12 @@ window-rule {
     default-column-width {proportion 0.4;}
 }
 
+window-rule {
+    // Waydroid FreeFire full screen
+    match app-id="waydroid.com.dts.freefiremax"
+    open-fullscreen true
+}
+
 // Example: block out two password managers from screen capture.
 // (This example rule is commented out with a "/-" in front.)
 /-window-rule {
