@@ -18,7 +18,7 @@
     }).config.flake;
 
   inputs = {
-    nixpkgs.url = "https://flakehub.com/f/DeterminateSystems/nixpkgs-weekly/0.1";
+    nixpkgs.url = "github:flox/nixpkgs/unstable";
 
     nixpkgs-stable.url = "https://flakehub.com/f/NixOS/nixpkgs/0";
 
