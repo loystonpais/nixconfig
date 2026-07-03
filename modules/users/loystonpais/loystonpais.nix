@@ -237,6 +237,8 @@
         lunar.devenv
         lunar.zed
         lunar.cyber
+        lunar.obs
+        lunar.waydroid
 
         lunar.niri
 
