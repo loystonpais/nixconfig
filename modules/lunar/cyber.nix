@@ -127,6 +127,20 @@
           gobuster
 
           wordlists
+
+          (pkgs.writeShellScriptBin "py" ''
+            exec ${lib.getExe (pkgs.python3.withPackages (p: with p; [requests]))} "$@"
+          '')
+
+          postman
+
+          subfinder
+          httpx
+          naabu
+          ffuf
+          nuclei
+          katana
+          waymore
         ];
 
       environment.etc."lunar/cyber/wordlists".source = "${pkgs.wordlists}/share/wordlists";
