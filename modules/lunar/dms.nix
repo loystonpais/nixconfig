@@ -11,6 +11,8 @@
 
       lunar.dms._.theme-fixes
       lunar.dms._.fix-java-apps
+      lunar.dms._.kde-dolphin-integration
+      lunar.dms._.kvantum-themes
 
       lunar.wayland._.tools
       lunar.audio._.tools
@@ -24,6 +26,7 @@
       environment.systemPackages = with pkgs; [
         kdePackages.qt6ct
         libsForQt5.qt5ct
+        kdePackages.qtstyleplugin-kvantum
 
         (whitesur-icon-theme.override {
           alternativeIcons = true;
@@ -36,7 +39,6 @@
         kdePackages.dolphin
         kdePackages.ark
         kdePackages.gwenview
-        kdePackages.spectacle
 
         nautilus
       ];
@@ -188,6 +190,54 @@
             ];
           };
         };
+      };
+    };
+
+    provides.kde-dolphin-integration = {
+      nixos = {
+        pkgs,
+        config,
+        ...
+      }: {
+        environment.systemPackages = with pkgs; [
+          kdePackages.dolphin
+
+          kdePackages.kservice # This needs be in path for MIME menus to work in dolphin
+
+          # By default, dolphin by itself is not packaged with support for svg icons. This may result in blank icons.
+          kdePackages.qtsvg
+
+          # https://gist.github.com/linhusp/05f8f7e0af3fa0fbb944dec17a75aa78
+          kdePackages.systemsettings
+          kdePackages.xdg-desktop-portal-kde
+          kdePackages.ffmpegthumbs
+          ffmpegthumbnailer
+        ];
+
+        # https://github.com/barsikus007/config/blob/055e386319459175df2382910e400613e888c6dc/nix/modules/desktop/environment/explorer/dolphin.nix
+        #? Fix unpopulated MIME menus in dolphin: https://discourse.nixos.org/t/dolphin-does-not-have-mime-associations/48985/8
+        # Make sure kservice is in path
+        environment.etc."xdg/menus/applications.menu" = {
+          enable = !config.services.desktopManager.plasma6.enable;
+          text = builtins.readFile "${pkgs.kdePackages.plasma-workspace}/etc/xdg/menus/plasma-applications.menu";
+        };
+      };
+    };
+
+    provides.kvantum-themes = {
+      nixos = {
+        pkgs,
+        config,
+        ...
+      }: {
+        environment.systemPackages = with pkgs; [
+          catppuccin-kvantum
+          rose-pine-kvantum
+        ];
+
+        environment.pathsToLink = [
+          "/share"
+        ];
       };
     };
 
