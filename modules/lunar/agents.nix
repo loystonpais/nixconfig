@@ -80,6 +80,11 @@
               RUNTIME_ARGS+=(--share-net)
             '')
 
+            (unsafe-add-raw-args "--dev-bind-try /dev/dri /dev/dri")
+            (unsafe-add-raw-args "--dev-bind-try /dev/nvidiactl /dev/nvidiactl")
+            (unsafe-add-raw-args "--dev-bind-try /dev/nvidia-uvm /dev/nvidia-uvm")
+            (unsafe-add-raw-args "--dev-bind-try /dev/nvidia0 /dev/nvidia0")
+
             # Mount the agent's home as rw
             (readwrite agentHome)
 
@@ -145,6 +150,32 @@
   };
 in {
   lunar.agents = {
+    provides.playwright = {
+      nixos = {
+        pkgs,
+        inputs',
+        ...
+      }: let
+        cloakbrowserChromium = inputs'.cloak-browser.packages.default;
+      in {
+        environment.systemPackages = with pkgs; [
+          playwright
+          playwright-mcp
+          playwright-driver
+          playwright-test
+
+          cloakbrowserChromium
+        ];
+
+        environment.sessionVariables = {
+          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD = "1";
+          PLAYWRIGHT_BROWSERS_PATH = "${pkgs.playwright-driver.browsers}";
+
+          CLOAKBROWSER_BINARY_PATH = "${cloakbrowserChromium}/bin/cloakbrowser-chrome";
+        };
+      };
+    };
+
     nixos = {pkgs, ...}: {
       environment.systemPackages = with pkgs; [
         mcp-nixos
