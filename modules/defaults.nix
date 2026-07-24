@@ -56,10 +56,10 @@ in {
       nix.settings = {
         substituters = [
           "https://cache.nixos.org/"
-          "https://nix-community.cachix.org?priority=5"
+          # "https://nix-community.cachix.org?priority=5" # CACHE TOO SLOW
         ];
         trusted-public-keys = [
-          "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+          # "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
         ];
         experimental-features = ["nix-command" "flakes"];
         lazy-trees = true;

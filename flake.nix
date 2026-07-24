@@ -60,6 +60,16 @@
       inputs.home-manager.follows = "home-manager";
     };
 
+    cloak-browser = {
+      url = "github:CloakHQ/CloakBrowser";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
+    };
+
+    linuwowo = {
+      url = "github:loystonpais/linuwowo";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # blender-bin = {
     #   url = "github:edolstra/nix-warez?dir=blender";
     #   inputs.nixpkgs.follows = "nixpkgs";
