@@ -16,6 +16,7 @@
 
           environment.systemPackages = with pkgs; [
             devenv
+            fzf
           ];
         }
       ];
@@ -24,6 +25,7 @@
     homeManager = {
       config,
       pkgs,
+      lib,
       ...
     }: {
       home.shell.enableShellIntegration = true;
@@ -99,6 +101,8 @@
 
           # Keybinds: shift-tab to reverse through menu
           bindkey '^[[Z' reverse-menu-complete
+
+          eval "$(${lib.getExe pkgs.fzf} --zsh)"
         '';
 
         history = {
