@@ -21,7 +21,7 @@
     homeManager = {...}: {
       home.shellAliases = {
         "adb-call-pick" = "adb shell input keyevent KEYCODE_CALL";
-        "adb-call-end" = "echo adb shell input keyevent KEYCODE_ENDCALL";
+        "adb-call-end" = "adb shell input keyevent KEYCODE_ENDCALL";
 
         "adb-button-power" = "adb shell input keyevent 26";
       };
