@@ -28,7 +28,10 @@
 
         programs.virt-manager.enable = true;
         virtualisation.spiceUSBRedirection.enable = true;
-        environment.systemPackages = [pkgs.virtiofsd];
+        environment.systemPackages = [
+          pkgs.virtiofsd
+          pkgs.spice
+        ];
       };
     };
   };
