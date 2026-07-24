@@ -2,6 +2,7 @@
   den,
   lunar,
   lib,
+  inputs,
   ...
 }: {
   #flake.den = den;
@@ -20,6 +21,8 @@
       imports = [
         ./_hw
         ./_vfio
+
+        inputs.linuwowo.nixosModules.default
       ];
 
       fileSystems."/mnt/windows" = {
@@ -54,7 +57,12 @@
         offload.enableOffloadCmd = true;
       };
 
-      hardware.nvidia.powerManagement.enable = lib.mkForce true;
+      # TODO: See if enabling these causes random crashes
+      # UPDATE: Haven't seen any crashes since enabling finegrained
+      hardware.nvidia = {
+        powerManagement.enable = true;
+        powerManagement.finegrained = true;
+      };
 
       boot.loader.grub = {
         enable = true;
@@ -72,6 +80,11 @@
 
       security.rtkit.enable = true;
       programs.nix-ld.enable = true;
+
+      programs.linuwowo = {
+        enable = true;
+        json = ./_hw/linuwowo.json;
+      };
     };
   };
 

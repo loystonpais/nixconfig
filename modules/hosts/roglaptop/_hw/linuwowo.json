@@ -1,0 +1,12 @@
+{
+  "cpuVendor": "amd",
+  "cpuFamily": 25,
+  "cpuModel": 68,
+  "modelName": "AMD Ryzen 7 6800H with Radeon Graphics",
+  "amdZenGen": 3,
+  "intelGen": 0,
+  "isSteamDeck": false,
+  "disableUmip": true,
+  "cpuidFaultEmulation": true,
+  "dmiProduct": "ROG Strix G513RC_G513RC"
+}
