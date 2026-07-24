@@ -10,8 +10,8 @@
 
       hardware.nvidia = {
         modesetting.enable = true;
-        powerManagement.enable = false;
-        powerManagement.finegrained = false;
+        powerManagement.enable = lib.mkDefault false;
+        powerManagement.finegrained = lib.mkDefault false;
         open = false;
         nvidiaSettings = true;
         package = config.boot.kernelPackages.nvidiaPackages.production;
@@ -37,6 +37,8 @@
         logout_timeout_s = lib.mkDefault 180;
         hotplug_type = lib.mkDefault "None";
       };
+
+      systemd.services.supergfxd.path = [pkgs.pciutils];
     };
   };
 }
