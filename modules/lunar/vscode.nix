@@ -12,7 +12,7 @@
       "update.mode" = "none";
       "continue.telemetryEnabled" = false;
       "diffEditor.ignoreTrimWhitespace" = false;
-      "extensions.autoUpdate" = false;
+      "extensions.autoUpdate" = "off";
       "explorer.confirmDragAndDrop" = false;
       "git.enableSmartCommit" = true;
       "redhat.telemetry.enabled" = false;
@@ -105,13 +105,13 @@
         golang.go
 
         # Gleam
-        gleam.gleam
+        # gleam.gleam #! BUILD FAILURE
 
         # Haskell
         haskell.haskell
 
         # C/C++
-        llvm-vs-code-extensions.vscode-clangd
+        # llvm-vs-code-extensions.vscode-clangd # Conflicts with ms-vscode.cpptools
         ms-vscode.makefile-tools
         ms-vscode.cpptools
         ms-vscode.cmake-tools
@@ -195,7 +195,7 @@
                     esbenp.prettier-vscode
 
                     # React / Next.js
-                    dsznajder.es7-react-js-snippets
+                    # dsznajder.es7-react-js-snippets #! BUILD FAILURE
                     pulkitgangwar.nextjs-snippets
 
                     # Styles
