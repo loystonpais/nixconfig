@@ -78,6 +78,9 @@
         lua
         python3Packages.markitdown
         nodejs
+        bun
+        inotify-tools
+        p7zip
       ];
 
       nix = {
@@ -104,6 +107,7 @@
       };
 
       networking.networkmanager.enable = true;
+      networking.networkmanager.plugins = with pkgs; [networkmanager-openvpn];
 
       virtualisation.vmVariant.networking.hostName = lib.mkForce "${config.networking.hostName}-vm";
 
@@ -248,6 +252,7 @@
         lunar.dms._.default-browser
 
         lunar.agents
+        lunar.agents._.playwright
         den.aspects.loystonpais.provides.jailed-agents
 
         lunar.infisical
