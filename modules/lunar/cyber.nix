@@ -104,7 +104,10 @@
           nmap
           masscan
 
-          wireshark
+          # wireshark # Wireshark breaks on kvantum themes so add a wrapper
+          (pkgs.writeShellScriptBin "wireshark" ''
+            exec ${lib.getExe wireshark} -style fusion "$@"
+          '')
 
           burpsuite
           burpsuite-pro
@@ -141,6 +144,10 @@
           nuclei
           katana
           waymore
+
+          binwalk
+
+          sqlite
         ];
 
       environment.etc."lunar/cyber/wordlists".source = "${pkgs.wordlists}/share/wordlists";
