@@ -24,11 +24,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1783030638,
-        "narHash": "sha256-IwK1u6DV2JqsFP5Y1ojbYQ7w6p6gtaoF6PjOMKqmk8o=",
+        "lastModified": 1785515211,
+        "narHash": "sha256-7AvfX0S/fxgArYE4C7k0NNriCPWj16jAkbz1pTn2JEI=",
         "owner": "CloakHQ",
         "repo": "CloakBrowser",
-        "rev": "a3e0994a313cbd718fe20ff05a7b36493f4d32c6",
+        "rev": "c2513a3c23ae9210f78ab4689331bf06cae37e9f",
         "type": "github"
       },
       "original": {
@@ -251,6 +251,27 @@
         "owner": "hercules-ci",
         "repo": "flake-parts",
         "rev": "f7c1a2d347e4c52d5fb8d10cb4d94b5884e546fb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "type": "github"
+      }
+    },
+    "flake-parts_3": {
+      "inputs": {
+        "nixpkgs-lib": [
+          "nixcraft",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1765835352,
+        "narHash": "sha256-XswHlK/Qtjasvhd1nOa1e8MgZ8GS//jBoTqWtrS1Giw=",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "rev": "a34fae9c08a15ad73f295041fec82323541400a9",
         "type": "github"
       },
       "original": {
@@ -526,6 +547,27 @@
         "type": "github"
       }
     },
+    "nixcraft": {
+      "inputs": {
+        "flake-parts": "flake-parts_3",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1787013805,
+        "narHash": "sha256-G5EigwS4rktvEkEEbEhcfDtM75imm/Lp+0fAzzAI0vM=",
+        "owner": "loystonpais",
+        "repo": "nixcraft",
+        "rev": "b01be70a1a97cb029689d17eed8026ed49f5ee1c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "loystonpais",
+        "repo": "nixcraft",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1773222311,
@@ -702,6 +744,7 @@
         "niri": "niri",
         "nix-security-box": "nix-security-box",
         "nix-vscode-extensions": "nix-vscode-extensions",
+        "nixcraft": "nixcraft",
         "nixpkgs": "nixpkgs_3",
         "nixpkgs-stable": "nixpkgs-stable",
         "plasma-manager": "plasma-manager",

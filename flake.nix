@@ -99,5 +99,10 @@
       url = "github:loystonpais/Droidspaces-OSS";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixcraft = {
+      url = "github:loystonpais/nixcraft";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 }
