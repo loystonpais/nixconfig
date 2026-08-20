@@ -739,6 +739,12 @@ window-rule {
 
 prefer-no-csd
 
+// Open Waywall fullscreen by default
+window-rule {
+    match app-id="^waywall$"
+    open-fullscreen true
+}
+
 // Open DMS windows as floating by default
 window-rule {
     match app-id=r#"org.quickshell$"#
