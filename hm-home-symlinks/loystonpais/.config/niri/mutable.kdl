@@ -607,7 +607,10 @@ binds {
     // Mod+Space       { switch-layout "next"; }
     // Mod+Shift+Space { switch-layout "prev"; }
 
-    Print { spawn-sh "grim -g \"$(slurp)\" - | swappy -f -"; }
+    //Print { spawn-sh "grim -g \"$(slurp)\" - | swappy -f -"; }
+    
+    Print { spawn "dms" "ipc" "call" "quickCapture" "screenshot" "region" "edit"; }
+
     Ctrl+Print { screenshot-screen; }
     Alt+Print { screenshot-window; }
 

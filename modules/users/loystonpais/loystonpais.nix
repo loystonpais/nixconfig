@@ -221,6 +221,7 @@
         lunar.graphics
         lunar.gaming
         lunar.minecraft
+        lunar.minecraft._.nixcraft
         lunar.multimedia
         lunar.piracy
         lunar.kitty
@@ -260,6 +261,8 @@
           projectId = infisical.projectId;
           syncSec = "10h";
         })
+
+        lunar.espanso
       ];
     };
 
