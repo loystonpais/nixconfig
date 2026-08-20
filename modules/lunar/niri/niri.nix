@@ -8,6 +8,14 @@
   lunar.niri = {
     includes = [
       lunar.niri._.fix-webrtc
+
+      {
+        nixos = {pkgs, ...}: {
+          services.espanso.package = lib.mkDefault pkgs.espanso-wayland;
+        };
+
+        homeManager.services.espanso.waylandSupport = true;
+      }
     ];
 
     nixos = {pkgs, ...}: {

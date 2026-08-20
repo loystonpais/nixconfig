@@ -60,8 +60,8 @@
       # TODO: See if enabling these causes random crashes
       # UPDATE: Haven't seen any crashes since enabling finegrained
       hardware.nvidia = {
-        powerManagement.enable = true;
-        powerManagement.finegrained = true;
+        powerManagement.enable = lib.mkForce false;
+        powerManagement.finegrained = lib.mkForce false;
       };
 
       boot.loader.grub = {

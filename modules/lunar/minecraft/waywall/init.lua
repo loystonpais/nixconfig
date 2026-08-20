@@ -151,6 +151,8 @@ config.input.remaps = options.remapped_kb
 config.input.sensitivity = options.sens._normal
 config.theme = options.theme
 config.window = {
+    width = options.window.width,
+    height = options.window.height,
     fullscreen_width = options.window.width,
     fullscreen_height = options.window.height,
 }
