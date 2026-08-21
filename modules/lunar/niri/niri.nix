@@ -121,5 +121,13 @@
         };
       };
     };
+
+    provides.render-device = device: {
+      homeManager = {...}: {
+        programs.niri.settings.debug = {
+          render-drm-device = device;
+        };
+      };
+    };
   };
 }

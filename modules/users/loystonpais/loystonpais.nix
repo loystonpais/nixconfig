@@ -246,6 +246,7 @@
         lunar.waydroid
 
         lunar.niri
+        (lunar.niri._.render-device "/dev/dri/by-path/pci-0000:06:00.0-render")
 
         lunar.dms
         (lunar.dms._.via-systemd {desktops = ["niri" "Hyprland"];})
