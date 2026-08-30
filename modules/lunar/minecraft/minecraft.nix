@@ -37,6 +37,20 @@
     };
 
     provides.nixcraft = {
+      nixos = {...}: {
+        imports = [
+          inputs.nixcraft.nixosModules.default
+        ];
+
+        config = {
+          nixcraft = {
+            enable = true;
+            cache.enable = true;
+            renice.enable = true;
+          };
+        };
+      };
+
       homeManager = {
         config,
         pkgs,
@@ -85,8 +99,12 @@
 
                 # Use PrismLauncher assets to avoid downloading thousands of Nix derivations
                 _classSettings = {
-                  assetsDir = lib.mkForce "${config.home.homeDirectory}/.local/share/PrismLauncher/assets";
+                  # assetsDir = lib.mkForce "${config.home.homeDirectory}/.local/share/PrismLauncher/assets";
                 };
+
+                # enableFastAssetDownload = true;
+
+                enableExternalAssets = true;
 
                 # Game is passed to the gpu (set if you have nvidia gpu)
                 enableNvidiaOffload = true;
@@ -118,10 +136,9 @@
                   preLaunchShellScript = lib.mkBefore ''
                     mkdir -p ${lib.escapeShellArg config.nixcraft.client.instances.fsg.absoluteDir}
                     rm -rf ${lib.escapeShellArg config.nixcraft.client.instances.fsg.absoluteDir}/saves/*
-
-                    echo "Setting niceness..."
-                    /run/wrappers/bin/sudo ${pkgs.util-linux}/bin/renice --priority -20 -p $$
                   '';
+
+                  renice.enable = true;
 
                   # this advanced option accepts common arguments that are passed to the client
                   _classSettings = {
@@ -186,6 +203,33 @@
                       terminal = true;
                     };
                   };
+
+                  assetHash = "sha256-VK8fwyG8j2FpKPXIZLVYofq5Kdl83hiW47S+xCE3qjQ=";
+                };
+
+                oneseven = {
+                  enable = true;
+
+                  version = "1.17";
+
+                  assetHash = "sha256-1ZibFNIDxPPsDv4BihihmvPI5Dw18w7bH+6c88ejhaU=";
+
+                  files."options.txt" = {
+                    type = "options-txt";
+                    value = {
+                      fov = "0.0";
+                      gamma = "0.0";
+                    };
+                  };
+                };
+
+                onetwo = {
+                  enable = true;
+
+                  version = "1.18";
+
+                  enableExternalAssets = lib.mkForce true;
+                  #enableFastAssetDownload = lib.mkForce true;
                 };
 
                 rsg = {
@@ -237,6 +281,8 @@
                       terminal = true;
                     };
                   };
+
+                  assetHash = "sha256-VK8fwyG8j2FpKPXIZLVYofq5Kdl83hiW47S+xCE3qjQ=";
                 };
               };
             };

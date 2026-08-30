@@ -19,9 +19,9 @@ bobView:true
 toggleCrouch:false
 toggleSprint:false
 mouseSensitivity:0.35035210847854614
-fov:0.75
+fov:0.625
 gamma:5.0
-renderDistance:32
+renderDistance:5
 entityDistanceScaling:1.5
 guiScale:3
 particles:0
@@ -31,7 +31,7 @@ graphicsMode:1
 ao:2
 biomeBlendRadius:2
 renderClouds:true
-resourcePacks:["vanilla"]
+resourcePacks:[]
 incompatibleResourcePacks:[]
 lastServer:
 lang:en_us
