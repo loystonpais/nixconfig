@@ -3,7 +3,7 @@
   lunar,
   ...
 }: {
-  den.homes.x86_64-linux."loyston_pais@maple" = {};
+  den.homes.aarch64-darwin."loyston_pais@maple" = {};
 
   den.aspects.loyston_pais = {
     includes = [

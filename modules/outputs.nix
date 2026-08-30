@@ -11,5 +11,5 @@
 
   den.schema.flake-system.includes.into.host = {system}:
     map (host: {inherit host;})
-    (lib.attrValues den.hosts.${system});
+    (lib.attrValues (den.hosts.${system} or {}));
 }
