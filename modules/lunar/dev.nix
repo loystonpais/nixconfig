@@ -13,11 +13,6 @@
             enableBashIntegration = true;
             enableZshIntegration = true;
           };
-
-          environment.systemPackages = with pkgs; [
-            devenv
-            fzf
-          ];
         }
       ];
     };
@@ -29,50 +24,59 @@
       lib,
       ...
     }: {
+      home.packages = with pkgs; [
+        devenv
+        fzf
+      ];
+
       home.shell.enableShellIntegration = true;
 
-      programs.starship = {
-        enable = true;
+      programs.starship =
+        {
+          enable = true;
 
-        enableBashIntegration = true;
-        enableZshIntegration = true;
+          enableBashIntegration = true;
+          enableZshIntegration = true;
 
-        settings = {
-          shell = {
-            xonsh_indicator = "X";
-            bash_indicator = "B";
-            zsh_indicator = "Z";
-            nu_indicator = "N";
-            unknown_indicator = "?";
-            format = "[$indicator]($style)";
-            disabled = false;
+          settings = {
+            shell = {
+              xonsh_indicator = "X";
+              bash_indicator = "B";
+              zsh_indicator = "Z";
+              nu_indicator = "N";
+              unknown_indicator = "?";
+              format = "[$indicator]($style)";
+              disabled = false;
+            };
+
+            shlvl = {
+              format = "[$symbol]($style) ";
+              repeat = true;
+              symbol = "❯";
+              repeat_offset = 1;
+              threshold = 0;
+              disabled = false;
+            };
+
+            status = {
+              disabled = false;
+            };
           };
-
-          shlvl = {
-            format = "[$symbol]($style) ";
-            repeat = true;
-            symbol = "❯";
-            repeat_offset = 1;
-            threshold = 0;
-            disabled = false;
-          };
-
-          status = {
-            disabled = false;
-          };
+        }
+        // lib.optionalAttrs (options.programs.starship ? enableXonshIntegration) {
+          enableXonshIntegration = true;
         };
-      } // lib.optionalAttrs (options.programs.starship ? enableXonshIntegration) {
-        enableXonshIntegration = true;
-      };
 
-      programs.zoxide = {
-        enable = true;
+      programs.zoxide =
+        {
+          enable = true;
 
-        enableBashIntegration = true;
-        enableZshIntegration = true;
-      } // lib.optionalAttrs (options.programs.zoxide ? enableXonshIntegration) {
-        enableXonshIntegration = true;
-      };
+          enableBashIntegration = true;
+          enableZshIntegration = true;
+        }
+        // lib.optionalAttrs (options.programs.zoxide ? enableXonshIntegration) {
+          enableXonshIntegration = true;
+        };
 
       programs.bash.enable = true;
 
