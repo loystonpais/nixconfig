@@ -24,6 +24,7 @@
 
     homeManager = {
       config,
+      options,
       pkgs,
       lib,
       ...
@@ -33,7 +34,6 @@
       programs.starship = {
         enable = true;
 
-        enableXonshIntegration = true;
         enableBashIntegration = true;
         enableZshIntegration = true;
 
@@ -61,14 +61,17 @@
             disabled = false;
           };
         };
+      } // lib.optionalAttrs (options.programs.starship ? enableXonshIntegration) {
+        enableXonshIntegration = true;
       };
 
       programs.zoxide = {
         enable = true;
 
         enableBashIntegration = true;
-        enableXonshIntegration = true;
         enableZshIntegration = true;
+      } // lib.optionalAttrs (options.programs.zoxide ? enableXonshIntegration) {
+        enableXonshIntegration = true;
       };
 
       programs.bash.enable = true;

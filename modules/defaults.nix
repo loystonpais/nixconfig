@@ -14,6 +14,7 @@ in {
   flake.den = den;
 
   den.schema.user.includes = [den._.mutual-provider];
+  den.schema.home.includes = [den._.mutual-provider];
 
   den.default = {
     includes = [
@@ -83,8 +84,13 @@ in {
       };
     };
 
-    homeManager = {pkgs, ...}: {
+    homeManager = {
+      pkgs,
+      lib,
+      ...
+    }: {
       _module.args.pkgs-stable = mkPkgsStable pkgs;
+      home.stateVersion = lib.mkDefault "25.11";
     };
   };
 }
