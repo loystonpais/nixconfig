@@ -23,6 +23,21 @@
         ./_vfio
 
         inputs.linuwowo.nixosModules.default
+        {
+          specialisation.linuwowo.configuration = {
+            programs.linuwowo = {
+              enable = true;
+              json = ./_hw/linuwowo.json;
+            };
+          };
+        }
+
+        # Cachyos kernel
+        {
+          nixpkgs.overlays = [inputs.nix-cachyos-kernel.overlays.pinned];
+          boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest;
+          system.nixos.tags = ["cachyos"];
+        }
       ];
 
       fileSystems."/mnt/windows" = {
@@ -80,11 +95,6 @@
 
       security.rtkit.enable = true;
       programs.nix-ld.enable = true;
-
-      programs.linuwowo = {
-        enable = true;
-        json = ./_hw/linuwowo.json;
-      };
     };
   };
 
